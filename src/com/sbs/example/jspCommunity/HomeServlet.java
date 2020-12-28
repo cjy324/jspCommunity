@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 입력된 데이터의 문자셋은 UTF-8 이다.
+		// 입력될 데이터의 문자셋은 UTF-8로 세팅 
 		request.setCharacterEncoding("UTF-8");
-		// 출력될 문서는 html(UTF-8) 이다.
+		// 출력될 문서를 html(UTF-8)으로 세팅
 		response.setContentType("text/html; charset=UTF-8");
 
 		String lang = request.getParameter("lang");
