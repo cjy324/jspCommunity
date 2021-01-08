@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sbs.example.jspCommunity.container.Container;
+import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -21,25 +24,30 @@ public class doDeleteArticle extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		int id = 0;
-		
 		if (request.getParameter("id") == null) {
-			response.getWriter().append("삭제하실 게시물 id를 입력해주세요.");
+			response.getWriter().append("삭제할 게시물 id를 입력해주세요.");
 			return;
 		}
-		if (request.getParameter("id") != null) { 
-			id = Integer.parseInt(request.getParameter("id")); 
-		}
+
+		int id = Integer.parseInt(request.getParameter("id"));
 		
 		
 		//DB 서버 연결
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 		
-		SecSql sql = new SecSql();
-		sql.append("DELETE from article ");
-		sql.append("WHERE id = ? ", id);
+		ArticleService articleService = Container.articleService;
 
-		MysqlUtil.delete(sql);
+		//해당 게시물 존재하는지 확인
+		
+		Article article = articleService.getArticleById(id);
+		
+		if(article == null) {
+			response.getWriter().append("해당 게시물이 없습니다. 게시물 번호를 확인하세요.");
+			return;
+		}
+		
+		// 게시물 수정
+		articleService.articleDelete(id);
 		
 		
 		//DB 서버 연결 종료

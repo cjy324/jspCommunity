@@ -2,8 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 <%
-List<Map<String, Object>> articleMapList = (List<Map<String, Object>>) request.getAttribute("articleMapList");
+Article article = (Article) request.getAttribute("article");
 %>
 <!doctype html>
 <html lang="ko">
@@ -12,26 +13,19 @@ List<Map<String, Object>> articleMapList = (List<Map<String, Object>>) request.g
 <title>게시물 생성</title>
 </head>
 <body>
-	<%
-	for (Map<String, Object> articleMap : articleMapList) {
-	%>
-	<h1><%=articleMap.get("id") + "번"%> 게시물 생성</h1>
-	<div>
+	<h1><%=article.id + "번"%> 게시물 생성 완료</h1>
+	<div style="font-size:1.2rem;">
 		번호 :
-		<%=articleMap.get("id")%>
+		<%=article.id%>
 		<br />
 		제목 :
-		<%=articleMap.get("title")%>
+		<%=article.title%>
 		<br />
 		내용 :
-		<%=articleMap.get("body")%>
+		<%=article.body%>
 		<br />
 		게시판 :
-		<%=articleMap.get("boardId")%>
+		<%=article.extra_boardName%>
 	</div>
-	<%
-	}
-	%>
-	<h1>게시물 생성 완료</h1>
 </body>
 </html>

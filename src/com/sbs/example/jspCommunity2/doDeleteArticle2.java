@@ -1,4 +1,4 @@
-package com.sbs.example.jspCommunity;
+package com.sbs.example.jspCommunity2;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,36 +13,41 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
-@WebServlet("/jsp/usr/article/detail")
-public class articleDetail extends HttpServlet {
+@WebServlet("/jsp/usr/article2/doDelete2")
+public class doDeleteArticle2 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-
-		int id = 1;
-
+		
+		int id = 0;
+		
 		if (request.getParameter("id") == null) {
-			response.getWriter().append("게시물 id를 입력해주세요.");
+			response.getWriter().append("삭제하실 게시물 id를 입력해주세요.");
 			return;
 		}
-		if (request.getParameter("id") != null) {
-			id = Integer.parseInt(request.getParameter("id"));
+		if (request.getParameter("id") != null) { 
+			id = Integer.parseInt(request.getParameter("id")); 
 		}
-
-		// DB 서버 연결
+		
+		
+		//DB 서버 연결
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
+		
+		SecSql sql = new SecSql();
+		sql.append("DELETE from article ");
+		sql.append("WHERE id = ? ", id);
 
-		List<Map<String, Object>> articleMapList = MysqlUtil
-				.selectRows(new SecSql().append("SELECT * FROM article WHERE id = ?", id));
-
-		// DB 서버 연결 종료
+		MysqlUtil.delete(sql);
+		
+		
+		//DB 서버 연결 종료
 		MysqlUtil.closeConnection();
-
-		request.setAttribute("articleMapList", articleMapList);
-
-		request.getRequestDispatcher("/jsp/usr/article/detail.jsp").forward(request, response);
+		
+		request.setAttribute("id", id);
+		
+		request.getRequestDispatcher("/jsp/usr/article2/doDelete2.jsp").forward(request, response);
 
 	}
 }

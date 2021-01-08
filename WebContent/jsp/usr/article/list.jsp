@@ -2,11 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="java.util.List"%>
+<%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 <%
-List<Map<String, Object>> articleMapList = (List<Map<String, Object>>) request.getAttribute("articleMapList");
-int boardId = (int) request.getAttribute("boardId");
-String boardName = (String) request.getAttribute("boardName");
-String boardCode = (String) request.getAttribute("boardCode");
+List<Article> articles = (List<Article>) request.getAttribute("articles");
 %>
 <!doctype html>
 <html lang="ko">
@@ -15,22 +13,28 @@ String boardCode = (String) request.getAttribute("boardCode");
 <title>게시물 리스트</title>
 </head>
 <body>
-	<h1><%= boardName %> 게시판 게시물 리스트</h1>
+	<h1><%=articles.get(0).extra_boardName%> 게시물 리스트</h1>
+	<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doWrite?boardId=<%=articles.get(0).boardId%>">새 게시물 생성</a>
+	<br>
+	<br>	
 	<%
-	for (Map<String, Object> articleMap : articleMapList) {
+	for (Article article : articles) {
 	%>
 	<div style="font-weight:bold;">
 		번호 :
-		<%=articleMap.get("id")%>
+		<%=article.id%>
+		<br />
+		작성일 :
+		<%=article.regDate%>
+		<br />
+		갱신일 :
+		<%=article.updateDate%>
+		<br />
+		작성자 :
+		<%=article.extra_memberName%>
 		<br />
 		제목 :
-		<a style="text-decoration:none; color:inherit;" href="http://localhost:8083/jspCommunity/jsp/usr/article/detail?id=<%=articleMap.get("id")%>"><%=articleMap.get("title")%></a>
-		<br />
-		내용 :
-		<%=articleMap.get("body")%>
-		<br>
-		<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doModify?id=<%=articleMap.get("id")%>">수정</a>
-		<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doDelete?id=<%=articleMap.get("id")%>">삭제</a>
+		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/jsp/usr/article/detail?id=<%=article.id%>"><%=article.title%></a>
 		<hr />
 	</div>
 	<%
