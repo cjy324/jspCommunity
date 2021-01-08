@@ -1,4 +1,4 @@
-package com.sbs.example.jspCommunity;
+package com.sbs.example.jspCommunity.test;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
