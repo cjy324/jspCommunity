@@ -17,7 +17,7 @@ public class ArticleController {
 		articleService = Container.articleService;
 	}
 
-	//리스트 가져오기
+	// 리스트 가져오기
 	public String showList(HttpServletRequest request, HttpServletResponse response) {
 
 		/*
@@ -28,15 +28,19 @@ public class ArticleController {
 
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
-		/*
-		 * if(articles.size() <= 0) {
-		 * response.getWriter().append("해당 게시판이 없습니다. 게시판 번호를 확인하세요."); continue; }
-		 */
+		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
+		if (articles.size() <= 0) {
+			request.setAttribute("alertMsg", boardId + "번 게시물은 존재하지 않습니다. 게시판 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
 		request.setAttribute("articles", articles);
 
 		return "usr/article/list";
 	}
 
+	// 게시물 상세보기
 	public String showDetail(HttpServletRequest request, HttpServletResponse response) {
 		/*
 		 * if (request.getParameter("id") == null) {
@@ -47,10 +51,11 @@ public class ArticleController {
 
 		Article article = articleService.getArticleById(id);
 
-		/*
-		 * if(article == null) {
-		 * response.getWriter().append("해당 게시물이 없습니다. 게시물 번호를 확인하세요."); return; }
-		 */
+		if (article == null) {
+			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		request.setAttribute("article", article);
 
@@ -93,13 +98,14 @@ public class ArticleController {
 
 		String body = request.getParameter("body");
 
-		/*
-		 * // 해당 게시판이 존재하는지 확인 List<Article> articles =
-		 * articleService.getArticlesForPrintByBoardId(boardId);
-		 * 
-		 * if (articles.size() <= 0) {
-		 * response.getWriter().append("해당 게시판이 없습니다. 게시판 번호를 확인하세요."); return; }
-		 */
+		// 해당 게시판이 존재하는지 확인
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
+
+		if (articles.size() <= 0) {
+			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		// 게시물 생성
 		int id = articleService.add(boardId, title, body);
@@ -119,12 +125,10 @@ public class ArticleController {
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 
 		int memberId = Integer.parseInt(request.getParameter("memberId"));
-		
-		
+
 		request.setAttribute("id", id);
 		request.setAttribute("boardId", boardId);
 		request.setAttribute("memberId", memberId);
-		
 
 		return "usr/article/doModifyForm";
 	}
@@ -151,24 +155,26 @@ public class ArticleController {
 
 		String body = request.getParameter("body");
 
-		/*
-		 * //해당 게시물 존재하는지 확인 Article article = articleService.getArticleById(id);
-		 * 
-		 * if(article == null) {
-		 * response.getWriter().append("해당 게시물이 없습니다. 게시물 번호를 확인하세요."); return; }
-		 */
+		Article article = articleService.getArticleById(id);
+
+		if (article == null) {
+			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		// 게시물 수정
 		articleService.articleModify(id, title, body);
 
 		// 수정된 해당 게시물 정보 다시 불러오기
-		Article article = articleService.getArticleById(id);
+		article = articleService.getArticleById(id);
 
 		request.setAttribute("article", article);
 
 		return "usr/article/doModify";
 	}
-
+	
+	// 게시물 삭제
 	public String doDelete(HttpServletRequest request, HttpServletResponse response) {
 		/*
 		 * if (request.getParameter("id") == null) {
@@ -177,12 +183,13 @@ public class ArticleController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		/*
-		 * //해당 게시물 존재하는지 확인 Article article = articleService.getArticleById(id);
-		 * 
-		 * if(article == null) {
-		 * response.getWriter().append("해당 게시물이 없습니다. 게시물 번호를 확인하세요."); return; }
-		 */
+		Article article = articleService.getArticleById(id);
+
+		if (article == null) {
+			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		// 게시물 삭제
 		articleService.articleDelete(id);

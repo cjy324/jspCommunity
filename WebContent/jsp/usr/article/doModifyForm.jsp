@@ -16,7 +16,7 @@ int memberId= (int) request.getAttribute("memberId");
 </head>
 <body>
 	<h1><%=id + "번"%> 게시물 수정</h1>
-	<form action="/jspCommunity/usr/article/doModify" target="_blank" method="POST">
+	<form action="/jspCommunity/usr/article/doModify" method="POST">
   <input type="hidden" name="id" value="<%= id %>">
   <input type="hidden" name="boardId" value="<%= boardId %>">
   <input type="hidden" name="memberId" value="<%= memberId %>">
