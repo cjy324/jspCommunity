@@ -1,4 +1,4 @@
-package com.sbs.example.jspCommunity.controller;
+package com.sbs.example.jspCommunity.controller.usr;
 
 import java.util.List;
 

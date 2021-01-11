@@ -35,10 +35,10 @@ Article article = (Article) request.getAttribute("article");
 		<%=article.body%>
 		<br />
 		게시판 :
-		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/jsp/usr/article/list?boardId=<%=article.boardId%>"><%=article.extra_boardName%></a>
+		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/usr/article/list?boardId=<%=article.boardId%>"><%=article.extra_boardName%></a>
 		<br>
 		<br>
-		<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doModify?id=<%=article.id%>">수정</a>
+		<a href="http://localhost:8083/jspCommunity/usr/article/doModifyForm?id=<%=article.id%>&boardId=<%=article.boardId%>&memberId=<%=article.memberId%>">수정</a>
 		<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doDelete?id=<%=article.id%>">삭제</a>
 	</div>
 	
