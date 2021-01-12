@@ -65,12 +65,12 @@ public class ArticleController {
 	// 게시물 등록 폼
 	public String doWriteForm(HttpServletRequest request, HttpServletResponse response) {
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		//int boardId = Integer.parseInt(request.getParameter("boardId"));
 
-		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		//int memberId = Integer.parseInt(request.getParameter("memberId"));
 
-		request.setAttribute("boardId", boardId);
-		request.setAttribute("memberId", memberId);
+		//request.setAttribute("boardId", boardId);
+		//request.setAttribute("memberId", memberId);
 
 		return "usr/article/doWriteForm";
 	}
@@ -106,29 +106,38 @@ public class ArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
+		
+		
 
 		// 게시물 생성
 		int id = articleService.add(boardId, title, body);
-
-		Article article = articleService.getArticleById(id);
-
-		request.setAttribute("article", article);
-
-		return "usr/article/doWrite";
+		
+		// 생성 알림창 보여주고 detail로 이동하기
+		request.setAttribute("alertMsg", id + "번 게시물이 생성되었습니다.");
+		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
+		return "common/redirect";
+		
+		/*
+		 * Article article = articleService.getArticleById(id);
+		 * 
+		 * request.setAttribute("article", article);
+		 * 
+		 * return "usr/article/doWrite";
+		 */
 	}
 
 	// 게시물 수정 폼
 	public String doModifyForm(HttpServletRequest request, HttpServletResponse response) {
 
-		int id = Integer.parseInt(request.getParameter("id"));
+		//int id = Integer.parseInt(request.getParameter("id"));
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		//int boardId = Integer.parseInt(request.getParameter("boardId"));
 
-		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		//int memberId = Integer.parseInt(request.getParameter("memberId"));
 
-		request.setAttribute("id", id);
-		request.setAttribute("boardId", boardId);
-		request.setAttribute("memberId", memberId);
+	//	request.setAttribute("id", id);
+	//	request.setAttribute("boardId", boardId);
+	//	request.setAttribute("memberId", memberId);
 
 		return "usr/article/doModifyForm";
 	}
@@ -165,13 +174,20 @@ public class ArticleController {
 
 		// 게시물 수정
 		articleService.articleModify(id, title, body);
+		
+		// 수정 알림창 보여주고 detail로 이동하기
+		request.setAttribute("alertMsg", id + "번 게시물이 수정되었습니다.");
+		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
+		return "common/redirect";
+		
 
-		// 수정된 해당 게시물 정보 다시 불러오기
-		article = articleService.getArticleById(id);
-
-		request.setAttribute("article", article);
-
-		return "usr/article/doModify";
+		/*
+		 * // 수정된 해당 게시물 정보 다시 불러오기 article = articleService.getArticleById(id);
+		 * 
+		 * request.setAttribute("article", article);
+		 * 
+		 * return "usr/article/doModify";
+		 */
 	}
 	
 	// 게시물 삭제
@@ -193,10 +209,18 @@ public class ArticleController {
 
 		// 게시물 삭제
 		articleService.articleDelete(id);
+		
+		// 삭제 알림창 보여주고 리스트로 이동하기
+		request.setAttribute("alertMsg", id + "번 게시물이 삭제되었습니다.");
+		request.setAttribute("replaceUrl", String.format("list?boardId=%d", article.boardId));
+		return "common/redirect";
+		
 
-		request.setAttribute("id", id);
-
-		return "usr/article/doDelete";
+		/*
+		 * request.setAttribute("id", id);
+		 * 
+		 * return "usr/article/doDelete";
+		 */
 	}
 
 }

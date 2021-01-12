@@ -27,7 +27,7 @@ Article article = (Article) request.getAttribute("article");
 		게시판 :
 		<%=article.extra_boardName%>
 		<hr />
-		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/usr/article/list?boardId=<%=article.boardId%>">게시판 리스트로 돌아가기</a>
+		<a style="text-decoration:none;" href="list?boardId=<%=article.boardId%>">리스트로 돌아가기</a>
 	</div>
 </body>
 </html>

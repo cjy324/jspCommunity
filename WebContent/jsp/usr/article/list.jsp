@@ -14,7 +14,7 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 </head>
 <body>
 	<h1><%=articles.get(0).extra_boardName%> 게시물 리스트</h1>
-	<a href="http://localhost:8083/jspCommunity/usr/article/doWriteForm?boardId=<%=articles.get(0).boardId%>&memberId=1">새 게시물 생성</a>
+	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=<%=request.getParameter("boardId")%>&memberId=1">새 게시물 생성</a></button>
 	<br>
 	<br>	
 	<%
@@ -34,7 +34,7 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 		<%=article.extra_memberName%>
 		<br />
 		제목 :
-		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/usr/article/detail?id=<%=article.id%>"><%=article.title%></a>
+		<a style="text-decoration:none;" href="detail?id=<%=article.id%>"><%=article.title%></a>
 		<hr />
 	</div>
 	<%

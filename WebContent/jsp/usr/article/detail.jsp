@@ -35,11 +35,13 @@ Article article = (Article) request.getAttribute("article");
 		<%=article.body%>
 		<br />
 		게시판 :
-		<a style="text-decoration:none;" href="http://localhost:8083/jspCommunity/usr/article/list?boardId=<%=article.boardId%>"><%=article.extra_boardName%></a>
+		<%=article.extra_boardName%>
 		<br>
 		<br>
-		<a href="http://localhost:8083/jspCommunity/usr/article/doModifyForm?id=<%=article.id%>&boardId=<%=article.boardId%>&memberId=<%=article.memberId%>">수정</a>
-		<a href="http://localhost:8083/jspCommunity/jsp/usr/article/doDelete?id=<%=article.id%>">삭제</a>
+		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=<%=article.id%>&boardId=<%=article.boardId%>&memberId=<%=article.memberId%>">수정</a></button>
+		<button type="button"><a style="text-decoration:none;" href="doDelete?id=<%=article.id%>">삭제</a></button>
+		<hr>
+		<button type="button"><a style="text-decoration:none;" href="list?boardId=<%=article.boardId%>">리스트로 돌아가기</a></button>
 	</div>
 	
 </body>
