@@ -2,6 +2,9 @@ package com.sbs.example.jspCommunity.dto;
 
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class Article {
 
 	public Article(Map<String, Object> articlesMap) {
@@ -30,16 +33,16 @@ public class Article {
 
 	}
 
-	public int id;
-	public String regDate;
-	public String updateDate;
-	public String title;
-	public String body;
-	public int boardId;
-	public int memberId;
-	public String extra_memberName;
-	public String extra_boardName;
-	public String extra_boardCode;
-	public int hitsCount;
+	private int id;
+	private String regDate;
+	private String updateDate;
+	private String title;
+	private String body;
+	private int boardId;
+	private int memberId;
+	private String extra_memberName;
+	private String extra_boardName;
+	private String extra_boardCode;
+	private int hitsCount;
 
 }

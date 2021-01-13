@@ -13,7 +13,7 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 <title>게시물 리스트</title>
 </head>
 <body>
-	<h1><%=articles.get(0).extra_boardName%> 게시물 리스트</h1>
+	<h1><%=articles.get(0).getExtra_boardName()%> 게시물 리스트</h1>
 	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=<%=request.getParameter("boardId")%>&memberId=1">새 게시물 생성</a></button>
 	<br>
 	<br>	
@@ -22,19 +22,19 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 	%>
 	<div style="font-weight:bold;">
 		번호 :
-		<%=article.id%>
+		<%=article.getId()%>
 		<br />
 		작성일 :
-		<%=article.regDate%>
+		<%=article.getRegDate()%>
 		<br />
 		갱신일 :
-		<%=article.updateDate%>
+		<%=article.getUpdateDate()%>
 		<br />
 		작성자 :
-		<%=article.extra_memberName%>
+		<%=article.getExtra_memberName()%>
 		<br />
 		제목 :
-		<a style="text-decoration:none;" href="detail?id=<%=article.id%>"><%=article.title%></a>
+		<a style="text-decoration:none;" href="detail?id=<%=article.getId()%>"><%=article.getTitle()%></a>
 		<hr />
 	</div>
 	<%

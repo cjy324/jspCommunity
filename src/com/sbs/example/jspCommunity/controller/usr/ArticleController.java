@@ -212,7 +212,7 @@ public class ArticleController {
 		
 		// 삭제 알림창 보여주고 리스트로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 삭제되었습니다.");
-		request.setAttribute("replaceUrl", String.format("list?boardId=%d", article.boardId));
+		request.setAttribute("replaceUrl", String.format("list?boardId=%d", article.getBoardId()));
 		return "common/redirect";
 		
 

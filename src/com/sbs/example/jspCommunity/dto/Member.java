@@ -2,6 +2,9 @@ package com.sbs.example.jspCommunity.dto;
 
 import java.util.Map;
 
+import lombok.Data;
+
+@Data
 public class Member {
 
 	public Member(Map<String, Object> memberMap) {
@@ -16,13 +19,13 @@ public class Member {
 	
 	}
 
-	public int id;
-	public String loginId;
-	public String loginPw;
-	public String name;
-	public String nickname;
-	public String email;
-	public String cellphoneNo;
-	public int authLevel;
+	private int id;
+	private String loginId;
+	private String loginPw;
+	private String name;
+	private String nickname;
+	private String email;
+	private String cellphoneNo;
+	private int authLevel;
 
 }

@@ -14,34 +14,34 @@ Article article = (Article) request.getAttribute("article");
 </head>
 <body>
 	
-	<h1><%=article.id + "번"%> 게시물 상세보기</h1>
+	<h1><%=article.getId() + "번"%> 게시물 상세보기</h1>
 	<div style="font-size:1.2rem;">
 		번호 :
-		<%=article.id%>
+		<%=article.getId()%>
 		<br />
 		작성일 :
-		<%=article.regDate%>
+		<%=article.getRegDate()%>
 		<br />
 		수정일 :
-		<%=article.updateDate%>
+		<%=article.getUpdateDate()%>
 		<br />
 		작성자 :
-		<%=article.extra_memberName%>
+		<%=article.getExtra_memberName()%>
 		<br />
 		제목 :
-		<%=article.title%>
+		<%=article.getTitle()%>
 		<br />
 		내용 :
-		<%=article.body%>
+		<%=article.getBody()%>
 		<br />
 		게시판 :
-		<%=article.extra_boardName%>
+		<%=article.getExtra_boardName()%>
 		<br>
 		<br>
-		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=<%=article.id%>&boardId=<%=article.boardId%>&memberId=<%=article.memberId%>">수정</a></button>
-		<button type="button"><a style="text-decoration:none;" href="doDelete?id=<%=article.id%>">삭제</a></button>
+		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=<%=article.getId()%>&boardId=<%=article.getBoardId()%>&memberId=<%=article.getMemberId()%>">수정</a></button>
+		<button type="button"><a style="text-decoration:none;" href="doDelete?id=<%=article.getId()%>">삭제</a></button>
 		<hr>
-		<button type="button"><a style="text-decoration:none;" href="list?boardId=<%=article.boardId%>">리스트로 돌아가기</a></button>
+		<button type="button"><a style="text-decoration:none;" href="list?boardId=<%=article.getBoardId()%>">리스트로 돌아가기</a></button>
 	</div>
 	
 </body>

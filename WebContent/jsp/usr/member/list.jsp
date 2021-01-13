@@ -19,22 +19,22 @@ List<Member> members = (List<Member>) request.getAttribute("members");
 	%>
 	<div>
 		번호 :
-		<%=member.id%>
+		<%=member.getId()%>
 		<br />
 		이름 :
-		<%=member.name%>
+		<%=member.getName()%>
 		<br />
 		닉네임 :
-		<%=member.nickname%>
+		<%=member.getNickname()%>
 		<br />
 		e-mail :
-		<%=member.email%>
+		<%=member.getEmail()%>
 		<br />
 		Phone :
-		<%=member.cellphoneNo%>
+		<%=member.getCellphoneNo()%>
 		<br />
 		회원등급 :
-		<%=member.authLevel%>
+		<%=member.getAuthLevel()%>
 		<hr />
 	</div>
 	<%
