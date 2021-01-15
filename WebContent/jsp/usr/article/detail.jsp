@@ -38,9 +38,9 @@ Article article = (Article) request.getAttribute("article");
 		<%=article.getExtra_boardName()%>
 		<br>
 		<br>
-		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=<%=article.getId()%>&boardId=<%=article.getBoardId()%>&memberId=<%=article.getMemberId()%>">수정</a></button>
-		<button type="button"><a style="text-decoration:none;" href="doDelete?id=<%=article.getId()%>">삭제</a></button>
-		<hr>
+		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=<%=article.getId()%>&boardId=<%=article.getBoardId()%>&memberId=<%=article.getMemberId()%>&title=<%=article.getTitle()%>&body=<%=article.getBody()%>">수정</a></button>
+		<button onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=<%=article.getId()%>">삭제</a></button>
+		<hr>   
 		<button type="button"><a style="text-decoration:none;" href="list?boardId=<%=article.getBoardId()%>">리스트로 돌아가기</a></button>
 	</div>
 	
