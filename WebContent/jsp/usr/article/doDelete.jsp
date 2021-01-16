@@ -4,14 +4,8 @@
 <%@ page import="java.util.List"%>
 <%
 int id = (int) request.getAttribute("id");
+String pageTitle = "게시물 삭제";
 %>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<title>게시물 삭제</title>
-</head>
-<body>
+<%@ include file="../../part/head.jspf" %>
 	<h1><%=id + "번"%> 게시물 삭제 완료</h1>
-</body>
-</html>
+<%@ include file="../../part/foot.jspf" %>

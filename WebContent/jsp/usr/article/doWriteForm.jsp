@@ -7,16 +7,11 @@
 <%
 int boardId= (int) Integer.parseInt(request.getParameter("boardId"));
 int memberId= (int) Integer.parseInt(request.getParameter("memberId"));
+String pageTitle = "신규 게시물 등록";
 %>
 
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<title>게시물 생성</title>
-</head>
-<body>
-<h1>신규 게시물 등록</h1>
+<%@ include file="../../part/head.jspf" %>
+<h1><%=pageTitle%></h1>
 	
 <form action="doWrite" method="POST">
   <input type="hidden" name="boardId" value="<%= boardId %>">
@@ -33,5 +28,4 @@ int memberId= (int) Integer.parseInt(request.getParameter("memberId"));
   
 </form>
 	
-</body>
-</html>
+<%@ include file="../../part/foot.jspf" %>

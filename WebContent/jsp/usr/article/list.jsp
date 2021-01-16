@@ -5,15 +5,10 @@
 <%@ page import="com.sbs.example.jspCommunity.dto.Article"%>
 <%
 List<Article> articles = (List<Article>) request.getAttribute("articles");
+String pageTitle = "게시물 리스트";
 %>
-<!doctype html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8" />
-<title>게시물 리스트</title>
-</head>
-<body>
-	<h1><%=articles.get(0).getExtra_boardName()%> 게시물 리스트</h1>
+<%@ include file="../../part/head.jspf" %>
+	<h1><%=articles.get(0).getExtra_boardName()%> <%=pageTitle%></h1>
 	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=<%=request.getParameter("boardId")%>&memberId=1">새 게시물 생성</a></button>
 	<br>
 	<br>	
@@ -40,5 +35,4 @@ List<Article> articles = (List<Article>) request.getAttribute("articles");
 	<%
 	}
 	%>
-</body>
-</html>
+<%@ include file="../../part/foot.jspf" %>
