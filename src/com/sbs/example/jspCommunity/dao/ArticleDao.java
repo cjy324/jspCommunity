@@ -75,18 +75,39 @@ public class ArticleDao {
 
 		return MysqlUtil.insert(sql);
 	}
-
-	public void articleModify(int id, String title, String body) {
+	
+	public void articleModify(Map<String, Object> modifyArgs) {
 		SecSql sql = new SecSql();
+		
+		int id = (int) modifyArgs.get("id");
+		String title = modifyArgs.get("title") != null ? (String) modifyArgs.get("title") : null;
+		String body = modifyArgs.get("body") != null ? (String) modifyArgs.get("body") : null;
 		
 		sql.append("UPDATE article ");
 		sql.append("SET ");
 		sql.append("updateDate = NOW(), ");
-		sql.append("title = ? , ", title);
-		sql.append("`body` = ? ", body);
+
+		// 수정이 필요한지 여부 판단
+		boolean needToModify = false;
+
+		if (title != "") {
+			// 만약, title값이 들어왔으면, 수정할 필요가 있음
+			needToModify = true;
+			sql.append("title = ? , ", title);
+		}
+
+		if (body != "") {
+			// 만약, body값이 들어왔으면, 수정할 필요가 있음
+			needToModify = true;
+			sql.append("`body` = ? ", body);
+		}
+		
 		sql.append("WHERE id = ? ", id);
 
-		MysqlUtil.update(sql);
+		// 만약, needToModify값이 true이면 실행
+		if (needToModify) {
+			MysqlUtil.update(sql);
+		}
 	}
 
 	public void articleDelete(int id) {

@@ -129,15 +129,27 @@ public class ArticleController {
 	// 게시물 수정 폼
 	public String doModifyForm(HttpServletRequest request, HttpServletResponse response) {
 
-		//int id = Integer.parseInt(request.getParameter("id"));
 
-		//int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
+		
+		int id = Integer.parseInt(request.getParameter("id"));
 
-		//int memberId = Integer.parseInt(request.getParameter("memberId"));
+		Article article = articleService.getArticleById(id);
 
-	//	request.setAttribute("id", id);
-	//	request.setAttribute("boardId", boardId);
-	//	request.setAttribute("memberId", memberId);
+		if (article == null) {
+			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+		
+		if(article.getMemberId() != memberId) {
+			request.setAttribute("alertMsg", id + "번 게시물에 대한 권한이 없습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+		request.setAttribute("article", article);
+
 
 		return "usr/article/doModifyForm";
 	}
