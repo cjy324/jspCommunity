@@ -48,4 +48,19 @@ public class MemberDao {
 		return MysqlUtil.insert(sql);
 	}
 
+	public Member getMemberById(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM member");
+		sql.append("WHERE id = ?", id);
+		
+		Map<String, Object> memberMap = MysqlUtil.selectRow(sql);
+		
+		if(memberMap.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(memberMap);
+	}
+
 }

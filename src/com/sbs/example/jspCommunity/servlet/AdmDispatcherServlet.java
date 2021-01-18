@@ -1,7 +1,6 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,13 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.usr.ArticleController;
-import com.sbs.example.jspCommunity.controller.usr.MemberController;
-import com.sbs.example.jspCommunity.dto.Article;
-import com.sbs.example.jspCommunity.service.ArticleService;
+import com.sbs.example.jspCommunity.controller.adm.MemberController;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
-@WebServlet("/usr/*")
-public class DispatcherServlet extends HttpServlet {
+@WebServlet("/adm/*")
+public class AdmDispatcherServlet extends HttpServlet {
 
 	// doGet 메서드 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,50 +55,15 @@ public class DispatcherServlet extends HttpServlet {
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 
 		if (controllerName.equals("member")) {
-			MemberController membercontroller = Container.membercontroller;
+			MemberController membercontroller = Container.admMembercontroller;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = membercontroller.showList(request, response);
 			}
-			if (actionMethodName.equals("doJoinForm")) {
-				jspPath = membercontroller.doJoinForm(request, response);
-			}
-			if (actionMethodName.equals("doJoin")) {
-				jspPath = membercontroller.doJoin(request, response);
-			}
-			if (actionMethodName.equals("doLoginForm")) {
-				jspPath = membercontroller.doLoginForm(request, response);
-			}
-			if (actionMethodName.equals("doLogin")) {
-				jspPath = membercontroller.doLogin(request, response);
-			}
+			
 		}
 
-		if (controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
-
-			if (actionMethodName.equals("list")) {
-				jspPath = articleController.showList(request, response);
-			}
-			if (actionMethodName.equals("detail")) {
-				jspPath = articleController.showDetail(request, response);
-			}
-			if (actionMethodName.equals("doWriteForm")) {
-				jspPath = articleController.doWriteForm(request, response);
-			}
-			if (actionMethodName.equals("doWrite")) {
-				jspPath = articleController.doWrite(request, response);
-			}
-			if (actionMethodName.equals("doModifyForm")) {
-				jspPath = articleController.doModifyForm(request, response);
-			}
-			if (actionMethodName.equals("doModify")) {
-				jspPath = articleController.doModify(request, response);
-			}
-			if (actionMethodName.equals("doDelete")) {
-				jspPath = articleController.doDelete(request, response);
-			}
-		}
+		
 
 		// DB 서버 연결 종료
 		MysqlUtil.closeConnection();

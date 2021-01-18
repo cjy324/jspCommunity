@@ -1,6 +1,7 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.usr.ArticleController;
 import com.sbs.example.jspCommunity.controller.usr.MemberController;
+import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
-@WebServlet("/adm/*")
-public class AdminServlet extends HttpServlet {
+@WebServlet("/usr/*")
+public class UsrDispatcherServlet extends HttpServlet {
 
 	// doGet 메서드 호출
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -57,8 +60,17 @@ public class AdminServlet extends HttpServlet {
 		if (controllerName.equals("member")) {
 			MemberController membercontroller = Container.membercontroller;
 
-			if (actionMethodName.equals("list")) {
-				jspPath = membercontroller.showList(request, response);
+			if (actionMethodName.equals("doJoinForm")) {
+				jspPath = membercontroller.doJoinForm(request, response);
+			}
+			if (actionMethodName.equals("doJoin")) {
+				jspPath = membercontroller.doJoin(request, response);
+			}
+			if (actionMethodName.equals("doLoginForm")) {
+				jspPath = membercontroller.doLoginForm(request, response);
+			}
+			if (actionMethodName.equals("doLogin")) {
+				jspPath = membercontroller.doLogin(request, response);
 			}
 		}
 
