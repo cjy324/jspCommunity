@@ -32,18 +32,18 @@ public class MemberDao {
 		return members;
 	}
 
-	public int join(String loginId, String loginPw, String name, String nickname, String email, String cellPhoneNo) {
+	public int join(Map<String, Object> joinArg) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO member");
-		sql.append("SET loginId = ?,", loginId);
-		sql.append("loginPw = ?,", loginPw);
+		sql.append("SET loginId = ?,", joinArg.get("loginId"));
+		sql.append("loginPw = ?,", joinArg.get("loginPw"));
 		sql.append("regDate = NOW(),");
 		sql.append("updateDate = NOW(),");
-		sql.append("name = ?,", name);
-		sql.append("nickname = ?,", nickname);
-		sql.append("email = ?,", email);
-		sql.append("cellPhoneNo = ?", cellPhoneNo);
+		sql.append("name = ?,", joinArg.get("name"));
+		sql.append("nickname = ?,", joinArg.get("nickname"));
+		sql.append("email = ?,", joinArg.get("email"));
+		sql.append("cellPhoneNo = ?", joinArg.get("cellPhoneNo"));
 
 		return MysqlUtil.insert(sql);
 	}
@@ -62,5 +62,6 @@ public class MemberDao {
 		
 		return new Member(memberMap);
 	}
+
 
 }

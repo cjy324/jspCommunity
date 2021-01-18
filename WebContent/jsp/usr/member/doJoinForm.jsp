@@ -13,7 +13,7 @@
 	<br />
 	<span>로그인 PW</span>
 	<br />
-	<input type="text" name="loginPw" maxlength="50" placeholder="PW 입력">
+	<input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
 	<br />
 	<span>이름</span>
 	<br />
@@ -25,11 +25,11 @@
 	<br />
 	<span>E-Mail</span>
 	<br />
-	<input type="text" name="email" maxlength="50" placeholder="이메일 주소 입력">
+	<input type="email" name="email" maxlength="100" placeholder="이메일 주소 입력">
 	<br />
 	<span>연락처</span>
 	<br />
-	<input type="text" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
+	<input type="number" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
 	<br />
 	<hr />
 	<input type="submit" value="회원가입">

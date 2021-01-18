@@ -1,6 +1,8 @@
 package com.sbs.example.jspCommunity.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,8 +62,16 @@ public class UsrMemberController {
 			}
 		}
 
+		Map<String, Object> joinArg = new HashMap<>();
+		joinArg.put("loginId", loginId);
+		joinArg.put("loginPw", loginPw);
+		joinArg.put("name", name);
+		joinArg.put("nickname", nickname);
+		joinArg.put("email", email);
+		joinArg.put("cellPhoneNo", cellPhoneNo);
+		
 		// 신규 회원가입
-		int id = memberService.join(loginId, loginPw, name, nickname, email, cellPhoneNo);
+		int id = memberService.join(joinArg);
 
 		// 생성 알림창 보여주고 회원정보로 이동하기
 		request.setAttribute("alertMsg", id + "번 회원님 반갑습니다.");
