@@ -1,7 +1,6 @@
 package com.sbs.example.jspCommunity.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.example.jspCommunity.container.Container;
-import com.sbs.example.jspCommunity.controller.usr.ArticleController;
-import com.sbs.example.jspCommunity.controller.usr.MemberController;
-import com.sbs.example.jspCommunity.dto.Article;
-import com.sbs.example.jspCommunity.service.ArticleService;
+import com.sbs.example.jspCommunity.controller.UsrArticleController;
+import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
@@ -58,7 +55,7 @@ public class UsrDispatcherServlet extends HttpServlet {
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
 
 		if (controllerName.equals("member")) {
-			MemberController membercontroller = Container.membercontroller;
+			UsrMemberController membercontroller = Container.userMembercontroller;
 
 			if (actionMethodName.equals("doJoinForm")) {
 				jspPath = membercontroller.doJoinForm(request, response);
@@ -75,7 +72,7 @@ public class UsrDispatcherServlet extends HttpServlet {
 		}
 
 		if (controllerName.equals("article")) {
-			ArticleController articleController = Container.articleController;
+			UsrArticleController articleController = Container.articleController;
 
 			if (actionMethodName.equals("list")) {
 				jspPath = articleController.showList(request, response);

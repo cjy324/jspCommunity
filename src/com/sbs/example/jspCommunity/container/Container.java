@@ -1,7 +1,8 @@
 package com.sbs.example.jspCommunity.container;
 
-import com.sbs.example.jspCommunity.controller.usr.ArticleController;
-import com.sbs.example.jspCommunity.controller.usr.MemberController;
+import com.sbs.example.jspCommunity.controller.AdmMemberController;
+import com.sbs.example.jspCommunity.controller.UsrArticleController;
+import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dao.MemberDao;
 import com.sbs.example.jspCommunity.service.ArticleService;
@@ -11,9 +12,9 @@ public class Container {
 
 	public static ArticleService articleService;
 	public static ArticleDao articleDao;
-	public static MemberController membercontroller;
-	public static com.sbs.example.jspCommunity.controller.adm.MemberController admMembercontroller;
-	public static ArticleController articleController;
+	public static UsrMemberController userMembercontroller;
+	public static AdmMemberController admMembercontroller;
+	public static UsrArticleController articleController;
 	public static MemberService memberService;
 	public static MemberDao memberDao;
 
@@ -25,8 +26,8 @@ public class Container {
 		memberService = new MemberService();
 		articleService = new ArticleService();
 		
-		admMembercontroller = new com.sbs.example.jspCommunity.controller.adm.MemberController();
-		membercontroller = new MemberController();
-		articleController = new ArticleController();
+		admMembercontroller = new AdmMemberController();
+		userMembercontroller = new UsrMemberController();
+		articleController = new UsrArticleController();
 	}
 }
