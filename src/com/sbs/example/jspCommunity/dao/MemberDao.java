@@ -32,4 +32,20 @@ public class MemberDao {
 		return members;
 	}
 
+	public int join(String loginId, String loginPw, String name, String nickname, String email, String cellPhoneNo) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO member");
+		sql.append("SET loginId = ?,", loginId);
+		sql.append("loginPw = ?,", loginPw);
+		sql.append("regDate = NOW(),");
+		sql.append("updateDate = NOW(),");
+		sql.append("name = ?,", name);
+		sql.append("nickname = ?,", nickname);
+		sql.append("email = ?,", email);
+		sql.append("cellPhoneNo = ?", cellPhoneNo);
+
+		return MysqlUtil.insert(sql);
+	}
+
 }

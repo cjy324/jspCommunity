@@ -2,29 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="회원 리스트"/>
+<c:set var ="pageTitle" value="회원 가입"/>
 <%@ include file="../../part/head.jspf" %>
-	<h1>${pageTitle}</h1>
-	<c:forEach var="member" items="${members}">
-	<div>
-		번호 :
+	<h1>${member.id}번 회원 가입 완료</h1>
+	<div style="font-size:1.2rem;">
+		회원번호 :
 		${member.id}
 		<br />
-		이름 :
-		${member.name}
+		아이디 :
+		${member.loginId}
 		<br />
 		닉네임 :
 		${member.nickname}
-		<br />
-		e-mail :
-		${member.email}
-		<br />
-		Phone :
-		${member.cellphoneNo}
-		<br />
-		회원등급 :
-		${member.authLevel}
 		<hr />
+		<a style="text-decoration:none;" href="list">리스트로 돌아가기</a>
 	</div>
-	</c:forEach>
 <%@ include file="../../part/foot.jspf" %>
