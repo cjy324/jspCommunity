@@ -9,7 +9,7 @@ String pageTitle = "게시물 리스트";
 %>
 <%@ include file="../../part/head.jspf" %>
 	<h1><%=articles.get(0).getExtra_boardName()%> <%=pageTitle%></h1>
-	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=<%=request.getParameter("boardId")%>&memberId=1">새 게시물 생성</a></button>
+	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}&memberId=1">새 게시물 생성</a></button>
 	<br>
 	<br>	
 	<%
