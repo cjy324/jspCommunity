@@ -25,8 +25,8 @@ public class ArticleService {
 
 	}
 
-	public int add(int boardId, String title, String body) {
-		return articleDao.add(boardId, title, body);
+	public int add(int boardId, String title, String body, int memberId) {
+		return articleDao.add(boardId, title, body, memberId);
 	}
 
 	public void articleModify(int id, String title, String body) {

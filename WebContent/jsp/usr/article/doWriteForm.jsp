@@ -6,9 +6,9 @@
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 
-<form action="doWrite" method="POST">
-	<input type="hidden" name="boardId" value="${param.boardId}"> <input
-		type="hidden" name="memberId" value="${param.memberId}">
+<form name="form" onsubmit="return check()" action="doWrite" method="POST">
+	<input type="hidden" name="boardId" value="${param.boardId}"> 
+	<input type="hidden" name="memberId" value="${loginedMemberId}">
 	<span>TITLE</span>
 	<br />
 	<input type="text" name="title" maxlength="50" placeholder="제목 입력">
@@ -21,5 +21,27 @@
 	<button type="button" onclick="history.back();">뒤로가기</button>
 
 </form>
+
+<script>
+function check(){
+
+	if(form.title.value == ""){
+		alert("제목을 입력하세요.")
+		form.title.focus();
+
+		return false;
+	}
+	if(form.body.value == ""){
+		alert("내용을 입력하세요.")
+		form.body.focus();
+
+		return false;
+	}
+
+	else return true;
+}
+
+</script>
+
 
 <%@ include file="../../part/foot.jspf"%>

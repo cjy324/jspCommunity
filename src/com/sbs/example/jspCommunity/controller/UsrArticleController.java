@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
@@ -65,13 +66,13 @@ public class UsrArticleController {
 	// 게시물 등록 폼
 	public String doWriteForm(HttpServletRequest request, HttpServletResponse response) {
 
-		//int boardId = Integer.parseInt(request.getParameter("boardId"));
-
-		//int memberId = Integer.parseInt(request.getParameter("memberId"));
-
-		//request.setAttribute("boardId", boardId);
-		//request.setAttribute("memberId", memberId);
-
+		// 로그인 여부 체크
+		if((boolean)request.getAttribute("isLogined") == false) {
+			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+		
 		return "usr/article/doWriteForm";
 	}
 
@@ -83,6 +84,7 @@ public class UsrArticleController {
 		 */
 
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
 
 		/*
 		 * if (request.getParameter("title") == null) {
@@ -110,7 +112,7 @@ public class UsrArticleController {
 		
 
 		// 게시물 생성
-		int id = articleService.add(boardId, title, body);
+		int id = articleService.add(boardId, title, body, memberId);
 		
 		// 생성 알림창 보여주고 detail로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 생성되었습니다.");

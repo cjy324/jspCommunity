@@ -62,7 +62,7 @@ public class ArticleDao {
 		return new Article(articleMap);
 	}
 
-	public int add(int boardId, String title, String body) {
+	public int add(int boardId, String title, String body, int memberId) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO article");
@@ -71,7 +71,7 @@ public class ArticleDao {
 		sql.append("title = ?,", title);
 		sql.append("body = ?,", body);
 		sql.append("boardId = ?,", boardId);
-		sql.append("memberId = 1");
+		sql.append("memberId = ?", memberId);
 
 		return MysqlUtil.insert(sql);
 	}
