@@ -7,7 +7,6 @@
 	<h1>${article.id}번 ${pageTitle}</h1>
 	<form action="doModify" method="POST">
   <input type="hidden" name="id" value="${article.id}">
-  <input type="hidden" name="memberId" value="${article.memberId}">
   <span>TITLE</span>
   <br>
   <input type="text" name="title" maxlength="50" placeholder="수정할 제목 입력" value="${article.title}">

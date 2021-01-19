@@ -9,3 +9,16 @@
 <title>${pageTitle}</title>
 </head>
 <body>
+<div>	
+	<c:if test="${sessionScope.loginedMemberId > 0}">
+		<a style="text-decoration:none;" href="../article/list?boardId=1">공시자항 게시판</a>
+		<a style="text-decoration:none;" href="../member/doLogout">Logout</a>
+		<hr/>
+	</c:if>
+	<c:if test="${sessionScope.loginedMemberId == null}">
+		<a style="text-decoration:none;" href="../article/list?boardId=1">공시자항 게시판</a>
+		<a style="text-decoration:none;" href="../member/doLoginForm">Login</a>
+		<a style="text-decoration:none;" href="../member/doJoinForm">Join</a>
+		<hr/>
+	</c:if>
+</div>

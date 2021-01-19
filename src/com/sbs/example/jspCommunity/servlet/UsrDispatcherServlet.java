@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.UsrArticleController;
+import com.sbs.example.jspCommunity.controller.UsrHomeController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.jspCommunity.dto.Member;
 
@@ -20,26 +21,31 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 
 		String jspPath = null;
 
-		// 로그인 여부를 request에 저장 시작
-		HttpSession session = request.getSession();
+		/*
+		 * // 로그인 여부를 request에 저장 시작 HttpSession session = request.getSession();
+		 * 
+		 * int loginedMemberId = -1; boolean isLogined = false; Member loginedMember =
+		 * null;
+		 * 
+		 * if (session.getAttribute("loginedMemberId") != null) { loginedMemberId =
+		 * (int) session.getAttribute("loginedMemberId"); isLogined = true;
+		 * loginedMember = Container.memberService.getMemberById(loginedMemberId); }
+		 * 
+		 * request.setAttribute("loginedMemberId", loginedMemberId);
+		 * request.setAttribute("isLogined", isLogined);
+		 * request.setAttribute("loginedMember", loginedMember); // 로그인 여부를 request에 저장
+		 * 끝
+		 */
 
-		int loginedMemberId = -1;
-		boolean isLogined = false;
-		Member loginedMember = null;
+		if(controllerName.equals("home")) {
+			UsrHomeController homeController = Container.homeController;
 
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int) session.getAttribute("loginedMemberId");
-			isLogined = true;
-			loginedMember = Container.memberService.getMemberById(loginedMemberId);
+			if (actionMethodName.equals("main")) {
+				jspPath = homeController.main(request, response);
+			}
 		}
-
-		request.setAttribute("loginedMemberId", loginedMemberId);
-		request.setAttribute("isLogined", isLogined);
-		request.setAttribute("loginedMember", loginedMember);
-		// 로그인 여부를 request에 저장 끝
-
-		System.out.println(loginedMemberId);
-
+		
+		
 		if (controllerName.equals("member")) {
 			UsrMemberController membercontroller = Container.userMembercontroller;
 
@@ -54,6 +60,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			}
 			if (actionMethodName.equals("doLogin")) {
 				jspPath = membercontroller.doLogin(request, response);
+			}
+			if (actionMethodName.equals("doLogout")) {
+				jspPath = membercontroller.doLogout(request, response);
 			}
 		}
 

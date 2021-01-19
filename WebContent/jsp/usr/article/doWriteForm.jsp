@@ -8,7 +8,6 @@
 
 <form name="form" onsubmit="return check()" action="doWrite" method="POST">
 	<input type="hidden" name="boardId" value="${param.boardId}"> 
-	<input type="hidden" name="memberId" value="${loginedMemberId}">
 	<span>TITLE</span>
 	<br />
 	<input type="text" name="title" maxlength="50" placeholder="제목 입력">

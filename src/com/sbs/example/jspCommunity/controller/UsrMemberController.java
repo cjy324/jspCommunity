@@ -76,7 +76,7 @@ public class UsrMemberController {
 
 		// 생성 알림창 보여주고 회원정보로 이동하기
 		request.setAttribute("alertMsg", id + "번 회원님 반갑습니다.");
-
+		
 		Member member = memberService.getMemberById(id);
 
 		request.setAttribute("member", member);
@@ -118,17 +118,26 @@ public class UsrMemberController {
 			return "common/redirect";
 		}
 
-
-		// 로그인 알림창 보여주고 리스트로 이동
-		request.setAttribute("alertMsg", loginId + " 회원님 반갑습니다.");
-		
 		// 로그인 여부를 세션에 저장
 		HttpSession session = request.getSession();
 		session.setAttribute("loginedMemberId", member.getId());
 
-		request.setAttribute("loginId", loginId);
+		// 로그인 알림창 보여주고 메인화면으로 이동
+		request.setAttribute("alertMsg", member.getNickname() + ", 님 반갑습니다.");
+		request.setAttribute("replaceUrl", "../home/main");
+		return "common/redirect";
+	}
+
+	//로그아웃
+	public String doLogout(HttpServletRequest request, HttpServletResponse response) {
+		// 로그인 여부를 세션에서 삭제
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginedMemberId");
 		
-		return "usr/member/doLogin";
+		request.setAttribute("alertMsg", "로그아웃 되었습니다.");
+		request.setAttribute("replaceUrl", "../home/main");
+		return "common/redirect";
+
 	}
 
 }
