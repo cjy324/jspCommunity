@@ -7,7 +7,7 @@
 	
 	<div>
 	<span>
-	로그인 되었습니다.
+	${loginId}님, 로그인 완료!!
 	</span>
 	</div>
 	

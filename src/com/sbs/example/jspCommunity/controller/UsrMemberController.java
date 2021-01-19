@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
@@ -120,9 +121,13 @@ public class UsrMemberController {
 
 		// 로그인 알림창 보여주고 리스트로 이동
 		request.setAttribute("alertMsg", loginId + " 회원님 반갑습니다.");
-	//	request.setAttribute("replaceUrl", String.format("doLoginForm"));
-	//	return "common/redirect";
+		
+		// 로그인 여부를 세션에 저장
+		HttpSession session = request.getSession();
+		session.setAttribute("loginedMemberId", member.getId());
 
+		request.setAttribute("loginId", loginId);
+		
 		return "usr/member/doLogin";
 	}
 

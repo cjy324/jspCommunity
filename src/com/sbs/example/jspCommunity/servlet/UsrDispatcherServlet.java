@@ -7,10 +7,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.UsrArticleController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
+import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
@@ -53,6 +55,27 @@ public class UsrDispatcherServlet extends HttpServlet {
 
 		// DB 서버 연결
 		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
+
+		
+		// 로그인 여부를 request에 저장 시작
+		HttpSession session = request.getSession();
+		
+		int loginedMemberId = -1;
+		boolean isLogined = false;
+		Member loginedMember = null;
+		
+		if(session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int) session.getAttribute("loginedMemberId");
+			isLogined = true;
+			loginedMember = Container.memberService.getMemberById(loginedMemberId);
+		}
+		
+		request.setAttribute("loginedMemberId", loginedMemberId);
+		request.setAttribute("isLogined", isLogined);
+		request.setAttribute("loginedMember", loginedMember);
+		// 로그인 여부를 request에 저장 끝
+		
+		System.out.println(loginedMemberId);
 
 		if (controllerName.equals("member")) {
 			UsrMemberController membercontroller = Container.userMembercontroller;
