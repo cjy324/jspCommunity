@@ -21,7 +21,7 @@
 		${article.updateDate}
 		<br />
 		작성자 :
-		${article.extra_memberName}
+		${article.extra_memberNickname}
 		<br />
 		제목 :
 		<a style="text-decoration:none;" href="detail?id=${article.id}">${article.title}</a>

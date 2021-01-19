@@ -24,13 +24,13 @@
 <script>
 function check(){
 
-	if(form.title.value == ""){
+	if(form.title.value.trim().length == 0){
 		alert("제목을 입력하세요.")
 		form.title.focus();
 
 		return false;
 	}
-	if(form.body.value == ""){
+	if(form.body.value.trim().length == 0){
 		alert("내용을 입력하세요.")
 		form.body.focus();
 

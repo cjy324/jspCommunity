@@ -22,6 +22,16 @@ public class UsrMemberController {
 
 	// 회원가입 폼
 	public String doJoinForm(HttpServletRequest request, HttpServletResponse response) {
+
+		HttpSession session = request.getSession();
+
+		// 로그인 여부 확인
+		if (session.getAttribute("loginedMemberId") != null) {
+			request.setAttribute("alertMsg", "이미 로그인된 상태입니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+		
 		return "usr/member/doJoinForm";
 	}
 
@@ -34,14 +44,6 @@ public class UsrMemberController {
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String cellPhoneNo = request.getParameter("cellPhoneNo");
-
-		/* form check 도입으로 여기서 실행할 필요 없음
-		 * // 정보가 하나라도 입력안되면 리턴 if (loginId == null || loginPw == null || name == null
-		 * || nickname == null || email == null || cellPhoneNo == null) {
-		 * request.setAttribute("alertMsg", "모든 정보를 입력하세요.");
-		 * request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기 return
-		 * "common/redirect"; }
-		 */
 
 		List<Member> members = memberService.getMemberListForPrint();
 
@@ -76,7 +78,7 @@ public class UsrMemberController {
 
 		// 생성 알림창 보여주고 회원정보로 이동하기
 		request.setAttribute("alertMsg", id + "번 회원님 반갑습니다.");
-		
+
 		Member member = memberService.getMemberById(id);
 
 		request.setAttribute("member", member);
@@ -94,13 +96,6 @@ public class UsrMemberController {
 	public String doLogin(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
 		String loginPw = request.getParameter("loginPw");
-
-		/* form check 도입으로 여기서 실행할 필요 없음
-		 * // 정보가 하나라도 입력안되면 리턴 if (loginId == null || loginPw == null) {
-		 * request.setAttribute("alertMsg", "모든 정보를 입력하세요.");
-		 * request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기 return
-		 * "common/redirect"; }
-		 */
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
@@ -128,12 +123,21 @@ public class UsrMemberController {
 		return "common/redirect";
 	}
 
-	//로그아웃
+	// 로그아웃
 	public String doLogout(HttpServletRequest request, HttpServletResponse response) {
-		// 로그인 여부를 세션에서 삭제
+
 		HttpSession session = request.getSession();
+
+		// 로그인 여부 확인
+		if (session.getAttribute("loginedMemberId") == null) {
+			request.setAttribute("alertMsg", "이미 로그아웃 상태입니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+		// 로그인 여부를 세션에서 삭제
 		session.removeAttribute("loginedMemberId");
-		
+
 		request.setAttribute("alertMsg", "로그아웃 되었습니다.");
 		request.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";

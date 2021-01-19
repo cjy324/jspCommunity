@@ -7,10 +7,8 @@
 	
 	<h1>${pageTitle}</h1>
 	<div style="font-size:1.2rem;">
-		
-		<br>
-		<hr>   
-		<button type="button"><a style="text-decoration:none;" href="list?boardId=${article.boardId}">리스트로 돌아가기</a></button>
+	임시
 	</div>
+	<hr/>
 	
 <%@ include file="../../part/foot.jspf" %>

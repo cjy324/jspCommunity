@@ -4,8 +4,10 @@
 
 <c:set var ="pageTitle" value="게시물 수정"/>
 <%@ include file="../../part/head.jspf" %>
-	<h1>${article.id}번 ${pageTitle}</h1>
-	<form action="doModify" method="POST">
+
+<h1>${article.id}번 ${pageTitle}</h1>
+
+<form action="doModify" method="POST" onsubmit="return check()">
   <input type="hidden" name="id" value="${article.id}">
   <span>TITLE</span>
   <br>
@@ -17,5 +19,25 @@
   <hr>
   <input type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}" value="수정완료"><button type="button" onclick="history.back();">뒤로가기</button>
 </form>
+
+<script>
+function check(){
+	if(form.title.value.trim().length == 0){
+		alert("제목을 입력하세요.")
+		form.title.focus();
+
+		return false;
+	}
+	if(form.body.value.trim().length == 0){
+		alert("내용을 입력하세요.")
+		form.body.focus();
+
+		return false;
+	}
+
+	else return true;
+
+}
+</script>
 	
 <%@ include file="../../part/foot.jspf" %>

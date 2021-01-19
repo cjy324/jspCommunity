@@ -11,14 +11,14 @@
 <body>
 <div>	
 	<c:if test="${sessionScope.loginedMemberId > 0}">
-		<a style="text-decoration:none;" href="../article/list?boardId=1">공시자항 게시판</a>
-		<a style="text-decoration:none;" href="../member/doLogout">Logout</a>
+		<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
+		<button><a style="text-decoration:none;" href="../member/doLogout">로그아웃</a></button>
 		<hr/>
 	</c:if>
 	<c:if test="${sessionScope.loginedMemberId == null}">
-		<a style="text-decoration:none;" href="../article/list?boardId=1">공시자항 게시판</a>
-		<a style="text-decoration:none;" href="../member/doLoginForm">Login</a>
-		<a style="text-decoration:none;" href="../member/doJoinForm">Join</a>
+		<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
+		<button><a style="text-decoration:none;" href="../member/doLoginForm">로그인</a></button>
+		<button><a style="text-decoration:none;" href="../member/doJoinForm">회원가입</a></button>
 		<hr/>
 	</c:if>
 </div>

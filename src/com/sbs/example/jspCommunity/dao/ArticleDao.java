@@ -16,6 +16,7 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
 		sql.append(", M.name AS extra_memberName");
+		sql.append(", M.nickname AS extra_memberNickname");
 		sql.append(", B.name AS extra_boardName");
 		sql.append(", B.code AS extra_boardCode");
 		sql.append("FROM article AS A");
@@ -43,15 +44,17 @@ public class ArticleDao {
 	public Article getArticleById(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT article.*, ");
-		sql.append("member.name AS extra_memberName, ");
-		sql.append("board.name AS extra_boardName");
-		sql.append("FROM article");
-		sql.append("INNER JOIN member");
-		sql.append("ON article.memberId = member.id");
-		sql.append("INNER JOIN `board`");
-		sql.append("ON article.boardId = board.id");
-		sql.append("WHERE article.id = ?", id);
+		sql.append("SELECT A.*");
+		sql.append(", M.name AS extra_memberName");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append(", B.name AS extra_boardName");
+		sql.append(", B.code AS extra_boardCode");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("INNER JOIN `board` AS B");
+		sql.append("ON A.boardId = B.id");
+		sql.append("WHERE A.id = ?", id);
 
 		Map<String, Object> articleMap = MysqlUtil.selectRow(sql);
 

@@ -16,9 +16,12 @@ public class Article {
 		this.boardId = (int) articlesMap.get("boardId");
 		this.memberId = (int) articlesMap.get("memberId");
 		this.hitsCount = (int) articlesMap.get("hitsCount");
-
+		
 		if (articlesMap.containsKey("extra_memberName")) {
 			this.extra_memberName = (String) articlesMap.get("extra_memberName");
+		}
+		if (articlesMap.containsKey("extra_memberNickname")) {
+			this.extra_memberNickname = (String) articlesMap.get("extra_memberNickname");
 		}
 		if (articlesMap.containsKey("extra_boardName")) {
 			this.extra_boardName = (String) articlesMap.get("extra_boardName");
@@ -41,6 +44,7 @@ public class Article {
 	private int boardId;
 	private int memberId;
 	private String extra_memberName;
+	private String extra_memberNickname;
 	private String extra_boardName;
 	private String extra_boardCode;
 	private int hitsCount;
