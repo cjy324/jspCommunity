@@ -67,12 +67,12 @@ public class UsrArticleController {
 	public String doWriteForm(HttpServletRequest request, HttpServletResponse response) {
 
 		// 로그인 여부 체크
-		if((boolean)request.getAttribute("isLogined") == false) {
+		if ((boolean) request.getAttribute("isLogined") == false) {
 			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
+
 		return "usr/article/doWriteForm";
 	}
 
@@ -108,17 +108,15 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
-		
 
 		// 게시물 생성
 		int id = articleService.add(boardId, title, body, memberId);
-		
+
 		// 생성 알림창 보여주고 detail로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 생성되었습니다.");
 		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
 		return "common/redirect";
-		
+
 		/*
 		 * Article article = articleService.getArticleById(id);
 		 * 
@@ -131,9 +129,22 @@ public class UsrArticleController {
 	// 게시물 수정 폼
 	public String doModifyForm(HttpServletRequest request, HttpServletResponse response) {
 
+		// 로그인 여부 체크
+		if ((boolean) request.getAttribute("isLogined") == false) {
+			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		int memberId = Integer.parseInt(request.getParameter("memberId"));
-		
+
+		// 본인 여부 체크
+		if ((int) request.getAttribute("loginedMemberId") != memberId) {
+			request.setAttribute("alertMsg", "작성자만 수정이 가능합니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		Article article = articleService.getArticleById(id);
@@ -143,15 +154,14 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
-		if(article.getMemberId() != memberId) {
+
+		if (article.getMemberId() != memberId) {
 			request.setAttribute("alertMsg", id + "번 게시물에 대한 권한이 없습니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
 
 		request.setAttribute("article", article);
-
 
 		return "usr/article/doModifyForm";
 	}
@@ -188,12 +198,11 @@ public class UsrArticleController {
 
 		// 게시물 수정
 		articleService.articleModify(id, title, body);
-		
+
 		// 수정 알림창 보여주고 detail로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 수정되었습니다.");
 		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
 		return "common/redirect";
-		
 
 		/*
 		 * // 수정된 해당 게시물 정보 다시 불러오기 article = articleService.getArticleById(id);
@@ -203,13 +212,25 @@ public class UsrArticleController {
 		 * return "usr/article/doModify";
 		 */
 	}
-	
+
 	// 게시물 삭제
 	public String doDelete(HttpServletRequest request, HttpServletResponse response) {
-		/*
-		 * if (request.getParameter("id") == null) {
-		 * response.getWriter().append("삭제할 게시물 id를 입력해주세요."); return; }
-		 */
+
+		// 로그인 여부 체크
+		if ((boolean) request.getAttribute("isLogined") == false) {
+			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+		int memberId = Integer.parseInt(request.getParameter("memberId"));
+
+		// 본인 여부 체크
+		if ((int) request.getAttribute("loginedMemberId") != memberId) {
+			request.setAttribute("alertMsg", "작성자만 삭제가 가능합니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
@@ -223,12 +244,11 @@ public class UsrArticleController {
 
 		// 게시물 삭제
 		articleService.articleDelete(id);
-		
+
 		// 삭제 알림창 보여주고 리스트로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 삭제되었습니다.");
 		request.setAttribute("replaceUrl", String.format("list?boardId=%d", article.getBoardId()));
 		return "common/redirect";
-		
 
 		/*
 		 * request.setAttribute("id", id);

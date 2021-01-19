@@ -30,7 +30,7 @@
 		<br>
 		<br>
 		<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&memberId=${article.memberId}&title=${article.title}&body=${article.body}">수정</a></button>
-		<button onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=${article.id}">삭제</a></button>
+		<button onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=${article.id}&memberId=${article.memberId}">삭제</a></button>
 		<hr>   
 		<button type="button"><a style="text-decoration:none;" href="list?boardId=${article.boardId}">리스트로 돌아가기</a></button>
 	</div>
