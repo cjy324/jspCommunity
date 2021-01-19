@@ -17,6 +17,11 @@
 	<input type="password" name="loginPw" maxlength="50"
 		placeholder="PW 입력">
 	<br />
+	<span>로그인 PW 확인</span>
+	<br />
+	<input type="password" name="loginPwConfirm" maxlength="50"
+		placeholder="PW 입력">
+	<br />
 	<span>이름</span>
 	<br />
 	<input type="text" name="name" maxlength="50" placeholder="이름 입력">
@@ -43,38 +48,45 @@
 
 <script>
 	function check() {
-
-		if (form.loginId.value == "") {
+	
+		if (form.loginId.value.trim().length == 0) {
 			alert("ID를 입력해주세요.");
 			form.loginId.focus();
 			
 			return false;
 		}
-		if (form.loginPw.value == "") {
+		if (form.loginPw.value.trim().length == 0) {
 			alert("PW를 입력해주세요.");
 			form.loginPw.focus();
 			
 			return false;
 		}
-		if (form.name.value == "") {
+		if (form.loginPw.value != form.loginPwConfirm.value) {
+			alert("PW가 일치하지 않습니다. PW를 확인해 주세요.");
+			form.loginPwConfirm.focus();
+			
+			return false;
+		}
+		
+		if (form.name.value.trim().length == 0) {
 			alert("이름을 입력해주세요.");
 			form.name.focus();
 			
 			return false;
 		}
-		if (form.nickname.value == "") {
+		if (form.nickname.value.trim().length == 0) {
 			alert("닉네임을 입력해주세요.");
 			form.nickname.focus();
 			
 			return false;
 		}
-		if (form.email.value == "") {
+		if (form.email.value.trim().length == 0) {
 			alert("e-mail을 입력해주세요.");
 			form.email.focus();
 			
 			return false;
 		}
-		if (form.cellPhoneNo.value == "") {
+		if (form.cellPhoneNo.value.trim().length == 0) {
 			alert("연락처를 입력해주세요.");
 			form.cellPhoneNo.focus();
 			

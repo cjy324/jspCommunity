@@ -1,10 +1,6 @@
 package com.sbs.example.jspCommunity.servlet;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,68 +9,35 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.UsrArticleController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.jspCommunity.dto.Member;
-import com.sbs.example.mysqlutil.MysqlUtil;
 
 @WebServlet("/usr/*")
-public class UsrDispatcherServlet extends HttpServlet {
+public class UsrDispatcherServlet extends DispatcherServlet {
 
-	// doGet 메서드 호출
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doHandle(request, response);
-	}
+	// (2) doBeforeActionRs의 결과로 도출된 controllerName, actionMethodName 가져와 usr, adm 서블릿으로 전송
+	// usr, adm 서블릿에서 각 컨트롤들이 요청 수행후 jspPath 리턴
+	protected String doAction(HttpServletRequest request, HttpServletResponse response, String controllerName,
+			String actionMethodName) {
 
-	// doPost 메서드 호출
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doHandle(request, response);
-	}
-
-	// doGet, doPost 중 들어온 방식으로 처리
-	protected void doHandle(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-
-		// 요청된 uri의 정보를 가져오기
-		String requestURI = request.getRequestURI();
-		// 가져온 uri의 정보를 /기준으로 쪼개기
-		String[] requestUriBits = requestURI.split("/");
-
-		// 만약, requestURIBits.length가 5보다 작으면
-		// 즉, /jspCommunity/jsp/usr/article/list 와 같은 형식이 아니면 중지
-		if (requestUriBits.length < 5) {
-			response.getWriter().append("잘못된 요청입니다.");
-			return;
-		}
-
-		String controllerName = requestUriBits[3];
-		String actionMethodName = requestUriBits[4];
 		String jspPath = null;
 
-		// DB 서버 연결
-		MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
-
-		
 		// 로그인 여부를 request에 저장 시작
 		HttpSession session = request.getSession();
-		
+
 		int loginedMemberId = -1;
 		boolean isLogined = false;
 		Member loginedMember = null;
-		
-		if(session.getAttribute("loginedMemberId") != null) {
+
+		if (session.getAttribute("loginedMemberId") != null) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			isLogined = true;
 			loginedMember = Container.memberService.getMemberById(loginedMemberId);
 		}
-		
+
 		request.setAttribute("loginedMemberId", loginedMemberId);
 		request.setAttribute("isLogined", isLogined);
 		request.setAttribute("loginedMember", loginedMember);
 		// 로그인 여부를 request에 저장 끝
-		
+
 		System.out.println(loginedMemberId);
 
 		if (controllerName.equals("member")) {
@@ -120,10 +83,7 @@ public class UsrDispatcherServlet extends HttpServlet {
 			}
 		}
 
-		// DB 서버 연결 종료
-		MysqlUtil.closeConnection();
-
-		request.getRequestDispatcher("/jsp/" + jspPath + ".jsp").forward(request, response);
+		return jspPath;
 
 	}
 

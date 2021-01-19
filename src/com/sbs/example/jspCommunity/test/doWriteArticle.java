@@ -61,14 +61,14 @@ public class doWriteArticle extends HttpServlet {
 		
 		
 		// 게시물 생성
-		int id = articleService.add(boardId, title, body);
+		//int id = articleService.add(boardId, title, body);
 		
-		Article article = articleService.getArticleById(id);
+		//Article article = articleService.getArticleById(id);
 
 		// DB 서버 연결 종료
 		MysqlUtil.closeConnection();
 
-		request.setAttribute("article", article);
+		//request.setAttribute("article", article);
 
 		request.getRequestDispatcher("/jsp/usr/article/doWrite.jsp").forward(request, response);
 
