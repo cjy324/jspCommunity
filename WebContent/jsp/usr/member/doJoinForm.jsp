@@ -31,12 +31,12 @@
 			},
 			function(data){
 				if( data == "YES"){
-					alert("해당 아이디는 사용 가능합니다.");
+					alert("해당 ID는 사용 가능합니다.");
 					checkedDupId = loginId;
 				
 				}
 				else{
-					alert("해당 아이디는 이미 사용중입니다.");
+					alert("해당 ID는 이미 사용중입니다.");
 				}
 			},			
 			'html'
@@ -58,7 +58,7 @@
 		}
 		
 		if (form.loginId.value != checkedDupId) {
-			alert("ID 중복 검사를 해주세요.");
+			alert("먼저 ID 중복 검사를 해주세요.");
 			form.dupIdCheck.focus();
 			
 			return false;

@@ -11,8 +11,7 @@
 <script src="${pageContext.request.contextPath}/static/usrHomeMain.js" defer></script>
 -->	
 	
-	<!-- 사이트 박스 시작 -->
-<section class="site-box min-height-100vh flex flex-column">
+
 
   <!-- 탑바 시작 -->
   <div class="top-bar-padding visible-md-up">
