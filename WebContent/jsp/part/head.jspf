@@ -6,19 +6,41 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
+
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<!-- 반응형 필수 -->
+<meta name="viewport" content="width=device-width, user-scalable=no" />
+
+<!-- 제이쿼리 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/static/common.css" />
+<script src="${pageContext.request.contextPath}/static/common.js" defer></script>
+
+
 <title>${pageTitle}</title>
+
+
+
 </head>
 <body>
-<div>	
-	<c:if test="${sessionScope.loginedMemberId > 0}">
-		<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
-		<button><a style="text-decoration:none;" href="../member/doLogout">로그아웃</a></button>
-		<hr/>
-	</c:if>
-	<c:if test="${sessionScope.loginedMemberId == null}">
-		<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
-		<button><a style="text-decoration:none;" href="../member/doLoginForm">로그인</a></button>
-		<button><a style="text-decoration:none;" href="../member/doJoinForm">회원가입</a></button>
-		<hr/>
-	</c:if>
-</div>
+	<div class="head-bar">	
+		<c:if test="${sessionScope.loginedMemberId > 0}">
+			<button><a style="text-decoration:none;" href="../home/main">홈</a></button>
+			<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
+			<button><a style="text-decoration:none;" href="../member/doLogout">로그아웃</a></button>
+			<hr/>
+		</c:if>
+		<c:if test="${sessionScope.loginedMemberId == null}">
+			<button><a style="text-decoration:none;" href="../home/main">홈</a></button>
+			<button><a style="text-decoration:none;" href="../article/list?boardId=1">공지사항</a></button>
+			<button><a style="text-decoration:none;" href="../member/doLoginForm">로그인</a></button>
+			<button><a style="text-decoration:none;" href="../member/doJoinForm">회원가입</a></button>
+			<hr/>
+		</c:if>
+	</div>
+
+	<main>

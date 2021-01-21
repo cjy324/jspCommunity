@@ -144,4 +144,24 @@ public class UsrMemberController {
 
 	}
 
+	public String getLoginIdDup(HttpServletRequest request, HttpServletResponse response) {
+		
+		String loginId = request.getParameter("loginId");
+		
+		Member member = memberService.getMemberByLoginId(loginId);
+		
+		String data = "";
+		
+		if(member == null) {
+			data = "YES";
+		}
+		else {
+			data = "NO";
+		}
+		
+		request.setAttribute("data", data);
+		
+		return "common/pure";
+	}
+
 }

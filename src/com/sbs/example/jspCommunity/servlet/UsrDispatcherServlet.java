@@ -52,6 +52,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doJoinForm")) {
 				jspPath = membercontroller.doJoinForm(request, response);
 			}
+			if (actionMethodName.equals("getLoginIdDup")) {
+				jspPath = membercontroller.getLoginIdDup(request, response);
+			}
 			if (actionMethodName.equals("doJoin")) {
 				jspPath = membercontroller.doJoin(request, response);
 			}

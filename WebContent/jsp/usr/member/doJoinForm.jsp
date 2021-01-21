@@ -6,11 +6,112 @@
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 
-<form name="form" onsubmit="return check()" action="doJoin"
-	method="POST">
+<script>
+	
+	//변수명과 함수명이 같으면 에러발생!!
+	let checkedDupId = "";
+	
+	
+	// 중복체크
+	function checkDupId(el){
+		//가장 근접한 'form'을 가져오기
+		//$(el).parent.parent.parent 방식으로 부모를 찾아도 됨
+		const form = $(el).closest('form').get(0);
+		
+		const loginId = form.loginId.value;
+		
+		
+		//ajax 통신으로 보내고 데이터 받기
+		$.get(
+			'getLoginIdDup',  //요청할 주소
+			{		
+				//	loginId:loginId도 맞다
+				// 최신 JS에서는 이 방식이 가능함
+				loginId
+			},
+			function(data){
+				if( data == "YES"){
+					alert("해당 아이디는 사용 가능합니다.");
+					checkedDupId = loginId;
+				
+				}
+				else{
+					alert("해당 아이디는 이미 사용중입니다.");
+				}
+			},			
+			'html'
+		
+		);
+		
+	};
+
+
+	
+	// 폼 공백 체크
+	function check(form) {
+	
+		if (form.loginId.value.trim().length == 0) {
+			alert("ID를 입력해주세요.");
+			form.loginId.focus();
+			
+			return;
+		}
+		
+		if (form.loginId.value != checkedDupId) {
+			alert("ID 중복 검사를 해주세요.");
+			form.dupIdCheck.focus();
+			
+			return false;
+		}
+		
+		if (form.loginPw.value.trim().length == 0) {
+			alert("PW를 입력해주세요.");
+			form.loginPw.focus();
+			
+			return;
+		}
+		if (form.loginPw.value != form.loginPwConfirm.value) {
+			alert("PW가 일치하지 않습니다. PW를 확인해 주세요.");
+			form.loginPwConfirm.focus();
+			
+			return;
+		}
+		
+		if (form.name.value.trim().length == 0) {
+			alert("이름을 입력해주세요.");
+			form.name.focus();
+			
+			return;
+		}
+		if (form.nickname.value.trim().length == 0) {
+			alert("닉네임을 입력해주세요.");
+			form.nickname.focus();
+			
+			return;
+		}
+		if (form.email.value.trim().length == 0) {
+			alert("e-mail을 입력해주세요.");
+			form.email.focus();
+			
+			return;
+		}
+		if (form.cellPhoneNo.value.trim().length == 0) {
+			alert("연락처를 입력해주세요.");
+			form.cellPhoneNo.focus();
+			
+			return;
+		}
+		
+		form.submit();
+	};
+</script>
+
+
+<form name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
 	<span>로그인 ID</span>
 	<br />
 	<input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
+	<button name="dupIdCheck" onclick="checkDupId(this);" type = "button">중복체크</button>
 	<br />
 	<span>로그인 PW</span>
 	<br />
@@ -46,56 +147,7 @@
 
 </form>
 
-<script>
-	function check() {
-	
-		if (form.loginId.value.trim().length == 0) {
-			alert("ID를 입력해주세요.");
-			form.loginId.focus();
-			
-			return false;
-		}
-		if (form.loginPw.value.trim().length == 0) {
-			alert("PW를 입력해주세요.");
-			form.loginPw.focus();
-			
-			return false;
-		}
-		if (form.loginPw.value != form.loginPwConfirm.value) {
-			alert("PW가 일치하지 않습니다. PW를 확인해 주세요.");
-			form.loginPwConfirm.focus();
-			
-			return false;
-		}
-		
-		if (form.name.value.trim().length == 0) {
-			alert("이름을 입력해주세요.");
-			form.name.focus();
-			
-			return false;
-		}
-		if (form.nickname.value.trim().length == 0) {
-			alert("닉네임을 입력해주세요.");
-			form.nickname.focus();
-			
-			return false;
-		}
-		if (form.email.value.trim().length == 0) {
-			alert("e-mail을 입력해주세요.");
-			form.email.focus();
-			
-			return false;
-		}
-		if (form.cellPhoneNo.value.trim().length == 0) {
-			alert("연락처를 입력해주세요.");
-			form.cellPhoneNo.focus();
-			
-			return false;
-		}
-		
-		else return true;
-	}
-</script>
+
 
 
 <%@ include file="../../part/foot.jspf"%>

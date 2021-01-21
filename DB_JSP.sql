@@ -139,3 +139,4 @@ title = '제목5',
 `body` = '내용5';
 
 SELECT * FROM article;
+SELECT * FROM `member`;
