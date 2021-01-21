@@ -183,7 +183,7 @@ public class UsrArticleController {
 		
 		// 작성자 본인 여부 체크
 		if (article.getMemberId() != memberId) {
-			request.setAttribute("alertMsg", "작성자만 수정이 가능합니다.");
+			request.setAttribute("alertMsg", "작성자만 삭제가 가능합니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}

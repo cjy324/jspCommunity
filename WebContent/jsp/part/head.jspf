@@ -8,13 +8,15 @@
 <meta charset="UTF-8" />
 
 <!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 <!-- 반응형 필수 -->
 <meta name="viewport" content="width=device-width, user-scalable=no" />
 
 <!-- 제이쿼리 불러오기 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/common.css" />
@@ -28,19 +30,31 @@
 </head>
 <body>
 	<!-- 사이트 박스 시작 -->
-<section class="site-box min-height-100vh flex flex-column">
-	
-	<section class="head-bar-section">	
-	<div class="head-bar con flex flex-jc-fe">	
-		<c:if test="${sessionScope.loginedMemberId > 0}">
-			<div class="head-bar-button"><a href="../home/main">홈</a></div>
-			<div class="head-bar-button"><a href="../member/">회원정보</a></div>
-			<div class="head-bar-button"><a href="../member/doLogout">로그아웃</a></div>
-		</c:if>
-		<c:if test="${sessionScope.loginedMemberId == null}">
-			<div class="head-bar-button"><a href="../home/main">홈</a></div>
-			<div class="head-bar-button"><a href="../member/doLoginForm">로그인</a></div>
-			<div class="head-bar-button"><a href="../member/doJoinForm">회원가입</a></div>
-		</c:if>
-	</div>
-</section>
+	<section class="site-box min-height-100vh flex flex-column">
+
+		<section class="head-bar-section">
+			<div class="head-bar con flex flex-jc-fe">
+				<c:if test="${sessionScope.loginedMemberId > 0}">
+					<div class="head-bar-button">
+						<a href="../home/main">홈</a>
+					</div>
+					<div class="head-bar-button">
+						<a href="../member/">회원정보</a>
+					</div>
+					<div class="head-bar-button">
+						<a href="../member/doLogout">로그아웃</a>
+					</div>
+				</c:if>
+				<c:if test="${sessionScope.loginedMemberId == null}">
+					<div class="head-bar-button">
+						<a href="../home/main">홈</a>
+					</div>
+					<div class="head-bar-button">
+						<a href="../member/doLoginForm">로그인</a>
+					</div>
+					<div class="head-bar-button">
+						<a href="../member/doJoinForm">회원가입</a>
+					</div>
+				</c:if>
+			</div>
+		</section>
