@@ -27,19 +27,20 @@
 			{		
 				//	loginId:loginId도 맞다
 				// 최신 JS에서는 이 방식이 가능함
-				loginId
+				loginId:loginId
 			},
 			function(data){
-				if( data == "YES"){
-					alert("해당 ID는 사용 가능합니다.");
-					checkedDupId = loginId;
+				if( data.code.substring(0,2) == "S-"){
+					alert(data.msg + " (" + data.code + ")");
+					checkedDupId = data.loginId;
 				
 				}
 				else{
-					alert("해당 ID는 이미 사용중입니다.");
+					alert(data.msg + " (" + data.code + ")");
+				//	alert();
 				}
 			},			
-			'html'
+			'json'
 		
 		);
 		

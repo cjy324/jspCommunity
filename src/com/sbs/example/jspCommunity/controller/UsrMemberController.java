@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.service.MemberService;
+import com.sbs.example.util.Util;
 
 public class UsrMemberController {
 
@@ -144,22 +145,39 @@ public class UsrMemberController {
 
 	}
 
+	// 회원가입 폼 작성 시 ajax로 중복체크
 	public String getLoginIdDup(HttpServletRequest request, HttpServletResponse response) {
+		
+		Map<String, Object> rs = new HashMap<>();
 		
 		String loginId = request.getParameter("loginId");
 		
 		Member member = memberService.getMemberByLoginId(loginId);
 		
-		String data = "";
+		String code = null;
+		String msg = null;
+		
 		
 		if(member == null) {
-			data = "YES";
+			code = "S-1";   //S = success의 약자, 숫자는 유형 개념
+							//1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
+			msg = "해당 ID는 사용이 가능합니다.";
 		}
-		else {
-			data = "NO";
+		if(member != null){
+			code = "F-1";
+			msg = "해당 ID는 이미 사용중입니다.";
+		}
+		if(loginId.trim().length() == 0){
+			code = "F-2";
+			msg = "해당 ID는 사용이 불가능합니다.";
 		}
 		
-		request.setAttribute("data", data);
+		rs.put("loginId", loginId);
+		rs.put("code", code);
+		rs.put("msg", msg);
+		
+		//rs 맵리스트를 json방식으로 생성해서 data로 보내기
+		request.setAttribute("data", Util.getJsonText(rs));
 		
 		return "common/pure";
 	}
