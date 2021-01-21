@@ -17,6 +17,7 @@ function MobileTopBar__init() {
 MobileTopBar__init();
 
 
+/*
 //좌우슬라이딩
 $(function() {
   var winW = cnt = setId = 0;
@@ -78,5 +79,4 @@ function mainslideFn() {  //메인슬라이드 함수
   //count 변경시마다 버튼 색깔 변경
   
 });
-
-
+*/
