@@ -6,7 +6,7 @@
 <%@ include file="../../part/head.jspf" %>
 
 	<h1>${articles.get(0).extra_boardName} ${pageTitle}</h1>
-	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}&memberId=1">새 게시물 생성</a></button>
+	<button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">새 게시물 생성</a></button>
 	<br>
 	<br>
 	<c:forEach var="article" items="${articles}">	

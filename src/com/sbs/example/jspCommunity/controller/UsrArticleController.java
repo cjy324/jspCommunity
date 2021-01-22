@@ -58,25 +58,14 @@ public class UsrArticleController {
 	// 게시물 등록 폼
 	public String doWriteForm(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
-
-		// 로그인 여부 체크
-		if (session.getAttribute("loginedMemberId") == null) {
-			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
-			request.setAttribute("replaceUrl", "../member/doLoginForm");
-			return "common/redirect";
-		}
-
 		return "usr/article/doWriteForm";
 	}
 
 	// 게시물 등록
 	public String doWrite(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
-
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
-		int memberId = (int) session.getAttribute("loginedMemberId");
+		int memberId = (int) request.getAttribute("loginedMemberId");
 
 		String title = request.getParameter("title");
 
@@ -104,16 +93,7 @@ public class UsrArticleController {
 	// 게시물 수정 폼
 	public String doModifyForm(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
-		
-		// 로그인 여부 체크
-		if (session.getAttribute("loginedMemberId") == null) {
-			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
-			request.setAttribute("replaceUrl", "../member/doLoginForm");
-			return "common/redirect";
-		}
-
-		int memberId = (int) session.getAttribute("loginedMemberId");
+		int memberId = (int) request.getAttribute("loginedMemberId");
 
 		// 해당 게시판이 존재하는지 확인
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -158,18 +138,8 @@ public class UsrArticleController {
 	// 게시물 삭제
 	public String doDelete(HttpServletRequest request, HttpServletResponse response) {
 
-		HttpSession session = request.getSession();
+		int memberId = (int) request.getAttribute("loginedMemberId");
 
-		// 로그인 여부 체크
-		if (session.getAttribute("loginedMemberId") == null) {
-			request.setAttribute("alertMsg", "로그인 후 이용가능합니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
-		}
-
-		int memberId = (int) session.getAttribute("loginedMemberId");
-
-		
 		// 해당 게시판이 존재하는지 확인
 		int id = Integer.parseInt(request.getParameter("id"));
 
