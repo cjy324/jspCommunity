@@ -116,6 +116,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionList.add("usr/article/doModifyForm");
 		needToLoginActionList.add("usr/article/doModify");
 		needToLoginActionList.add("usr/article/doDelete");
+		needToLoginActionList.add("usr/member/showMyPage");
 
 		/// 로그인 여부 확인
 		if (needToLoginActionList.contains(actionUrl)) {
@@ -137,7 +138,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToNonLoginActionList.add("usr/member/doLogin");
 		needToNonLoginActionList.add("usr/member/doJoinForm");
 		needToNonLoginActionList.add("usr/member/doJoin");
-
+		
 		/// 로그인 여부 확인
 		if (needToNonLoginActionList.contains(actionUrl)) {
 			if ((boolean) request.getAttribute("isLogined")) {

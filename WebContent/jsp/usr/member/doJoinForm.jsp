@@ -59,7 +59,7 @@
 		}
 		
 		if (form.loginId.value != checkedDupId) {
-			alert("먼저 ID 중복 검사를 해주세요.");
+			alert("먼저 ID 중복체크를 해주세요.");
 			form.dupIdCheck.focus();
 			
 			return false;

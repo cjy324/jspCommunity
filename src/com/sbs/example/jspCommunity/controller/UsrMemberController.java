@@ -23,7 +23,7 @@ public class UsrMemberController {
 
 	// 회원가입 폼
 	public String doJoinForm(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		return "usr/member/doJoinForm";
 	}
 
@@ -130,39 +130,114 @@ public class UsrMemberController {
 
 	// 회원가입 폼 작성 시 ajax로 중복체크
 	public String getLoginIdDup(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		Map<String, Object> rs = new HashMap<>();
-		
+
 		String loginId = request.getParameter("loginId");
-		
+
 		Member member = memberService.getMemberByLoginId(loginId);
-		
+
 		String code = null;
 		String msg = null;
-		
-		
-		if(member == null) {
-			code = "S-1";   //S = success의 약자, 숫자는 유형 개념
-							//1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
+
+		if (member == null) {
+			code = "S-1"; // S = success의 약자, 숫자는 유형 개념
+							// 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
 			msg = "해당 ID는 사용이 가능합니다.";
 		}
-		if(member != null){
+		if (member != null) {
 			code = "F-1";
 			msg = "해당 ID는 이미 사용중입니다.";
 		}
-		if(loginId.trim().length() == 0){
+		if (loginId.trim().length() == 0) {
 			code = "F-2";
 			msg = "해당 ID는 사용이 불가능합니다.";
 		}
-		
+
 		rs.put("loginId", loginId);
 		rs.put("code", code);
 		rs.put("msg", msg);
-		
-		//rs 맵리스트를 json방식으로 생성해서 data로 보내기
+
+		// rs 맵리스트를 json방식으로 생성해서 data로 보내기
 		request.setAttribute("data", Util.getJsonText(rs));
-		
+
 		return "common/pure";
+	}
+	
+	// ajax로 닉네임 중복체크
+		public String getNicknameDup(HttpServletRequest request, HttpServletResponse response) {
+			Map<String, Object> rs = new HashMap<>();
+
+			String nickname = request.getParameter("nickname");
+
+			Member member = memberService.getMemberByNickname(nickname);
+
+			String code = null;
+			String msg = null;
+
+			if (member == null) {
+				code = "S-1"; // S = success의 약자, 숫자는 유형 개념
+								// 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
+				msg = "해당 닉네임은 사용이 가능합니다.";
+			}
+			if (member != null) {
+				code = "F-1";
+				msg = "해당 닉네임은 이미 사용중입니다.";
+			}
+			if (nickname.trim().length() == 0) {
+				code = "F-2";
+				msg = "해당 닉네임은 사용이 불가능합니다.";
+			}
+
+			rs.put("nickname", nickname);
+			rs.put("code", code);
+			rs.put("msg", msg);
+
+			// rs 맵리스트를 json방식으로 생성해서 data로 보내기
+			request.setAttribute("data", Util.getJsonText(rs));
+
+			return "common/pure";
+		}
+
+	// 회원 정보 페이지
+	public String showMyPage(HttpServletRequest request, HttpServletResponse response) {
+		return "usr/member/showMyPage";
+	}
+
+	// 회원 정보 이름 수정
+	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(request.getParameter("id"));
+		
+		String loginId = request.getParameter("loginId");
+		String name = request.getParameter("name");
+		String nickname = request.getParameter("nickname");
+		String email = request.getParameter("email");
+		String cellphoneNo = request.getParameter("cellphoneNo");
+		
+		Member member = memberService.getMemberById(id);
+		
+		if(loginId == null) {
+			loginId = member.getLoginId();
+		}
+		if(name == null) {
+			name = member.getName();
+		}
+		if(nickname == null) {
+			nickname = member.getNickname();
+		}
+		if(email == null) {
+			email = member.getEmail();
+		}
+		if(cellphoneNo == null) {
+			cellphoneNo = member.getCellphoneNo();
+		}
+
+		memberService.doModifyMemberName(id, loginId, name, nickname, email, cellphoneNo);
+	
+		
+		request.setAttribute("alertMsg", "수정되었습니다.");
+		request.setAttribute("replaceUrl", "../member/showMyPage");
+		return "common/redirect";
 	}
 
 }

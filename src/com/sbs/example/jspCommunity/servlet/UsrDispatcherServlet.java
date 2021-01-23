@@ -55,6 +55,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("getLoginIdDup")) {
 				jspPath = membercontroller.getLoginIdDup(request, response);
 			}
+			if (actionMethodName.equals("getNicknameDup")) {
+				jspPath = membercontroller.getNicknameDup(request, response);
+			}
 			if (actionMethodName.equals("doJoin")) {
 				jspPath = membercontroller.doJoin(request, response);
 			}
@@ -66,6 +69,12 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			}
 			if (actionMethodName.equals("doLogout")) {
 				jspPath = membercontroller.doLogout(request, response);
+			}
+			if (actionMethodName.equals("showMyPage")) {
+				jspPath = membercontroller.showMyPage(request, response);
+			}
+			if (actionMethodName.equals("doModifyInfo")) {
+				jspPath = membercontroller.doModifyInfo(request, response);
 			}
 		}
 

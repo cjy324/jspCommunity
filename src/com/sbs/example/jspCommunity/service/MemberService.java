@@ -32,6 +32,15 @@ public class MemberService {
 		return memberDao.getMemberByLoginId(loginId);
 	}
 
+	public void doModifyMemberName(int id, String loginId, String name, String nickname, String email, String cellphoneNo) {
+		memberDao.doModifyMemberName(id, loginId, name, nickname, email, cellphoneNo);
+		
+	}
+
+	public Member getMemberByNickname(String nickname) {
+		return memberDao.getMemberByNickname(nickname);
+	}
+
 
 
 }

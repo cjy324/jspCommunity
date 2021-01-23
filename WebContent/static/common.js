@@ -1,4 +1,5 @@
 console.clear();
+/* 모바일용 메뉴 버튼 시작 */
 function MobileTopBar__init() {
   $('.mobile-top-bar_btn-toggle-side-bar').click(function() {
     let $this = $(this);
@@ -15,6 +16,110 @@ function MobileTopBar__init() {
 }
 
 MobileTopBar__init();
+/* 모바일용 메뉴 버튼 끝 */
+
+/* 회원정보 수정 버튼 시작 */
+function memberModifyInfo__init() {
+  $('.infoModifyBtn0').click(function() {
+
+      $('.infoModifyBtn0').addClass('active');
+      $('.oldLoginIdInfo').addClass('active');
+      $('.newLoginIdInfo').addClass('active');  
+  }),
+   $('.infoModifyBtn1').click(function() {
+
+      $('.infoModifyBtn1').addClass('active');
+      $('.oldNameInfo').addClass('active');
+      $('.newNameInfo').addClass('active'); 
+  }),
+   $('.infoModifyBtn2').click(function() {
+
+      $('.infoModifyBtn2').addClass('active');
+      $('.oldNicknameInfo').addClass('active');
+      $('.newNicknameInfo').addClass('active');
+    
+  }),
+   $('.infoModifyBtn3').click(function() {
+    
+      $('.infoModifyBtn3').addClass('active');
+      $('.oldEmailInfo').addClass('active');
+      $('.newEmailInfo').addClass('active');
+    
+  }),
+   $('.infoModifyBtn4').click(function() {
+    
+      $('.infoModifyBtn4').addClass('active');
+      $('.oldPhoneInfo').addClass('active');
+      $('.newPhoneInfo').addClass('active');
+    
+  });
+}
+
+memberModifyInfo__init();
+
+function memberModifyInfo__remove() {
+  $('.cleModifyBtn0').click(function() {
+
+      $('.infoModifyBtn0').removeClass('active');
+      $('.oldLoginIdInfo').removeClass('active');
+      $('.newLoginIdInfo').removeClass('active');  
+  }),
+   $('.cleModifyBtn1').click(function() {
+
+      $('.infoModifyBtn1').removeClass('active');
+      $('.oldNameInfo').removeClass('active');
+      $('.newNameInfo').removeClass('active'); 
+  }),
+   $('.cleModifyBtn2').click(function() {
+
+      $('.infoModifyBtn2').removeClass('active');
+      $('.oldNicknameInfo').removeClass('active');
+      $('.newNicknameInfo').removeClass('active');
+    
+  }),
+   $('.cleModifyBtn3').click(function() {
+    
+      $('.infoModifyBtn3').removeClass('active');
+      $('.oldEmailInfo').removeClass('active');
+      $('.newEmailInfo').removeClass('active');
+    
+  }),
+   $('.cleModifyBtn4').click(function() {
+    
+      $('.infoModifyBtn4').removeClass('active');
+      $('.oldPhoneInfo').removeClass('active');
+      $('.newPhoneInfo').removeClass('active');
+    
+  });
+};
+
+memberModifyInfo__remove();
+
+/* 회원정보 수정 버튼 끝 */
+
+
+
+/* top-button 옵션 시작 */
+$(function() {  
+  // 보이기 | 숨기기
+  $(window).scroll(function() { 
+    if ($(this).scrollTop() < 200) { 
+    //200 넘으면 버튼이 보임 
+     $('.top-button').fadeOut(); 
+  } else { 
+    $('.top-button').fadeIn();
+  } 
+  }); 
+  // 버튼 클릭시 0 까지 animation 이동합니다. 
+  $(".top-button").click(function() {
+    $('html, body').animate({ 
+      scrollTop : 0 }, 200); // 속도 200 
+    return false; 
+  }); 
+
+});
+
+/* top-button 옵션 끝 */
 
 
 /*
@@ -80,3 +185,4 @@ function mainslideFn() {  //메인슬라이드 함수
   
 });
 */
+

@@ -78,5 +78,36 @@ public class MemberDao {
 		return new Member(memberMap);
 	}
 
+	// 회원 정보 수정
+	public void doModifyMemberName(int id, String loginId, String name, String nickname, String email, String cellphoneNo) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE member");
+		sql.append("SET updateDate = NOW()");
+		sql.append(", loginId = ?", loginId);
+		sql.append(", name = ?", name);
+		sql.append(", nickname = ?", nickname);
+		sql.append(", email = ?", email);
+		sql.append(", cellphoneNo = ?", cellphoneNo);
+		sql.append("WHERE id = ?", id);
+		
+		MysqlUtil.update(sql);
+	}
+
+	public Member getMemberByNickname(String nickname) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM member");
+		sql.append("WHERE nickname = ?", nickname);
+		
+		Map<String, Object> memberMap = MysqlUtil.selectRow(sql);
+		
+		if(memberMap.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(memberMap);
+	}
+
 
 }

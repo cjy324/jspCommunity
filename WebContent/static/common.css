@@ -1,10 +1,15 @@
 /* 폰트 1*/
-
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 /* 폰트 2 */
-
+  
 
 html{
-
+  font-family: 'IBMPlexSansKR-Regular';
 }
 
 /* 노말라이즈 */
@@ -478,6 +483,90 @@ border:3px solid black;
 /* 회원가입 페이지 끝 */
 
 
+
+/* 회원정보 페이지 시작 */
+.section-MyPage{
+  padding-top:50px;
+}
+.section-MyPage > .section-MyPage-body{
+  background-color:gray;
+  text-align:left;
+  border:1px solid black;
+  width:300px;
+  font-size:1.2rem;
+  font-weight:bold;
+}
+.section-MyPage-body > div{
+  padding:5px;
+  padding-left:20px;
+}
+
+
+.MyPage_cell__title{
+  color:white;
+}
+
+.MyPage_cell__body{
+  font-size:1.1rem;
+  background-color:white;
+  height:50px;
+  display:flex;
+  align-items:center;
+}
+
+.MyPage_cell__body > form{
+  display:none;
+}
+
+.infoModifyBtn0.active{
+  display:none;
+}
+.infoModifyBtn1.active{
+  display:none;
+}
+.infoModifyBtn2.active{
+  display:none;
+}
+.infoModifyBtn3.active{
+  display:none;
+}
+.infoModifyBtn4.active{
+  display:none;
+}
+
+.oldLoginIdInfo.active{
+  display:none;
+}
+.oldNameInfo.active{
+  display:none;
+}
+.oldNicknameInfo.active{
+  display:none;
+}
+.oldEmailInfo.active{
+  display:none;
+}
+.oldPhoneInfo.active{
+  display:none;
+}
+
+.newLoginIdInfo.active{
+  display:block;
+}
+.newNameInfo.active{
+  display:block;
+}
+.newNicknameInfo.active{
+  display:block;
+}
+.newEmailInfo.active{
+  display:block;
+}
+.newPhoneInfo.active{
+  display:block;
+}
+
+/* 회원정보 페이지 끝 */
 
 /* 홈 시작 */
 .section-home > div{
