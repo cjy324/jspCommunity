@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
 
@@ -74,6 +75,11 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(id);
 
 		request.setAttribute("member", member);
+
+		// 회원가입시 축하메일 발송
+		EmailService emailService = Container.emailService;
+
+		emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname + "님, 회원가입을 축하드립니다.");
 
 		return "usr/member/doJoin";
 
@@ -163,41 +169,41 @@ public class UsrMemberController {
 
 		return "common/pure";
 	}
-	
+
 	// ajax로 닉네임 중복체크
-		public String getNicknameDup(HttpServletRequest request, HttpServletResponse response) {
-			Map<String, Object> rs = new HashMap<>();
+	public String getNicknameDup(HttpServletRequest request, HttpServletResponse response) {
+		Map<String, Object> rs = new HashMap<>();
 
-			String nickname = request.getParameter("nickname");
+		String nickname = request.getParameter("nickname");
 
-			Member member = memberService.getMemberByNickname(nickname);
+		Member member = memberService.getMemberByNickname(nickname);
 
-			String code = null;
-			String msg = null;
+		String code = null;
+		String msg = null;
 
-			if (member == null) {
-				code = "S-1"; // S = success의 약자, 숫자는 유형 개념
-								// 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
-				msg = "해당 닉네임은 사용이 가능합니다.";
-			}
-			if (member != null) {
-				code = "F-1";
-				msg = "해당 닉네임은 이미 사용중입니다.";
-			}
-			if (nickname.trim().length() == 0) {
-				code = "F-2";
-				msg = "해당 닉네임은 사용이 불가능합니다.";
-			}
-
-			rs.put("nickname", nickname);
-			rs.put("code", code);
-			rs.put("msg", msg);
-
-			// rs 맵리스트를 json방식으로 생성해서 data로 보내기
-			request.setAttribute("data", Util.getJsonText(rs));
-
-			return "common/pure";
+		if (member == null) {
+			code = "S-1"; // S = success의 약자, 숫자는 유형 개념
+							// 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
+			msg = "해당 닉네임은 사용이 가능합니다.";
 		}
+		if (member != null) {
+			code = "F-1";
+			msg = "해당 닉네임은 이미 사용중입니다.";
+		}
+		if (nickname.trim().length() == 0) {
+			code = "F-2";
+			msg = "해당 닉네임은 사용이 불가능합니다.";
+		}
+
+		rs.put("nickname", nickname);
+		rs.put("code", code);
+		rs.put("msg", msg);
+
+		// rs 맵리스트를 json방식으로 생성해서 data로 보내기
+		request.setAttribute("data", Util.getJsonText(rs));
+
+		return "common/pure";
+	}
 
 	// 회원 정보 페이지
 	public String showMyPage(HttpServletRequest request, HttpServletResponse response) {
@@ -207,34 +213,33 @@ public class UsrMemberController {
 	// 회원 정보 이름 수정
 	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		
+
 		String loginId = request.getParameter("loginId");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String cellphoneNo = request.getParameter("cellphoneNo");
-		
+
 		Member member = memberService.getMemberById(id);
-		
-		if(loginId == null) {
+
+		if (loginId == null) {
 			loginId = member.getLoginId();
 		}
-		if(name == null) {
+		if (name == null) {
 			name = member.getName();
 		}
-		if(nickname == null) {
+		if (nickname == null) {
 			nickname = member.getNickname();
 		}
-		if(email == null) {
+		if (email == null) {
 			email = member.getEmail();
 		}
-		if(cellphoneNo == null) {
+		if (cellphoneNo == null) {
 			cellphoneNo = member.getCellphoneNo();
 		}
 
 		memberService.doModifyMemberName(id, loginId, name, nickname, email, cellphoneNo);
-	
-		
+
 		request.setAttribute("alertMsg", "수정되었습니다.");
 		request.setAttribute("replaceUrl", "../member/showMyPage");
 		return "common/redirect";
