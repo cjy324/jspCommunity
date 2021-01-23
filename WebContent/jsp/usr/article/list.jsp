@@ -34,7 +34,7 @@
               <div class="article-list__cell-reg-date">${article.regDate}</div>
               <div class="article-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="article-list__cell-title">
-                <a href="detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
                 <span>[5]</span>
               </div>
               <div class="article-list__cell-hitsCount">10</div>

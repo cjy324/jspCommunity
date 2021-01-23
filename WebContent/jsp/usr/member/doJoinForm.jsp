@@ -4,7 +4,6 @@
 
 <c:set var="pageTitle" value="신규 회원 가입" />
 <%@ include file="../../part/head.jspf"%>
-<h1>${pageTitle}</h1>
 
 <script>
 	
@@ -108,45 +107,66 @@
 </script>
 
 
-<form name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
-	<span>로그인 ID</span>
-	<br />
-	<input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
-	<button name="dupIdCheck" onclick="checkDupId(this);" type = "button">중복체크</button>
-	<br />
-	<span>로그인 PW</span>
-	<br />
-	<input type="password" name="loginPw" maxlength="50"
-		placeholder="PW 입력">
-	<br />
-	<span>로그인 PW 확인</span>
-	<br />
-	<input type="password" name="loginPwConfirm" maxlength="50"
-		placeholder="PW 입력">
-	<br />
-	<span>이름</span>
-	<br />
-	<input type="text" name="name" maxlength="50" placeholder="이름 입력">
-	<br />
-	<span>닉네임</span>
-	<br />
-	<input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
-	<br />
-	<span>E-Mail</span>
-	<br />
-	<input type="email" name="email" maxlength="100"
-		placeholder="이메일 주소 입력">
-	<br />
-	<span>연락처</span>
-	<br />
-	<input type="number" name="cellPhoneNo" maxlength="50"
-		placeholder="연락처 입력">
-	<br />
-	<hr />
-	<input type="submit" value="회원가입">
-	<button type="button" onclick="history.back();">뒤로가기</button>
+  <!-- 메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1">
+    <section class="main-box-section con">
+      <!-- 메인-회원가입 페이지 시작 -->
+      <div class="section-join min-height-50vh flex flex-jc-c flex-ai-c">
 
-</form>
+        <form name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
+          <div class=join_cell__title>
+            <span>신규 ID</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
+            <button name="dupIdCheck" onclick="checkDupId(this);" type="button">중복체크</button>
+          </div>
+          <div class=join_cell__title>
+            <span>Password</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+          </div>
+          <div class=join_cell__title>
+            <span>Password Check</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 입력">
+          </div>
+          <div class=join_cell__title>
+            <span>이름</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="text" name="name" maxlength="50" placeholder="이름 입력">
+          </div>
+          <div class=join_cell__title>
+            <span>닉네임</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
+          </div>
+          <div class=join_cell__title>
+            <span>E-Mail</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="email" name="email" maxlength="100" placeholder="이메일 주소 입력">
+          </div>
+          <div class=join_cell__title>
+            <span>연락처</span>
+          </div>
+          <div class=join_cell__body>
+            <input type="number" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
+          </div>
+          <div class=joinInput-cell>
+            <input type="submit" value="회원가입">
+            <button type="button" onclick="history.back();">뒤로가기</button>
+          </div>
+        </form>
+      </div>
+      <!-- 메인-회원가입 페이지 끝 -->
+    </section>
+  </main>
+  <!-- 메인 컨텐츠 박스 끝 -->
 
 
 
