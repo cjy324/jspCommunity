@@ -210,7 +210,7 @@ public class UsrMemberController {
 		return "usr/member/showMyPage";
 	}
 
-	// 회원 정보 이름 수정
+	// 회원 정보 수정
 	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 
