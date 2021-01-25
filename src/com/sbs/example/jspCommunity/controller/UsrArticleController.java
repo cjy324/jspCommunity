@@ -22,17 +22,24 @@ public class UsrArticleController {
 	public String showList(HttpServletRequest request, HttpServletResponse response) {
 
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
-	
+
+		String searchKeywordType = request.getParameter("searchKeywordType");
+		String searchKeyword = request.getParameter("searchKeyword");
+
 		// 총 게시물 수 카운트
-		int totalCount = articleService.getArticlesCountByBoardId(boardId);
-		
-		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
+		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
+
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, searchKeywordType,
+				searchKeywordType);
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
+
 		if (articles.size() <= 0) {
-			request.setAttribute("alertMsg", boardId + "번 게시물은 존재하지 않습니다. 게시판 번호를 확인하세요.");
+
+			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
+
 		}
 
 		request.setAttribute("totalCount", totalCount);
@@ -76,7 +83,7 @@ public class UsrArticleController {
 		String body = request.getParameter("body");
 
 		// 해당 게시판이 존재하는지 확인
-		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, null, null);
 
 		if (articles.size() <= 0) {
 			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
@@ -154,14 +161,14 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
+
 		// 작성자 본인 여부 체크
 		if (article.getMemberId() != memberId) {
 			request.setAttribute("alertMsg", "작성자만 삭제가 가능합니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
+
 		// 게시물 삭제
 		articleService.articleDelete(id);
 

@@ -11,7 +11,7 @@ import com.sbs.example.mysqlutil.SecSql;
 
 public class ArticleDao {
 
-	public List<Article> getArticlesForPrintByBoardId(int boardId) {
+	public List<Article> getArticlesForPrintByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
 		List<Article> articles = new ArrayList<>();
 
 		SecSql sql = new SecSql();
@@ -25,9 +25,22 @@ public class ArticleDao {
 		sql.append("ON A.memberId = M.id");
 		sql.append("INNER JOIN `board` AS B");
 		sql.append("ON A.boardId = B.id");
+		sql.append("WHERE 1");
+
 		if (boardId != 0) {
-			sql.append("WHERE A.boardId = ?", boardId);
-		}
+			sql.append("AND A.boardId = ?", boardId);
+		};
+
+		if (searchKeyword != null) {
+			if (searchKeywordType == null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("titleAndBody")) {
+				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyword, searchKeyword);
+			}
+		};
+		
 		sql.append("ORDER BY A.id DESC");
 
 		List<Map<String, Object>> articlesMapList = MysqlUtil.selectRows(sql);
@@ -79,14 +92,14 @@ public class ArticleDao {
 
 		return MysqlUtil.insert(sql);
 	}
-	
+
 	public void articleModify(Map<String, Object> modifyArgs) {
 		SecSql sql = new SecSql();
-		
+
 		int id = (int) modifyArgs.get("id");
 		String title = modifyArgs.get("title") != null ? (String) modifyArgs.get("title") : null;
 		String body = modifyArgs.get("body") != null ? (String) modifyArgs.get("body") : null;
-		
+
 		sql.append("UPDATE article ");
 		sql.append("SET ");
 		sql.append("updateDate = NOW(), ");
@@ -105,7 +118,7 @@ public class ArticleDao {
 			needToModify = true;
 			sql.append("`body` = ? ", body);
 		}
-		
+
 		sql.append("WHERE id = ? ", id);
 
 		// 만약, needToModify값이 true이면 실행
@@ -142,17 +155,28 @@ public class ArticleDao {
 		return boards;
 	}
 
-	public int getArticlesCountByBoardId(int boardId) {
+	public int getArticlesCountByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
 		SecSql sql = new SecSql();
-		
+
 		sql.append("SELECT COUNT(*) AS cnt");
 		sql.append("FROM article AS A");
-		
-		if(boardId != 0) {
-			sql.append("WHERE A.boardId = ?", boardId);
-		}
-		
-		
+		sql.append("WHERE 1");
+
+		if (boardId != 0) {
+			sql.append("AND A.boardId = ?", boardId);
+		};
+
+		if (searchKeyword != null) {
+			if (searchKeywordType == null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("titleAndBody")) {
+				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyword,
+						searchKeyword);
+			}
+		};
+
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 
