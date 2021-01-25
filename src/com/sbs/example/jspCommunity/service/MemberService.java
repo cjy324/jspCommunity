@@ -19,7 +19,7 @@ public class MemberService {
 		return memberDao.getMemberListForPrint();
 
 	}
-	
+
 	public int join(Map<String, Object> joinArg) {
 		return memberDao.join(joinArg);
 	}
@@ -32,15 +32,18 @@ public class MemberService {
 		return memberDao.getMemberByLoginId(loginId);
 	}
 
-	public void doModifyMemberName(int id, String loginId, String name, String nickname, String email, String cellphoneNo) {
+	public void doModifyMemberName(int id, String loginId, String name, String nickname, String email,
+			String cellphoneNo) {
 		memberDao.doModifyMemberName(id, loginId, name, nickname, email, cellphoneNo);
-		
+
 	}
 
 	public Member getMemberByNickname(String nickname) {
 		return memberDao.getMemberByNickname(nickname);
 	}
 
-
+	public Member getMemberByNameAndEmail(String name, String email) {
+		return memberDao.getMemberByNameAndEmail(name, email);
+	}
 
 }

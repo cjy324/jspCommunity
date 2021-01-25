@@ -109,5 +109,23 @@ public class MemberDao {
 		return new Member(memberMap);
 	}
 
+	public Member getMemberByNameAndEmail(String name, String email) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM member");
+		sql.append("WHERE name = ?", name);
+		sql.append("AND email = ?", email);
+		sql.append("ORDER BY id DESC");
+		sql.append("LIMIT 1");
+		
+		Map<String, Object> memberMap = MysqlUtil.selectRow(sql);
+		
+		if(memberMap.isEmpty()) {
+			return null;
+		}
+		
+		return new Member(memberMap);
+	}
+
 
 }

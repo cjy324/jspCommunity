@@ -100,6 +100,8 @@ public class UsrMemberController {
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
 
+		System.out.println(loginPw);
+
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		// 해당 loginId가 등록된 id인지 확인
@@ -247,6 +249,32 @@ public class UsrMemberController {
 
 		request.setAttribute("alertMsg", "수정되었습니다.");
 		request.setAttribute("replaceUrl", "../member/showMyPage");
+		return "common/redirect";
+	}
+
+	// 아이디 찾기 폼
+	public String doFindLoginIdForm(HttpServletRequest request, HttpServletResponse response) {
+		return "usr/member/doFindLoginIdForm";
+	}
+
+	// 아이디 찾기
+	public String doFindLoginId(HttpServletRequest request, HttpServletResponse response) {
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+
+		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
+		if (member == null) {
+			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+
+		// 로그인 알림창 보여주고 로그인화면으로 이동
+		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.");
+		request.setAttribute("replaceUrl", "../member/doLoginForm");
 		return "common/redirect";
 	}
 

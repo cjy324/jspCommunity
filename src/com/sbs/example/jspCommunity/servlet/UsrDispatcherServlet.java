@@ -76,6 +76,12 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doModifyInfo")) {
 				jspPath = membercontroller.doModifyInfo(request, response);
 			}
+			if (actionMethodName.equals("doFindLoginIdForm")) {
+				jspPath = membercontroller.doFindLoginIdForm(request, response);
+			}
+			if (actionMethodName.equals("doFindLoginId")) {
+				jspPath = membercontroller.doFindLoginId(request, response);
+			}
 		}
 
 		if (controllerName.equals("article")) {
