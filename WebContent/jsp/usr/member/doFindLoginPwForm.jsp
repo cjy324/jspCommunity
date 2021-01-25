@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="아이디 찾기" />
+<c:set var="pageTitle" value="비밀번호 찾기" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
@@ -45,21 +45,21 @@
       <!-- 메인-로그인 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
-        <form name="form" onsubmit="check(this); return false;" action="doFindLoginId" method="POST">
+        <form name="form" onsubmit="check(this); return false;" action="doFindLoginPw" method="POST">
           <div class="login_cell__title">
-            <span>이름</span>
+            <span>아이디</span>
           </div>
           <div class="login_cell__body">
-            <input type="text" name="name" maxlength="50" placeholder="이름 입력">
+            <input type="text" name="loginId" maxlength="50" placeholder="아이디를 입력하세요.">
           </div>
           <div class="login_cell__title">
             <span>이메일 주소</span>
           </div>
           <div class="login_cell__body">
-            <input type="email" name="email" maxlength="50" placeholder="email 입력">
+            <input type="email" name="email" maxlength="50" placeholder="email을 입력하세요.">
           </div>
           <div class="loginInput_cell">
-            <input type="submit" value="아이디 찾기">
+            <input type="submit" value="비밀번호 찾기">
             <button type="button" onclick="history.back();">뒤로가기</button>
             <div>
         </form>

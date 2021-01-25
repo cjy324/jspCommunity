@@ -127,5 +127,59 @@ public class MemberDao {
 		return new Member(memberMap);
 	}
 
+	// 회원 정보 수정
+	public void modify(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE member");
+		sql.append("SET updateDate = NOW()");
+		
+		boolean needToUpdate = false;
+		
+		if(args.get("loginId") != null) {
+			needToUpdate = true;
+			sql.append(", loginId = ?", args.get("loginId"));
+		}
+		
+		if(args.get("loginPw") != null) {
+			needToUpdate = true;
+			sql.append(", loginPw = ?", args.get("loginPw"));
+		}
+		
+		if(args.get("name") != null) {
+			needToUpdate = true;
+			sql.append(", name = ?", args.get("name"));
+		}
+		
+		if(args.get("nickname") != null) {
+			needToUpdate = true;
+			sql.append(", nickname = ?", args.get("nickname"));
+		}
+		
+		if(args.get("email") != null) {
+			needToUpdate = true;
+			sql.append(", email = ?", args.get("email"));
+		}
+		
+		if(args.get("cellphoneNo") != null) {
+			needToUpdate = true;
+			sql.append(", cellphoneNo = ?", args.get("cellphoneNo"));
+		}
+		
+		if(args.get("authLevel") != null) {
+			needToUpdate = true;
+			sql.append(", authLevel = ?", args.get("authLevel"));
+		}
+		
+		if(needToUpdate == false) {
+			return;
+		}
+
+		sql.append("WHERE id = ?", args.get("id"));
+		
+		MysqlUtil.update(sql);
+		
+	}
+
 
 }

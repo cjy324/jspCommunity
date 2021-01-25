@@ -21,7 +21,7 @@
 
 		}
 
-		if (form.loginPw.trim().length == 0) {
+		if (form.loginPw.value.trim().length == 0) {
 
 			alert("PASSWORD를 입력해 주세요.");
 
@@ -63,6 +63,7 @@
             <input type="submit" value="로그인">
             <button type="button" onclick="history.back();">뒤로가기</button>
             <button type="button"><a href="../member/doFindLoginIdForm">아이디 찾기</a></button>
+            <button type="button"><a href="../member/doFindLoginPwForm">비밀번호 찾기</a></button>
             <div>
         </form>
       </div>

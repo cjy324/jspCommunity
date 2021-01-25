@@ -271,10 +271,45 @@ public class UsrMemberController {
 			return "common/redirect";
 		}
 
-
-		// 로그인 알림창 보여주고 로그인화면으로 이동
+		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
 		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.");
 		request.setAttribute("replaceUrl", "../member/doLoginForm");
+		return "common/redirect";
+	}
+
+	// 비밀번호 찾기 폼
+	public String doFindLoginPwForm(HttpServletRequest request, HttpServletResponse response) {
+		return "usr/member/doFindLoginPwForm";
+	}
+
+	// 비밀번호 찾기
+	public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
+		String loginId = request.getParameter("loginId");
+		String email = request.getParameter("email");
+
+		Member member = memberService.getMemberByLoginId(loginId);
+
+		// 해당 loginId가 등록된 id인지 확인
+		if (member == null) {
+			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+
+		// 해당 email이 일치하는지 확인
+		if (member.getEmail().equals(email) == false) {
+			request.setAttribute("alertMsg", "이메일주소가 일치하지 않습니다.");
+			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
+			return "common/redirect";
+		}
+		
+		// 임시 비밀번호 생성 후 회원 email로 발송 
+		memberService.sendTempLoginPwToEmail(member);
+		
+
+		// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
+		request.setAttribute("alertMsg", "회원님의 임시 비밀번호가 \"" + email + "\"로 발송되었습니다.");
+		request.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
 	}
 
