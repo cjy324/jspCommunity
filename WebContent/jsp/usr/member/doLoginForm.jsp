@@ -10,10 +10,17 @@
 
 <script>
 	function check(form) {
+	
+		let DoLoginIdForm_submited = false;
+	
+		if ( DoLoginIdForm_submited ) {
+			alert('처리중 입니다.');
+			return;
+		}
 
 		if (form.loginId.value.trim().length == 0) {
 
-			alert("ID를 입력해주세요.");
+			alert("ID를 입력해 주세요.");
 
 			form.loginId.focus();
 
@@ -35,6 +42,7 @@
 		form.loginPw.value = "";
 		
 		form.submit();
+		DoLoginIdForm_submited = true;
 
 	};
 </script>

@@ -5,15 +5,20 @@
 <c:set var="pageTitle" value="비밀번호 찾기" />
 <%@ include file="../../part/head.jspf"%>
 
-<!-- sha256 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-
 <script>
 	function check(form) {
+	
+		let DoFindLoginPwForm_submited = false;
+	
+		if ( DoFindLoginPwForm_submited ) {
+			alert('처리중입니다.');
+			return;
+		}
+		
 
 		if (form.loginId.value.trim().length == 0) {
 
-			alert("ID를 입력해주세요.");
+			alert("ID를 입력해 주세요.");
 
 			form.loginId.focus();
 
@@ -21,20 +26,19 @@
 
 		}
 
-		if (form.loginPw.trim().length == 0) {
+		if (form.email.value.trim().length == 0) {
 
-			alert("PASSWORD를 입력해 주세요.");
+			alert("e-mail을 입력해 주세요.");
 
-			form.loginPw.focus();
+			form.email.focus();
 
 			return false;
 
 		}
 		
-		form.loginPwReal.value = sha256(form.loginPw.value);
-		form.loginPw.value = "";
 		
 		form.submit();
+		DoFindLoginPwForm_submited = true;
 
 	};
 </script>
@@ -42,7 +46,7 @@
   <!-- 메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1">
     <section class="main-box-section con">
-      <!-- 메인-로그인 페이지 시작 -->
+      <!-- 메인-로그인비번 찾기 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
         <form name="form" onsubmit="check(this); return false;" action="doFindLoginPw" method="POST">
@@ -56,7 +60,7 @@
             <span>이메일 주소</span>
           </div>
           <div class="login_cell__body">
-            <input type="email" name="email" maxlength="50" placeholder="email을 입력하세요.">
+            <input type="email" name="email" maxlength="50" placeholder="e-mail을 입력하세요.">
           </div>
           <div class="loginInput_cell">
             <input type="submit" value="비밀번호 찾기">
@@ -64,7 +68,7 @@
             <div>
         </form>
       </div>
-      <!-- 메인-로그인 페이지 끝 -->
+      <!-- 메인-로그인비번 찾기 페이지 끝 -->
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->

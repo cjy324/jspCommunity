@@ -14,7 +14,7 @@
 	let checkedDupId = "";
 	
 	
-	// 중복체크
+	// 아이디 중복체크
 	function checkDupId(el){
 		//가장 근접한 'form'을 가져오기
 		//$(el).parent.parent.parent 방식으로 부모를 찾아도 됨
@@ -47,6 +47,31 @@
 		);
 		
 	};
+	
+	// 닉네임 중복체크
+	let checkedDupNick = "";
+
+	function checkDupNick(el){
+		const form = $(el).closest('form').get(0);
+		const nickname = form.nickname.value;
+
+		$.get(
+			'getNicknameDup',  //요청할 주소
+			{		
+				nickname:nickname
+			},
+			function(data){
+				if( data.code.substring(0,2) == "S-"){
+					alert(data.msg + " (" + data.code + ")");
+					checkedDupNick = data.nickname;
+				}
+				else{
+					alert(data.msg + " (" + data.code + ")");
+				}
+			},			
+			'json'
+		);	
+	};
 
 
 	
@@ -54,7 +79,7 @@
 	function check(form) {
 	
 		if (form.loginId.value.trim().length == 0) {
-			alert("ID를 입력해주세요.");
+			alert("ID를 입력해 주세요.");
 			form.loginId.focus();
 			
 			return;
@@ -68,7 +93,7 @@
 		}
 		
 		if (form.loginPw.value.trim().length == 0) {
-			alert("PW를 입력해주세요.");
+			alert("PW를 입력해 주세요.");
 			form.loginPw.focus();
 			
 			return;
@@ -81,25 +106,34 @@
 		}
 		
 		if (form.name.value.trim().length == 0) {
-			alert("이름을 입력해주세요.");
+			alert("이름을 입력해 주세요.");
 			form.name.focus();
 			
 			return;
 		}
 		if (form.nickname.value.trim().length == 0) {
-			alert("닉네임을 입력해주세요.");
+			alert("닉네임을 입력해 주세요.");
 			form.nickname.focus();
 			
 			return;
 		}
+		
+		if (form.nickname.value != checkedDupNick) {
+			alert("먼저 닉네임 중복체크를 해주세요.");
+			form.dupNickCheck.focus();
+			
+			return false;
+		}
+		
+		
 		if (form.email.value.trim().length == 0) {
-			alert("e-mail을 입력해주세요.");
+			alert("e-mail을 입력해 주세요.");
 			form.email.focus();
 			
 			return;
 		}
 		if (form.cellPhoneNo.value.trim().length == 0) {
-			alert("연락처를 입력해주세요.");
+			alert("연락처를 입력해 주세요.");
 			form.cellPhoneNo.focus();
 			
 			return;
@@ -141,7 +175,7 @@
             <span>Password Check</span>
           </div>
           <div class=join_cell__body>
-            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 입력">
+            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 확인">
           </div>
           <div class=join_cell__title>
             <span>이름</span>
@@ -154,19 +188,19 @@
           </div>
           <div class=join_cell__body>
             <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
+            <button name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
           </div>
           <div class=join_cell__title>
             <span>E-Mail</span>
           </div>
           <div class=join_cell__body>
-            <input type="email" name="email" maxlength="100" placeholder="이메일 주소 입력">
+            <input type="email" name="email" maxlength="100" placeholder="이메일 입력">
           </div>
           <div class=join_cell__title>
             <span>연락처</span>
           </div>
           <div class=join_cell__body>
-            <input type="tel" name="cellPhoneNo" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-       required maxlength="50" placeholder="연락처 입력">
+            <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
           </div>
           <div class=joinInput-cell>
             <input type="submit" value="회원가입">
