@@ -23,6 +23,9 @@ public class UsrArticleController {
 
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
 	
+		// 총 게시물 수 카운트
+		int totalCount = articleService.getArticlesCountByBoardId(boardId);
+		
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
@@ -32,6 +35,7 @@ public class UsrArticleController {
 			return "common/redirect";
 		}
 
+		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("articles", articles);
 
 		return "usr/article/list";

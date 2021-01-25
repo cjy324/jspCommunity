@@ -14,6 +14,7 @@
         <div class="article-list">
           <div class="article-list-name">
             <span>${articles.get(0).extra_boardName} ${pageTitle}</span>
+            <span>(${totalCount})</span>
             <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">새 게시물 생성</a></button>
           </div>
           <header>
