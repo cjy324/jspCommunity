@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -122,4 +123,23 @@ public class ArticleDao {
 		MysqlUtil.delete(sql);
 
 	}
+
+	public List<Board> getBoardsForPrint() {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT *");
+		sql.append("FROM board");
+
+		List<Board> boards = new ArrayList<>();
+		List<Map<String, Object>> boardsMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> boardsMap : boardsMapList) {
+			Board board = new Board(boardsMap);
+
+			boards.add(board);
+		}
+
+		return boards;
+	}
+
 }

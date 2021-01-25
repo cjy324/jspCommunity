@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.jspCommunity.service.ArticleService;
 
 public class UsrArticleController {
@@ -22,7 +22,7 @@ public class UsrArticleController {
 	public String showList(HttpServletRequest request, HttpServletResponse response) {
 
 		int boardId = Integer.parseInt(request.getParameter("boardId"));
-
+	
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
