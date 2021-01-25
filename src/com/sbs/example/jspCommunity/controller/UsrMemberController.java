@@ -32,7 +32,9 @@ public class UsrMemberController {
 	public String doJoin(HttpServletRequest request, HttpServletResponse response) {
 
 		String loginId = request.getParameter("loginId");
-		String loginPw = request.getParameter("loginPw");
+		// String loginPw = request.getParameter("loginPw");
+		// 암호화된 비밀번호 값을 받기
+		String loginPw = request.getParameter("loginPwReal");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
@@ -76,11 +78,12 @@ public class UsrMemberController {
 
 		request.setAttribute("member", member);
 
-		// 회원가입시 축하메일 발송
-		EmailService emailService = Container.emailService;
-
-		emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname + "님, 회원가입을 축하드립니다.");
-
+		/*
+		 * // 회원가입시 축하메일 발송 EmailService emailService = Container.emailService;
+		 * 
+		 * emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname +
+		 * "님, 회원가입을 축하드립니다.");
+		 */
 		return "usr/member/doJoin";
 
 	}
@@ -93,7 +96,9 @@ public class UsrMemberController {
 	// 로그인
 	public String doLogin(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
-		String loginPw = request.getParameter("loginPw");
+		// String loginPw = request.getParameter("loginPw");
+		// 암호화된 비밀번호 값을 받기
+		String loginPw = request.getParameter("loginPwReal");
 
 		Member member = memberService.getMemberByLoginId(loginId);
 

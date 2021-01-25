@@ -6,8 +6,11 @@
 <%@ include file="../../part/head.jspf"%>
 <h1>${pageTitle}</h1>
 
+<!-- sha256 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <script>
-	function check() {
+	function check(form) {
 
 		if (form.loginId.value.trim().length == 0) {
 
@@ -19,7 +22,7 @@
 
 		}
 
-		else if (form.loginPw.trim().length == 0) {
+		if (form.loginPw.trim().length == 0) {
 
 			alert("PASSWORD를 입력해 주세요.");
 
@@ -28,9 +31,13 @@
 			return false;
 
 		}
-
-		else
-			return true;
+		
+		// loginPw를 sha256으로 암호화하고
+		// loginPw와 loginPwConfirm는 공백값으로 전송
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = "";
+		
+		form.submit();
 
 	}
 </script>
@@ -41,7 +48,8 @@
       <!-- 메인-로그인 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
-        <form name="form" onsubmit="return check()" action="doLogin" method="POST">
+        <form name="form" onsubmit="check(this); return false;" action="doLogin" method="POST">
+          <input type="hidden" name="loginPwReal">
           <div class="login_cell__title">
             <span>로그인 ID</span>
           </div>

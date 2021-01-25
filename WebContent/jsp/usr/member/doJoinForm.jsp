@@ -5,6 +5,9 @@
 <c:set var="pageTitle" value="신규 회원 가입" />
 <%@ include file="../../part/head.jspf"%>
 
+<!-- sha256 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <script>
 	
 	//변수명과 함수명이 같으면 에러발생!!
@@ -102,6 +105,12 @@
 			return;
 		}
 		
+		// loginPw를 sha256으로 암호화하고
+		// loginPw와 loginPwConfirm는 공백값으로 전송
+		form.loginPwReal.value = sha256(form.loginPw.value);
+		form.loginPw.value = "";
+		form.loginPwConfirm.value = "";
+		
 		form.submit();
 	};
 </script>
@@ -114,6 +123,7 @@
       <div class="section-join min-height-50vh flex flex-jc-c flex-ai-c">
 
         <form name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
+          <input type="hidden" name="loginPwReal">
           <div class=join_cell__title>
             <span>신규 ID</span>
           </div>
@@ -155,7 +165,8 @@
             <span>연락처</span>
           </div>
           <div class=join_cell__body>
-            <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
+            <input type="tel" name="cellPhoneNo" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+       required maxlength="50" placeholder="연락처 입력">
           </div>
           <div class=joinInput-cell>
             <input type="submit" value="회원가입">
