@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
@@ -100,8 +101,6 @@ public class UsrMemberController {
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
 
-		System.out.println(loginPw);
-
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		// 해당 loginId가 등록된 id인지 확인
@@ -113,7 +112,6 @@ public class UsrMemberController {
 
 		// 해당 loginPw가 일치하는지 확인
 		if (member.getLoginPw().equals(loginPw) == false) {
-			System.out.println(member.getLoginPw());
 			request.setAttribute("alertMsg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
@@ -145,7 +143,7 @@ public class UsrMemberController {
 	// 회원가입 폼 작성 시 ajax로 중복체크
 	public String getLoginIdDup(HttpServletRequest request, HttpServletResponse response) {
 
-		Map<String, Object> rs = new HashMap<>();
+		// Map<String, Object> rs = new HashMap<>();
 
 		String loginId = request.getParameter("loginId");
 
@@ -155,8 +153,7 @@ public class UsrMemberController {
 		String msg = null;
 
 		if (member == null) {
-			code = "S-1"; // S = success의 약자, 숫자는 유형 개념
-							// 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
+			code = "S-1"; // S = success의 약자, 숫자는 유형 개념 // 1이면 일반적인 성공, 2이면 약간 문제는 있지만 성공? 이런 방식
 			msg = "해당 ID는 사용이 가능합니다.";
 		}
 		if (member != null) {
@@ -168,14 +165,18 @@ public class UsrMemberController {
 			msg = "해당 ID는 사용이 불가능합니다.";
 		}
 
-		rs.put("loginId", loginId);
-		rs.put("code", code);
-		rs.put("msg", msg);
+		// ResultData 객체 도입으로 삭제
+		/*
+		 * rs.put("loginId", loginId); rs.put("code", code); rs.put("msg", msg);
+		 * 
+		 * rs 맵리스트를 json방식으로 생성해서 data로 보내기 request.setAttribute("data",
+		 * Util.getJsonText(rs));
+		 * 
+		 * return "common/pure";
+		 */
 
-		// rs 맵리스트를 json방식으로 생성해서 data로 보내기
-		request.setAttribute("data", Util.getJsonText(rs));
-
-		return "common/pure";
+		request.setAttribute("data", new ResultData(code, msg, "loginId", loginId));
+		return "common/json";
 	}
 
 	// ajax로 닉네임 중복체크
@@ -203,14 +204,19 @@ public class UsrMemberController {
 			msg = "해당 닉네임은 사용이 불가능합니다.";
 		}
 
-		rs.put("nickname", nickname);
-		rs.put("code", code);
-		rs.put("msg", msg);
-
-		// rs 맵리스트를 json방식으로 생성해서 data로 보내기
-		request.setAttribute("data", Util.getJsonText(rs));
-
-		return "common/pure";
+		// ResultData 객체 도입으로 삭제
+		/*
+		 * rs.put("nickname", nickname); rs.put("code", code); rs.put("msg", msg);
+		 * 
+		 * // rs 맵리스트를 json방식으로 생성해서 data로 보내기 request.setAttribute("data",
+		 * Util.getJsonText(rs));
+		 * 
+		 * return "common/pure";
+		 */
+		
+		request.setAttribute("data", new ResultData(code, msg, "nickname", nickname));
+		return "common/json";
+		
 	}
 
 	// 회원 정보 페이지
@@ -303,25 +309,32 @@ public class UsrMemberController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
-		// 임시 비밀번호 생성 후 회원 email로 발송 
-		//memberService.sendTempLoginPwToEmail(member);
-		
+
+		// 임시 비밀번호 생성 후 회원 email로 발송
+		// memberService.sendTempLoginPwToEmail(member);
+
 		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
-		Map<String, Object> sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
-		
-		String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
-		String resultMsg = (String) sendTempLoginPwToEmailRs.get("resultMsg");
-		
+		/*
+		 * //ResultData 객체 도입으로 삭제 Map<String, Object> sendTempLoginPwToEmailRs =
+		 * memberService.sendTempLoginPwToEmail(member);
+		 * 
+		 * String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
+		 * String resultMsg = (String) sendTempLoginPwToEmailRs.get("resultMsg");
+		 */
+
+		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
+		ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
+
 		/// 만약 메일 발송 실패인 경우
-		if(resultCode.contains("F")) {
-			request.setAttribute("alertMsg", resultMsg);
+		// if(resultCode.contains("F")) {
+		if (sendTempLoginPwToEmailRs.isFail()) {
+			request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 			request.setAttribute("historyBack", true);
 			return "common/redirect";
 		}
-		
+
 		// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
-		request.setAttribute("alertMsg", resultMsg);
+		request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 		request.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
 	}

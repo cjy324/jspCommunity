@@ -7,31 +7,39 @@
 	
 	<script>
 
-	//아이디 중복체크
 	let checkedDupId = "";
-
+	
+	// 아이디 중복체크
 	function checkDupId(el){
+		//가장 근접한 'form'을 가져오기
+		//$(el).parent.parent.parent 방식으로 부모를 찾아도 됨
 		const form = $(el).closest('form').get(0);
 		
 		const loginId = form.loginId.value;
-
+		
+		
+		//ajax 통신으로 보내고 데이터 받기
 		$.get(
-			'getLoginIdDup',  
+			'getLoginIdDup',  //요청할 주소
 			{		
-				loginId:loginId
+				//	loginId:loginId도 맞다
+				// 최신 JS에서는 이 방식이 가능함
+				loginId
 			},
 			function(data){
-				if( data.code.substring(0,2) == "S-"){
-					alert(data.msg + " (" + data.code + ")");
-					checkedDupId = data.loginId;
+				
+				if(data.msg){
+					alert(data.msg + " (" + data.resultCode + ")");
 				}
-				else{
-					alert(data.msg + " (" + data.code + ")");
-				//	alert();
+
+				if(data.success){
+					checkedDupId = data.body.loginId;				
 				}
 			},			
 			'json'
+		
 		);
+		
 	};
 	
 
@@ -46,15 +54,15 @@
 		$.get(
 			'getNicknameDup',  //요청할 주소
 			{		
-				nickname:nickname
+				nickname
 			},
 			function(data){
-				if( data.code.substring(0,2) == "S-"){
-					alert(data.msg + " (" + data.code + ")");
-					checkedDupNick = data.nickname;
+				if(data.msg){
+					alert(data.msg + " (" + data.resultCode + ")");
 				}
-				else{
-					alert(data.msg + " (" + data.code + ")");
+
+				if(data.success){
+					checkedDupNick = data.body.nickname;				
 				}
 			},			
 			'json'
