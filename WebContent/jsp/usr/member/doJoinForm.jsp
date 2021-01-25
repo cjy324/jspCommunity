@@ -155,7 +155,7 @@
             <span>연락처</span>
           </div>
           <div class=join_cell__body>
-            <input type="number" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
+            <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
           </div>
           <div class=joinInput-cell>
             <input type="submit" value="회원가입">
