@@ -113,6 +113,7 @@ public class UsrMemberController {
 
 		// 해당 loginPw가 일치하는지 확인
 		if (member.getLoginPw().equals(loginPw) == false) {
+			System.out.println(member.getLoginPw());
 			request.setAttribute("alertMsg", "비밀번호가 틀렸습니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
@@ -304,11 +305,23 @@ public class UsrMemberController {
 		}
 		
 		// 임시 비밀번호 생성 후 회원 email로 발송 
-		memberService.sendTempLoginPwToEmail(member);
+		//memberService.sendTempLoginPwToEmail(member);
 		
-
+		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
+		Map<String, Object> sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
+		
+		String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
+		String resultMsg = (String) sendTempLoginPwToEmailRs.get("resultMsg");
+		
+		/// 만약 메일 발송 실패인 경우
+		if(resultCode.contains("F")) {
+			request.setAttribute("alertMsg", resultMsg);
+			request.setAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
 		// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
-		request.setAttribute("alertMsg", "회원님의 임시 비밀번호가 \"" + email + "\"로 발송되었습니다.");
+		request.setAttribute("alertMsg", resultMsg);
 		request.setAttribute("replaceUrl", "../home/main");
 		return "common/redirect";
 	}

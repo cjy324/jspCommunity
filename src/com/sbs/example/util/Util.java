@@ -71,7 +71,8 @@ public class Util {
 			msg.setContent(body, "text/html; charset=UTF-8");
 
 			Transport.send(msg);
-
+			
+		// 메일발송 실패시 -1,-2,-3 리턴
 		} catch (AddressException ae) {
 			System.out.println("AddressException : " + ae.getMessage());
 			return -1;
@@ -82,7 +83,8 @@ public class Util {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
 			return -3;
 		}
-
+		
+		// 메일발송 성공시 1 리턴
 		return 1;
 	}
 
