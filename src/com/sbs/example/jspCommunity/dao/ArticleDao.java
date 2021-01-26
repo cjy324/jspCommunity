@@ -180,4 +180,38 @@ public class ArticleDao {
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 
+	public List<Article> getArticlesForPrintByBoardId(int boardId) {
+		List<Article> articles = new ArrayList<>();
+
+		SecSql sql = new SecSql();
+		sql.append("SELECT A.*");
+		sql.append(", M.name AS extra_memberName");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append(", B.name AS extra_boardName");
+		sql.append(", B.code AS extra_boardCode");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("INNER JOIN `board` AS B");
+		sql.append("ON A.boardId = B.id");
+		sql.append("WHERE 1");
+
+		if (boardId != 0) {
+			sql.append("AND A.boardId = ?", boardId);
+		};
+	
+		sql.append("ORDER BY A.id DESC");
+
+		List<Map<String, Object>> articlesMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> articlesMap : articlesMapList) {
+			Article article = new Article(articlesMap);
+
+			articles.add(article);
+
+		}
+		// Collections.reverse(articles);
+		return articles;
+	}
+
 }

@@ -29,14 +29,12 @@ public class UsrArticleController {
 		// 총 게시물 수 카운트
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
 
-		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, searchKeywordType,
-				searchKeywordType);
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, searchKeywordType, searchKeyword);
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
 
 		if (articles.size() <= 0) {
-
-			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
+			request.setAttribute("alertMsg", "해당 키워드가 포함된 게시물이 존재하지 않습니다.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 

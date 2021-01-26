@@ -54,5 +54,9 @@ public class ArticleService {
 		return articleDao.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
 	}
 
+	public List<Article> getArticlesForPrintByBoardId(int boardId) {
+		return articleDao.getArticlesForPrintByBoardId(boardId);
+	}
+
 
 }
