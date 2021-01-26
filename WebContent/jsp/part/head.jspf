@@ -65,7 +65,7 @@
 		<header class="top-bar visible-md-up ">
 			<div class="con height-100p flex flex-jc-sb flex-ai-c">
 				<div class="title">
-					<a class="" href="../home/main">
+					<a href="../home/main">
 						<span>Community Site</span>
 					</a>
 				</div>
@@ -83,19 +83,19 @@
 									<span>ARTICLES</span>
 								</a>
 								<ul>
-									<li title="공지사항">
+									<li title="NOTICE">
 										<a href="../article/list?boardId=1" class="block">
-											<span>공지사항</span>
+											<span>NOTICE</span>
 										</a>
 									</li>
-									<li title="방명록">
+									<li title="FREE">
 										<a href="../article/list?boardId=2" class="block">
-											<span>방명록</span>
+											<span>FREE</span>
 										</a>
 									</li>
-									<li title="지유">
+									<li title="NEWS">
 										<a href="../article/list?boardId=3" class="block">
-											<span>자유</span>
+											<span>NEWS</span>
 										</a>
 									</li>
 								</ul>
@@ -149,7 +149,7 @@
 		<header class="mobile-top-bar flex visible-sm-down">
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
 				<div class="title">
-					<a class="" href="#">
+					<a href="../home/main">
 						<span>Community Site</span>
 					</a>
 				</div>
@@ -158,7 +158,7 @@
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
 		<aside class="mobile-side-bar visible-sm-down">
-			<nav class="mobile-side-bar_menu">
+			<nav class="mobile-side-bar_menu flex flex-jc-c">
 				<ul class="">
 					<li title="ABOUT">
 						<a href="about.html" class="block">
@@ -171,15 +171,20 @@
 						</a>
 						<ul>
 							<li title="NOTICE">
-								<a href="notice-list-1.html" class="block">
-									<span>NOTICE</span>
-								</a>
-							</li>
-							<li title="FREE">
-								<a href="free-list-1.html" class="block">
-									<span>FREE</span>
-								</a>
-							</li>
+										<a href="../article/list?boardId=1" class="block">
+											<span>NOTICE</span>
+										</a>
+									</li>
+									<li title="FREE">
+										<a href="../article/list?boardId=2" class="block">
+											<span>FREE</span>
+										</a>
+									</li>
+									<li title="NEWS">
+										<a href="../article/list?boardId=3" class="block">
+											<span>"NEWS"</span>
+										</a>
+									</li>
 						</ul>
 					</li>
 					<li>

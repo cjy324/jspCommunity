@@ -55,19 +55,21 @@ updateDate = NOW(),
 `code` = 'notice',
 `name` = '공지사항';
 
-# 방명록 게시판 생성
-INSERT INTO board
-SET regDate = NOW(),
-updateDate = NOW(),
-`code` = 'guestBook',
-`name` = '방명록';
-
 # 자유게시판 생성
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free',
 `name` = '자유';
+
+# NEWS 게시판 생성
+INSERT INTO board
+SET regDate = NOW(),
+updateDate = NOW(),
+`code` = 'news',
+`name` = 'NEWS';
+
+
 
 # 게시물 테이블 생성
 CREATE TABLE article (
