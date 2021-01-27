@@ -31,15 +31,13 @@ public class UsrArticleController {
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
 
 		// 페이징
-		int articlesInAPage = 30; // 한 페이지에 들어갈 article 수 설정
-		int pageNum = Util.getAsInt(request.getParameter("pageNum"), 1); // pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로
-																			// 변환
-		int pageLimitStartIndex = (pageNum - 1) * articlesInAPage;
+		int articlesInAPage = 10; // 한 페이지에 들어갈 article 수 설정
+		int page = Util.getAsInt(request.getParameter("page"), 1); // pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로
+																	// 변환
+		int pageLimitStartIndex = (page - 1) * articlesInAPage;
 
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, pageLimitStartIndex,
 				articlesInAPage, searchKeywordType, searchKeyword);
-
-		// 현재 게시물 = 0~30번까지
 
 		int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
 		int totalArticlesCount = totalCount; // 전체 article의 수 카운팅
@@ -48,7 +46,8 @@ public class UsrArticleController {
 		// 총 필요 페이지 수까지 버튼 만들기
 		// 하단 페이지 이동 버튼 메뉴 만들기
 		// 1. pageMenuBox내 시작 번호, 끝 번호 설정
-		int previousPageNumCount = (pageNum - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
+
+		int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
 		int boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
 		int boxEndNum = pageMenuBoxSize + boxStartNum - 1;
 
@@ -70,45 +69,6 @@ public class UsrArticleController {
 		boolean boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
 		boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
 
-		link(boardId, pageNum);
-
-		if (boxStartNumBeforePageBtnNeedToShow) {
-			StringBuilder boxStartNumBeforePageBtn = new StringBuilder();
-			boxStartNumBeforePageBtn.append("<li class=\"before-btn\"><a href=\"" + link(boardId, boxStartNumBeforePage)
-					+ "\" class=\"flex flex-ai-c\"> &lt; 이전</a></li>");
-			//System.out.println("boxStartNumBeforePageBtn: " + boxStartNumBeforePageBtn.toString());
-			request.setAttribute("boxStartNumBeforePageBtn", boxStartNumBeforePageBtn.toString());
-		}
-		List<String> pageBoxNums = new ArrayList<>();
-		for (int i = boxStartNum; i <= boxEndNum; i++) {
-
-			String pageBoxNum = "";
-			String selectedPageNum = "";
-
-			if (i == pageNum) {
-				selectedPageNum = "article-page-menu__link--selected";
-			//	System.out.println("selectedPageNum: " + selectedPageNum);
-			}
-
-			pageBoxNum += "<li><a href=\"" + link(boardId, i) + "\" class=\"page-btn flex flex-ai-c " + selectedPageNum
-					+ "\">" + i + "</a></li>";
-
-			pageBoxNums.add(pageBoxNum);
-
-			//System.out.println("pageBoxNum: " + pageBoxNums);
-			request.setAttribute("pageBoxNums", pageBoxNums);
-		}
-
-		if (boxEndNumAfterPageBtnNeedToShow) {
-			StringBuilder boxEndNumAfterPageBtn = new StringBuilder();
-			boxEndNumAfterPageBtn.append("<li class=\"after-btn\"><a href=\"" + link(boardId, boxEndNumAfterPage)
-					+ "\" class=\"flex flex-ai-c\">다음 &gt;</a></li>");
-
-			//System.out.println("boxEndNumAfterPageBtn: " + boxEndNumAfterPageBtn.toString());
-			request.setAttribute("boxEndNumAfterPageBtn", boxEndNumAfterPageBtn.toString());
-		}
-		//System.out.println("page : " + pageNum);
-
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
 
 		if (articles.size() <= 0) {
@@ -121,14 +81,16 @@ public class UsrArticleController {
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("articles", articles);
 		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("page", page);
 
+		request.setAttribute("boxStartNum", boxStartNum);
+		request.setAttribute("boxEndNum", boxEndNum);
+		request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
+		request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
+		request.setAttribute("boxStartNumBeforePageBtnNeedToShow", boxStartNumBeforePageBtnNeedToShow);
+		request.setAttribute("boxEndNumAfterPageBtnNeedToShow", boxEndNumAfterPageBtnNeedToShow);
+		
 		return "usr/article/list";
-	}
-
-	// 게시판 페이지 링크 생성 함수
-	private String link(int boardId, int page) {
-		return "../article/list?boardId=" + boardId + "&pageNum=" + page;
-
 	}
 
 	// 게시물 상세보기
@@ -150,24 +112,23 @@ public class UsrArticleController {
 		// 상세페이지 하단 메뉴
 
 		int boardId = article.getBoardId();
-		Article beforeArticle = articleService.getArticleByIdAndBoardId(id-1, boardId);
-		Article afterArticle = articleService.getArticleByIdAndBoardId(id+1, boardId);
+		Article beforeArticle = articleService.getArticleByIdAndBoardId(id - 1, boardId);
+		Article afterArticle = articleService.getArticleByIdAndBoardId(id + 1, boardId);
 
 		String beforeArticleBtn = "";
 		String afterArticleBtn = "";
-		
+
 		if (beforeArticle != null) {
 			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + beforeArticle.getId()
-						+ "\" class=\"hover-underline\">&lt 이전글</a></div>";
+					+ "\" class=\"hover-underline\">&lt 이전글</a></div>";
 			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
 		}
 
 		if (afterArticle != null) {
 			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + afterArticle.getId()
-						+ "\"class=\"hover-underline\">다음글 &gt</a></div>";
+					+ "\"class=\"hover-underline\">다음글 &gt</a></div>";
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
-
 
 		request.setAttribute("article", article);
 		request.setAttribute("articleBody", articleBody);
@@ -232,11 +193,9 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
-		
+
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
-		
 
 		request.setAttribute("article", article);
 		request.setAttribute("articleBody", articleBody);

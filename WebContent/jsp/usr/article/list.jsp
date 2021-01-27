@@ -37,7 +37,7 @@ function DoSearchForm_submit(form){
             <span>${articles.get(0).extra_boardName} ${pageTitle}</span>
             <span>(Total : ${totalCount})</span>
             <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">새 게시물 생성</a></button>
-         	<form action="" onsubmit="DoSearchForm_submit(this); return false;">
+         	<form onsubmit="DoSearchForm_submit(this); return false;">
          		<input type="hidden" name="boardId" value="${param.boardId}">
          		<select name="searchKeywordType">
          			<option value="titleAndBody">제목+내용</option>
@@ -89,11 +89,19 @@ function DoSearchForm_submit(form){
       <div class="article-page-menu-section">
         <div class="article-page-menu">
           <ul class="flex flex-jc-c">
-            ${boxStartNumBeforePageBtn}
-            <c:forEach var="pageBoxNums" items="${pageBoxNums}">
-            	${pageBoxNums}
+          	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
+          	</c:if>
+            <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
+				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
+				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
             </c:forEach>
-            ${boxEndNumAfterPageBtn}
+            <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
+          	</c:if>
           </ul>
         </div>
       </div>

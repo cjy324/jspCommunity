@@ -15,3 +15,12 @@ WHERE id != 14;
 UPDATE `member`
 SET loginPw = SHA2(loginPw, 256)
 WHERE id != 14;
+
+#게시물 랜덤 생성
+INSERT INTO `article`
+SET `regDate` = NOW(),
+`updateDate` = NOW(),
+`title` = CONCAT('제목입니다._',RAND()),
+`body` = CONCAT('내용입니다._',RAND()),
+`boardId` = FLOOR(RAND()*2) + 1,
+`memberId` = FLOOR(RAND()*2) + 1;
