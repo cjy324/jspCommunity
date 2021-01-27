@@ -5,6 +5,7 @@
 <c:set var ="pageTitle" value="게시물 리스트"/>
 <%@ include file="../../part/head.jspf" %>
 
+
 <script>
 let DoSearchForm_submited = false;
 
@@ -88,18 +89,11 @@ function DoSearchForm_submit(form){
       <div class="article-page-menu-section">
         <div class="article-page-menu">
           <ul class="flex flex-jc-c">
-            <li class="before-btn"><a href="#" class="flex flex-ai-c"> &lt; 이전</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c article-page-menu__link--selected">1</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">2</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">3</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">4</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">5</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">6</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">7</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">8</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">9</a></li>
-            <li><a href="#" class="page-btn flex flex-ai-c">10</a></li>
-            <li class="after-btn"><a href="#" class="flex flex-ai-c">다음 &gt;</a></li>
+            ${boxStartNumBeforePageBtn}
+            <c:forEach var="pageBoxNums" items="${pageBoxNums}">
+            	${pageBoxNums}
+            </c:forEach>
+            ${boxEndNumAfterPageBtn}
           </ul>
         </div>
       </div>
