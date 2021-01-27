@@ -11,7 +11,7 @@ import com.sbs.example.mysqlutil.SecSql;
 
 public class ArticleDao {
 
-	public List<Article> getArticlesForPrintByBoardId(int boardId, String searchKeywordType, String searchKeyword) {
+	public List<Article> getArticlesForPrintByBoardId(int boardId, int pageLimitStartIndex, int articlesInAPage, String searchKeywordType, String searchKeyword) {
 		List<Article> articles = new ArrayList<>();
 
 		SecSql sql = new SecSql();
@@ -42,6 +42,10 @@ public class ArticleDao {
 		};
 		
 		sql.append("ORDER BY A.id DESC");
+		
+		if ( articlesInAPage != -1 ) {
+			sql.append("LIMIT ?, ?", pageLimitStartIndex, articlesInAPage);
+		}
 
 		List<Map<String, Object>> articlesMapList = MysqlUtil.selectRows(sql);
 

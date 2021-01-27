@@ -9,6 +9,8 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
 import com.sbs.example.jspCommunity.service.ArticleService;
+import com.sbs.example.util.Util;
+
 
 public class UsrArticleController {
 
@@ -25,11 +27,17 @@ public class UsrArticleController {
 
 		String searchKeywordType = request.getParameter("searchKeywordType");
 		String searchKeyword = request.getParameter("searchKeyword");
-
+	
 		// 총 게시물 수 카운트
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
 
-		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, searchKeywordType, searchKeyword);
+		// 페이징
+		int articlesInAPage = 30; // 한 페이지에 들어갈 article 수 설정
+		int pageNum = Util.getAsInt(request.getParameter("pageNum"), 1); //pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로 변환
+		int pageLimitStartIndex = (pageNum-1)*articlesInAPage;
+			
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, pageLimitStartIndex, articlesInAPage, searchKeywordType, searchKeyword);
+
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
 
@@ -81,7 +89,7 @@ public class UsrArticleController {
 		String body = request.getParameter("body");
 
 		// 해당 게시판이 존재하는지 확인
-		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId, null, null);
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
 		if (articles.size() <= 0) {
 			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
