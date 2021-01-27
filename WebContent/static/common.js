@@ -291,9 +291,27 @@ function renderCodepen(wrapperId, url) {
 /* codepen 함수 끝 */
 	
 	
+/* toastui-editor 함수 시작 */
+function Editor__init() {
+  $('.toast-ui-editor').each(function(index, node) {
+    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
+
+    var editor = new toastui.Editor({
+      el: node,
+      previewStyle: 'vertical',
+      initialValue: initialValue,
+      height:600,
+      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+    });
+
+	$(node).data('data-toast-editor', editor);
+  });
+}
+
+/* toastui-editor 함수 끝 */
 
 
-/* toastui-viewr 함수 시작 */
+/* toastui-viewer 함수 시작 */
 function EditorViewer__init() {
 	  $('.toast-ui-viewer').each(function(index, node) {
 	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
@@ -311,9 +329,10 @@ function EditorViewer__init() {
 });
 }
 	EditorViewer__init();
+	Editor__init();
 }
 
 ArticleDetail__Body__init();
 
-/* toastui-viewr 함수 끝 */
+/* toastui-viewer 함수 끝 */
 
