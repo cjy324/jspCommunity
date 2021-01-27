@@ -48,10 +48,11 @@
               <span>제목 : </span><span>${article.title}</span>
             </div>
           </div>
-          <div class="article-detail-cell__body height-100p ">
-            <div class=" ">
-              <span>${article.body}
-              </span>
+          <script type = "text/x-template">
+				${articleBody}
+			</script>
+		<div class="article-detail-cell__body height-70p toast-ui-viewer">
+            <div>
             </div>
           </div>
           <div class="article-detail-cell__option flex flex-jc-fe">
@@ -74,12 +75,12 @@
    <section class="section-3 con-min-width">
       <div class="con">
         <div class="article-list-bottom-cell flex flex-jc-c">
-          <div class="./"><a href="#" class="hover-underline">&lt 이전글</a></div>
+          ${beforeArticleBtn}
           <div class="./">
             <i class="fas fa-th-list"></i>
             <a href="list?boardId=${article.boardId}" class="hover-underline"> 목록 </a>
           </div>  
-          <div class="./"><a href="#" class="hover-underline">다음글 &gt</a></div>
+          ${afterArticleBtn}
         </div>
       </div>
     </section>

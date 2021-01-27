@@ -76,41 +76,38 @@ public class UsrArticleController {
 			StringBuilder boxStartNumBeforePageBtn = new StringBuilder();
 			boxStartNumBeforePageBtn.append("<li class=\"before-btn\"><a href=\"" + link(boardId, boxStartNumBeforePage)
 					+ "\" class=\"flex flex-ai-c\"> &lt; 이전</a></li>");
-			System.out.println("boxStartNumBeforePageBtn: " + boxStartNumBeforePageBtn.toString());
+			//System.out.println("boxStartNumBeforePageBtn: " + boxStartNumBeforePageBtn.toString());
 			request.setAttribute("boxStartNumBeforePageBtn", boxStartNumBeforePageBtn.toString());
 		}
 		List<String> pageBoxNums = new ArrayList<>();
 		for (int i = boxStartNum; i <= boxEndNum; i++) {
-			
+
 			String pageBoxNum = "";
 			String selectedPageNum = "";
 
 			if (i == pageNum) {
 				selectedPageNum = "article-page-menu__link--selected";
-				System.out.println("selectedPageNum: " + selectedPageNum);
+			//	System.out.println("selectedPageNum: " + selectedPageNum);
 			}
 
-			pageBoxNum += "<li><a href=\"" + link(boardId, i) + "\" class=\"page-btn flex flex-ai-c "
-					+ selectedPageNum + "\">" + i + "</a></li>";
+			pageBoxNum += "<li><a href=\"" + link(boardId, i) + "\" class=\"page-btn flex flex-ai-c " + selectedPageNum
+					+ "\">" + i + "</a></li>";
 
 			pageBoxNums.add(pageBoxNum);
 
-			System.out.println("pageBoxNum: " + pageBoxNums);
+			//System.out.println("pageBoxNum: " + pageBoxNums);
 			request.setAttribute("pageBoxNums", pageBoxNums);
 		}
 
-		
-		
-		
 		if (boxEndNumAfterPageBtnNeedToShow) {
 			StringBuilder boxEndNumAfterPageBtn = new StringBuilder();
 			boxEndNumAfterPageBtn.append("<li class=\"after-btn\"><a href=\"" + link(boardId, boxEndNumAfterPage)
 					+ "\" class=\"flex flex-ai-c\">다음 &gt;</a></li>");
 
-			System.out.println("boxEndNumAfterPageBtn: " + boxEndNumAfterPageBtn.toString());
+			//System.out.println("boxEndNumAfterPageBtn: " + boxEndNumAfterPageBtn.toString());
 			request.setAttribute("boxEndNumAfterPageBtn", boxEndNumAfterPageBtn.toString());
 		}
-		System.out.println("page : " + pageNum);
+		//System.out.println("page : " + pageNum);
 
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
 
@@ -128,6 +125,7 @@ public class UsrArticleController {
 		return "usr/article/list";
 	}
 
+	// 게시판 페이지 링크 생성 함수
 	private String link(int boardId, int page) {
 		return "../article/list?boardId=" + boardId + "&pageNum=" + page;
 
@@ -146,7 +144,44 @@ public class UsrArticleController {
 			return "common/redirect";
 		}
 
+		String articleBody = article.getBody();
+		articleBody = articleBody.replaceAll("script", "t-script");
+		
+		
+		
+		// 상세페이지 하단 메뉴
+
+		int boardId = article.getBoardId();
+		Article beforeArticle = articleService.getArticleByIdAndBoardId(id-1, boardId);
+		Article afterArticle = articleService.getArticleByIdAndBoardId(id+1, boardId);
+
+		String beforeArticleBtn = "";
+		String afterArticleBtn = "";
+		
+		if (beforeArticle != null) {
+			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + beforeArticle.getId()
+						+ "\" class=\"hover-underline\">&lt 이전글</a></div>";
+			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
+		}
+
+		if (afterArticle != null) {
+			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + afterArticle.getId()
+						+ "\"class=\"hover-underline\">다음글 &gt</a></div>";
+			request.setAttribute("afterArticleBtn", afterArticleBtn);
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
 		request.setAttribute("article", article);
+		request.setAttribute("articleBody", articleBody);
 
 		return "usr/article/detail";
 	}
