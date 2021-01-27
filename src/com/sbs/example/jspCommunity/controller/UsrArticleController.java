@@ -146,9 +146,7 @@ public class UsrArticleController {
 
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
-		
-		
-		
+
 		// 상세페이지 하단 메뉴
 
 		int boardId = article.getBoardId();
@@ -170,15 +168,6 @@ public class UsrArticleController {
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
 
 		request.setAttribute("article", article);
 		request.setAttribute("articleBody", articleBody);
@@ -243,8 +232,14 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
+		
+		
+		String articleBody = article.getBody();
+		articleBody = articleBody.replaceAll("script", "t-script");
+		
 
 		request.setAttribute("article", article);
+		request.setAttribute("articleBody", articleBody);
 
 		return "usr/article/doModifyForm";
 	}

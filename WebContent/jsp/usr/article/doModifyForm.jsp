@@ -54,7 +54,8 @@ function check(form){
   <hr>
   <span>BODY</span>
   <br>
-  <script type="text/x-template">${article.body}</script>
+  <script type="text/x-template">  </script>
+
  	<div class="toast-ui-editor"></div>
   <hr>
   <input type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}" value="수정완료"><button type="button" onclick="history.back();">뒤로가기</button>
