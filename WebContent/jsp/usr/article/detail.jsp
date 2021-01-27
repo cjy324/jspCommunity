@@ -57,9 +57,9 @@
           </div>
           <div class="article-detail-cell__option flex flex-jc-fe">
           <c:if test="${sessionScope.loginedMemberId > 0}">
-			<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}">수정</a></button>
+			<button type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}">수정</a></button>
 			<button onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=${article.id}">삭제</a></button>
-		</c:if>
+		  </c:if>
             </div>
           <div class="article-detail-cell__tag flex">
             <nav># <a href="#" target="_blank">tag1</a></nav>

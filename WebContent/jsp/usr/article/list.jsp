@@ -36,7 +36,9 @@ function DoSearchForm_submit(form){
           <div class="article-list-name flex">
             <span>${articles.get(0).extra_boardName} ${pageTitle}</span>
             <span>(Total : ${totalCount})</span>
-            <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">새 게시물 생성</a></button>
+            <c:if test="${sessionScope.loginedMemberId > 0}">           
+              <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
+         	</c:if>
          	<form onsubmit="DoSearchForm_submit(this); return false;">
          		<input type="hidden" name="boardId" value="${param.boardId}">
          		<select name="searchKeywordType">
