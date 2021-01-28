@@ -34,7 +34,7 @@ function DoSearchForm_submit(form){
       <div class="section-article-list">
         <div class="article-list">
           <div class="article-list-name flex">
-            <span>${articles.get(0).extra_boardName} ${pageTitle}</span>
+            <span>${articles.get(0).extra_boardName}</span>
             <span>(Total : ${totalCount})</span>
             <c:if test="${sessionScope.loginedMemberId > 0}">           
               <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>

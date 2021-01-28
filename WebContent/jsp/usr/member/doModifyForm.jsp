@@ -177,9 +177,9 @@
           <div class=MyPage_cell__body>
             <span>${loginedMember.regDate}</span>
           </div>
+          <input class ="submitModifyBtn" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}" value="변경">
+          <button class ="cleModifyBtn" type="button" onclick="history.back();">취소</button>
         </div>
-          <input type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}" value="변경">
-          <button class ="cleModifyBtn4" type="button">취소</button>
       	</form>
       </div>
       <!-- 메인-회원정보 페이지 끝 -->
