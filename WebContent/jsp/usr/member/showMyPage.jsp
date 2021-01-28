@@ -10,6 +10,7 @@
     <section class="main-box-section con">
       <!-- 메인-회원정보 페이지 시작 -->
       <div class="section-MyPage min-height-50vh flex flex-jc-c flex-ai-c">
+      	<div>
         <div class="section-MyPage-body">
           <div class="MyPage_cell__title">
             <span>회원번호</span>
@@ -61,6 +62,7 @@
           </div>
         </div>
         <button class ="doModifyBtn" type="button"><a href="../member/doModifyForm">수정</a></button>
+      	</div>
       </div>
       <!-- 메인-회원정보 페이지 끝 -->
     </section>

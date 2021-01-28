@@ -566,7 +566,7 @@ a {
 .section-MyPage{
   padding-top:50px;
 }
-.section-MyPage > .section-MyPage-body{
+.section-MyPage >*> .section-MyPage-body{
   background-color:gray;
   text-align:left;
   border:1px solid black;
@@ -596,54 +596,6 @@ a {
   display:none;
 }
 
-.infoModifyBtn0.active{
-  display:none;
-}
-.infoModifyBtn1.active{
-  display:none;
-}
-.infoModifyBtn2.active{
-  display:none;
-}
-.infoModifyBtn3.active{
-  display:none;
-}
-.infoModifyBtn4.active{
-  display:none;
-}
-
-.oldLoginIdInfo.active{
-  display:none;
-}
-.oldNameInfo.active{
-  display:none;
-}
-.oldNicknameInfo.active{
-  display:none;
-}
-.oldEmailInfo.active{
-  display:none;
-}
-.oldPhoneInfo.active{
-  display:none;
-}
-
-.newLoginIdInfo.active{
-  display:block;
-}
-.newNameInfo.active{
-  display:block;
-}
-.newNicknameInfo.active{
-  display:block;
-}
-.newEmailInfo.active{
-  display:block;
-}
-.newPhoneInfo.active{
-  display:block;
-}
-
 /* 회원정보 페이지 끝 */
 
 /* 홈 시작 */
@@ -657,6 +609,7 @@ a {
 /** 홈 슬라이드 시작 **/
 
 #section-home-slide{
+  background-color:red;
   height:700px;
   box-shadow:10px 10px 10px gray;
 }
