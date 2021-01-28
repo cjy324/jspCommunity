@@ -15,10 +15,12 @@ public class MemberService {
 
 	private MemberDao memberDao;
 	private EmailService emailService;
+	private AttrService attrService;
 
 	public MemberService() {
 		memberDao = Container.memberDao;
 		emailService = Container.emailService;
+		attrService = Container.attrService;
 	}
 
 	public List<Member> getMemberListForPrint() {
@@ -93,6 +95,8 @@ public class MemberService {
 		modifyArg.put("id", actor.getId());
 		modifyArg.put("loginPw", Util.sha256(tempPassword));
 
+		attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", null);
+		
 		modify(modifyArg);
 	}
 
