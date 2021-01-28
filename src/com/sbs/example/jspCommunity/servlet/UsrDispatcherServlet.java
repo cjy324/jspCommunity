@@ -73,6 +73,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("showMyPage")) {
 				jspPath = membercontroller.showMyPage(request, response);
 			}
+			if (actionMethodName.equals("doModifyForm")) {
+				jspPath = membercontroller.doModifyForm(request, response);
+			}
 			if (actionMethodName.equals("doModifyInfo")) {
 				jspPath = membercontroller.doModifyInfo(request, response);
 			}

@@ -143,8 +143,6 @@ public class UsrMemberController {
 	// 회원가입 폼 작성 시 ajax로 중복체크
 	public String getLoginIdDup(HttpServletRequest request, HttpServletResponse response) {
 
-		// Map<String, Object> rs = new HashMap<>();
-
 		String loginId = request.getParameter("loginId");
 
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -181,7 +179,6 @@ public class UsrMemberController {
 
 	// ajax로 닉네임 중복체크
 	public String getNicknameDup(HttpServletRequest request, HttpServletResponse response) {
-		Map<String, Object> rs = new HashMap<>();
 
 		String nickname = request.getParameter("nickname");
 
@@ -199,6 +196,7 @@ public class UsrMemberController {
 			code = "F-1";
 			msg = "해당 닉네임은 이미 사용중입니다.";
 		}
+
 		if (nickname.trim().length() == 0) {
 			code = "F-2";
 			msg = "해당 닉네임은 사용이 불가능합니다.";
@@ -213,10 +211,10 @@ public class UsrMemberController {
 		 * 
 		 * return "common/pure";
 		 */
-		
+
 		request.setAttribute("data", new ResultData(code, msg, "nickname", nickname));
 		return "common/json";
-		
+
 	}
 
 	// 회원 정보 페이지
@@ -224,35 +222,33 @@ public class UsrMemberController {
 		return "usr/member/showMyPage";
 	}
 
+	// 회원 정보 수정 폼
+	public String doModifyForm(HttpServletRequest request, HttpServletResponse response) {
+		return "usr/member/doModifyForm";
+	}
+
 	// 회원 정보 수정
 	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		String loginId = request.getParameter("loginId");
+		String loginPw = request.getParameter("loginPwReal");
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String cellphoneNo = request.getParameter("cellphoneNo");
 
-		Member member = memberService.getMemberById(id);
+		Map<String, Object> args = new HashMap<String, Object>();
 
-		if (loginId == null) {
-			loginId = member.getLoginId();
-		}
-		if (name == null) {
-			name = member.getName();
-		}
-		if (nickname == null) {
-			nickname = member.getNickname();
-		}
-		if (email == null) {
-			email = member.getEmail();
-		}
-		if (cellphoneNo == null) {
-			cellphoneNo = member.getCellphoneNo();
-		}
+		args.put("id", id);
+		args.put("loginId", loginId);
+		args.put("loginPw", loginPw);
+		args.put("name", name);
+		args.put("nickname", nickname);
+		args.put("email", email);
+		args.put("cellphoneNo", cellphoneNo);
 
-		memberService.doModifyMemberName(id, loginId, name, nickname, email, cellphoneNo);
+		memberService.modify(args);
 
 		request.setAttribute("alertMsg", "수정되었습니다.");
 		request.setAttribute("replaceUrl", "../member/showMyPage");
