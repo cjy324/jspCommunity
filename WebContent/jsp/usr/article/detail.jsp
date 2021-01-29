@@ -70,12 +70,12 @@
 							</div>
 						</div>
 					</div>
-
-					<div class="article-detail-cell__body height-100p ">
-						<div class=" ">
-							<span>${article.body} </span>
-						</div>
-					</div>
+					
+					 <script type = "text/x-template">
+				${articleBody}
+			</script>
+		<div class="article-detail-cell__body height-70p toast-ui-viewer">
+            </div>
 					<div class="article-detail-cell__tag flex">
 						<nav>
 							#
@@ -92,15 +92,13 @@
 					</div>
 					<div class="article-detail-cell__option flex flex-jc-fe">
 						<c:if test="${sessionScope.loginedMemberId > 0}">
-							<button type="button">
-								<a style="text-decoration: none;"
-									href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}">수정</a>
+							<button class="btn" type="button">
+								<a href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}">수정</a>
 							</button>
-							<button
+							<button class="btn btn-warning"
 								onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}"
 								type="button">
-								<a style="text-decoration: none;"
-									href="doDelete?id=${article.id}">삭제</a>
+								<a href="doDelete?id=${article.id}">삭제</a>
 							</button>
 						</c:if>
 					</div>

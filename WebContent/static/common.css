@@ -172,9 +172,9 @@ a {
 
 /* 버튼 시작 */
 .btn {
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1rem;
-  padding: 10px 15px 7px 15px;
+  padding: 7px 10px 6px 10px;
   display: inline-flex;
   font-weight: bold;
   border-radius: 10px;
@@ -557,7 +557,8 @@ a {
   min-width:150px;
 }
 .loginInput_cell{
-  font-size:0.9rem;
+  margin-top:10px;
+  font-size:0.8rem;
 
 }
 
@@ -690,13 +691,15 @@ a {
 }
 
 .submitModifyBtn{
-  margin:10px;
-  margin-left:150px;
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-right:5px;
+  margin-left:190px;
 }
 
 .doModifyBtn{
   margin:10px;
-  margin-left:230px;
+  margin-left:250px;
 }
 
 /* 회원정보 페이지 끝 */
@@ -1258,18 +1261,17 @@ a {
   padding:10px;
   margin-bottom:20px;
   border-bottom:4px solid;
-  box-shadow:2px 5px 5px 5px gray;
+
 }
 .article-detail-cell__head-contents-box{
-  
-  box-shadow:7px 0px 7px gray;
+  background-color:rgba(240, 240, 240, 0.5);
 }
 
 
 .article-detail-cell__head-contents-box > div{
-  border-top:2px solid;
-  border-left:2px solid;
-  border-right:2px solid;
+  border-top:1px solid gray;
+  border-left:1px solid gray;
+  border-right:1px solid gray;
   font-size:0.8rem;
 }
 
@@ -1287,7 +1289,7 @@ a {
 }
 
 .article-detail-cell__head-contents-1 >div:not(:last-child){
-  border-right:2px solid;
+  border-right:1px solid gray;
 
 }
 
@@ -1305,11 +1307,11 @@ a {
 
 
 .article-detail-cell__body{
-  border:2px solid;
-  border-top:5px double;
+  border:1px solid gray;
+  border-top:5px double gray;
   padding:30px;
-  font-size:1.2rem;
-  box-shadow:7px 7px 7px gray;
+  font-size:1rem;
+
 }
 .article-list-bottom-cell > div{
   padding:15px;
@@ -1319,7 +1321,7 @@ a {
 
 
 .article-detail-cell__body .tui-editor-contents{
-  font-size:1.1rem;
+  font-size:1rem;
 }
 
 .article-detail-cell__tag{
@@ -1328,14 +1330,21 @@ a {
 }
 
 .article-detail-cell__tag > nav{
+  font-size:0.7rem;
   margin-right:10px;
-  padding:3px;
-  border:3px solid;
+  padding:2px;
+  border:1px solid gray;
   border-radius:10px 5px 5px 5px; 
 }
 .article-detail-cell__tag > nav:hover{
   background-color:rgba(220,220,220,0.5);
 }
+
+
+.article-detail-cell__option .btn{
+  margin-left:5px;
+}
+
 /* 게시물 상세페이지 끝 */
 /* 게시물 상세페이지 하단 메뉴 시작 */
 .section-3{
