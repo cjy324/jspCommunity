@@ -119,13 +119,13 @@ public class UsrArticleController {
 
 		if (beforeArticle != null) {
 			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + beforeArticle.getId()
-					+ "\" class=\"hover-underline\">&lt 이전글</a></div>";
+					+ "\">&lt 이전글</a></div>";
 			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
 		}
 
 		if (afterArticle != null) {
 			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + afterArticle.getId()
-					+ "\"class=\"hover-underline\">다음글 &gt</a></div>";
+					+ "\">다음글 &gt</a></div>";
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
 
