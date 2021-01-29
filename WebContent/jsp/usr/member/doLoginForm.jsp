@@ -53,26 +53,29 @@
       <!-- 메인-로그인 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
-        <form name="form" onsubmit="check(this); return false;" action="doLogin" method="POST">
-          <input type="hidden" name="loginPwReal">
+        <form name="form" onsubmit="return check()" action="doLogin" method="POST">
           <div class="login_cell__title">
-            <span>로그인 ID</span>
+            <span>아이디</span>
           </div>
           <div class="login_cell__body">
-            <input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
+            <input type="text" name="loginId" maxlength="50" placeholder="ID">
           </div>
           <div class="login_cell__title">
-            <span>로그인 PW</span>
+            <span>비밀번호</span>
           </div>
           <div class="login_cell__body">
-            <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+            <input type="password" name="loginPw" maxlength="50" placeholder="Password">
           </div>
           <div class="loginInput_cell">
-            <input type="submit" value="로그인">
-            <button type="button" onclick="history.back();">뒤로가기</button>
-            <button type="button"><a href="../member/doFindLoginIdForm">아이디 찾기</a></button>
-            <button type="button"><a href="../member/doFindLoginPwForm">비밀번호 찾기</a></button>
             <div>
+            <button class="btn" type="submit">Login</button>
+            <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
+            </div>
+            <div>
+            <a href="../member/doFindLoginIdForm">ID 찾기</a>
+           / <a href="../member/doFindLoginPwForm">PW 찾기</a>
+              </div>
+            </div>
         </form>
       </div>
       <!-- 메인-로그인 페이지 끝 -->

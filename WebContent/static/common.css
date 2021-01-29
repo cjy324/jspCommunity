@@ -170,6 +170,47 @@ a {
   max-width: var(--site-width);
 }
 
+/* 버튼 시작 */
+.btn {
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 10px 15px 7px 15px;
+  display: inline-flex;
+  font-weight: bold;
+  border-radius: 10px;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: #3D94F6;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 20px #000000;
+  text-decoration: none;
+  box-sizing: border-box;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-success {
+  background-color: #28a745;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+}
+
+.btn-danger {
+  background-color: #dc3540;
+}
+
+.btn-back {
+  background-color:	#696969;
+}
+
+.btn-warning {
+  background-color:	#8B4513;
+}
+/* 버튼 끝 */
+
 /* 탑 헤더 시작 */
 .head-bar-section{
   font-family: 'Arita-dotum-Medium';
@@ -490,13 +531,13 @@ a {
   
 }
 .section-login > form{
-  background-color:black;
   text-align:center;
   border-radius:10% 10% 10% 10%;
-  box-shadow:10px 10px 10px gray;
+  box-shadow:5px 10px 10px 10px gray;
   width:300px;
-  font-size:1.2rem;
+  font-size:1rem;
   font-weight:bold;
+  padding:10px;
 }
 .section-login > form > div{
   padding:5px;
@@ -504,7 +545,7 @@ a {
 }
 
 .login_cell__title{
-  color:white;
+  color:black;
 }
 
 .login_cell__body > input{
@@ -514,12 +555,31 @@ a {
   height:35px;
   width:90%;
   min-width:150px;
-  border:none;
 }
 .loginInput_cell{
-  font-size:1.5rem;
-  font-weight:bold;
+  font-size:0.9rem;
+
 }
+
+.loginInput_cell > div > button:hover{
+  background-color:	#8B0000;
+  
+}
+
+.loginInput_cell > div:last-child{
+  padding:7px;
+}
+
+.loginInput_cell > div:last-child > a{
+  padding:7px;
+}
+
+.loginInput_cell > div > a:hover{
+  color:red;
+  font-weight:bold;
+  text-decoration:underline;
+}
+
 
 
 /* 로그인 페이지 끝 */
