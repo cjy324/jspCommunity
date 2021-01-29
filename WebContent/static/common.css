@@ -589,37 +589,46 @@ a {
 /* 회원가입 페이지 시작 */
 .section-join{
   padding-top:50px;
+  
 }
 .section-join > form{
-  background-color:black;
-  text-align:center;
-  width:300px;
-  font-size:1.2rem;
+  text-align:left;
+  width:310px;
+  font-size:1rem;
   font-weight:bold;
-  border:2px solid;
-  box-shadow:10px 10px 10px 0 gray;
+  border-radius:20px 20px 20px 20px;
+  box-shadow:5px 10px 10px 10px gray;
+  padding:10px;
+  padding-top:20px;
+  
 }
 .section-join > form > div{
   padding:5px;
 
 }
 
-.join_cell__title{
-  color:white;
+.join_cell__title > span{
+  padding-bottom:3px;
+  border-bottom:4px solid;
 }
 
 .join_cell__body > input{
   font-size:1rem;
   font-weight:bold;
   padding:5px;
-  height:35px;
+  height:25px;
   width:95%;
   min-width:150px;
-  border:none;
 }
-.joinInput_cell{
-  font-size:1.5rem;
-  font-weight:bold;
+.join_cell__body > .btn-check {
+  margin-top:5px;
+  margin-left:7px;
+  width:95%;
+  font-size:0.8rem;
+}
+
+.joinInput-cell{
+  text-align:center;
 }
 
 

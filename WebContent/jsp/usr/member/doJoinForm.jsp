@@ -162,7 +162,7 @@
           </div>
           <div class=join_cell__body>
             <input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
-            <button name="dupIdCheck" onclick="checkDupId(this);" type="button">중복체크</button>
+            <button class="btn btn-check" name="dupIdCheck" onclick="checkDupId(this);" type="button">중복체크</button>
           </div>
           <div class=join_cell__title>
             <span>Password</span>
@@ -187,7 +187,7 @@
           </div>
           <div class=join_cell__body>
             <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
-            <button name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
+            <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
           </div>
           <div class=join_cell__title>
             <span>E-Mail</span>
@@ -202,8 +202,8 @@
             <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
           </div>
           <div class=joinInput-cell>
-            <input type="submit" value="회원가입">
-            <button type="button" onclick="history.back();">뒤로가기</button>
+            <button class="btn" type="submit">회원가입</button>
+            <button class="btn btn-back" type="button" onclick="history.back();">뒤로가기</button>
           </div>
         </form>
       </div>
