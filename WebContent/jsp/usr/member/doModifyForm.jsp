@@ -5,6 +5,10 @@
 <c:set var="pageTitle" value="MyPage"/>
 <%@ include file="../../part/head.jspf" %>
 	
+	<!-- sha256 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+	
+
 	<script>
 
 	// 닉네임 중복체크
@@ -151,7 +155,7 @@
           </div>
           <div class=MyPage_cell__body>
          	<input type="text" name="nickname" placeholder="${loginedMember.nickname}">
-			<button name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
+			<button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
 		  </div>
           <div class=MyPage_cell__title>
             <span>e-Mail</span>        
@@ -177,8 +181,8 @@
           <div class=MyPage_cell__body>
             <span>${loginedMember.regDate}</span>
           </div>
-          <input class ="submitModifyBtn" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}" value="변경">
-          <button class ="cleModifyBtn" type="button" onclick="history.back();">취소</button>
+          <button class ="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}">변경</button>
+          <button class ="cleModifyBtn btn btn-back" type="button" onclick="history.back();">취소</button>
         </div>
       	</form>
       </div>

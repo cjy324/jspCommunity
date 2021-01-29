@@ -53,7 +53,8 @@
       <!-- 메인-로그인 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
-        <form name="form" onsubmit="return check()" action="doLogin" method="POST">
+        <form name="form" onsubmit="check(this); return false;" action="doLogin" method="POST">
+          <input type="hidden" name="loginPwReal">
           <div class="login_cell__title">
             <span>아이디</span>
           </div>

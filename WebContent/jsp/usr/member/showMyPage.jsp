@@ -60,8 +60,8 @@
           <div class=MyPage_cell__body>
             <span>${loginedMember.regDate}</span>
           </div>
+          <button class ="doModifyBtn btn" type="button"><a href="../member/doModifyForm">수정</a></button>
         </div>
-        <button class ="doModifyBtn" type="button"><a href="../member/doModifyForm">수정</a></button>
       	</div>
       </div>
       <!-- 메인-회원정보 페이지 끝 -->

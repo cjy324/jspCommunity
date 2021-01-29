@@ -190,11 +190,11 @@ a {
   text-align: center;
 }
 
-.btn-success {
+.btn-go {
   background-color: #28a745;
 }
 
-.btn-info {
+.btn-check {
   background-color: #17a2b8;
 }
 
@@ -562,7 +562,7 @@ a {
 }
 
 .loginInput_cell > div > button:hover{
-  background-color:	#8B0000;
+  background-color:	black;
   
 }
 
@@ -630,15 +630,17 @@ a {
 /* 회원정보 페이지 시작 */
 .section-MyPage{
   padding-top:50px;
+  padding-bottom:50px;
 }
 .section-MyPage > * > .section-MyPage-body{
-  background-color:black;
   text-align:left;
-  border:1px solid black;
   width:310px;
-  font-size:1.2rem;
+  font-size:1rem;
   font-weight:bold;
-  box-shadow:10px 10px 10px 0 gray;
+  border-radius:20px 20px 20px 20px;
+  box-shadow:5px 10px 10px 10px gray;
+  padding:5px;
+  padding-top:20px;
 }
 .section-MyPage-body > div{
   padding:5px;
@@ -646,29 +648,47 @@ a {
 }
 
 .MyPage_cell__title{
-  color:white;
+ 
+}
+.MyPage_cell__title > span{
+  padding-bottom:3px;
+  border-bottom:4px solid;
 }
 
 .MyPage_cell__body{
-  font-size:1.1rem;
+  font-size:1rem;
   background-color:white;
   height:50px;
   display:flex;
   align-items:center;
 }
 
-.MyPage_cell__body > *{
+.MyPage_cell__body > input{
   font-size:1rem;
   height:30px;
   display:flex;
   align-items:center;
 }
 
-.submitModifyBtn{
-  margin:10px;
-  margin-left:200px;
+.MyPage_cell__body > .btn{
+  margin-left:10px;
+  font-size:0.6rem;
 }
 
+.MyPage_cell__body > .btn:hover{
+  font-weight:bold;
+  background-color:	black;
+}
+
+.submitModifyBtn{
+  margin:10px;
+  margin-left:150px;
+}
+
+.doModifyBtn{
+  margin:10px;
+  margin-left:230px;
+}
 
 /* 회원정보 페이지 끝 */
 
@@ -1371,3 +1391,7 @@ a {
 
 
 
+.btn:hover{
+  font-weight:bold;
+  background-color:	black;
+}
