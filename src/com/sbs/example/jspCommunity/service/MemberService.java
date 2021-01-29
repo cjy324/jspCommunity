@@ -63,7 +63,7 @@ public class MemberService {
 		// 메일 발송 결과를 int값으로 받음(개선)
 		int sendRs = emailService.send(actor.getEmail(), title, body);
 
-		Map<String, Object> rs = new HashMap<>();
+		//Map<String, Object> rs = new HashMap<>();
 
 		/*  //ResultData객체 도입으로 삭제
 		 * if (sendRs == 1) { // 발송 성공인 경우 rs.put("resultCode", "S-1");
@@ -95,7 +95,7 @@ public class MemberService {
 		modifyArg.put("id", actor.getId());
 		modifyArg.put("loginPw", Util.sha256(tempPassword));
 
-		attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", null);
+	//	attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", null);
 		
 		modify(modifyArg);
 	}
