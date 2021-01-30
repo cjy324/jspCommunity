@@ -36,26 +36,6 @@ function DoSearchForm_submit(form){
           <div class="article-list-name flex">
             <span>${articles.get(0).extra_boardName}</span>
             <span>(Total : ${totalCount})</span>
-            <c:if test="${sessionScope.loginedMemberId > 0}">           
-              <button type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
-         	</c:if>
-         	<form onsubmit="DoSearchForm_submit(this); return false;">
-         		<input type="hidden" name="boardId" value="${param.boardId}">
-         		<select name="searchKeywordType">
-         			<option value="titleAndBody">제목+내용</option>
-         			<option value="title">제목</option>
-         			<option value="body">내용</option>
-         		</select>
-         		<script>
-					const param_searchKeywordType = '${param.searchKeywordType}';
-
-					if(param_searchKeywordType){
-						$('select[name="searchKeywordType"]').val(param_searchKeywordType);
-					}
-         		</script>
-         		<input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
-         		<input type="submit" value="검색">
-         	</form>
           </div>
           <header>
             <div class="article-list__cell-head">
@@ -82,8 +62,32 @@ function DoSearchForm_submit(form){
               <div class="article-list__cell-likesCount">3</div>
             </div>
 			</c:forEach>
-
+			
+			
           </div>
+          <div class="article-list__cell-search flex flex-jc-c">
+         	<form onsubmit="DoSearchForm_submit(this); return false;">
+         		<input type="hidden" name="boardId" value="${param.boardId}">
+         		<select name="searchKeywordType">
+         			<option value="titleAndBody">제목+내용</option>
+         			<option value="title">제목</option>
+         			<option value="body">내용</option>
+         		</select>
+         		<script>
+					const param_searchKeywordType = '${param.searchKeywordType}';
+
+					if(param_searchKeywordType){
+						$('select[name="searchKeywordType"]').val(param_searchKeywordType);
+					}
+         		</script>
+         		<input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
+         		<input type="submit" value="검색">
+         	</form>
+            <c:if test="${sessionScope.loginedMemberId > 0}">           
+              <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
+              </button>
+         	</c:if>
+            </div>
         </div>
       </div>
       <!-- 메인-리스트페이지 끝 -->
