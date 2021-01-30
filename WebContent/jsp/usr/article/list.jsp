@@ -68,8 +68,8 @@ function DoSearchForm_submit(form){
             </div>
           </header>
           <div class="article-list__cell-body">
-          
-          	<c:forEach var="article" items="${articles}">
+      
+          	<c:forEach var="article" items="${articles}" varStatus="status">
             <div>
               <div class="article-list__cell-id">${article.id}</div>
               <div class="article-list__cell-reg-date">${article.regDate}</div>

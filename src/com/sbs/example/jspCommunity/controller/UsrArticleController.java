@@ -1,5 +1,6 @@
 package com.sbs.example.jspCommunity.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class UsrArticleController {
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
 
 		// 페이징
-		int articlesInAPage = 10; // 한 페이지에 들어갈 article 수 설정
+		int articlesInAPage = 20; // 한 페이지에 들어갈 article 수 설정
 		int page = Util.getAsInt(request.getParameter("page"), 1); // pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로
 																	// 변환
 		int pageLimitStartIndex = (page - 1) * articlesInAPage;
@@ -90,7 +91,7 @@ public class UsrArticleController {
 		request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
 		request.setAttribute("boxStartNumBeforePageBtnNeedToShow", boxStartNumBeforePageBtnNeedToShow);
 		request.setAttribute("boxEndNumAfterPageBtnNeedToShow", boxEndNumAfterPageBtnNeedToShow);
-		
+
 		return "usr/article/list";
 	}
 
@@ -106,40 +107,52 @@ public class UsrArticleController {
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-		
+
 		// 조회수 증가
 		articleService.addView(id);
 		int hitsCount = articleService.getViewCount(id);
-		
+
 		// 게시물 정보에 조회수 업데이트
 		Map<String, Object> args = new HashMap<>();
 		args.put("id", id);
 		args.put("hitsCount", hitsCount);
-		
+
 		articleService.addArticleHitsCount(args);
-		
+
 		// 업데이트된 게시물 정보 가져오기
 		Article article = articleService.getArticleById(id);
-		
+
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
 
 		// 상세페이지 하단 메뉴
+		/// 현재 게시물의 인덱스값 가져오기
+		int currentArticleIndex = 0;
 		int boardId = article.getBoardId();
-		Article beforeArticle = articleService.getArticleByIdAndBoardId(id - 1, boardId);
-		Article afterArticle = articleService.getArticleByIdAndBoardId(id + 1, boardId);
+
+		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
+		Collections.reverse(articles);
+
+		for (int i = 0; i < articles.size(); i++) {
+			if (article.getId() == articles.get(i).getId()) {
+				currentArticleIndex = i;
+				break;
+			}
+		};
+
+		int x = currentArticleIndex;
 
 		String beforeArticleBtn = "";
 		String afterArticleBtn = "";
 
-		if (beforeArticle != null) {
-			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + beforeArticle.getId()
+		if (x - 1 >= 0) {
+			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + articles.get(x - 1).getId()
 					+ "\">&lt 이전글</a></div>";
 			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
 		}
 
-		if (afterArticle != null) {
-			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + afterArticle.getId()
+		if (x < articles.size() - 1) {
+			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + articles.get(x + 1).getId()
 					+ "\">다음글 &gt</a></div>";
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}

@@ -159,3 +159,11 @@ CREATE TABLE attr(
 );
 
 SELECT * FROM attr;
+
+# 21.01.30 View 테이블 추가
+CREATE TABLE `view`(
+    viewCount INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    viewArticleId INT(10) UNSIGNED NOT NULL
+);
+
+SELECT * FROM `view`;

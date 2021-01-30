@@ -79,6 +79,7 @@ public class UsrMemberController {
 
 		request.setAttribute("member", member);
 
+
 		/*
 		 * // 회원가입시 축하메일 발송 EmailService emailService = Container.emailService;
 		 * 
@@ -272,7 +273,7 @@ public class UsrMemberController {
 		// 회원수정 후 비번 변경 여부 확인
 		Member member = memberService.getMemberById(id);
 		String modifiedLoginPw = member.getLoginPw();
-		
+
 		System.out.println(loginPw);
 		System.out.println(modifiedLoginPw);
 
