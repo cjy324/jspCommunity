@@ -94,19 +94,32 @@ public abstract class DispatcherServlet extends HttpServlet {
 		int loginedMemberId = 0;
 		boolean isLogined = false;
 		Member loginedMember = null;
-
+		boolean isUsingTempPassword = false;
+		
 		HttpSession session = request.getSession();
 
 		if (session.getAttribute("loginedMemberId") != null && (int) session.getAttribute("loginedMemberId") > 0) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
 			isLogined = true;
 			loginedMember = Container.memberService.getMemberById(loginedMemberId);
+			
+			
+			/// 임시패스워드 사용 여부 확인
+			String rs = Container.attrService.getValue("member__" + loginedMemberId + "__extra__isUsingTempPassword");
+			/// 세션에 임시패스워드 사용중인 회원 정보 담기
+			if(rs.equals("1")) {
+				isUsingTempPassword = true;
+			}
 		}
 
 		request.setAttribute("loginedMemberId", loginedMemberId);
 		request.setAttribute("isLogined", isLogined);
 		request.setAttribute("loginedMember", loginedMember);
+		request.setAttribute("isUsingTempPassword", isUsingTempPassword);
 		// 세션에 로그인 정보 담기 끝
+		
+		
+		
 
 		// 로그인 필요한 action list 필터링 시작
 		List<String> needToLoginActionList = new ArrayList<>();
