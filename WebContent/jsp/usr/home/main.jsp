@@ -71,46 +71,20 @@
             <div><span>공지사항</span></div>
             <header></header>
             <div class="home-list__cell-body">
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
+            
+            <c:forEach var="article" items="${articles1}" end="4">
+            <div>
+              <div class="home-list__cell-id">${article.id}</div>
+              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
+              <div class="home-list__cell-title">
+                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <span>[5]</span>
               </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
+              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount">3</div>
+            </div>
+			</c:forEach>
+            
             </div>
           </div>
           <div class="home-list_img">
@@ -147,46 +121,20 @@
             <div><span>자유게시판</span></div>
             <header></header>
             <div class="home-list__cell-body">
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
+            
+            <c:forEach var="article" items="${articles2}" end="4">
+            <div>
+              <div class="home-list__cell-id">${article.id}</div>
+              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
+              <div class="home-list__cell-title">
+                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <span>[5]</span>
               </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
+              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount">3</div>
+            </div>
+			</c:forEach>
+            
             </div>
           </div>
         </div>
@@ -195,46 +143,20 @@
             <div><span>News 게시판</span></div>
             <header></header>
             <div class="home-list__cell-body">
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
+            
+            <c:forEach var="article" items="${articles3}" end="4">
+            <div>
+              <div class="home-list__cell-id">${article.id}</div>
+              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
+              <div class="home-list__cell-title">
+                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <span>[5]</span>
               </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
-              <div>
-                <div class="home-list__cell-id">9</div>
-                <div class="home-list__cell-writer">홍길동</div>
-                <div class="home-list__cell-title">
-                  <a href="article_9.html" class="hover-underline">제목9</a>
-                  <span>[5]</span>
-                </div>
-                <div class="home-list__cell-hitsCount">10</div>
-                <div class="home-list__cell-likesCount">3</div>
-              </div>
+              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount">3</div>
+            </div>
+			</c:forEach>
+            
             </div>
           </div>
           <div class="home-list_img">
