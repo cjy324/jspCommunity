@@ -60,9 +60,9 @@
             <input type="email" name="email" maxlength="50" placeholder="email 입력">
           </div>
           <div class="loginInput_cell">
-            <input type="submit" value="아이디 찾기">
-            <button type="button" onclick="history.back();">뒤로가기</button>
-            <div>
+            <button class="btn" type="submit">ID 찾기</button>
+            <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
+          </div>
         </form>
       </div>
       <!-- 메인-로그인아이디 찾기 페이지 끝 -->

@@ -30,14 +30,8 @@ public class ArticleService {
 		return articleDao.add(boardId, title, body, memberId);
 	}
 
-	public void articleModify(int id, String title, String body) {
-
-		Map<String, Object> modifyArgs = new HashMap<>();
-		modifyArgs.put("id", id);
-		modifyArgs.put("title", title);
-		modifyArgs.put("body", body);
-
-		articleDao.articleModify(modifyArgs);
+	public void articleModify(Map<String, Object> args) {
+		articleDao.articleModify(args);
 
 	}
 
@@ -60,6 +54,18 @@ public class ArticleService {
 
 	public Article getArticleByIdAndBoardId(int id, int boardId) {
 		return articleDao.getArticleByIdAndBoardId(id, boardId);
+	}
+
+	public void addView(int id) {
+		articleDao.addView(id); 
+	}
+
+	public int getViewCount(int id) {
+		return articleDao.getViewCount(id);
+	}
+
+	public void addArticleHitsCount(Map<String, Object> args) {
+		articleDao.articleModify(args);
 	}
 
 

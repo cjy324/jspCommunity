@@ -97,38 +97,47 @@ public class ArticleDao {
 		return MysqlUtil.insert(sql);
 	}
 
-	public void articleModify(Map<String, Object> modifyArgs) {
+	public void articleModify(Map<String, Object> args) {
 		SecSql sql = new SecSql();
 
-		int id = (int) modifyArgs.get("id");
-		String title = modifyArgs.get("title") != null ? (String) modifyArgs.get("title") : null;
-		String body = modifyArgs.get("body") != null ? (String) modifyArgs.get("body") : null;
-
-		sql.append("UPDATE article ");
-		sql.append("SET ");
-		sql.append("updateDate = NOW(), ");
-
-		// 수정이 필요한지 여부 판단
-		boolean needToModify = false;
-
-		if (title != "") {
-			// 만약, title값이 들어왔으면, 수정할 필요가 있음
-			needToModify = true;
-			sql.append("title = ? , ", title);
+		sql.append("UPDATE article");
+		sql.append("SET updateDate = NOW()");
+		
+		boolean needToUpdate = false;
+		
+		if(args.get("title") != null) {
+			needToUpdate = true;
+			sql.append(", title = ?", args.get("title"));
+		}
+		
+		if(args.get("body") != null) {
+			needToUpdate = true;
+			sql.append(", body = ?", args.get("body"));
 		}
 
-		if (body != "") {
-			// 만약, body값이 들어왔으면, 수정할 필요가 있음
-			needToModify = true;
-			sql.append("`body` = ? ", body);
+		if(args.get("boardId") != null) {
+			needToUpdate = true;
+			sql.append(", boardId = ?", args.get("boardId"));
+		}
+		
+		if(args.get("memberId") != null) {
+			needToUpdate = true;
+			sql.append(", memberId = ?", args.get("memberId"));
+		}
+		
+		if(args.get("hitsCount") != null) {
+			needToUpdate = true;
+			sql.append(", hitsCount = ?", args.get("hitsCount"));
 		}
 
-		sql.append("WHERE id = ? ", id);
-
-		// 만약, needToModify값이 true이면 실행
-		if (needToModify) {
-			MysqlUtil.update(sql);
+		if(needToUpdate == false) {
+			return;
 		}
+
+		sql.append("WHERE id = ?", args.get("id"));
+		
+		MysqlUtil.update(sql);
+		
 	}
 
 	public void articleDelete(int id) {
@@ -241,6 +250,26 @@ public class ArticleDao {
 		}
 
 		return new Article(articleMap);
+	}
+
+	public void addView(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO view");
+		sql.append("SET");
+		sql.append("viewArticleId = ?", id);
+
+		MysqlUtil.insert(sql);
+	}
+
+	public int getViewCount(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(viewCount)");
+		sql.append("FROM view");
+		sql.append("WHERE viewArticleId = ?", id);
+		
+		return MysqlUtil.selectRowIntValue(sql);
 	}
 
 }

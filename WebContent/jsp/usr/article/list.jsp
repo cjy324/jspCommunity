@@ -78,7 +78,7 @@ function DoSearchForm_submit(form){
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
                 <span>[5]</span>
               </div>
-              <div class="article-list__cell-hitsCount">10</div>
+              <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
               <div class="article-list__cell-likesCount">3</div>
             </div>
 			</c:forEach>

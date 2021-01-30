@@ -60,7 +60,7 @@ public class doModifyArticle extends HttpServlet {
 		}
 		
 		// 게시물 수정
-		articleService.articleModify(id, title, body);
+		//articleService.articleModify(id, title, body);
 		
 		// 수정된 해당 게시물 정보 다시 불러오기
 		article = articleService.getArticleById(id);

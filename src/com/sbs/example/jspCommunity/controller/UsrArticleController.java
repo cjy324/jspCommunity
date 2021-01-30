@@ -1,6 +1,8 @@
 package com.sbs.example.jspCommunity.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -97,19 +99,32 @@ public class UsrArticleController {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
-		Article article = articleService.getArticleById(id);
+		Article oldArticle = articleService.getArticleById(id);
 
-		if (article == null) {
+		if (oldArticle == null) {
 			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
 			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
 			return "common/redirect";
 		}
-
+		
+		// 조회수 증가
+		articleService.addView(id);
+		int hitsCount = articleService.getViewCount(id);
+		
+		// 게시물 정보에 조회수 업데이트
+		Map<String, Object> args = new HashMap<>();
+		args.put("id", id);
+		args.put("hitsCount", hitsCount);
+		
+		articleService.addArticleHitsCount(args);
+		
+		// 업데이트된 게시물 정보 가져오기
+		Article article = articleService.getArticleById(id);
+		
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
 
 		// 상세페이지 하단 메뉴
-
 		int boardId = article.getBoardId();
 		Article beforeArticle = articleService.getArticleByIdAndBoardId(id - 1, boardId);
 		Article afterArticle = articleService.getArticleByIdAndBoardId(id + 1, boardId);
@@ -210,7 +225,12 @@ public class UsrArticleController {
 		String body = request.getParameter("body");
 
 		// 게시물 수정
-		articleService.articleModify(id, title, body);
+		Map<String, Object> args = new HashMap<>();
+		args.put("id", id);
+		args.put("title", title);
+		args.put("body", body);
+
+		articleService.articleModify(args);
 
 		// 수정 알림창 보여주고 detail로 이동하기
 		request.setAttribute("alertMsg", id + "번 게시물이 수정되었습니다.");

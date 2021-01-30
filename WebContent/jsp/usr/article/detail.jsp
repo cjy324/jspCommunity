@@ -57,7 +57,7 @@
 							<div class="article-detail-cell__title-contents flex flex-jc-fe">
 								<div class="article-detail-cell-hitsCount">
 									<i class="far fa-eye"></i>
-									<span>20</span>
+									<span>${article.hitsCount}</span>
 								</div>
 								<div class="article-detail-cell-likesCount">
 									<i class="far fa-thumbs-up"></i>
