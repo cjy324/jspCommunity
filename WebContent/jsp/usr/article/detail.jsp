@@ -14,7 +14,7 @@
 				<div class="article-detail-cell height-100p">
 					<div class="article-detail-cell__board-name">
 						<div>
-							<span>${article.extra_boardName}</span>
+							<span>${article.extra_boardName} Board</span>
 						</div>
 					</div>
 					<div class="article-detail-cell__head-contents-box">

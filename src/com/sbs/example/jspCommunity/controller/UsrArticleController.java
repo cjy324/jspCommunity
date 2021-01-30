@@ -80,11 +80,12 @@ public class UsrArticleController {
 
 		}
 
-		request.setAttribute("totalCount", totalCount);
+
 		request.setAttribute("articles", articles);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("page", page);
-
+		request.setAttribute("totalPages", totalPages);
+		
 		request.setAttribute("boxStartNum", boxStartNum);
 		request.setAttribute("boxEndNum", boxEndNum);
 		request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
