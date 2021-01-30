@@ -5,8 +5,6 @@
 <c:set var ="pageTitle" value="게시물 수정"/>
 <%@ include file="../../part/head.jspf" %>
 
-<h1>${article.id}번 ${pageTitle}</h1>
-
 <script>
 let DoModifyForm_submited = false;
 
@@ -45,19 +43,45 @@ function check(form){
 </script>
 
 
-<form name="form" action="doModify" method="POST" onsubmit="check(this); return false;">
-  <input type="hidden" name="id" value="${article.id}">
-  <input type="hidden" name="body">
-  <span>TITLE</span>
-  <br>
-  <input type="text" name="title" maxlength="50" placeholder="수정할 제목 입력" value="${article.title}">
-  <hr>
-  <span>BODY</span>
-  <br>
-  	<script type="text/x-template">${articleBody}</script>
- 	<div class="toast-ui-editor"></div>
-  <hr>
-  <input type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}" value="수정완료"><button type="button" onclick="history.back();">뒤로가기</button>
-</form>
+  <!-- 메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1">
+    <section class="main-box-section con">
+      <!-- 메인-글쓰기,수정페이지 시작 -->
+      <section class="section-2 min-height-50vh">
+        <div class="height-100p">
+          <div class="article-writeAndModify-cell height-100p">
+            <div class="article-writeAndModify-cell__board-name">
+              <div>
+                <span>${article.id}번 ${pageTitle}</span>
+              </div>
+            </div>
+            <div class="article-writeAndModify-cell__contents-box">
+              <form name="form" action="doModify" method="POST" onsubmit="check(this); return false;">
+  				<input type="hidden" name="id" value="${article.id}">
+  				<input type="hidden" name="body">
+                <span>TITLE</span>
+                <br />
+                <input type="text" name="title" maxlength="50" placeholder="수정할 제목 입력" value="${article.title}">
+                <hr />
+                <span>BODY</span>
+                <script type="text/x-template">${articleBody}</script>
+                <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
+                </div>
+                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
+                  <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
+                  <button class="btn btn-back" type="button" onclick="history.back();">
+                    뒤로가기
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 메인-글쓰기,수정페이지 시작 -->
+    </section>
+  </main>
+  <!-- 메인 컨텐츠 박스 끝 -->
+
 	
 <%@ include file="../../part/foot.jspf" %>

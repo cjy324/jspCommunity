@@ -4,7 +4,6 @@
 
 <c:set var="pageTitle" value="신규 게시물 등록" />
 <%@ include file="../../part/head.jspf"%>
-<h1>${pageTitle}</h1>
 
 <script>
 
@@ -43,23 +42,45 @@ function check(form){
 
 </script>
 
-<form name="form" onsubmit="check(this); return false;" action="doWrite" method="POST">
-	<input type="hidden" name="boardId" value="${param.boardId}"> 
-	<input type="hidden" name="body">
-	<span>TITLE</span>
-	<br />
-	<input type="text" name="title" maxlength="50" placeholder="제목 입력">
-	<hr />
-	<span>BODY</span>
-	<br />
-	
-	<script type="text/x-template"></script>
- 	<div class="toast-ui-editor"></div>
-	<hr />
-	<input type="submit" value="등록">
-	<button type="button" onclick="history.back();">뒤로가기</button>
-
-</form>
+  <!-- 메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1">
+    <section class="main-box-section con">
+      <!-- 메인-글쓰기,수정페이지 시작 -->
+      <section class="section-2 min-height-50vh">
+        <div class="height-100p">
+          <div class="article-writeAndModify-cell height-100p">
+            <div class="article-writeAndModify-cell__board-name">
+              <div>
+                <span>${pageTitle}</span>
+              </div>
+            </div>
+            <div class="article-writeAndModify-cell__contents-box">
+              <form name="form" onsubmit="check(this); return false;" action="doWrite" method="POST">
+                <input type="hidden" name="boardId" value="${param.boardId}">
+                <input type="hidden" name="body">
+                <span>TITLE</span>
+                <br />
+                <input type="text" name="title" maxlength="50" placeholder="제목 입력">
+                <hr />
+                <span>BODY</span>
+                <script type="text/x-template"></script>
+                <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
+                </div>
+                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
+                  <button class="btn" type="submit">등록</button>
+                  <button class="btn btn-back" type="button" onclick="history.back();">
+                    뒤로가기
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 메인-글쓰기,수정페이지 시작 -->
+    </section>
+  </main>
+  <!-- 메인 컨텐츠 박스 끝 -->
 
 
 

@@ -1370,6 +1370,50 @@ a {
 /* 게시물 상세페이지 하단 메뉴 끝 */
 
 
+
+/* 게시물 글쓰기(수정)페이지 시작 */
+.article-writeAndModify-cell__board-name{
+  font-size:1.3rem;
+  padding:10px;
+  margin-bottom:20px;
+  border-bottom:4px solid;
+
+}
+
+.article-writeAndModify-cell__contents-box > form > span{
+  font-size:1.1rem;
+  font-weight:bold;
+  margin:10px;
+}
+
+.article-writeAndModify-cell__contents-box input{
+  margin:10px;
+  height:30px;
+  width:90%;
+}
+
+
+.article-writeAndModify-cell__body, .toast-ui-editor{
+  margin-top:10px;
+  margin-bottom:10px;
+  border:1px solid gray;
+  border-top:5px double gray;
+  padding:30px;
+  font-size:1rem;
+  min-width:1200px;
+}
+
+
+.article-writeAndModify-cell__option .btn{
+  margin-left:5px;
+}
+
+/* 게시물 글쓰기(수정)페이지 시작 */
+
+
+
+
+
 /* 맨 위 버튼 시작 */
 .top-button{
   display:none;
