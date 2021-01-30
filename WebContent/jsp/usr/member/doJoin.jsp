@@ -7,7 +7,7 @@
 	
 	
 	
-	  <!-- 메인 컨텐츠 박스 시작 -->
+<!-- 메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1">
     <section class="main-box-section con">
       <!-- 메인-회원정보 페이지 시작 -->

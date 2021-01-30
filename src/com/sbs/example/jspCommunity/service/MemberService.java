@@ -95,7 +95,7 @@ public class MemberService {
 		modifyArg.put("id", actor.getId());
 		modifyArg.put("loginPw", Util.sha256(tempPassword));
 
-	//	attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", null);
+		attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", "2099-12-31 00:00:00");
 		
 		modify(modifyArg);
 	}

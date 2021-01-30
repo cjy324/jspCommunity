@@ -5,9 +5,8 @@
 <c:set var="pageTitle" value="MyPage"/>
 <%@ include file="../../part/head.jspf" %>
 	
-	<!-- sha256 -->
+<!-- sha256 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
-	
 
 	<script>
 
@@ -105,7 +104,8 @@
 			form.loginPwConfirm.value = "";
 
 		}
-		
+
+
 		form.submit();
 		DoModifyForm_submited = true;
 	};

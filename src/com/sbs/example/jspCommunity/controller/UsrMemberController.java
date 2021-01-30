@@ -121,6 +121,16 @@ public class UsrMemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginedMemberId", member.getId());
 
+		// 임시패스워드 사용 여부 확인
+		String rs = Container.attrService.getValue("member__" + member.getId() + "__extra__isUsingTempPassword");
+
+		// 임시패스워드 사용중이면 알림창 보여주고 메인으로 이동
+		if (rs.equals("1")) {
+			request.setAttribute("alertMsg", "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.");
+			request.setAttribute("replaceUrl", "../home/main");
+			return "common/redirect";
+		}
+
 		// 로그인 알림창 보여주고 메인화면으로 이동
 		request.setAttribute("alertMsg", member.getNickname() + ", 님 반갑습니다.");
 		request.setAttribute("replaceUrl", "../home/main");
@@ -233,10 +243,19 @@ public class UsrMemberController {
 
 		String loginId = request.getParameter("loginId");
 		String loginPw = request.getParameter("loginPwReal");
+
+		// 비밀번호 null여부 확인
+		if (loginPw != null && loginPw.length() == 0) {
+			loginPw = null;
+		}
+
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		String email = request.getParameter("email");
 		String cellphoneNo = request.getParameter("cellphoneNo");
+
+		// 임시패스워드 사용 여부 확인
+		String rs = Container.attrService.getValue("member__" + id + "__extra__isUsingTempPassword");
 
 		Map<String, Object> args = new HashMap<String, Object>();
 
@@ -249,6 +268,18 @@ public class UsrMemberController {
 		args.put("cellphoneNo", cellphoneNo);
 
 		memberService.modify(args);
+
+		// 회원수정 후 비번 변경 여부 확인
+		Member member = memberService.getMemberById(id);
+		String modifiedLoginPw = member.getLoginPw();
+		
+		System.out.println(loginPw);
+		System.out.println(modifiedLoginPw);
+
+		// 임시패스워드 사용중인 회원이 비밀번호를 수정했으면 attr기록 삭제
+		if (loginPw != null && rs.equals("1") && loginPw != modifiedLoginPw) {
+			Container.attrService.remove("member__" + id + "__extra__isUsingTempPassword");
+		}
 
 		request.setAttribute("alertMsg", "수정되었습니다.");
 		request.setAttribute("replaceUrl", "../member/showMyPage");

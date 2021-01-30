@@ -140,5 +140,22 @@ boardId = 3,
 title = '제목5',
 `body` = '내용5';
 
+
 SELECT * FROM article;
 SELECT * FROM `member`;
+
+
+# 21.01.30 attr 테이블 추가
+CREATE TABLE attr(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(20) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    typeCode CHAR(30) NOT NULL,
+    type2Code CHAR(30) NOT NULL,
+    `value` TEXT NOT NULL,
+    `expireDate` DATETIME NOT NULL
+);
+
+SELECT * FROM attr;
