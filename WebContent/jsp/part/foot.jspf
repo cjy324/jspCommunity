@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
   <!-- 맨 위 버튼 시작 -->
-  <nav class="top-button flex flex-jc-c flex-ai-c">
+  <nav class="top-button btn flex flex-jc-c flex-ai-c">
     <div class="">
       <a href="#header">▲ TOP</a>
     </div>
