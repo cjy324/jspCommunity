@@ -65,7 +65,7 @@ public class ArticleService {
 	}
 
 	public void addArticleHitsCount(Map<String, Object> args) {
-		articleDao.articleModify(args);
+		articleDao.addArticleHitsCount(args);
 	}
 
 
