@@ -1,5 +1,8 @@
 package com.sbs.example.jspCommunity.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,9 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.ResultData;
-import com.sbs.example.jspCommunity.service.EmailService;
 import com.sbs.example.jspCommunity.service.MemberService;
-import com.sbs.example.util.Util;
 
 public class UsrMemberController {
 
@@ -79,6 +80,24 @@ public class UsrMemberController {
 
 		request.setAttribute("member", member);
 
+		/* 비밀번호 변경기간 최초설정 시작 */
+		// 날짜 포멧 셋팅
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		// Calendar생성
+		Calendar cal = Calendar.getInstance();
+		// 오늘 날짜
+		Date date = new Date();
+		// 오늘 날짜로 셋팅
+		cal.setTime(date);
+		// 오늘 날짜에 기간을 더한다(90일)
+		cal.add(cal.DATE, 90);
+		// cal에 셋팅한 값을 지정한 형식으로 가져온다
+		String endDate = sdf.format(cal.getTime());
+
+		// attr에 저장
+		Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
+				"2099-12-12 00:00:00");
+		/* 비밀번호 변경기간 최초설정 끝 */
 
 		/*
 		 * // 회원가입시 축하메일 발송 EmailService emailService = Container.emailService;
@@ -131,6 +150,30 @@ public class UsrMemberController {
 			request.setAttribute("replaceUrl", "../home/main");
 			return "common/redirect";
 		}
+
+		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 시작 */
+		String limitDate = Container.attrService.getValue("member__" + member.getId() + "__extra__isPwChangeDateLimit");
+
+		// 날짜 포멧 셋팅
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		// Calendar생성
+		Calendar cal = Calendar.getInstance();
+		// 오늘 날짜 가져오기
+		Date date = new Date();
+		// 오늘 날짜 셋팅
+		cal.setTime(date);
+		String todayDate = sdf.format(cal.getTime());
+
+		// 오늘 날짜와 제한기간 날짜 비교
+		int compare = todayDate.compareTo(limitDate);
+
+		// 만약 오늘날짜가 지정날짜보다 크거나 같으면 기간만료 알림창 보여주고 메인으로 이동
+		if (compare >= 0) {
+			request.setAttribute("alertMsg", "비밀번호 변경 후 90일이 지났습니다. 비밀번호를 변경해 주세요.");
+			request.setAttribute("replaceUrl", "../home/main");
+			return "common/redirect";
+		}
+		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 끝 */
 
 		// 로그인 알림창 보여주고 메인화면으로 이동
 		request.setAttribute("alertMsg", member.getNickname() + ", 님 반갑습니다.");
@@ -274,13 +317,32 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(id);
 		String modifiedLoginPw = member.getLoginPw();
 
-		System.out.println(loginPw);
-		System.out.println(modifiedLoginPw);
-
 		// 임시패스워드 사용중인 회원이 비밀번호를 수정했으면 attr기록 삭제
 		if (loginPw != null && rs.equals("1") && loginPw != modifiedLoginPw) {
 			Container.attrService.remove("member__" + id + "__extra__isUsingTempPassword");
 		}
+
+		/* 비밀번호 변경 시 변경기간 재설정 시작 */
+		if (loginPw != null && loginPw != modifiedLoginPw) {
+			// 날짜 포멧 셋팅
+			SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+			// Calendar생성
+			Calendar cal = Calendar.getInstance();
+			// 오늘 날짜
+			Date date = new Date();
+			// 오늘 날짜로 셋팅
+			cal.setTime(date);
+			// 오늘 날짜에 기간을 더한다(90일)
+			cal.add(cal.DATE, 90);
+			// cal에 셋팅한 값을 지정한 형식으로 가져온다
+			String endDate = sdf.format(cal.getTime());
+
+			// attr에서 기존 기록 삭제 신규 기간 저장
+			Container.attrService.remove("member__" + member.getId() + "__extra__isPwChangeDateLimit");
+			Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
+					"2099-12-12 00:00:00");
+		}
+		/* 비밀번호 변경 시 변경기간 재설정 끝 */
 
 		request.setAttribute("alertMsg", "수정되었습니다.");
 		request.setAttribute("replaceUrl", "../member/showMyPage");

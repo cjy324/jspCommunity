@@ -2,7 +2,10 @@ package com.sbs.example.jspCommunity.servlet;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,6 +100,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		boolean isUsingTempPassword = false;
 		
 		HttpSession session = request.getSession();
+
 
 		if (session.getAttribute("loginedMemberId") != null && (int) session.getAttribute("loginedMemberId") > 0) {
 			loginedMemberId = (int) session.getAttribute("loginedMemberId");
