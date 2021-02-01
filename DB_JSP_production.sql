@@ -24,3 +24,6 @@ SET `regDate` = NOW(),
 `body` = CONCAT('내용입니다._',RAND()),
 `boardId` = FLOOR(RAND()*2) + 1,
 `memberId` = FLOOR(RAND()*2) + 1;
+
+#attr 테이블 expireDate 컬럼속성 수정
+ALTER TABLE attr MODIFY COLUMN `expireDate` DATETIME NULL;

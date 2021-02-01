@@ -155,8 +155,16 @@ CREATE TABLE attr(
     typeCode CHAR(30) NOT NULL,
     type2Code CHAR(30) NOT NULL,
     `value` TEXT NOT NULL,
-    `expireDate` DATETIME NOT NULL
+    `expireDate` DATETIME NULL
 );
+
+# attr 유니크 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`); 
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 SELECT * FROM attr;
 

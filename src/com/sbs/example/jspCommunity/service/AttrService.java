@@ -79,4 +79,19 @@ public class AttrService {
 
 		return -1;
 	}
+
+	public void setValue(String name, boolean value, String expireDate) {
+		setValue(name, value ? "1":"0", expireDate);
+		
+	}
+
+	public boolean getValueAsBoolean(String name) {
+		String value = getValue(name);
+		
+		if(value == null || value.equals("1") == false) {
+			return false;
+		}
+
+		return true;
+	}
 }

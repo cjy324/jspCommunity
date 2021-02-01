@@ -94,11 +94,22 @@ public class MemberService {
 		Map<String, Object> modifyArg = new HashMap<>();
 		modifyArg.put("id", actor.getId());
 		modifyArg.put("loginPw", Util.sha256(tempPassword));
-
-		attrService.setValue("member__" + actor.getId() + "__extra__isUsingTempPassword", "1", "2099-12-31 00:00:00");
+		
+		// 임시패스워드 발급 정보 저장
+		setIsUsingTempPassword(actor.getId(), true);
 		
 		modify(modifyArg);
 	}
+
+	public void setIsUsingTempPassword(int actorId, boolean use) {
+		attrService.setValue("member__" + actorId + "__extra__isUsingTempPassword", use, null);
+
+	}
+	public boolean getIsUsingTempPassword(int actorId) {
+		return attrService.getValueAsBoolean("member__" + actorId + "__extra__isUsingTempPassword");
+
+	}
+	
 
 	public void modify(Map<String, Object> modifyArg) {
 		memberDao.modify(modifyArg);

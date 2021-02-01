@@ -109,9 +109,9 @@ public abstract class DispatcherServlet extends HttpServlet {
 			
 			
 			/// 임시패스워드 사용 여부 확인
-			String rs = Container.attrService.getValue("member__" + loginedMemberId + "__extra__isUsingTempPassword");
+			isUsingTempPassword = Container.memberService.getIsUsingTempPassword(loginedMemberId);
 			/// 세션에 임시패스워드 사용중인 회원 정보 담기
-			if(rs.equals("1")) {
+			if(isUsingTempPassword) {
 				isUsingTempPassword = true;
 			}
 		}

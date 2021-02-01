@@ -96,7 +96,7 @@ public class UsrMemberController {
 
 		// attr에 저장
 		Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
-				"2099-12-12 00:00:00");
+				null);
 		/* 비밀번호 변경기간 최초설정 끝 */
 
 		
@@ -139,15 +139,20 @@ public class UsrMemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("loginedMemberId", member.getId());
 
-		// 임시패스워드 사용 여부 확인
-		String rs = Container.attrService.getValue("member__" + member.getId() + "__extra__isUsingTempPassword");
-
-		// 임시패스워드 사용중이면 알림창 보여주고 메인으로 이동
-		if (rs.equals("1")) {
-			request.setAttribute("alertMsg", "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.");
-			request.setAttribute("replaceUrl", "../home/main");
+		
+		/* 임시패스워드 사용 여부 확인(개선) 시작 */
+		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(member.getId());
+		
+		String alertMsg = "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.";
+		String replaceUrl = "../member/showMyPage";
+		// 임시패스워드 사용중이면 알림창 보여주고 회원정보로 이동
+		if(isUsingTempPassword) {
+			request.setAttribute("alertMsg", alertMsg);
+			request.setAttribute("replaceUrl", replaceUrl);
 			return "common/redirect";
 		}
+		/* 임시패스워드 사용 여부 확인(개선) 끝 */
+
 
 		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 시작 */
 		String limitDate = Container.attrService.getValue("member__" + member.getId() + "__extra__isPwChangeDateLimit");
@@ -215,16 +220,6 @@ public class UsrMemberController {
 			msg = "해당 ID는 사용이 불가능합니다.";
 		}
 
-		// ResultData 객체 도입으로 삭제
-		/*
-		 * rs.put("loginId", loginId); rs.put("code", code); rs.put("msg", msg);
-		 * 
-		 * rs 맵리스트를 json방식으로 생성해서 data로 보내기 request.setAttribute("data",
-		 * Util.getJsonText(rs));
-		 * 
-		 * return "common/pure";
-		 */
-
 		request.setAttribute("data", new ResultData(code, msg, "loginId", loginId));
 		return "common/json";
 	}
@@ -253,16 +248,6 @@ public class UsrMemberController {
 			code = "F-2";
 			msg = "해당 닉네임은 사용이 불가능합니다.";
 		}
-
-		// ResultData 객체 도입으로 삭제
-		/*
-		 * rs.put("nickname", nickname); rs.put("code", code); rs.put("msg", msg);
-		 * 
-		 * // rs 맵리스트를 json방식으로 생성해서 data로 보내기 request.setAttribute("data",
-		 * Util.getJsonText(rs));
-		 * 
-		 * return "common/pure";
-		 */
 
 		request.setAttribute("data", new ResultData(code, msg, "nickname", nickname));
 		return "common/json";
@@ -297,7 +282,7 @@ public class UsrMemberController {
 		String cellphoneNo = request.getParameter("cellphoneNo");
 
 		// 임시패스워드 사용 여부 확인
-		String rs = Container.attrService.getValue("member__" + id + "__extra__isUsingTempPassword");
+		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(id);
 
 		Map<String, Object> args = new HashMap<String, Object>();
 
@@ -315,9 +300,9 @@ public class UsrMemberController {
 		Member member = memberService.getMemberById(id);
 		String modifiedLoginPw = member.getLoginPw();
 
-		// 임시패스워드 사용중인 회원이 비밀번호를 수정했으면 attr기록 삭제
-		if (loginPw != null && rs.equals("1") && loginPw != modifiedLoginPw) {
-			Container.attrService.remove("member__" + id + "__extra__isUsingTempPassword");
+		// 임시패스워드 사용중인 회원이 비밀번호를 수정했으면 attr정보 삭제
+		if (loginPw != null && isUsingTempPassword && loginPw != modifiedLoginPw) {
+			Container.attrService.remove("member__" + member.getId() + "__extra__isUsingTempPassword");
 		}
 
 		/* 비밀번호 변경 시 변경기간 재설정 시작 */
@@ -338,7 +323,7 @@ public class UsrMemberController {
 			// attr에서 기존 기록 삭제 신규 기간 저장
 			Container.attrService.remove("member__" + member.getId() + "__extra__isPwChangeDateLimit");
 			Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
-					"2099-12-12 00:00:00");
+					null);
 		}
 		/* 비밀번호 변경 시 변경기간 재설정 끝 */
 
@@ -398,23 +383,10 @@ public class UsrMemberController {
 			return "common/redirect";
 		}
 
-		// 임시 비밀번호 생성 후 회원 email로 발송
-		// memberService.sendTempLoginPwToEmail(member);
-
-		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
-		/*
-		 * //ResultData 객체 도입으로 삭제 Map<String, Object> sendTempLoginPwToEmailRs =
-		 * memberService.sendTempLoginPwToEmail(member);
-		 * 
-		 * String resultCode = (String) sendTempLoginPwToEmailRs.get("resultCode");
-		 * String resultMsg = (String) sendTempLoginPwToEmailRs.get("resultMsg");
-		 */
-
 		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
 		ResultData sendTempLoginPwToEmailRs = memberService.sendTempLoginPwToEmail(member);
 
 		/// 만약 메일 발송 실패인 경우
-		// if(resultCode.contains("F")) {
 		if (sendTempLoginPwToEmailRs.isFail()) {
 			request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
 			request.setAttribute("historyBack", true);
