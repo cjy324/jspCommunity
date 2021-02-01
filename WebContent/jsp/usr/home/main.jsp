@@ -182,19 +182,19 @@
   <!-- 메인 컨텐츠 박스 끝 -->
   
   
-     <!-- 모바일 메인 컨텐츠 박스 시작 -->
+  <!-- 모바일 메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1 visible-sm-down" style="min-height:500px;">
     <section class="main-box-section con ">
       <!-- 모바일 메인 홈 시작 -->
-      <div class="section-home flex flex-column ">
-        <div class="section-home-list1 flex flex-jc-c" style="margin:0; height:280px;">
-          <div class="home-list_img" style="max-width:300px; margin:20px 0 10px 0;">
+      <div class="mobile-section-home">
+        <div class="mobile-section-home-list1 ">
+          <div class="mobile-home-list_img">
             <nav class="flex flex-jc-c">
               <a href="../article/list?boardId=1">
                 <div>
-                  <div class="img-box" style="height:250px;">
+                  <div class="mobile-img-box">
                     <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
-                    <div class="img-txt" style="opacity:1; color:black; border:4px solid #8B0000; background-color:white;">
+                    <div class="mobile-img-txt">
                       Notice
                     </div>
                   </div>
@@ -203,14 +203,14 @@
             </nav>
           </div>
         </div>
-        <div class="section-home-list2 flex flex-jc-c" style="margin:0; height:270px;">
-          <div class="home-list_img" style="max-width:300px; margin:0px 0 0px 0;">
+        <div class="mobile-section-home-list2">
+          <div class="mobile-home-list_img">
             <nav class="flex flex-jc-c">
               <a href="../article/list?boardId=2">
                 <div>
-                  <div class="img-box" style="height:250px;">
+                  <div class="mobile-img-box">
                     <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
-                    <div class="img-txt" style="opacity:1; color:black; border:4px solid gray; background-color:white;">
+                    <div class="mobile-img-txt">
                       Free
                     </div>
                   </div>
@@ -219,14 +219,14 @@
             </nav>
           </div>
         </div>
-        <div class="section-home-list3 flex flex-jc-c" style="margin:0; height:230px;">
-          <div class="home-list_img" style="max-width:300px; margin:-10px 0 0px 0;">
+        <div class="mobile-section-home-list3">
+          <div class="mobile-home-list_img">
             <nav class="flex flex-jc-c">
               <a href="../article/list?boardId=3">
                 <div>
-                  <div class="img-box" style="height:250px;">
+                  <div class="mobile-img-box">
                     <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
-                    <div class="img-txt" style="opacity:1; color:black; border:4px solid #2F4F4F; background-color:white;">
+                    <div class="mobile-img-txt">
                       News
                     </div>
                   </div>
@@ -240,5 +240,6 @@
     </section>
   </main>
   <!-- 모바일 메인 컨텐츠 박스 끝 -->
+  
   
 <%@ include file="../../part/foot.jspf" %>

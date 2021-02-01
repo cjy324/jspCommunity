@@ -1,3 +1,5 @@
+console.clear();
+
 /* MobileTopBar 옵션 시작 */
 function MobileTopBar__init() {
   $('.mobile-top-bar_btn-toggle-side-bar').click(function() {

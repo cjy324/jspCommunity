@@ -1097,6 +1097,90 @@ a {
 
 
 
+/* 모바일-홈 시작 */
+
+
+
+/** 모바일-홈 이미지박스 시작 **/
+.mobile-home-list_img{
+  width:100%;
+
+}
+
+.mobile-home-list_img > nav > a{
+  width:100%;
+  box-sizing:border-box;
+}
+
+.mobile-img-box{
+  position:relative;
+  overflow:hidden;
+  max-height:300px;
+
+}
+
+.mobile-img-box::before {
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0);
+  transition:background-color 1s;
+  
+}
+
+.mobile-home-list_img > nav > a .mobile-img-box::before {
+  background-color:rgba(0,0,0,0.1);
+  z-index:1;
+}
+
+.mobile-img-txt{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translateX(-50%) translateY(-50%);
+  border:4px solid white;
+  padding:5px;
+  background-color:rgba(0,0,0,0.3);
+  border-radius:10px;
+  color:white;
+  font-weight:bold;
+  font-size:1.2rem;
+  transition:opacity 1s;
+  opacity:1;
+  z-index:1;
+}
+
+.mobile-img-txt::before{
+  content:"GO to ";
+  
+}
+
+
+.mobile-img-box > img{
+  position:relative;
+  height:100%;
+  width:100%;
+  transition:transform 1s;
+  min-height:300px;
+
+  
+}
+
+.mobile-home-list_img > nav > a:active .mobile-img-box > img{
+  transform:scale(1.2);
+  
+}
+
+/** 모바일-홈 이미지박스 끝 **/
+
+/* 모바일-홈 끝 */
+
+
+
+
 /* 메인 리스트 페이지 시작 */
 :root {
   --article-list__cell-id__width:100px;
