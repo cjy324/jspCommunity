@@ -99,12 +99,10 @@ public class UsrMemberController {
 				"2099-12-12 00:00:00");
 		/* 비밀번호 변경기간 최초설정 끝 */
 
-		/*
-		 * // 회원가입시 축하메일 발송 EmailService emailService = Container.emailService;
-		 * 
-		 * emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname +
-		 * "님, 회원가입을 축하드립니다.");
-		 */
+		
+		/* 회원가입시 축하메일 발송 */	 
+		Container.emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname + "님, 회원가입을 축하드립니다.");
+
 		return "usr/member/doJoin";
 
 	}

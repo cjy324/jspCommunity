@@ -16,38 +16,38 @@
               <ul id="slider">
                 <li>
                   <div>
-                    <h3>공지사항</h3>
-                    <span>NOTICE</span>
-                  </div>
-                  <a href="../article/list?boardId=1">
-                    <img src="https://images.unsplash.com/photo-1505744386214-51dba16a26fc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1467&q=80"></a>
-                </li>
-
-                <li>
-                  <div>
-                    <h3>자유게시판</h3>
-                    <span>FREE BOARD</span>
-                  </div>
-                  <a href="../article/list?boardId=2">
-                    <img src="https://images.unsplash.com/photo-1516414447565-b14be0adf13e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1266&q=80"></a>
-                </li>
-
-                <li>
-                  <div>
-                    <h3>News</h3>
-                    <span>ARTICLE BOARD</span>
+                    <h3>APPLE</h3>
+                    <span>"애플 아이폰 12 미니, DxOMark Mobile 122점 획득"</span>
                   </div>
                   <a href="../article/list?boardId=3">
-                    <img src="https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"></a>
+                    <img src="https://underkg.co.kr:44391/files/attach/images/145/158/798/002/92a951e821610b40e416acf7a532b7e6.jpg"></a>
                 </li>
 
                 <li>
                   <div>
-                    <h3>준비중입니다.</h3>
-                    <span>준비중입니다.</span>
+                    <h3>SANSUNG</h3>
+                    <span>"삼성 갤럭시 A52 5G 및 A72 5G 추가 유출"</span>
                   </div>
-                  <a href="">
-                    <img src="https://images.unsplash.com/photo-1611558245524-aff4541a18d2?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDE0fEo5eXJQYUhYUlFZfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"></a>
+                  <a href="../article/list?boardId=3">
+                    <img src="https://underkg.co.kr:44391/files/attach/images/145/200/798/002/b60a1d7858a0eff3a2fac3326da25e40.jpg"></a>
+                </li>
+
+                <li>
+                  <div>
+                    <h3>APPLE</h3>
+                    <span>"2021년 애플 모바일 기기 전망, 새 아이패드 프로 나오고 iOS는 '관리 모드'"</span>
+                  </div>
+                  <a href="../article/list?boardId=3">
+                    <img src="https://www.itworld.co.kr/files/itworld/2021/01/magic-keyboard-smart-keyboard-folio-100841331-large.jpg"></a>
+                </li>
+
+                <li>
+                  <div>
+                    <h3>LG</h3>
+                    <span>"여의봉처럼 스마트폰-태블릿 변화무쌍…‘LG 롤러블’ 깜짝 공개"</span>
+                  </div>
+                  <a href="../article/list?boardId=3">
+                    <img src="http://flexible.img.hani.co.kr/flexible/normal/970/541/imgdb/original/2021/0112/20210112501569.jpg"></a>
                 </li>
 
               </ul>
@@ -68,7 +68,7 @@
         </div>
         <div class="section-home-list section-home-list1 flex">
           <div class="home-list home-list1">
-            <div><span>공지사항</span></div>
+            <div><span>NOTICE</span></div>
             <header></header>
             <div class="home-list__cell-body">
             
@@ -92,7 +92,7 @@
               <a href="../article/list?boardId=1">
                 <div>
                   <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1511067087965-c1b6ce6454d3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1220&q=80" alt="">
+                    <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
                     <div class="img-txt">
                       Notice
                     </div>
@@ -108,7 +108,7 @@
               <a href="../article/list?boardId=2">
                 <div>
                   <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1462642109801-4ac2971a3a51?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1266&q=80" alt="">
+                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
                     <div class="img-txt">
                       Free
                     </div>
@@ -118,7 +118,7 @@
             </nav>
           </div>
           <div class="home-list home-list2 flex flex-column">
-            <div><span>자유게시판</span></div>
+            <div><span>FREE BOARD</span></div>
             <header></header>
             <div class="home-list__cell-body">
             
@@ -140,7 +140,7 @@
         </div>
         <div class="section-home-list section-home-list3 flex">
           <div class="home-list home-list3">
-            <div><span>News 게시판</span></div>
+            <div><span>NEWS</span></div>
             <header></header>
             <div class="home-list__cell-body">
             

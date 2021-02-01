@@ -14,8 +14,12 @@
 }
 
 /* 폰트 3 */
-
-
+@font-face {
+    font-family: 'LAB디지털';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LAB디지털.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 html{
@@ -173,6 +177,9 @@ a {
   max-width: var(--site-width);
 }
 
+
+
+
 /* 버튼 시작 */
 .btn {
   font-size: 0.8rem;
@@ -279,7 +286,7 @@ a {
 
 /* 타이틀 시작 */
 .title{
-  font-family: 'IBMPlexSansKR-Regular';
+  font-family: 'LAB디지털';
   text-align:center;
   font-size:2.1rem;
   font-weight:bold;
@@ -290,7 +297,7 @@ a {
 
 }
 .title span{
- 
+  color:	#696969;
 }
 /* 타이틀 끝 */
 
@@ -299,7 +306,7 @@ a {
 
 /* 메뉴바 시작 */
 .menu-bar{
-  font-family: 'Arita-dotum-Medium';
+  font-family: 'LAB디지털';
   font-size:1rem;
   text-align:center;
   z-index:200;
@@ -443,7 +450,7 @@ a {
 
 /* 모바일 사이드메뉴바 시작 */
 .mobile-side-bar {
-  font-family: 'Arita-dotum-Medium';
+  font-family: 'LAB디지털';
   position:fixed;
   top:var(--top-bar__height);
   left:-100%;
@@ -512,6 +519,7 @@ a {
 /* 메인 컨텐츠 박스 시작 */
 .main-box{
   min-height:1000px;
+  
 }
 
 .main-box-section{
@@ -524,6 +532,7 @@ a {
 
 /* 푸터 시작 */
 .bottom-bar{
+  background-color:white;
   margin-top:30px;
   border-top:3px outset gray;
   padding:20px;
@@ -759,12 +768,19 @@ a {
 #slider-wrap ul#slider li > div{
   position:absolute;
   top:20px;
-  left:35px;  
+  left:25px;  
+  text-shadow:5px 3px 5px black; 
+  background-color:rgba(220, 220, 220, 0.7);
+  box-shadow:5px 3px 7px black; 
+  border-radius:10px;
+  padding:10px;
 }
 
 #slider-wrap ul#slider li > div h3{
+  text-align:left;
   font-size:25px;
   text-transform:uppercase; 
+  
 }
 
 #slider-wrap ul#slider li > div span{
@@ -825,7 +841,7 @@ a {
 /*bar*/
 #pagination-wrap{
   min-width:20px;
-  margin-top:630px;
+  margin-top:430px;
   margin-left: auto; 
   margin-right: auto;
   height:15px;
@@ -959,7 +975,7 @@ a {
 .section-home-list{
   width:100%;
   text-align:center;
-  background-color:rgba(240, 240, 240, 0.5);
+  background-color:rgba(240, 240, 240, 0.9);
   padding:10px;
 
   box-shadow:10px 10px 10px gray;
@@ -1002,6 +1018,10 @@ a {
   
 }
 
+.home-list3 > div:first-child{
+  background-color:rgb(153,153,153);
+  border-left:6px solid		#2F4F4F;
+}
 
 .home-list > header{
   margin-top:20px;
@@ -1027,6 +1047,10 @@ a {
   position:absolute;
   top:-30px;
   left:0px;
+}
+
+.home-list3 > header{
+  border-bottom:4px solid #2F4F4F;
 }
 
 
