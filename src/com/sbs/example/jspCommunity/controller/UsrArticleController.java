@@ -13,7 +13,7 @@ import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
 
-public class UsrArticleController {
+public class UsrArticleController extends Controller{
 
 	ArticleService articleService;
 
@@ -24,7 +24,11 @@ public class UsrArticleController {
 	// 리스트 가져오기
 	public String showList(HttpServletRequest request, HttpServletResponse response) {
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
+		// 게시판 번호 확인
+		int boardId = Util.getAsInt(request.getParameter("boardId"), 0);
+		if (boardId == 0) {
+			return msgAndBack(request, "게시판 번호를 입력해 주세요.");
+		}
 
 		String searchKeywordType = request.getParameter("searchKeywordType");
 		String searchKeyword = request.getParameter("searchKeyword");
@@ -74,18 +78,14 @@ public class UsrArticleController {
 		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
 
 		if (articles.size() <= 0) {
-			request.setAttribute("alertMsg", "해당 키워드가 포함된 게시물이 존재하지 않습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
-
+			return msgAndBack(request, "해당 키워드가 포함된 게시물이 존재하지 않습니다.");
 		}
-
 
 		request.setAttribute("articles", articles);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("page", page);
 		request.setAttribute("totalPages", totalPages);
-		
+
 		request.setAttribute("boxStartNum", boxStartNum);
 		request.setAttribute("boxEndNum", boxEndNum);
 		request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
@@ -104,9 +104,7 @@ public class UsrArticleController {
 		Article oldArticle = articleService.getArticleById(id);
 
 		if (oldArticle == null) {
-			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
 		}
 
 		// 조회수 증가
@@ -139,7 +137,8 @@ public class UsrArticleController {
 				currentArticleIndex = i;
 				break;
 			}
-		};
+		}
+		;
 
 		int x = currentArticleIndex;
 
@@ -173,29 +172,38 @@ public class UsrArticleController {
 	// 게시물 등록
 	public String doWrite(HttpServletRequest request, HttpServletResponse response) {
 
-		int boardId = Integer.parseInt(request.getParameter("boardId"));
 		int memberId = (int) request.getAttribute("loginedMemberId");
-
-		String title = request.getParameter("title");
-
-		String body = request.getParameter("body");
-
+		
+		// 게시판 번호가 입력됐는지 확인
+		int boardId = Util.getAsInt(request.getParameter("boardId"), 0);
+		if (boardId == 0) {
+			return msgAndBack(request, "게시판 번호를 입력하세요.");
+		}
+		
 		// 해당 게시판이 존재하는지 확인
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
 		if (articles.size() <= 0) {
-			request.setAttribute("alertMsg", boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
+		}
+
+		// 게시물 제목이 입력됐는지 확인
+		String title = request.getParameter("title");
+		if (Util.isEmpty(title)) {
+			return msgAndBack(request, "제목을 입력하세요.");
+		}
+
+		// 게시물 내용이 입력됐는지 확인
+		String body = request.getParameter("body");
+		if (Util.isEmpty(body)) {
+			return msgAndBack(request, "내용을 입력하세요.");
 		}
 
 		// 게시물 생성
 		int id = articleService.add(boardId, title, body, memberId);
 
 		// 생성 알림창 보여주고 detail로 이동하기
-		request.setAttribute("alertMsg", id + "번 게시물이 생성되었습니다.");
-		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
-		return "common/redirect";
+		return msgAndReplaceUrl(request, id + "번 게시물이 생성되었습니다.", String.format("detail?id=%d", id));
 
 	}
 
@@ -204,22 +212,23 @@ public class UsrArticleController {
 
 		int memberId = (int) request.getAttribute("loginedMemberId");
 
-		// 해당 게시판이 존재하는지 확인
-		int id = Integer.parseInt(request.getParameter("id"));
+		// 게시물 번호가 입력됐는지 확인
+		int id = Util.getAsInt(request.getParameter("id"), 0);
 
+		if (id == 0) {
+			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		}
+
+		// 해당 게시물이 존재하는지 확인
 		Article article = articleService.getArticleById(id);
 
 		if (article == null) {
-			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
 		}
 
 		// 작성자 본인 여부 체크
 		if (article.getMemberId() != memberId) {
-			request.setAttribute("alertMsg", "작성자만 수정이 가능합니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, id + "작성자만 수정이 가능합니다.");
 		}
 
 		String articleBody = article.getBody();
@@ -234,9 +243,23 @@ public class UsrArticleController {
 	// 게시물 수정
 	public String doModify(HttpServletRequest request, HttpServletResponse response) {
 
-		int id = Integer.parseInt(request.getParameter("id"));
+		// 게시물 번호가 입력됐는지 확인
+		int id = Util.getAsInt(request.getParameter("id"), 0);
+		if (id == 0) {
+			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		}
+
+		// 게시물 제목이 입력됐는지 확인
 		String title = request.getParameter("title");
+		if (Util.isEmpty(title)) {
+			return msgAndBack(request, "제목을 입력하세요.");
+		}
+
+		// 게시물 내용이 입력됐는지 확인
 		String body = request.getParameter("body");
+		if (Util.isEmpty(body)) {
+			return msgAndBack(request, "내용을 입력하세요.");
+		}
 
 		// 게시물 수정
 		Map<String, Object> args = new HashMap<>();
@@ -247,9 +270,7 @@ public class UsrArticleController {
 		articleService.articleModify(args);
 
 		// 수정 알림창 보여주고 detail로 이동하기
-		request.setAttribute("alertMsg", id + "번 게시물이 수정되었습니다.");
-		request.setAttribute("replaceUrl", String.format("detail?id=%d", id));
-		return "common/redirect";
+		return msgAndReplaceUrl(request, id + "번 게시물이 수정되었습니다.", String.format("detail?id=%d", id));
 
 	}
 
@@ -258,31 +279,30 @@ public class UsrArticleController {
 
 		int memberId = (int) request.getAttribute("loginedMemberId");
 
-		// 해당 게시판이 존재하는지 확인
-		int id = Integer.parseInt(request.getParameter("id"));
+		// 게시물 번호가 입력됐는지 확인
+		int id = Util.getAsInt(request.getParameter("id"), 0);
+		if (id == 0) {
+			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		}
 
+		// 해당 게시물이 존재하는지 확인
 		Article article = articleService.getArticleById(id);
 
 		if (article == null) {
-			request.setAttribute("alertMsg", id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
 		}
 
 		// 작성자 본인 여부 체크
 		if (article.getMemberId() != memberId) {
-			request.setAttribute("alertMsg", "작성자만 삭제가 가능합니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "작성자만 삭제가 가능합니다.");
 		}
 
 		// 게시물 삭제
 		articleService.articleDelete(id);
 
 		// 삭제 알림창 보여주고 리스트로 이동하기
-		request.setAttribute("alertMsg", id + "번 게시물이 삭제되었습니다.");
-		request.setAttribute("replaceUrl", String.format("list?boardId=%d", article.getBoardId()));
-		return "common/redirect";
+		return msgAndReplaceUrl(request, id + "번 게시물이 삭제되었습니다.",
+				String.format("list?boardId=%d", article.getBoardId()));
 
 	}
 

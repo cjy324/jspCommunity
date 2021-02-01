@@ -15,8 +15,9 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.MemberService;
+import com.sbs.example.util.Util;
 
-public class UsrMemberController {
+public class UsrMemberController extends Controller{
 
 	private MemberService memberService;
 
@@ -33,34 +34,53 @@ public class UsrMemberController {
 	// 회원가입
 	public String doJoin(HttpServletRequest request, HttpServletResponse response) {
 
-		String loginId = request.getParameter("loginId");
+		String loginId = request.getParameter("loginId");		
+		if(Util.isEmpty(loginId)) {
+			return msgAndBack(request, "아이디를 입력하세요.");
+		}
+		
 		// String loginPw = request.getParameter("loginPw");
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
+		if(Util.isEmpty(loginPw)) {
+			return msgAndBack(request, "비밀번호를 입력하세요.");
+		}
+		
 		String name = request.getParameter("name");
+		if(Util.isEmpty(name)) {
+			return msgAndBack(request, "이름을 입력하세요.");
+		}
+		
 		String nickname = request.getParameter("nickname");
+		if(Util.isEmpty(nickname)) {
+			return msgAndBack(request, "닉네임을 입력하세요.");
+		}
+		
 		String email = request.getParameter("email");
+		if(Util.isEmpty(email)) {
+			return msgAndBack(request, "email을 입력하세요.");
+		}
+		
 		String cellPhoneNo = request.getParameter("cellPhoneNo");
+		if(Util.isEmpty(cellPhoneNo)) {
+			return msgAndBack(request, "연락처를 입력하세요.");
+		}
 
 		List<Member> members = memberService.getMemberListForPrint();
 
 		// 해당 loginId가 사용가능한지 중복확인
 		for (int i = 0; i < members.size(); i++) {
 			if (members.get(i).getLoginId().equals(loginId) == true) {
-				request.setAttribute("alertMsg", "해당 아이디는 이미 사용중인 아이디입니다.");
-				request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-				return "common/redirect";
+				return msgAndBack(request, "해당 아이디는 이미 사용중인 아이디입니다.");
 			}
-		}
+		};
 
 		// 해당 nickname이 사용가능한지 중복확인
 		for (int i = 0; i < members.size(); i++) {
 			if (members.get(i).getNickname().equals(nickname) == true) {
-				request.setAttribute("alertMsg", "해당 닉네임는 이미 사용중인 닉네임입니다.");
-				request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-				return "common/redirect";
+				return msgAndBack(request, "해당 닉네임는 이미 사용중인 닉네임입니다.");
 			}
-		}
+		};
 
 		Map<String, Object> joinArg = new HashMap<>();
 		joinArg.put("loginId", loginId);
@@ -72,9 +92,6 @@ public class UsrMemberController {
 
 		// 신규 회원가입
 		int id = memberService.join(joinArg);
-
-		// 생성 알림창 보여주고 회원정보로 이동하기
-		request.setAttribute("alertMsg", id + "번 회원님 반갑습니다.");
 
 		Member member = memberService.getMemberById(id);
 
@@ -104,7 +121,6 @@ public class UsrMemberController {
 		Container.emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname + "님, 회원가입을 축하드립니다.");
 
 		return "usr/member/doJoin";
-
 	}
 
 	// 로그인 폼
@@ -115,24 +131,26 @@ public class UsrMemberController {
 	// 로그인
 	public String doLogin(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
+		if(Util.isEmpty(loginId)) {
+			return msgAndBack(request, "아이디를 입력하세요.");
+		}
 		// String loginPw = request.getParameter("loginPw");
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
+		if(Util.isEmpty(loginPw)) {
+			return msgAndBack(request, "비밀번호를 입력하세요.");
+		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		// 해당 loginId가 등록된 id인지 확인
 		if (member == null) {
-			request.setAttribute("alertMsg", "해당 아이디는 없는 아이디입니다. 아이디를 확인하세요.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "해당 아이디는 없는 아이디입니다. 아이디를 확인하세요.");
 		}
 
 		// 해당 loginPw가 일치하는지 확인
 		if (member.getLoginPw().equals(loginPw) == false) {
-			request.setAttribute("alertMsg", "비밀번호가 틀렸습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "비밀번호가 틀렸습니다.");
 		}
 
 		// 로그인 여부를 세션에 저장
@@ -142,14 +160,10 @@ public class UsrMemberController {
 		
 		/* 임시패스워드 사용 여부 확인(개선) 시작 */
 		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(member.getId());
-		
-		String alertMsg = "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.";
-		String replaceUrl = "../member/showMyPage";
+
 		// 임시패스워드 사용중이면 알림창 보여주고 회원정보로 이동
 		if(isUsingTempPassword) {
-			request.setAttribute("alertMsg", alertMsg);
-			request.setAttribute("replaceUrl", replaceUrl);
-			return "common/redirect";
+			return msgAndReplaceUrl(request, "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.", "../member/showMyPage");
 		}
 		/* 임시패스워드 사용 여부 확인(개선) 끝 */
 
@@ -172,16 +186,13 @@ public class UsrMemberController {
 
 		// 만약 오늘날짜가 지정날짜보다 크거나 같으면 기간만료 알림창 보여주고 메인으로 이동
 		if (compare >= 0) {
-			request.setAttribute("alertMsg", "비밀번호 변경 후 90일이 지났습니다. 비밀번호를 변경해 주세요.");
-			request.setAttribute("replaceUrl", "../home/main");
-			return "common/redirect";
+			return msgAndReplaceUrl(request, "비밀번호 변경 후 90일이 지났습니다. 비밀번호를 변경해 주세요.", "../home/main");
 		}
 		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 끝 */
 
 		// 로그인 알림창 보여주고 메인화면으로 이동
-		request.setAttribute("alertMsg", member.getNickname() + ", 님 반갑습니다.");
-		request.setAttribute("replaceUrl", "../home/main");
-		return "common/redirect";
+		return msgAndReplaceUrl(request, member.getNickname() + ", 님 반갑습니다.", "../home/main");
+		
 	}
 
 	// 로그아웃
@@ -191,9 +202,7 @@ public class UsrMemberController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginedMemberId");
 
-		request.setAttribute("alertMsg", "로그아웃 되었습니다.");
-		request.setAttribute("replaceUrl", "../home/main");
-		return "common/redirect";
+		return msgAndReplaceUrl(request, "로그아웃 되었습니다.", "../home/main");
 
 	}
 
@@ -220,8 +229,7 @@ public class UsrMemberController {
 			msg = "해당 ID는 사용이 불가능합니다.";
 		}
 
-		request.setAttribute("data", new ResultData(code, msg, "loginId", loginId));
-		return "common/json";
+		return jsonWithData(request, new ResultData(code, msg, "loginId", loginId));
 	}
 
 	// ajax로 닉네임 중복체크
@@ -248,10 +256,8 @@ public class UsrMemberController {
 			code = "F-2";
 			msg = "해당 닉네임은 사용이 불가능합니다.";
 		}
-
-		request.setAttribute("data", new ResultData(code, msg, "nickname", nickname));
-		return "common/json";
-
+		
+		return jsonWithData(request, new ResultData(code, msg, "nickname", nickname));
 	}
 
 	// 회원 정보 페이지
@@ -266,20 +272,40 @@ public class UsrMemberController {
 
 	// 회원 정보 수정
 	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
-		int id = Integer.parseInt(request.getParameter("id"));
+		
+		int id = Util.getAsInt(request.getParameter("id"), 0);
+		if(id == 0) {
+			return msgAndBack(request, "회원 번호를 입력하세요.");
+		}	
 
-		String loginId = request.getParameter("loginId");
 		String loginPw = request.getParameter("loginPwReal");
-
+	
 		// 비밀번호 null여부 확인
-		if (loginPw != null && loginPw.length() == 0) {
+		if (loginPw != null && loginPw.trim().length() == 0) {
 			loginPw = null;
 		}
 
 		String name = request.getParameter("name");
+		if(Util.isEmpty(name)) {
+			return msgAndBack(request, "이름을 입력하세요.");
+		}
+		
 		String nickname = request.getParameter("nickname");
+		
+		// 닉네임 null여부 확인
+		if (nickname != null && nickname.trim().length() == 0) {
+				nickname = null;
+		}
+		
 		String email = request.getParameter("email");
+		if(Util.isEmpty(email)) {
+			return msgAndBack(request, "email을 입력하세요.");
+		}
+		
 		String cellphoneNo = request.getParameter("cellphoneNo");
+		if(Util.isEmpty(cellphoneNo)) {
+			return msgAndBack(request, "연락처를 입력하세요.");
+		}
 
 		// 임시패스워드 사용 여부 확인
 		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(id);
@@ -287,7 +313,6 @@ public class UsrMemberController {
 		Map<String, Object> args = new HashMap<String, Object>();
 
 		args.put("id", id);
-		args.put("loginId", loginId);
 		args.put("loginPw", loginPw);
 		args.put("name", name);
 		args.put("nickname", nickname);
@@ -327,9 +352,8 @@ public class UsrMemberController {
 		}
 		/* 비밀번호 변경 시 변경기간 재설정 끝 */
 
-		request.setAttribute("alertMsg", "수정되었습니다.");
-		request.setAttribute("replaceUrl", "../member/showMyPage");
-		return "common/redirect";
+
+		return msgAndReplaceUrl(request, "수정되었습니다.", "../member/showMyPage");
 	}
 
 	// 아이디 찾기 폼
@@ -340,21 +364,23 @@ public class UsrMemberController {
 	// 아이디 찾기
 	public String doFindLoginId(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
+		if(Util.isEmpty(name)) {
+			return msgAndBack(request, "이름을 입력하세요.");
+		}
 		String email = request.getParameter("email");
+		if(Util.isEmpty(email)) {
+			return msgAndBack(request, "email을 입력하세요.");
+		}
 
 		Member member = memberService.getMemberByNameAndEmail(name, email);
 
 		// 해당 이름과 이메일주소를 가진 회원이 존재하는지 확인
 		if (member == null) {
-			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "일치하는 회원이 존재하지 않습니다.");
 		}
 
 		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
-		request.setAttribute("alertMsg", name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.");
-		request.setAttribute("replaceUrl", "../member/doLoginForm");
-		return "common/redirect";
+		return msgAndReplaceUrl(request, name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.", "../member/doLoginForm");
 	}
 
 	// 비밀번호 찾기 폼
@@ -365,22 +391,25 @@ public class UsrMemberController {
 	// 비밀번호 찾기
 	public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
+		if(Util.isEmpty(loginId)) {
+			return msgAndBack(request, "아이디를 입력하세요.");
+		}
+
 		String email = request.getParameter("email");
+		if(Util.isEmpty(email)) {
+			return msgAndBack(request, "email을 입력하세요.");
+		}
 
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		// 해당 loginId가 등록된 id인지 확인
 		if (member == null) {
-			request.setAttribute("alertMsg", "일치하는 회원이 존재하지 않습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "일치하는 회원이 존재하지 않습니다.");
 		}
 
 		// 해당 email이 일치하는지 확인
 		if (member.getEmail().equals(email) == false) {
-			request.setAttribute("alertMsg", "이메일주소가 일치하지 않습니다.");
-			request.setAttribute("historyBack", true); // historyBack: 뒤로 돌아가기
-			return "common/redirect";
+			return msgAndBack(request, "이메일주소가 일치하지 않습니다.");
 		}
 
 		// 임시 비밀번호 생성 후 회원 email로 발송(개선)
@@ -388,15 +417,11 @@ public class UsrMemberController {
 
 		/// 만약 메일 발송 실패인 경우
 		if (sendTempLoginPwToEmailRs.isFail()) {
-			request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
-			request.setAttribute("historyBack", true);
-			return "common/redirect";
+			return msgAndBack(request, sendTempLoginPwToEmailRs.getMsg());
 		}
 
 		// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
-		request.setAttribute("alertMsg", sendTempLoginPwToEmailRs.getMsg());
-		request.setAttribute("replaceUrl", "../home/main");
-		return "common/redirect";
+		return msgAndReplaceUrl(request, sendTempLoginPwToEmailRs.getMsg(), "../home/main");
 	}
 
 }

@@ -70,6 +70,8 @@
 			return;
 		}
 
+		// 닉네임 변경시에만 닉네임 폼 공백 체크
+		if ( form.nickname.value.length > 0 ) {
 		if (form.nickname.value.trim().length == 0) {
 			alert("닉네임을 입력해주세요.");
 			form.nickname.focus();
@@ -81,6 +83,7 @@
 			form.dupNickCheck.focus();
 			
 			return false;
+		}
 		}
 
 		if (form.email.value.trim().length == 0) {

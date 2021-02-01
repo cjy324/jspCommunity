@@ -33,7 +33,7 @@ public class Util {
 		}
 		return rs;
 	}
-	
+
 	// json파일을 Map으로 가져오는 유틸
 	public static Map getJsonMapFromFile(InputStream inStream) {
 		ObjectMapper mapper = new ObjectMapper();
@@ -47,9 +47,10 @@ public class Util {
 		return null;
 
 	}
-	
-	//메일 보내는 유틸
-	public static int sendMail(String smtpServerId, String smtpServerPw, String from, String fromName, String to, String title, String body) {
+
+	// 메일 보내는 유틸
+	public static int sendMail(String smtpServerId, String smtpServerPw, String from, String fromName, String to,
+			String title, String body) {
 		Properties prop = System.getProperties();
 		prop.put("mail.smtp.starttls.enable", "true");
 		prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -71,8 +72,8 @@ public class Util {
 			msg.setContent(body, "text/html; charset=UTF-8");
 
 			Transport.send(msg);
-			
-		// 메일발송 실패시 -1,-2,-3 리턴
+
+			// 메일발송 실패시 -1,-2,-3 리턴
 		} catch (AddressException ae) {
 			System.out.println("AddressException : " + ae.getMessage());
 			return -1;
@@ -83,7 +84,7 @@ public class Util {
 			System.out.println("UnsupportedEncodingException : " + e.getMessage());
 			return -3;
 		}
-		
+
 		// 메일발송 성공시 1 리턴
 		return 1;
 	}
@@ -91,7 +92,8 @@ public class Util {
 	// 임시 패스워드 생성 유틸
 	public static String getTempPassword(int length) {
 		int index = 0;
-		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+		char[] charArr = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f',
+				'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
 
 		StringBuffer sb = new StringBuffer();
 
@@ -126,26 +128,36 @@ public class Util {
 
 	// 입력받은 값을 int로 형변환시켜주는 유틸
 	public static int getAsInt(Object value, int defaultValue) {
-		if ( value instanceof Integer ) {
-			return (int)value;
-		}
-		else if ( value instanceof Long ) {
-			return Long.valueOf((long)value).intValue();
-		}
-		else if ( value instanceof Float ) {
-			return Float.valueOf((float)value).intValue();
-		}
-		else if ( value instanceof Double ) {
-			return Double.valueOf((double)value).intValue();
-		}
-		else if ( value instanceof String ) {
+		if (value instanceof Integer) {
+			return (int) value;
+		} else if (value instanceof Long) {
+			return Long.valueOf((long) value).intValue();
+		} else if (value instanceof Float) {
+			return Float.valueOf((float) value).intValue();
+		} else if (value instanceof Double) {
+			return Double.valueOf((double) value).intValue();
+		} else if (value instanceof String) {
 			try {
-				return Integer.parseInt((String)value);
-			}
-			catch ( NumberFormatException e ) {
+				return Integer.parseInt((String) value);
+			} catch (NumberFormatException e) {
 			}
 		}
 
 		return defaultValue;
+	}
+
+	// 입력받은 String이 null인지, 0인지 확인하는 유틸
+	public static boolean isEmpty(Object object) {
+		if (object == null) {
+			return true;
+		}
+		if (object instanceof String) {
+			if (((String) object).trim().length() == 0) {
+				return true;
+			}
+
+		}
+
+		return false;
 	}
 }
