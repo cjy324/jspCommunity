@@ -191,7 +191,13 @@ public class UsrMemberController extends Controller{
 		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 끝 */
 
 		// 로그인 알림창 보여주고 메인화면으로 이동
-		return msgAndReplaceUrl(request, member.getNickname() + ", 님 반갑습니다.", "../home/main");
+		String replaceUrl = "../home/main";
+		
+		if ( Util.isEmpty(request.getParameter("nextUrlAfterLogin")) == false ) {
+			replaceUrl = request.getParameter("nextUrlAfterLogin");
+		}
+		
+		return msgAndReplaceUrl(request, member.getNickname() + ", 님 반갑습니다.", replaceUrl);
 		
 	}
 

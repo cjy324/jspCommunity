@@ -54,6 +54,7 @@
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
         <form name="form" onsubmit="check(this); return false;" action="doLogin" method="POST">
+          <input type="hidden" name="nextUrlAfterLogin" value="${param.nextUrlAfterLogin}">
           <input type="hidden" name="loginPwReal">
           <div class="login_cell__title">
             <span>아이디</span>

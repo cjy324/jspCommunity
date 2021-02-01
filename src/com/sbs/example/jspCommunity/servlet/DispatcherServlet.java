@@ -120,6 +120,21 @@ public abstract class DispatcherServlet extends HttpServlet {
 		request.setAttribute("isLogined", isLogined);
 		request.setAttribute("loginedMember", loginedMember);
 		request.setAttribute("isUsingTempPassword", isUsingTempPassword);
+		
+		
+		/// 현재 이동하려 시도했던 경로 저장(로그인 안되어있어서 취소된 경로)
+		String currentUrl = request.getRequestURI();
+
+		if (request.getQueryString() != null) {
+			currentUrl += "?" + request.getQueryString();
+		}
+
+		String encodedCurrentUrl = Util.getUrlEncoded(currentUrl);
+
+		request.setAttribute("currentUrl", currentUrl);
+		request.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
+		
+		
 		// 세션에 로그인 정보 담기 끝
 		
 		
@@ -140,7 +155,8 @@ public abstract class DispatcherServlet extends HttpServlet {
 		if (needToLoginActionList.contains(actionUrl)) {
 			if ((boolean) request.getAttribute("isLogined") == false) {
 				request.setAttribute("alertMsg", "로그인 후 이용해 주세요.");
-				request.setAttribute("replaceUrl", "../member/doLoginForm");
+			  //request.setAttribute("replaceUrl", "../member/doLoginForm");
+				request.setAttribute("replaceUrl", "../member/doLoginForm?nextUrlAfterLogin=" + encodedCurrentUrl);
 
 				RequestDispatcher rd = request.getRequestDispatcher("/jsp/common/redirect.jsp");
 
