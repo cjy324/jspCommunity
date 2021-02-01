@@ -190,7 +190,7 @@
 						<a class="block">
 							<span>ARTICLES</span>
 						</a>
-						<ul>
+						<ul class="hide">
 							<li title="NOTICE">
 										<a href="../article/list?boardId=1" class="block">
 											<span>NOTICE</span>
@@ -203,7 +203,7 @@
 									</li>
 									<li title="NEWS">
 										<a href="../article/list?boardId=3" class="block">
-											<span>"NEWS"</span>
+											<span>NEWS</span>
 										</a>
 									</li>
 						</ul>
@@ -212,7 +212,7 @@
 						<a class="block">
 							<span>LINK</span>
 						</a>
-						<ul>
+						<ul class="hide">
 							<li title="T-STORY">
 								<a href="https://cjy324.tistory.com/" target="_blank"
 									class="block">

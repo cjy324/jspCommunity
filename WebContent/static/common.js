@@ -18,6 +18,26 @@ MobileTopBar__init();
 /* MobileTopBar 옵션 끝 */
 
 
+/* mobile-side-bar_menu 옵션 시작 */
+
+    $(document).ready(function(){
+
+        $(".mobile-side-bar_menu>ul>li>a").click(function(){
+            var submenu = $(this).next(".hide");
+ 
+
+            if( submenu.is(":visible") ){
+                submenu.slideUp();
+            }else{
+                submenu.slideDown();
+            }
+        });
+    });
+
+
+//출처: https://stove99.tistory.com/103 [스토브 훌로구]
+/* mobile-side-bar_menu 옵션 끝 */
+
 
 /* top-button 옵션 시작 */
 $(function() {  

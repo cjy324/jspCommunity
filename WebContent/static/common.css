@@ -14,12 +14,7 @@
 }
 
 /* 폰트 3 */
-@font-face {
-    font-family: 'LAB디지털';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/LAB디지털.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 
 html{
@@ -286,9 +281,8 @@ a {
 
 /* 타이틀 시작 */
 .title{
-  font-family: 'LAB디지털';
   text-align:center;
-  font-size:2.1rem;
+  font-size:2rem;
   font-weight:bold;
   padding-left:4%;
   padding-top:30px;
@@ -306,7 +300,6 @@ a {
 
 /* 메뉴바 시작 */
 .menu-bar{
-  font-family: 'LAB디지털';
   font-size:1rem;
   text-align:center;
   z-index:200;
@@ -450,7 +443,6 @@ a {
 
 /* 모바일 사이드메뉴바 시작 */
 .mobile-side-bar {
-  font-family: 'LAB디지털';
   position:fixed;
   top:var(--top-bar__height);
   left:-100%;
@@ -489,10 +481,12 @@ a {
 }
 
 
-.mobile-side-bar_menu ul > li:hover > a{
+.mobile-side-bar_menu ul > li:active > a{
+  
   background-color:gray;
   color:white;
   font-weight:bold;
+  
 }
 
 .mobile-side-bar_menu ul > li:hover > a:after{
@@ -501,6 +495,7 @@ a {
 
 .mobile-side-bar_menu > ul > li{
   width:100%;
+  cursor:pointer;
 }
 
 .mobile-side-bar_menu > ul > li > ul{
@@ -508,8 +503,8 @@ a {
   width:100%;
 }
 
-.mobile-side-bar_menu ul > li:hover > ul{
-  display:block;
+.mobile-side-bar_menu ul > li > ul{
+  background-color:gray;
   color:white;
 }
 /* 모바일 사이드메뉴바 끝 */
@@ -736,7 +731,7 @@ a {
 }
 
 #wrapper{
-  width:1200px;
+  width:100%;
   height:100%;
   position:relative;
   color:#fff;
@@ -744,14 +739,14 @@ a {
 }
 
 #slider-wrap{
-  width:1200px;
+  width:100%;
   height:100%;
   position:relative;
   overflow:hidden;
 }
 
 #slider-wrap ul#slider{
-  width:1200px;
+  width:100%;
   height:100%;
   position:absolute;
   top:0;
@@ -759,9 +754,9 @@ a {
 }
 
 #slider-wrap ul#slider li{
+  width:1200px;
   float:left;
   position:relative;
-  width:1200px;
   height:100%;
 }
 
@@ -903,6 +898,7 @@ a {
   height:280px;
   position:relative;
   overflow:hidden;
+  border-radius:20px;
   box-shadow:10px 10px 10px gray;
 }
 
@@ -973,7 +969,6 @@ a {
 }
 
 .section-home-list{
-  width:100%;
   text-align:center;
   background-color:rgba(240, 240, 240, 0.9);
   padding:10px;
@@ -1020,7 +1015,7 @@ a {
 
 .home-list3 > div:first-child{
   background-color:rgb(153,153,153);
-  border-left:6px solid		#2F4F4F;
+  border-left:6px solid	#2F4F4F;
 }
 
 .home-list > header{
