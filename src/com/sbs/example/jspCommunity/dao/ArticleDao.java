@@ -284,4 +284,49 @@ public class ArticleDao {
 		
 	}
 
+	public void addLikeCount(int memberId, int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO like");
+		sql.append("SET");
+		sql.append("likeArticleId = ?", articleId);
+		sql.append(", likeMemberId = ?", memberId);
+
+		MysqlUtil.insert(sql);
+		
+	}
+
+	public int getLikesCountByMemberIdAndArticleId(int memberId, int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(likeCount)");
+		sql.append("FROM like");
+		sql.append("WHERE likeMemberId = ?", memberId);
+		sql.append("AND likeArticleId = ?", articleId);
+		
+		return MysqlUtil.selectRowIntValue(sql);
+
+	}
+
+	public int getLikesCountByArticleId(int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(likeCount)");
+		sql.append("FROM like");
+		sql.append("WHERE likeArticleId = ?", articleId);
+		
+		return MysqlUtil.selectRowIntValue(sql);
+	}
+
+	public void addArticleLikesCount(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE article");
+		sql.append("SET");
+		sql.append("likesCount = ?", args.get("likesCount"));
+		sql.append("WHERE id = ?", args.get("id"));
+		
+		MysqlUtil.update(sql);
+	}
+
 }

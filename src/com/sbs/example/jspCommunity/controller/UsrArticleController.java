@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
+import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
 
@@ -305,5 +307,56 @@ public class UsrArticleController extends Controller{
 				String.format("list?boardId=%d", article.getBoardId()));
 
 	}
+	
+	//  ajax로 좋아요 업데이트, 값 가져오기
+		public String updateAndGetLikeCount(HttpServletRequest request, HttpServletResponse response) {
+
+			int memberId = Util.getAsInt(request.getParameter("memberId"), 0);
+
+			// 게시물 번호가 입력됐는지 확인
+			int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
+			if (articleId == 0) {
+				return msgAndBack(request, "게시물 번호를 입력하세요.");
+			}
+			
+			System.out.println("값 들어옴");
+			System.out.println(memberId);
+			System.out.println(articleId);
+			
+			int likesCount = 0;
+			String code = null;
+			String msg = null;
+			
+			// 좋아요했던 회원인지 확인
+			boolean isAlreadylikeMember = articleService.isAlreadylikeMember(memberId, articleId);
+			
+			if(isAlreadylikeMember) {
+				code = "F-1";
+				msg = "회원님은 이미 좋아요를 하셨습니다.";
+			}
+			
+			if(isAlreadylikeMember == false) {
+				// 좋아요수 증가
+				articleService.addLikeCount(memberId, articleId);
+				
+				likesCount = articleService.getLikesCountByArticleId(articleId);
+				code = "S-1";
+				msg = "";
+				
+				
+				// 게시물 정보에 좋아요수 업데이트
+				Map<String, Object> args = new HashMap<>();
+				args.put("id", articleId);
+				args.put("likesCount", likesCount);
+
+				articleService.addArticleLikesCount(args);
+				
+			}
+			
+
+			return jsonWithData(request, new ResultData(code, msg, "likesCount", likesCount));
+		}
+	
+	
 
 }

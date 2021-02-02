@@ -8,6 +8,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.util.Util;
 
 public class ArticleService {
 
@@ -67,6 +68,32 @@ public class ArticleService {
 	public void addArticleHitsCount(Map<String, Object> args) {
 		articleDao.addArticleHitsCount(args);
 	}
+
+	public boolean isAlreadylikeMember(int memberId, int articleId) {
+		int memberLike = articleDao.getLikesCountByMemberIdAndArticleId(memberId, articleId);
+		
+		if(memberLike == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public void addLikeCount(int memberId, int articleId) {
+		articleDao.addLikeCount(memberId, articleId);
+		
+	}
+
+	public int getLikesCountByArticleId(int articleId) {
+		return articleDao.getLikesCountByArticleId(articleId);
+	}
+
+	public void addArticleLikesCount(Map<String, Object> args) {
+		articleDao.addArticleLikesCount(args);
+		
+	}
+
+	
 
 
 }

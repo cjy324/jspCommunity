@@ -4,7 +4,7 @@ USE jspCommunity;
 SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM `article`;
-
+SELECT * FROM attr;
 
 # 기존 회원 비밀번호 암호화 비교 조회
 SELECT loginPw, SHA2(loginPw, 256)

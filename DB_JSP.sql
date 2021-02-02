@@ -175,3 +175,16 @@ CREATE TABLE `view`(
 );
 
 SELECT * FROM `view`;
+
+# 21.02.02 like 테이블 추가
+CREATE TABLE `like`(
+    likeCount INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    likeArticleId INT(10) UNSIGNED NOT NULL,
+    likeMemberId INT(10) UNSIGNED NOT NULL
+);
+
+SELECT * FROM `like`;
+
+# 21.02.02 likesCount, unLikesCount 칼럼 추가
+ALTER TABLE article ADD COLUMN `likesCount` INT(10) UNSIGNED NOT NULL DEFAULT 0;
+ALTER TABLE article ADD COLUMN `unLikesCount` INT(10) UNSIGNED NOT NULL DEFAULT 0;
