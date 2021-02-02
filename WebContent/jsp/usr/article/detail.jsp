@@ -5,6 +5,33 @@
 <c:set var="pageTitle" value="게시물 상세보기" />
 <%@ include file="../../part/head.jspf"%>
 
+<script>
+
+let replyForm_submited = false;
+
+function check(form){
+
+	if(replyForm_submited){
+
+		alert('처리중입니다.');
+			return;
+	}
+
+	if(form.reply.value.trim().length == 0){
+		alert("댓글을 입력하세요.")
+		form.reply.focus();
+
+		return false;
+	}
+
+
+	form.submit();
+	replyForm_submited = true;
+}
+
+</script>
+
+
 
 <!-- 메인 컨텐츠 박스 시작 -->
 <main class="main-box flex-grow-1">
@@ -127,6 +154,65 @@
 			</div>
 		</section>
 		<!-- 메인-상세페이지 끝 -->
+		
+		<!-- 댓글창 시작 -->
+		<section class="section-3 con-min-width">
+			<div class="con">
+				<div class="article-list-bottom-cell flex flex-jc-c">
+					<form name="form" onsubmit="check(this); return false;" action="reply" method="POST">
+          				<input type="hidden" name="articleId" value="${article.id}">
+          				<input type="hidden" name="memberId" value="${loginedMemberId}">
+                <span>댓글</span>
+                <br />
+                <input type="textarea" name="replyBody" maxlength="50" placeholder="댓글 입력">
+                <hr />
+                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
+                  <button class="btn" type="submit">등록</button>
+                </div>
+              </form>						
+			</div>
+			<c:forEach var="reply" items="${replies}">
+            <div class="reply-list-box">
+              <div class="article-list__cell-id">${reply.id}</div>
+              <div class="article-list__cell-reg-date">${reply.regDate}</div>
+              <div class="article-list__cell-writer">${reply.extra_memberNickname}</div>
+              <div class="article-list__cell-title">${reply.body}</div>
+            </div>
+			</c:forEach>
+				
+			</div>
+			
+			<div class="article-page-menu-section">
+        <div class="article-page-menu">
+          <ul class="flex flex-jc-c">
+ 
+			<c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
+          	
+          	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
+          	</c:if>
+            <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
+				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
+				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
+            </c:forEach>
+            <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
+          	</c:if>
+          	
+          	<c:set var="aUrl" value="?page=${totalPages}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
+          	
+          </ul>
+        </div>
+      </div>
+		</section>
+
+		<!-- 댓글창 끝 -->
+		
 		<!-- 메인-상세 하단 메뉴 시작 -->
 		<section class="section-3 con-min-width">
 			<div class="con">

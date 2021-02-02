@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
 
@@ -357,6 +358,48 @@ public class ArticleDao {
 		sql.append("AND point = ?", -1);
 		
 		return MysqlUtil.selectRowIntValue(sql);
+	}
+
+	public void addReply(int id, int memberId, String relTypeCode, String replyBody) {
+		SecSql sql = new SecSql();
+
+		sql.append("INSERT INTO reply");
+		sql.append("SET regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		sql.append(", memberId = ?", memberId);
+		sql.append(", relTypeCode = ?", relTypeCode);
+		sql.append(", relId = ?", id);
+		sql.append(", body = ?", replyBody);
+		
+
+		MysqlUtil.insert(sql);
+		
+	}
+
+	public List<Reply> getArticleReplies(int id) {
+		List<Reply> replies = new ArrayList<>();
+
+		SecSql sql = new SecSql();
+		sql.append("SELECT R.*");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append("FROM reply AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
+		sql.append("WHERE 1");
+		sql.append("AND relTypeCode = ?", "article");
+		sql.append("AND relId = ?", id);
+		sql.append("ORDER BY R.id DESC");
+
+		List<Map<String, Object>> repliesMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> repliesMap : repliesMapList) {
+			Reply reply = new Reply(repliesMap);
+
+			replies.add(reply);
+
+		}
+		// Collections.reverse(articles);
+		return replies;
 	}
 	
 

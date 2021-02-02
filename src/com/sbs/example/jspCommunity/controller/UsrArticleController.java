@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
@@ -126,7 +127,7 @@ public class UsrArticleController extends Controller {
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
 
-		// 상세페이지 하단 메뉴
+		/* 상세페이지 하단 메뉴 시작 */
 		/// 현재 게시물의 인덱스값 가져오기
 		int currentArticleIndex = 0;
 		int boardId = article.getBoardId();
@@ -158,6 +159,70 @@ public class UsrArticleController extends Controller {
 					+ "\">다음글 &gt</a></div>";
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
+
+		/* 상세페이지 하단 메뉴 끝 */
+
+		/* 상세페이지 댓글리스트 가져오기 시작 */
+		List<Reply> replies = articleService.getArticleReplies(id);
+		
+
+		request.setAttribute("replies", replies);
+		
+		/*
+		 * // 총 댓글 수 카운트 int totalCount = articleService.getRepliesCountByArticleId(id);
+		 * 
+		 * // 페이징 int articlesInAPage = 20; // 한 페이지에 들어갈 article 수 설정 int page =
+		 * Util.getAsInt(request.getParameter("page"), 1); // pageNum이 null이면 1로 변환,
+		 * 정수형(int)이 아니면 정수형으로 // 변환 int pageLimitStartIndex = (page - 1) *
+		 * articlesInAPage;
+		 * 
+		 * List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId,
+		 * pageLimitStartIndex, articlesInAPage, searchKeywordType, searchKeyword);
+		 * 
+		 * int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8
+		 * 9 10 int totalArticlesCount = totalCount; // 전체 article의 수 카운팅 int totalPages
+		 * = (int) Math.ceil((double) totalArticlesCount / articlesInAPage); // 총 필요 페이지
+		 * 수 카운팅
+		 * 
+		 * // 총 필요 페이지 수까지 버튼 만들기 // 하단 페이지 이동 버튼 메뉴 만들기 // 1. pageMenuBox내 시작 번호, 끝 번호
+		 * 설정
+		 * 
+		 * int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면
+		 * previousPageNumCount = 1/5 int boxStartNum = pageMenuBoxSize *
+		 * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15 int boxEndNum =
+		 * pageMenuBoxSize + boxStartNum - 1;
+		 * 
+		 * if (boxEndNum > totalPages) { boxEndNum = totalPages; }
+		 * 
+		 * // 2. '이전','다음' 버튼 페이지 계산 int boxStartNumBeforePage = boxStartNum - 1; if
+		 * (boxStartNumBeforePage < 1) { boxStartNumBeforePage = 1; } int
+		 * boxEndNumAfterPage = boxEndNum + 1; if (boxEndNumAfterPage > totalPages) {
+		 * boxEndNumAfterPage = totalPages; }
+		 * 
+		 * // 3. '이전','다음' 버튼 필요 유무 판별 boolean boxStartNumBeforePageBtnNeedToShow =
+		 * boxStartNumBeforePage != boxStartNum; boolean boxEndNumAfterPageBtnNeedToShow
+		 * = boxEndNumAfterPage != boxEndNum;
+		 * 
+		 * // 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
+		 * 
+		 * if (articles.size() <= 0) { return msgAndBack(request,
+		 * "해당 키워드가 포함된 게시물이 존재하지 않습니다."); }
+		 * 
+		 * request.setAttribute("articles", articles);
+		 * request.setAttribute("totalCount", totalCount); request.setAttribute("page",
+		 * page); request.setAttribute("totalPages", totalPages);
+		 * 
+		 * request.setAttribute("boxStartNum", boxStartNum);
+		 * request.setAttribute("boxEndNum", boxEndNum);
+		 * request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
+		 * request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
+		 * request.setAttribute("boxStartNumBeforePageBtnNeedToShow",
+		 * boxStartNumBeforePageBtnNeedToShow);
+		 * request.setAttribute("boxEndNumAfterPageBtnNeedToShow",
+		 * boxEndNumAfterPageBtnNeedToShow);
+		 */
+
+		/* 상세페이지 댓글리스트 가져오기 끝 */
 
 		request.setAttribute("article", article);
 		request.setAttribute("articleBody", articleBody);
@@ -357,7 +422,7 @@ public class UsrArticleController extends Controller {
 
 		// 게시물에 대한 LikesCount 가져오기
 		int getArticleLikesCount = articleService.getArticleLikesCount(articleId);
-		
+
 		// 게시물에 대한 unLikesCount 가져오기
 		int getArticleUnLikesCount = articleService.getArticleUnLikesCount(articleId);
 
@@ -369,7 +434,39 @@ public class UsrArticleController extends Controller {
 
 		articleService.articleModify(args2);
 
+		// 새로고침
 		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
+	}
+
+	// 댓글 등록
+	public String reply(HttpServletRequest request, HttpServletResponse response) {
+
+		// 게시물 번호가 입력됐는지 확인
+		int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
+		if (articleId == 0) {
+			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		}
+
+		// 회원 아이디 확인
+		int memberId = Util.getAsInt(request.getParameter("memberId"), 0);
+		if (memberId == 0) {
+			return msgAndBack(request, "회원 아이디를 입력하세요.");
+		}
+
+		// 댓글이 입력됐는지 확인
+		String replyBody = request.getParameter("replyBody");
+		if (Util.isEmpty(replyBody)) {
+			return msgAndBack(request, "내용을 입력하세요.");
+		}
+
+		String relTypeCode = "article";
+
+		// 댓글 등록
+		articleService.addReply(articleId, memberId, relTypeCode, replyBody);
+
+		// 새로고침
+		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
+
 	}
 
 }

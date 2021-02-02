@@ -8,6 +8,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.ArticleDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.util.Util;
 
 public class ArticleService {
@@ -18,8 +19,10 @@ public class ArticleService {
 		articleDao = Container.articleDao;
 	}
 
-	public List<Article> getArticlesForPrintByBoardId(int boardId, int pageLimitStartIndex, int articlesInAPage, String searchKeywordType, String searchKeyword) {
-		return articleDao.getArticlesForPrintByBoardId(boardId, pageLimitStartIndex, articlesInAPage, searchKeywordType, searchKeyword);
+	public List<Article> getArticlesForPrintByBoardId(int boardId, int pageLimitStartIndex, int articlesInAPage,
+			String searchKeywordType, String searchKeyword) {
+		return articleDao.getArticlesForPrintByBoardId(boardId, pageLimitStartIndex, articlesInAPage, searchKeywordType,
+				searchKeyword);
 	}
 
 	public Article getArticleById(int id) {
@@ -58,7 +61,7 @@ public class ArticleService {
 	}
 
 	public void addView(int id) {
-		articleDao.addView(id); 
+		articleDao.addView(id);
 	}
 
 	public int getViewCount(int id) {
@@ -70,9 +73,9 @@ public class ArticleService {
 	}
 
 	public boolean isAlreadylikeMember(int memberId, int articleId) {
-		int memberLikesCount = articleDao.getMemberArticleLikesCount(memberId,articleId);
-		
-		if(memberLikesCount != 0) {
+		int memberLikesCount = articleDao.getMemberArticleLikesCount(memberId, articleId);
+
+		if (memberLikesCount != 0) {
 			return true;
 		}
 
@@ -91,8 +94,13 @@ public class ArticleService {
 		return articleDao.getArticleUnLikesCount(articleId);
 	}
 
+	public void addReply(int id, int memberId, String relTypeCode, String replyBody) {
+		articleDao.addReply(id, memberId, relTypeCode, replyBody);
 
-	
+	}
 
+	public List<Reply> getArticleReplies(int id) {
+		return articleDao.getArticleReplies(id);
+	}
 
 }

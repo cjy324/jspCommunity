@@ -1561,3 +1561,9 @@ a {
   box-shadow:3px 3px 3px gray;
   transition: all 100ms;
 }
+
+.reply-list-box{
+  display:flex;
+  justify-content:center;
+  border:2px solid;
+}
