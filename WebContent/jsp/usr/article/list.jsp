@@ -59,7 +59,7 @@ function DoSearchForm_submit(form){
                 <span>[5]</span>
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
-              <div class="article-list__cell-likesCount">3</div>
+              <div class="article-list__cell-likesCount">${article.likesCount}</div>
             </div>
 			</c:forEach>
 			

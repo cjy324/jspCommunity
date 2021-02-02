@@ -17,6 +17,7 @@ public class Article {
 		this.memberId = (int) articlesMap.get("memberId");
 		this.hitsCount = (int) articlesMap.get("hitsCount");
 		this.likesCount = (int) articlesMap.get("likesCount");
+		this.unLikesCount = (int) articlesMap.get("unLikesCount");
 		
 		if (articlesMap.containsKey("extra_memberName")) {
 			this.extra_memberName = (String) articlesMap.get("extra_memberName");
@@ -50,5 +51,6 @@ public class Article {
 	private String extra_boardCode;
 	private int hitsCount;
 	private int likesCount;
+	private int unLikesCount;
 	
 }

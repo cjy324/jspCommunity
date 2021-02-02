@@ -5,43 +5,6 @@
 <c:set var="pageTitle" value="게시물 상세보기" />
 <%@ include file="../../part/head.jspf"%>
 
-<script>
-
-// 좋아요 업데이트
-	let likesCount = "";
-
-	function updateLikesCount(el){
-
-		const form = $(el).closest('form').get(0);
-		
-		const articleId = form.articleId.value;
-		const memberId = form.memberId.value;
-		
-		//ajax 통신으로 보내고 데이터 받기
-		$.get(
-			'updateAndGetLikeCount',  //요청할 주소
-			{		
-				memberId
-			},
-			function(data){
-				
-				if(data.msg){
-					alert(data.msg + " (" + data.resultCode + ")");
-				}
-
-			},			
-			'json'
-		
-		);
-		
-	};
-
-
-</script>
-
-
-
-
 
 <!-- 메인 컨텐츠 박스 시작 -->
 <main class="main-box flex-grow-1">
@@ -100,16 +63,26 @@
 								<div class="article-detail-cell-likesCount">
 									<i class="far fa-thumbs-up"></i>
 									<span>30</span>
-									<c:if test="${isLogined}">
-									<form name="form" action="" method="POST">
+									
+									<form action="updateLikesCount" method="POST">
           								<input type="hidden" name="articleId" value="${article.id}">
           								<input type="hidden" name="memberId" value="${loginedMemberId}">
-									<button class="btn likeUpdate" name="likeUpdate" onclick="updateLikesCount(this);" type = "button">
+          								<input type="hidden" name="addLike" value="1">
+									<button class="btn addLike" type = "submit">
 										<i class="far fa-thumbs-up"></i>
 									&nbsp;<span class="likesCount">${article.likesCount}</span>
 									</button>
-									</form> 	
-									</c:if>
+									</form>
+									<form action="updateLikesCount" method="POST">
+										<input type="hidden" name="articleId" value="${article.id}">
+          								<input type="hidden" name="memberId" value="${loginedMemberId}">
+          								<input type="hidden" name="addUnLike" value="-1">
+									<button class="btn addUnLike" name="addUnLike" type = "submit">
+										<i class="far fa-thumbs-down"></i>
+									&nbsp;<span class="unLikesCount">${article.unLikesCount}</span>
+									</button>
+									 </form>
+									
 								</div>
 								<div class="article-detail-cell-commentsCount">
 									<i class="far fa-comment-dots"></i>

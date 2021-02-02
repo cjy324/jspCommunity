@@ -80,7 +80,9 @@ CREATE TABLE article (
     boardId INT(10) UNSIGNED NOT NULL,
     title CHAR(100) NOT NULL,
     `body` LONGTEXT NOT NULL,
-    hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0
+    hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    likesCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    unLikesCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 # 테스트 게시물 생성
@@ -178,13 +180,25 @@ SELECT * FROM `view`;
 
 # 21.02.02 like 테이블 추가
 CREATE TABLE `like`(
-    likeCount INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    likeArticleId INT(10) UNSIGNED NOT NULL,
-    likeMemberId INT(10) UNSIGNED NOT NULL
+    id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    `point` TINYINT(1)  # 좋아요 시 +1, 싫어요 시 -1 등 가능
 );
 
 SELECT * FROM `like`;
 
-# 21.02.02 likesCount, unLikesCount 칼럼 추가
-ALTER TABLE article ADD COLUMN `likesCount` INT(10) UNSIGNED NOT NULL DEFAULT 0;
-ALTER TABLE article ADD COLUMN `unLikesCount` INT(10) UNSIGNED NOT NULL DEFAULT 0;
+
+# 21.02.02 댓글 테이블 추가
+CREATE TABLE `reply`(  
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(30) NOT NULL,     #rel=관련된
+    relId INT(10) UNSIGNED NOT NULL,   
+    `body` TEXT NOT NULL   
+);

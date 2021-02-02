@@ -117,6 +117,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doDelete")) {
 				jspPath = articleController.doDelete(request, response);
 			}
+			if (actionMethodName.equals("updateLikesCount")) {
+				jspPath = articleController.updateLikesCount(request, response);
+			}
 		}
 
 		return jspPath;

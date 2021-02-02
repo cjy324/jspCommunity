@@ -70,28 +70,27 @@ public class ArticleService {
 	}
 
 	public boolean isAlreadylikeMember(int memberId, int articleId) {
-		int memberLike = articleDao.getLikesCountByMemberIdAndArticleId(memberId, articleId);
+		int memberLikesCount = articleDao.getMemberArticleLikesCount(memberId,articleId);
 		
-		if(memberLike == 0) {
-			return false;
+		if(memberLikesCount != 0) {
+			return true;
 		}
-		
-		return true;
-	}
-	
-	public void addLikeCount(int memberId, int articleId) {
-		articleDao.addLikeCount(memberId, articleId);
-		
+
+		return false;
 	}
 
-	public int getLikesCountByArticleId(int articleId) {
-		return articleDao.getLikesCountByArticleId(articleId);
+	public void addLikesCount(Map<String, Object> args) {
+		articleDao.addLikesCount(args);
 	}
 
-	public void addArticleLikesCount(Map<String, Object> args) {
-		articleDao.addArticleLikesCount(args);
-		
+	public int getArticleLikesCount(int articleId) {
+		return articleDao.getArticleLikesCount(articleId);
 	}
+
+	public int getArticleUnLikesCount(int articleId) {
+		return articleDao.getArticleUnLikesCount(articleId);
+	}
+
 
 	
 

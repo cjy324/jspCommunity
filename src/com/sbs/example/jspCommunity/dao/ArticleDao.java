@@ -129,6 +129,16 @@ public class ArticleDao {
 			needToUpdate = true;
 			sql.append(", hitsCount = ?", args.get("hitsCount"));
 		}
+		
+		if(args.get("likesCount") != null) {
+			needToUpdate = true;
+			sql.append(", likesCount = ?", args.get("likesCount"));
+		}
+		
+		if(args.get("unLikesCount") != null) {
+			needToUpdate = true;
+			sql.append(", unLikesCount = ?", args.get("unLikesCount"));
+		}
 
 		if(needToUpdate == false) {
 			return;
@@ -284,49 +294,70 @@ public class ArticleDao {
 		
 	}
 
-	public void addLikeCount(int memberId, int articleId) {
+	public int getMemberArticleLikesCount(int memberId, int articleId) {
 		SecSql sql = new SecSql();
 
-		sql.append("INSERT INTO like");
+		sql.append("SELECT COUNT(id)");
+		sql.append("FROM `like`");
+		sql.append("WHERE relTypeCode = ?", "article");
+		sql.append("AND relId = ?", articleId);
+		sql.append("AND memberId = ?", memberId);
+		
+		return MysqlUtil.selectRowIntValue(sql);
+	}
+
+	public void addLikesCount(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+		
+		sql.append("INSERT INTO `like`");
 		sql.append("SET");
-		sql.append("likeArticleId = ?", articleId);
-		sql.append(", likeMemberId = ?", memberId);
+		sql.append("regDate = NOW()");
+		sql.append(", updateDate = NOW()");
+		
+		
+		if(args.get("relTypeCode") != null) {
+			sql.append(", relTypeCode = ?", args.get("relTypeCode"));
+		}
+		
+		if(args.get("relId") != null) {
+			sql.append(", relId = ?", args.get("relId"));
+		}
+
+		if(args.get("memberId") != null) {
+			sql.append(", memberId = ?", args.get("memberId"));
+		}
+		
+		if(args.get("point") != null) {
+			sql.append(", point = ?", args.get("point"));
+		}
 
 		MysqlUtil.insert(sql);
 		
 	}
 
-	public int getLikesCountByMemberIdAndArticleId(int memberId, int articleId) {
+	public int getArticleLikesCount(int articleId) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT COUNT(likeCount)");
-		sql.append("FROM like");
-		sql.append("WHERE likeMemberId = ?", memberId);
-		sql.append("AND likeArticleId = ?", articleId);
-		
-		return MysqlUtil.selectRowIntValue(sql);
-
-	}
-
-	public int getLikesCountByArticleId(int articleId) {
-		SecSql sql = new SecSql();
-
-		sql.append("SELECT COUNT(likeCount)");
-		sql.append("FROM like");
-		sql.append("WHERE likeArticleId = ?", articleId);
+		sql.append("SELECT COUNT(id)");
+		sql.append("FROM `like`");
+		sql.append("WHERE relTypeCode = ?", "article");
+		sql.append("AND relId = ?", articleId);
+		sql.append("AND point = ?", 1);
 		
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 
-	public void addArticleLikesCount(Map<String, Object> args) {
+	public int getArticleUnLikesCount(int articleId) {
 		SecSql sql = new SecSql();
 
-		sql.append("UPDATE article");
-		sql.append("SET");
-		sql.append("likesCount = ?", args.get("likesCount"));
-		sql.append("WHERE id = ?", args.get("id"));
+		sql.append("SELECT COUNT(id)");
+		sql.append("FROM `like`");
+		sql.append("WHERE relTypeCode = ?", "article");
+		sql.append("AND relId = ?", articleId);
+		sql.append("AND point = ?", -1);
 		
-		MysqlUtil.update(sql);
+		return MysqlUtil.selectRowIntValue(sql);
 	}
+	
 
 }

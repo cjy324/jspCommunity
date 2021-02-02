@@ -5,6 +5,9 @@ SELECT * FROM `member`;
 SELECT * FROM board;
 SELECT * FROM `article`;
 SELECT * FROM attr;
+SELECT * FROM `view`;
+SELECT * FROM `like`;
+SELECT * FROM `reply`;
 
 # 기존 회원 비밀번호 암호화 비교 조회
 SELECT loginPw, SHA2(loginPw, 256)
@@ -24,6 +27,3 @@ SET `regDate` = NOW(),
 `body` = CONCAT('내용입니다._',RAND()),
 `boardId` = FLOOR(RAND()*2) + 1,
 `memberId` = FLOOR(RAND()*2) + 1;
-
-#attr 테이블 expireDate 컬럼속성 수정
-ALTER TABLE attr MODIFY COLUMN `expireDate` DATETIME NULL;
