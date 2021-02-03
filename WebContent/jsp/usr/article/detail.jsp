@@ -162,7 +162,7 @@ function checkModify(replyModifyForm){
 						</nav>
 					</div>
 					<div class="article-detail-cell__option flex flex-jc-fe">
-						<c:if test="${sessionScope.loginedMemberId > 0}">
+						<c:if test="${loginedMemberId == article.extra_memberId}">	
 							<button class="btn" type="button">
 								<a href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}">수정</a>
 							</button>

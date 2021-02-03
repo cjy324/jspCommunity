@@ -283,8 +283,8 @@ ArticleDetail__Body__init();
 /* TOAST-UI 끝 */
 
 
-/* 회원정보 수정 버튼 시작 */
-function memberModifyInfo__init() {
+/* 댓글 수정 버튼 시작 */
+function doModifyReplyForm__init() {
   $('.doModifyReplyForm').click(function() {
 
       $('.doModifyReplyForm').addClass('active');
@@ -293,4 +293,5 @@ function memberModifyInfo__init() {
   });
 }
 
-memberModifyInfo__init();
+doModifyReplyForm__init();
+/* 댓글 수정 버튼 끝 */

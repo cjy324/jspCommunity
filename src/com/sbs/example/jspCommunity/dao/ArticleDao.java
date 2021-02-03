@@ -17,6 +17,7 @@ public class ArticleDao {
 
 		SecSql sql = new SecSql();
 		sql.append("SELECT A.*");
+		sql.append(", M.id AS extra_memberId");
 		sql.append(", M.name AS extra_memberName");
 		sql.append(", M.nickname AS extra_memberNickname");
 		sql.append(", B.name AS extra_boardName");
@@ -64,6 +65,7 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 
 		sql.append("SELECT A.*");
+		sql.append(", M.id AS extra_memberId");
 		sql.append(", M.name AS extra_memberName");
 		sql.append(", M.nickname AS extra_memberNickname");
 		sql.append(", B.name AS extra_boardName");
