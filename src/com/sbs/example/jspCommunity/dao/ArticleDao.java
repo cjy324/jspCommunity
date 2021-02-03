@@ -504,6 +504,34 @@ public class ArticleDao {
 		
 	}
 
+	public void replyModify(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE reply");
+		sql.append("SET updateDate = NOW()");
+		
+		boolean needToUpdate = false;
+		
+		if(args.get("body") != null) {
+			needToUpdate = true;
+			sql.append(", body = ?", args.get("body"));
+		}
+
+		if(args.get("memberId") != null) {
+			needToUpdate = true;
+			sql.append(", memberId = ?", args.get("memberId"));
+		}
+
+		if(needToUpdate == false) {
+			return;
+		}
+
+		sql.append("WHERE id = ?", args.get("id"));
+		
+		MysqlUtil.update(sql);
+		
+	}
+
 	
 	
 

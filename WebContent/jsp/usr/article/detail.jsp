@@ -9,7 +9,7 @@
 
 let replyForm_submited = false;
 
-function check(form){
+function checkWrite(form){
 
 	if(replyForm_submited){
 
@@ -27,6 +27,29 @@ function check(form){
 
 	form.submit();
 	replyForm_submited = true;
+}
+
+
+let replyModifyForm_submited = false;
+
+function checkModify(replyModifyForm){
+
+	if(replyModifyForm_submited){
+
+		alert('처리중입니다.');
+			return;
+	}
+
+	if(replyModifyForm.body.value.trim().length == 0){
+		alert("댓글을 입력하세요.")
+		replyModifyForm.body.focus();
+
+		return false;
+	}
+
+
+	replyModifyForm.submit();
+	replyModifyForm_submited = true;
 }
 
 </script>
@@ -159,7 +182,7 @@ function check(form){
 		<section class="section-3 con-min-width">
 			<div class="con">
 				<div class="article-list-bottom-cell flex flex-jc-c">
-				<form name="form" onsubmit="check(this); return false;" action="reply" method="POST">
+				<form name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
           				<input type="hidden" name="articleId" value="${article.id}">
           				<input type="hidden" name="memberId" value="${loginedMemberId}">
                 <span>댓글</span>
@@ -179,22 +202,24 @@ function check(form){
               <div class="article-list__cell-title">${reply.body}</div>
             </div>
             <div class="article-detail-cell__option flex flex-jc-fe">
-						<c:if test="${isLogined}">
-						<form name="form" action="doModifyReply" method="POST" onsubmit="check(this); return false;">
+			<c:if test="${loginedMemberId == reply.memberId}">		
+				<form class="replyModifyForm" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
 						<input type="hidden" name="id" value="${reply.id}">
+						<input type="hidden" name="relId" value="${reply.relId}">
           				<input type="hidden" name="memberId" value="${loginedMemberId}">
                 <input type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
                 <hr />
                 <div class="article-writeAndModify-cell__option flex flex-jc-fe">
                   <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
-                  <button class="btn btn-back" type="button" onclick="history.back();">취소</button>
+                  <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
                 </div>
               </form>
-			<button class="btn" type="button">수정</button>
+              
+			<button class="btn doModifyReplyForm" type="button">수정</button>
 			<button class="btn btn-warning" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
 								<a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}">삭제</a>
 							</button>
-						</c:if>
+			</c:if>
 					</div>
 			</c:forEach>
 				

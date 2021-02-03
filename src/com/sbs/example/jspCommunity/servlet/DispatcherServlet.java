@@ -98,7 +98,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 		boolean isLogined = false;
 		Member loginedMember = null;
 		boolean isUsingTempPassword = false;
-		
+
 		HttpSession session = request.getSession();
 
 
@@ -114,6 +114,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 			if(isUsingTempPassword) {
 				isUsingTempPassword = true;
 			}
+
 		}
 
 		request.setAttribute("loginedMemberId", loginedMemberId);

@@ -1567,3 +1567,14 @@ a {
   justify-content:center;
   border:2px solid;
 }
+
+.replyModifyForm{
+	display:none;
+}
+
+.doModifyReplyForm.active{
+	display:none;
+}
+.replyModifyForm.active{
+	display:block;
+}

@@ -163,64 +163,64 @@ public class UsrArticleController extends Controller {
 		/* 상세페이지 하단 메뉴 끝 */
 
 		/* 상세페이지 댓글리스트 가져오기 시작 */
-		//List<Reply> replies = articleService.getArticleReplies(id);
-		
-		String relTypeCode = "article";
-		
+		// List<Reply> replies = articleService.getArticleReplies(id);
 
-		
-		  // 총 댓글 수 카운트 
-		 int totalCount = articleService.getRepliesCountByArticleId(id, relTypeCode);
-		  
-		  // 페이징 
-		 int repliesInAPage = 5; 
-		 // 한 페이지에 들어갈 article 수 설정 
-		 int page = Util.getAsInt(request.getParameter("page"), 1); 
-		 // pageNum이 null이면 1로 변환,정수형(int)이 아니면 정수형으로 변환
-		 int pageLimitStartIndex = (page - 1) * repliesInAPage;
-		  
-		  List<Reply> replies = articleService.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex, repliesInAPage);
-		  
-		  int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10 
-		  int totalRepliesCount = totalCount; // 전체 article의 수 카운팅 
-		  int totalPages = (int) Math.ceil((double) totalRepliesCount / repliesInAPage); // 총 필요 페이지수 카운팅
-		  
-		  // 총 필요 페이지 수까지 버튼 만들기 
-		  // 하단 페이지 이동 버튼 메뉴 만들기 
-		  // 1. pageMenuBox내 시작 번호, 끝 번호 설정
-		  
-		  int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5 
-		  int boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15 
-		  int boxEndNum = pageMenuBoxSize + boxStartNum - 1;
-		  
-		  if (boxEndNum > totalPages) { boxEndNum = totalPages; }
-		  
-		  // 2. '이전','다음' 버튼 페이지 계산 
-		  int boxStartNumBeforePage = boxStartNum - 1; 
-		  if(boxStartNumBeforePage < 1) { 
-			  boxStartNumBeforePage = 1; 
-			  } 
-		  int boxEndNumAfterPage = boxEndNum + 1; 
-		  if (boxEndNumAfterPage > totalPages) {
-		  boxEndNumAfterPage = totalPages; 
-		  }
-		  
-		  // 3. '이전','다음' 버튼 필요 유무 판별 
-		  boolean boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum; 
-		  boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
-		  
-		  
-		  request.setAttribute("replies", replies);
-		  request.setAttribute("totalCount", totalCount); request.setAttribute("page", page); 
-		  request.setAttribute("totalPages", totalPages);
-		  
-		  request.setAttribute("boxStartNum", boxStartNum);
-		  request.setAttribute("boxEndNum", boxEndNum);
-		  request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
-		  request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
-		  request.setAttribute("boxStartNumBeforePageBtnNeedToShow", boxStartNumBeforePageBtnNeedToShow);
-		  request.setAttribute("boxEndNumAfterPageBtnNeedToShow", boxEndNumAfterPageBtnNeedToShow);
-		 
+		String relTypeCode = "article";
+
+		// 총 댓글 수 카운트
+		int totalCount = articleService.getRepliesCountByArticleId(id, relTypeCode);
+
+		// 페이징
+		int repliesInAPage = 5;
+		// 한 페이지에 들어갈 article 수 설정
+		int page = Util.getAsInt(request.getParameter("page"), 1);
+		// pageNum이 null이면 1로 변환,정수형(int)이 아니면 정수형으로 변환
+		int pageLimitStartIndex = (page - 1) * repliesInAPage;
+
+		List<Reply> replies = articleService.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex,
+				repliesInAPage);
+
+		int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
+		int totalRepliesCount = totalCount; // 전체 article의 수 카운팅
+		int totalPages = (int) Math.ceil((double) totalRepliesCount / repliesInAPage); // 총 필요 페이지수 카운팅
+
+		// 총 필요 페이지 수까지 버튼 만들기
+		// 하단 페이지 이동 버튼 메뉴 만들기
+		// 1. pageMenuBox내 시작 번호, 끝 번호 설정
+
+		int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
+		int boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
+		int boxEndNum = pageMenuBoxSize + boxStartNum - 1;
+
+		if (boxEndNum > totalPages) {
+			boxEndNum = totalPages;
+		}
+
+		// 2. '이전','다음' 버튼 페이지 계산
+		int boxStartNumBeforePage = boxStartNum - 1;
+		if (boxStartNumBeforePage < 1) {
+			boxStartNumBeforePage = 1;
+		}
+		int boxEndNumAfterPage = boxEndNum + 1;
+		if (boxEndNumAfterPage > totalPages) {
+			boxEndNumAfterPage = totalPages;
+		}
+
+		// 3. '이전','다음' 버튼 필요 유무 판별
+		boolean boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
+		boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
+
+		request.setAttribute("replies", replies);
+		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("page", page);
+		request.setAttribute("totalPages", totalPages);
+
+		request.setAttribute("boxStartNum", boxStartNum);
+		request.setAttribute("boxEndNum", boxEndNum);
+		request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
+		request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
+		request.setAttribute("boxStartNumBeforePageBtnNeedToShow", boxStartNumBeforePageBtnNeedToShow);
+		request.setAttribute("boxEndNumAfterPageBtnNeedToShow", boxEndNumAfterPageBtnNeedToShow);
 
 		/* 상세페이지 댓글리스트 가져오기 끝 */
 
@@ -486,7 +486,38 @@ public class UsrArticleController extends Controller {
 		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
 
 	}
-	
+
+	// 댓글 수정
+	public String doModifyReply(HttpServletRequest request, HttpServletResponse response) {
+		// 댓글 번호가 입력됐는지 확인
+		int id = Util.getAsInt(request.getParameter("id"), 0);
+		if (id == 0) {
+			return msgAndBack(request, "댓글 번호를 입력하세요.");
+		}
+
+		// 대상 번호
+		int relId = Util.getAsInt(request.getParameter("relId"), 0);
+		if (relId == 0) {
+			return msgAndBack(request, "번호를 입력하세요.");
+		}
+		
+		// 댓글 내용이 입력됐는지 확인
+		String body = request.getParameter("body");
+		if (Util.isEmpty(body)) {
+			return msgAndBack(request, "내용을 입력하세요.");
+		}
+
+		// 댓글 수정
+		Map<String, Object> args = new HashMap<>();
+		args.put("id", id);
+		args.put("body", body);
+
+		articleService.replyModify(args);
+
+		// 수정 알림창 보여주고 새로고침
+		return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", String.format("detail?id=%d", relId));
+	}
+
 	// 댓글 삭제
 	public String doDeleteReply(HttpServletRequest request, HttpServletResponse response) {
 		int memberId = (int) request.getAttribute("loginedMemberId");
@@ -496,12 +527,12 @@ public class UsrArticleController extends Controller {
 		if (id == 0) {
 			return msgAndBack(request, "댓글 번호를 입력하세요.");
 		}
-		
+
+		// 대상 번호
 		int relId = Util.getAsInt(request.getParameter("relId"), 0);
 		if (relId == 0) {
 			return msgAndBack(request, "번호를 입력하세요.");
 		}
-		
 
 		// 해당 댓글이 존재하는지 확인
 		Reply reply = articleService.getReplyById(id);
@@ -518,10 +549,9 @@ public class UsrArticleController extends Controller {
 		// 댓글 삭제
 		articleService.replyDelete(id);
 
-		// 삭제 알림창 보여주고 리스트로 이동하기
+		// 삭제 알림창 보여주고 새로고침
 		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);
 
 	}
 
-	
 }

@@ -126,4 +126,9 @@ public class ArticleService {
 
 	}
 
+	public void replyModify(Map<String, Object> args) {
+		articleDao.replyModify(args);
+		
+	}
+
 }
