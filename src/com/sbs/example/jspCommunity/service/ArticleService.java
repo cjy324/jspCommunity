@@ -117,4 +117,13 @@ public class ArticleService {
 		return articleDao.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex, repliesInAPage);
 	}
 
+	public Reply getReplyById(int id) {
+		return articleDao.getReplyById(id);
+	}
+
+	public void replyDelete(int id) {
+		articleDao.replyDelete(id);
+
+	}
+
 }

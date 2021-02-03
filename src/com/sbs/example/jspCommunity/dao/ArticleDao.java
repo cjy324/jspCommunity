@@ -474,6 +474,36 @@ public class ArticleDao {
 		return replies;
 	}
 
+	public Reply getReplyById(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT R.*");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append("FROM Reply AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
+		sql.append("WHERE R.id = ?", id);
+
+		Map<String, Object> replyMap = MysqlUtil.selectRow(sql);
+
+		if (replyMap.isEmpty()) {
+			return null;
+		}
+
+		return new Reply(replyMap);
+	}
+
+	public void replyDelete(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("DELETE");
+		sql.append("FROM `reply`");		
+		sql.append("WHERE id = ?", id);
+
+		MysqlUtil.delete(sql);
+		
+	}
+
 	
 	
 

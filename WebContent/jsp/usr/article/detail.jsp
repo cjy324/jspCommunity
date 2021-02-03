@@ -178,6 +178,24 @@ function check(form){
               <div class="article-list__cell-writer">${reply.extra_memberNickname}</div>
               <div class="article-list__cell-title">${reply.body}</div>
             </div>
+            <div class="article-detail-cell__option flex flex-jc-fe">
+						<c:if test="${isLogined}">
+						<form name="form" action="doModifyReply" method="POST" onsubmit="check(this); return false;">
+						<input type="hidden" name="id" value="${reply.id}">
+          				<input type="hidden" name="memberId" value="${loginedMemberId}">
+                <input type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
+                <hr />
+                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
+                  <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
+                  <button class="btn btn-back" type="button" onclick="history.back();">취소</button>
+                </div>
+              </form>
+			<button class="btn" type="button">수정</button>
+			<button class="btn btn-warning" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+								<a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}">삭제</a>
+							</button>
+						</c:if>
+					</div>
 			</c:forEach>
 				
 			</div>

@@ -123,6 +123,10 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("reply")) {
 				jspPath = articleController.reply(request, response);
 			}
+			if (actionMethodName.equals("doDeleteReply")) {
+				jspPath = articleController.doDeleteReply(request, response);
+			}
+			
 		}
 
 		return jspPath;

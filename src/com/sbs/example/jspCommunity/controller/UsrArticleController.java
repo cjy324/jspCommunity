@@ -486,5 +486,42 @@ public class UsrArticleController extends Controller {
 		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
 
 	}
+	
+	// 댓글 삭제
+	public String doDeleteReply(HttpServletRequest request, HttpServletResponse response) {
+		int memberId = (int) request.getAttribute("loginedMemberId");
 
+		// 댓글 번호가 입력됐는지 확인
+		int id = Util.getAsInt(request.getParameter("id"), 0);
+		if (id == 0) {
+			return msgAndBack(request, "댓글 번호를 입력하세요.");
+		}
+		
+		int relId = Util.getAsInt(request.getParameter("relId"), 0);
+		if (relId == 0) {
+			return msgAndBack(request, "번호를 입력하세요.");
+		}
+		
+
+		// 해당 댓글이 존재하는지 확인
+		Reply reply = articleService.getReplyById(id);
+
+		if (reply == null) {
+			return msgAndBack(request, id + "번 댓글은 존재하지 않습니다. 댓글 번호를 확인하세요.");
+		}
+
+		// 작성자 본인 여부 체크
+		if (reply.getMemberId() != memberId) {
+			return msgAndBack(request, "작성자만 삭제가 가능합니다.");
+		}
+
+		// 댓글 삭제
+		articleService.replyDelete(id);
+
+		// 삭제 알림창 보여주고 리스트로 이동하기
+		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);
+
+	}
+
+	
 }
