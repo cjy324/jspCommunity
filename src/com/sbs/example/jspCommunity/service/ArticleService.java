@@ -103,4 +103,18 @@ public class ArticleService {
 		return articleDao.getArticleReplies(id);
 	}
 
+	public void removeLikeMember(int memberId, int articleId) {
+		articleDao.removeLikeMember(memberId, articleId);
+
+	}
+
+	public int getRepliesCountByArticleId(int id, String relTypeCode) {
+		return articleDao.getRepliesCountByArticleId(id, relTypeCode);
+	}
+
+	public List<Reply> getRepliesForPrintByArticleId(int id, String relTypeCode, int pageLimitStartIndex,
+			int repliesInAPage) {
+		return articleDao.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex, repliesInAPage);
+	}
+
 }

@@ -335,7 +335,22 @@ public class ArticleDao {
 		MysqlUtil.insert(sql);
 		
 	}
+	
+	public void removeLikeMember(int memberId, int articleId) {
+		SecSql sql = new SecSql();
 
+		sql.append("DELETE");
+		sql.append("FROM `like`");		
+		sql.append("WHERE 1");
+		sql.append("AND relTypeCode = ?", "article");
+		sql.append("AND relId = ?", articleId);
+		sql.append("AND memberId = ?", memberId);
+
+		MysqlUtil.delete(sql);
+		
+	}
+	
+	
 	public int getArticleLikesCount(int articleId) {
 		SecSql sql = new SecSql();
 
@@ -401,6 +416,65 @@ public class ArticleDao {
 		// Collections.reverse(articles);
 		return replies;
 	}
+
+	public int getRepliesCountByArticleId(int id, String relTypeCode) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(*) AS cnt");
+		sql.append("FROM reply AS R");
+		sql.append("WHERE 1");
+
+		if (relTypeCode != null) {
+			sql.append("AND R.relTypeCode = ?", relTypeCode);
+		};
+		
+		if (id != 0) {
+			sql.append("AND R.relId = ?", id);
+		};
+
+		return MysqlUtil.selectRowIntValue(sql);
+	}
+
+	public List<Reply> getRepliesForPrintByArticleId(int id, String relTypeCode, int pageLimitStartIndex,
+			int repliesInAPage) {
+		List<Reply> replies = new ArrayList<>();
+
+		SecSql sql = new SecSql();
+		sql.append("SELECT R.*");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append("FROM reply AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
+		sql.append("WHERE 1");
+
+		if (relTypeCode != null) {
+			sql.append("AND R.relTypeCode = ?", relTypeCode);
+		};
+		
+		if (id != 0) {
+			sql.append("AND R.relId = ?", id);
+		};
+
+
+		sql.append("ORDER BY R.id DESC");
+		
+		if ( repliesInAPage != -1 ) {
+			sql.append("LIMIT ?, ?", pageLimitStartIndex, repliesInAPage);
+		}
+
+		List<Map<String, Object>> repliesMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> repliesMap : repliesMapList) {
+			Reply reply = new Reply(repliesMap);
+
+			replies.add(reply);
+
+		}
+		// Collections.reverse(articles);
+		return replies;
+	}
+
+	
 	
 
 }

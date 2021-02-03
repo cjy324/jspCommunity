@@ -159,7 +159,7 @@ function check(form){
 		<section class="section-3 con-min-width">
 			<div class="con">
 				<div class="article-list-bottom-cell flex flex-jc-c">
-					<form name="form" onsubmit="check(this); return false;" action="reply" method="POST">
+				<form name="form" onsubmit="check(this); return false;" action="reply" method="POST">
           				<input type="hidden" name="articleId" value="${article.id}">
           				<input type="hidden" name="memberId" value="${loginedMemberId}">
                 <span>댓글</span>
@@ -186,24 +186,24 @@ function check(form){
         <div class="article-page-menu">
           <ul class="flex flex-jc-c">
  
-			<c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			<c:set var="aUrl" value="?page=1&id=${param.id}" />
 			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
           	
           	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
-          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<c:set var="aUrl" value="?id=${param.id}&page=${boxStartNumBeforePage}" />
           		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
           	</c:if>
             <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
 				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
-				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+				<c:set var="aUrl" value="?id=${param.id}&page=${i}" />
 				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
             </c:forEach>
             <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
-          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<c:set var="aUrl" value="?id=${param.id}&page=${boxEndNumAfterPage}" />
           		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
           	</c:if>
           	
-          	<c:set var="aUrl" value="?page=${totalPages}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          	<c:set var="aUrl" value="?page=${totalPages}&id=${param.id}" />
 			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
           	
           </ul>
