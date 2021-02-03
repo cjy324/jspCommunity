@@ -482,6 +482,16 @@ public class UsrArticleController extends Controller {
 		// 댓글 등록
 		articleService.addReply(articleId, memberId, relTypeCode, replyBody);
 
+		// 게시물에 대한 댓글수 가져오기
+		int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
+
+		// 게시물 정보 수정
+		Map<String, Object> args2 = new HashMap<>();
+		args2.put("id", articleId);
+		args2.put("repliesCount", getArticleRepliesCount);
+
+		articleService.articleModify(args2);
+
 		// 새로고침
 		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
 
@@ -500,7 +510,7 @@ public class UsrArticleController extends Controller {
 		if (relId == 0) {
 			return msgAndBack(request, "번호를 입력하세요.");
 		}
-		
+
 		// 댓글 내용이 입력됐는지 확인
 		String body = request.getParameter("body");
 		if (Util.isEmpty(body)) {
@@ -548,6 +558,16 @@ public class UsrArticleController extends Controller {
 
 		// 댓글 삭제
 		articleService.replyDelete(id);
+
+		// 게시물에 대한 댓글수 가져오기
+		int getArticleRepliesCount = articleService.getArticleRepliesCount(relId);
+
+		// 게시물 정보 수정
+		Map<String, Object> args2 = new HashMap<>();
+		args2.put("id", relId);
+		args2.put("repliesCount", getArticleRepliesCount);
+
+		articleService.articleModify(args2);
 
 		// 삭제 알림창 보여주고 새로고침
 		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);

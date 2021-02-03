@@ -43,6 +43,7 @@ public class ArticleDao {
 			}
 		};
 		
+		
 		sql.append("ORDER BY A.id DESC");
 		
 		if ( articlesInAPage != -1 ) {
@@ -142,6 +143,12 @@ public class ArticleDao {
 			needToUpdate = true;
 			sql.append(", unLikesCount = ?", args.get("unLikesCount"));
 		}
+		
+		if(args.get("repliesCount") != null) {
+			needToUpdate = true;
+			sql.append(", repliesCount = ?", args.get("repliesCount"));
+		}
+		
 
 		if(needToUpdate == false) {
 			return;
@@ -532,6 +539,18 @@ public class ArticleDao {
 		
 		MysqlUtil.update(sql);
 		
+	}
+
+	public int getArticleRepliesCount(int articleId) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(id)");
+		sql.append("FROM `reply`");
+		sql.append("WHERE relTypeCode = ?", "article");
+		sql.append("AND relId = ?", articleId);
+		
+		return MysqlUtil.selectRowIntValue(sql);
+
 	}
 
 	

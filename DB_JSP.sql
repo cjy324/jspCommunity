@@ -82,7 +82,8 @@ CREATE TABLE article (
     `body` LONGTEXT NOT NULL,
     hitsCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
     likesCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
-    unLikesCount INT(10) UNSIGNED NOT NULL DEFAULT 0
+    unLikesCount INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    repliesCount INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 # 테스트 게시물 생성

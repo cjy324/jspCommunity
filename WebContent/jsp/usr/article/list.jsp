@@ -56,7 +56,7 @@ function DoSearchForm_submit(form){
               <div class="article-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="article-list__cell-title">
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
-                <span>[5]</span>
+                <span>[${article.repliesCount}]</span>
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
               <div class="article-list__cell-likesCount">${article.likesCount}</div>

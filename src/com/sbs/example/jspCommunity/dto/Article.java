@@ -18,6 +18,7 @@ public class Article {
 		this.hitsCount = (int) articlesMap.get("hitsCount");
 		this.likesCount = (int) articlesMap.get("likesCount");
 		this.unLikesCount = (int) articlesMap.get("unLikesCount");
+		this.repliesCount = (int) articlesMap.get("repliesCount");
 		
 		if (articlesMap.containsKey("extra_memberId")) {
 			this.extra_memberId = (int) articlesMap.get("extra_memberId");
@@ -33,9 +34,6 @@ public class Article {
 		}
 		if (articlesMap.containsKey("extra_boardCode")) {
 			this.extra_boardCode = (String) articlesMap.get("extra_boardCode");
-		}
-		if (articlesMap.containsKey("extra_replyCount")) {
-			this.extra_replyCount = (int) articlesMap.get("extra_replyCount");
 		}
 
 	}
@@ -59,6 +57,6 @@ public class Article {
 	private int hitsCount;
 	private int likesCount;
 	private int unLikesCount;
-	private int extra_replyCount;
+	private int repliesCount;
 	
 }

@@ -131,4 +131,8 @@ public class ArticleService {
 		
 	}
 
+	public int getArticleRepliesCount(int articleId) {
+		return articleDao.getArticleRepliesCount(articleId);
+	}
+
 }

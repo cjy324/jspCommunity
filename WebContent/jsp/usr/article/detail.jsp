@@ -166,9 +166,7 @@ function checkModify(replyModifyForm){
 							<button class="btn" type="button">
 								<a href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}">수정</a>
 							</button>
-							<button class="btn btn-warning"
-								onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}"
-								type="button">
+							<button class="btn btn-warning" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
 								<a href="doDelete?id=${article.id}">삭제</a>
 							</button>
 						</c:if>
@@ -225,7 +223,7 @@ function checkModify(replyModifyForm){
 				
 			</div>
 			
-			<div class="article-page-menu-section">
+	<div class="article-page-menu-section">
         <div class="article-page-menu">
           <ul class="flex flex-jc-c">
  
@@ -252,7 +250,7 @@ function checkModify(replyModifyForm){
           </ul>
         </div>
       </div>
-		</section>
+	</section>
 
 		<!-- 댓글창 끝 -->
 		
