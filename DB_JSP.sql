@@ -39,6 +39,11 @@ cellphoneNo = "010-4324-4444",
 loginId = "user2",
 loginPw = "user2";
 
+# 회원 비밀번호 암호화 수행
+UPDATE `member`
+SET loginPw = SHA2(loginPw, 256)
+WHERE id != 14;
+
 # 게시판 테이블 생성
 CREATE TABLE board (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -179,6 +184,7 @@ CREATE TABLE `view`(
 
 SELECT * FROM `view`;
 
+
 # 21.02.02 like 테이블 추가
 CREATE TABLE `like`(
     id INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -187,10 +193,15 @@ CREATE TABLE `like`(
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
-    `point` TINYINT(1)  # 좋아요 시 +1, 싫어요 시 -1 등 가능
+    `point` SMALLINT(1) UNSIGNED NOT NULL  # 좋아요 시 +1, 싫어요 시 -1 등 가능
 );
 
 SELECT * FROM `like`;
+
+# like 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `jspCommunity`.`like` ADD INDEX (`relTypeCode`, `relId`, `memberId`);
 
 
 # 21.02.02 댓글 테이블 추가
@@ -203,3 +214,8 @@ CREATE TABLE `reply`(
     relId INT(10) UNSIGNED NOT NULL,   
     `body` TEXT NOT NULL   
 );
+
+# reply 인덱스 걸기
+## 중복변수 생성금지
+## 변수찾는 속도 최적화
+ALTER TABLE `jspCommunity`.`reply` ADD INDEX (`relTypeCode`, `relId`, `memberId`);

@@ -110,30 +110,26 @@ function checkModify(replyModifyForm){
 									<i class="far fa-eye"></i>
 									<span>${article.hitsCount}</span>
 								</div>
-								<div class="article-detail-cell-likesCount">
-									<i class="far fa-thumbs-up"></i>
-									<span>30</span>
-									
-									<form action="updateLikesCount" method="POST">
-          								<input type="hidden" name="articleId" value="${article.id}">
-          								<input type="hidden" name="memberId" value="${loginedMemberId}">
-          								<input type="hidden" name="addLike" value="1">
-									<button class="btn addLike" type = "submit">
-										<i class="far fa-thumbs-up"></i>
-									&nbsp;<span class="likesCount">${article.likesCount}</span>
-									</button>
-									</form>
-									<form action="updateLikesCount" method="POST">
-										<input type="hidden" name="articleId" value="${article.id}">
-          								<input type="hidden" name="memberId" value="${loginedMemberId}">
-          								<input type="hidden" name="addUnLike" value="-1">
-									<button class="btn addUnLike" name="addUnLike" type = "submit">
-										<i class="far fa-thumbs-down"></i>
-									&nbsp;<span class="unLikesCount">${article.unLikesCount}</span>
-									</button>
-									 </form>
-									
-								</div>
+								<div class="article-detail-cell-likesCount flex">
+                    <form class="updateLikesCount" action="updateLikesCount" method="POST">
+                      <input type="hidden" name="articleId" value="${article.id}">
+                      <input type="hidden" name="memberId" value="${loginedMemberId}">
+                      <input type="hidden" name="addLike" value="1">
+                      <button class="btn addLike" type="submit">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${article.likesCount}</span>
+                      </button>
+                    </form>
+                    <form class="updateLikesCount" action="updateLikesCount" method="POST">
+                      <input type="hidden" name="articleId" value="${article.id}">
+                      <input type="hidden" name="memberId" value="${loginedMemberId}">
+                      <input type="hidden" name="addUnLike" value="-1">
+                      <button class="btn btn-warning addUnLike" name="addUnLike" type="submit">
+                        <i class="far fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${article.unLikesCount}</span>
+                      </button>
+                    </form>
+                  </div>
 								<div class="article-detail-cell-commentsCount">
 									<i class="far fa-comment-dots"></i>
 									<span>50</span>
@@ -176,88 +172,84 @@ function checkModify(replyModifyForm){
 		</section>
 		<!-- 메인-상세페이지 끝 -->
 		
-		<!-- 댓글창 시작 -->
-		<section class="section-3 con-min-width">
-			<div class="con">
-				<div class="article-list-bottom-cell flex flex-jc-c">
-				<form name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
-          				<input type="hidden" name="articleId" value="${article.id}">
-          				<input type="hidden" name="memberId" value="${loginedMemberId}">
-                <span>댓글</span>
-                <br />
-                <input type="textarea" name="replyBody" maxlength="50" placeholder="댓글 입력">
-                <hr />
-                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
-                  <button class="btn" type="submit">등록</button>
-                </div>
-              </form>						
-			</div>
-			<c:forEach var="reply" items="${replies}">
+		<!-- 댓글창 시작 -->    
+		<c:if test="${isLogined}">
+          <div class="reply-write-box">
+            <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+              <input type="hidden" name="articleId" value="${article.id}">
+              <input type="hidden" name="memberId" value="${loginedMemberId}">
+              <span>댓글</span>
+              <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+              <div class="reply-write-box-form__option ">          
+                <button class="btn" type="submit">등록</button>
+              </div>
+            </form>
+          </div>
+          </c:if>
+          <c:forEach var="reply" items="${replies}">
             <div class="reply-list-box">
-              <div class="article-list__cell-id">${reply.id}</div>
-              <div class="article-list__cell-reg-date">${reply.regDate}</div>
-              <div class="article-list__cell-writer">${reply.extra_memberNickname}</div>
-              <div class="article-list__cell-title">${reply.body}</div>
-            </div>
-            <div class="article-detail-cell__option flex flex-jc-fe">
-			<c:if test="${loginedMemberId == reply.memberId}">		
-				<form class="replyModifyForm" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
-						<input type="hidden" name="id" value="${reply.id}">
-						<input type="hidden" name="relId" value="${reply.relId}">
-          				<input type="hidden" name="memberId" value="${loginedMemberId}">
-                <input type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
-                <hr />
-                <div class="article-writeAndModify-cell__option flex flex-jc-fe">
-                  <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
-                  <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
+              <div class="reply-list-box-writer">${reply.extra_memberNickname}</div>
+              <div class="reply-list-box__cell flex flex-jc-sb">
+               <div class="reply-list-box__cell-contents flex flex-ai-c">
+                 <div class="reply-list-box__cell-updateDate">${reply.updateDate}</div>
+                 <div class="reply-list-box__cell-body">${reply.body}</div>                  
+               </div> 
+               <div class="reply-list-box-cell__option">
+               <c:if test="${loginedMemberId == reply.memberId}">
+                <form class="replyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                  <input type="hidden" name="id" value="${reply.id}">
+                  <input type="hidden" name="relId" value="${reply.relId}">
+                  <input type="hidden" name="memberId" value="${loginedMemberId}">
+                  <input class="replyBodyInput" type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
+                  <div class="replyModifyForm__option flex flex-jc-fe">
+                    <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
+                    <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
+                  </div>
+                </form>
+                <div class="reply-list-box-cell__option-btns flex flex-ai-c">
+                <button class="btn doModifyReplyForm" type="button">수정</button>
+                <button class="btn btn-warning" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+                  <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}">삭제</a>
+                </button>
                 </div>
-              </form>
-              
-			<button class="btn doModifyReplyForm" type="button">수정</button>
-			<button class="btn btn-warning" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
-								<a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}">삭제</a>
-							</button>
-			</c:if>
-					</div>
-			</c:forEach>
-				
-			</div>
-			
-	<div class="article-page-menu-section">
-        <div class="article-page-menu">
-          <ul class="flex flex-jc-c">
- 
-			<c:set var="aUrl" value="?page=1&id=${param.id}" />
-			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
-          	
-          	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
-          		<c:set var="aUrl" value="?id=${param.id}&page=${boxStartNumBeforePage}" />
-          		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
-          	</c:if>
-            <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
-				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
-				<c:set var="aUrl" value="?id=${param.id}&page=${i}" />
-				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
-            </c:forEach>
-            <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
-          		<c:set var="aUrl" value="?id=${param.id}&page=${boxEndNumAfterPage}" />
-          		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
-          	</c:if>
-          	
-          	<c:set var="aUrl" value="?page=${totalPages}&id=${param.id}" />
-			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
-          	
-          </ul>
-        </div>
-      </div>
-	</section>
+              </c:if>
+            </div>
+            </div>
+            </div>
+          </c:forEach>
 
-		<!-- 댓글창 끝 -->
+        </div>
+
+        <div class="reply-page-menu-section">
+          <div class="reply-page-menu">
+            <ul class="flex flex-jc-c">
+
+
+              <c:if test="${boxStartNumBeforePageBtnNeedToShow}">
+                <c:set var="aUrl" value="?id=${param.id}&page=${boxStartNumBeforePage}" />
+                <li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
+              </c:if>
+              <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
+                <c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />
+                <c:set var="aUrl" value="?id=${param.id}&page=${i}" />
+                <li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
+              </c:forEach>
+              <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
+                <c:set var="aUrl" value="?id=${param.id}&page=${boxEndNumAfterPage}" />
+                <li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
+              </c:if>
+
+
+            </ul>
+          </div>
+ 
+
+      <!-- 댓글창 끝 -->
 		
 		<!-- 메인-상세 하단 메뉴 시작 -->
 		<section class="section-3 con-min-width">
 			<div class="con">
-				<div class="article-list-bottom-cell flex flex-jc-c">
+				<div class="article-detail-bottom-cell flex flex-jc-c">
 					${beforeArticleBtn}
 					<div class="./">
 						<a href="list?boardId=${article.boardId}">

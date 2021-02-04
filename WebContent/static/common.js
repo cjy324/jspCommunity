@@ -288,7 +288,11 @@ function doModifyReplyForm__init() {
   $('.doModifyReplyForm').click(function() {
 
       $('.doModifyReplyForm').addClass('active');
-      $(this).prev().addClass('active');
+      $(this).parents().parents().prev('.reply-list-box__cell-contents').addClass('active');
+      $(this).parents().parents().addClass('active');
+      $(this).parents().addClass('active');
+      $(this).parents().prev().addClass('active');
+      $(this).next().addClass('active');
 
   });
 }

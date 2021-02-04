@@ -1424,6 +1424,18 @@ a {
   padding:5px;
 }
 
+.updateLikesCount{
+  
+}
+
+.addLike{
+  margin-right:5px;
+}
+
+.addUnLike{
+
+}
+
 
 .article-detail-cell__body{
   border:1px solid gray;
@@ -1432,7 +1444,7 @@ a {
   font-size:1rem;
 
 }
-.article-list-bottom-cell > div{
+.article-detail-bottom-cell > div{
   padding:15px;
   padding-top:25px;
   padding-bottom:5px;
@@ -1466,6 +1478,172 @@ a {
 }
 
 /* 게시물 상세페이지 끝 */
+/* 댓글창 시작 */
+.reply-write-box{
+  margin:20px 0;
+  white-space:nowrap;
+}
+
+.reply-write-box-form > span{
+  padding:10px;
+
+}
+
+.reply-write-box-form > input{
+  height:30px;
+  width:90%;
+}
+
+.reply-write-box-form__option{
+  padding:0px 10px;
+
+}
+
+.reply-list-box{
+  white-space:nowrap;
+  padding:0 20px;
+}
+
+.reply-list-box-writer {
+  margin:5px 0;
+  border-bottom:1px solid gray;
+}
+
+
+
+.reply-list-box__cell-contents > *:first-child{
+  
+  
+}
+
+
+.reply-list-box-form{
+  
+}
+
+.reply-list-box__cell-updateDate{
+  font-size:0.8rem;
+  top:0px;
+}
+
+.reply-list-box__cell-body{
+  padding-right:20px;
+  padding-left:10px;
+  padding-top:1px;
+  margin-left:10px;
+  width:90%;
+  border-left:1px solid gray;
+  white-space:normal;
+}
+
+
+.reply-list-box-cell__option{
+
+}
+
+.reply-list-box-cell__option-btns{
+  height:100%;
+}
+.reply-list-box-cell__option-btns > button{
+  margin-left:5px;
+}
+
+.replyModifyForm{
+	display:none;
+  width:100%;
+}
+
+.replyBodyInput{
+  width:99%;
+  height:30px;
+  
+}
+.replyModifyForm__option{
+  margin-top:5px;
+}
+.replyModifyForm__option > *{
+  margin-left:5px;
+}
+
+
+
+
+.reply-list-box__cell-contents.active{
+  display:none;
+}
+
+.reply-list-box-cell__option.active{
+  width:100%;
+}
+
+.reply-list-box-cell__option button:last-child.active{
+  display:none;
+}
+.reply-list-box-cell__option-btns.active{
+  display:none;
+}
+.doModifyReplyForm.active{
+	display:none;
+}
+.replyModifyForm.active{
+	display:block;
+}
+
+/* 댓글창 끝 */
+/* 댓글창 하단 메뉴 시작 */
+.reply-page-menu-section{
+  margin-top:15px;
+  padding-bottom:50px;
+}
+
+.reply-page-menu {
+  font-size:0.9rem;
+}
+
+.reply-page-menu > ul > li > a {
+  border:1px solid transparent;
+  padding:7px;
+
+}
+
+.reply-page-menu > ul > .before-btn, .after-btn {
+  margin-top:-3px;
+}
+
+.reply-page-menu > ul > li:first-child, li:last-child {
+  margin-top:0px;
+}
+
+
+.reply-page-menu > ul > li:not(.before-btn):not(.after-btn) > a {
+  padding-left:0;
+  padding-right:0;
+  min-width:30px;
+  justify-content:center;
+}
+
+.reply-page-menu > ul > li:hover > a {
+  font-weight:bold;
+  background-color:rgba(220,220,220,1);
+  border-radius:50%;
+}
+
+.reply-page-menu__link--selected {
+  color:red;
+  font-weight:bold;
+  background-color:rgba(220,220,220,0.5);
+  border-radius:50%;
+  text-decoration:underline;
+
+}
+
+.reply-page-menu > ul > li:hover > a {
+  font-weight:bold;
+  color:red;
+}
+
+
+/* 댓글창 하단 메뉴 끝 */
 /* 게시물 상세페이지 하단 메뉴 시작 */
 .section-3{
   padding-bottom:50px;
@@ -1562,19 +1740,3 @@ a {
   transition: all 100ms;
 }
 
-.reply-list-box{
-  display:flex;
-  justify-content:center;
-  border:2px solid;
-}
-
-.replyModifyForm{
-	display:none;
-}
-
-.doModifyReplyForm.active{
-	display:none;
-}
-.replyModifyForm.active{
-	display:block;
-}
