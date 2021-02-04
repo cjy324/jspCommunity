@@ -130,10 +130,6 @@ function checkModify(replyModifyForm){
                       </button>
                     </form>
                   </div>
-								<div class="article-detail-cell-commentsCount">
-									<i class="far fa-comment-dots"></i>
-									<span>50</span>
-								</div>
 							</div>
 						</div>
 					</div>
