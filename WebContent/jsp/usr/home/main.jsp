@@ -78,10 +78,10 @@
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
-                <span>[5]</span>
+                <span>[${article.repliesCount}]</span>
               </div>
-              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount">3</div>
+              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
             </div>
 			</c:forEach>
             
@@ -108,9 +108,9 @@
               <a href="../article/list?boardId=2">
                 <div>
                   <div class="img-box">
-                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
+                    <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
                     <div class="img-txt">
-                      Free
+                      News
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
             </nav>
           </div>
           <div class="home-list home-list2 flex flex-column">
-            <div><span>FREE BOARD</span></div>
+            <div><span>NEWS</span></div>
             <header></header>
             <div class="home-list__cell-body">
             
@@ -128,10 +128,10 @@
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
-                <span>[5]</span>
+                <span>[${article.repliesCount}]</span>
               </div>
-              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount">3</div>
+              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
             </div>
 			</c:forEach>
             
@@ -140,7 +140,7 @@
         </div>
         <div class="section-home-list section-home-list3 flex">
           <div class="home-list home-list3">
-            <div><span>NEWS</span></div>
+            <div><span>FREE BOARD</span></div>
             <header></header>
             <div class="home-list__cell-body">
             
@@ -150,10 +150,10 @@
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
-                <span>[5]</span>
+                <span>[${article.repliesCount}]</span>
               </div>
-              <div class="home-list__cell-hitsCount">${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount">3</div>
+              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
             </div>
 			</c:forEach>
             
@@ -164,9 +164,9 @@
               <a href="../article/list?boardId=3">
                 <div>
                   <div class="img-box">
-                    <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
                     <div class="img-txt">
-                      News
+                      Free
                     </div>
                   </div>
                 </div>
@@ -209,9 +209,9 @@
               <a href="../article/list?boardId=2">
                 <div>
                   <div class="mobile-img-box">
-                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
+                    <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
                     <div class="mobile-img-txt">
-                      Free
+                      News
                     </div>
                   </div>
                 </div>
@@ -225,9 +225,9 @@
               <a href="../article/list?boardId=3">
                 <div>
                   <div class="mobile-img-box">
-                    <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
                     <div class="mobile-img-txt">
-                      News
+                      Free
                     </div>
                   </div>
                 </div>

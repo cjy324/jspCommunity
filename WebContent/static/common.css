@@ -528,7 +528,6 @@ a {
 /* 푸터 시작 */
 .bottom-bar{
   background-color:white;
-  margin-top:30px;
   border-top:3px outset gray;
   padding:20px;
 }
@@ -723,6 +722,11 @@ a {
   margin-top:30px;
 }
 
+.section-home > div:last-child{
+  margin-bottom:30px;
+}
+  
+
 /** 홈 슬라이드 시작 **/
 
 #section-home-slide{
@@ -757,7 +761,8 @@ a {
   width:1200px;
   float:left;
   position:relative;
-  height:100%;
+  overflow:hidden;
+
 }
 
 #slider-wrap ul#slider li > div{
@@ -767,19 +772,19 @@ a {
   text-shadow:5px 3px 5px black; 
   background-color:rgba(220, 220, 220, 0.7);
   box-shadow:5px 3px 7px black; 
-  border-radius:10px;
+
   padding:10px;
 }
 
 #slider-wrap ul#slider li > div h3{
   text-align:left;
-  font-size:25px;
+  font-size:20px;
   text-transform:uppercase; 
   
 }
 
 #slider-wrap ul#slider li > div span{
-  font-size:18px;
+  font-size:16px;
 }
 
 #slider-wrap ul#slider li img{
@@ -972,7 +977,7 @@ a {
   text-align:center;
   background-color:rgba(240, 240, 240, 0.9);
   padding:10px;
-
+  border-top:3px solid;
   box-shadow:10px 10px 10px gray;
 }
 
