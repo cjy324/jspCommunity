@@ -99,7 +99,6 @@ public abstract class DispatcherServlet extends HttpServlet {
 		}
 		else {
 		  MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
-		  MysqlUtil.setDevMode(true);
 		}
 		
 		
@@ -110,7 +109,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 		String actionUrl = controllerTypeName + "/" + controllerName + "/" + actionMethodName;
 
-		// 세션에 로그인 정보 담기 시작
+		/* 세션에 로그인 정보 담기 시작 */
 		int loginedMemberId = 0;
 		boolean isLogined = false;
 		Member loginedMember = null;
@@ -151,14 +150,13 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 		request.setAttribute("currentUrl", currentUrl);
 		request.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
-		
-		
-		// 세션에 로그인 정보 담기 끝
+				
+		/* 세션에 로그인 정보 담기 끝 */
 		
 		
 		
 
-		// 로그인 필요한 action list 필터링 시작
+		/* 로그인 필요한 action list 필터링 시작 */
 		List<String> needToLoginActionList = new ArrayList<>();
 		needToLoginActionList.add("usr/member/doLogout");
 		needToLoginActionList.add("usr/article/doWriteForm");
@@ -166,6 +164,10 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionList.add("usr/article/doModifyForm");
 		needToLoginActionList.add("usr/article/doModify");
 		needToLoginActionList.add("usr/article/doDelete");
+		needToLoginActionList.add("usr/article/updateLikesCount");
+		needToLoginActionList.add("usr/article/reply");
+		needToLoginActionList.add("usr/article/doModifyReply");
+		needToLoginActionList.add("usr/article/doDeleteReply");
 		needToLoginActionList.add("usr/member/showMyPage");
 		needToLoginActionList.add("usr/member/doModifyForm");
 
@@ -182,9 +184,9 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 			}
 		}
-		// 로그인 필요한 action list 필터링 끝
+		/* 로그인 필요한 action list 필터링 끝 */
 
-		// 로그인 상태면 안되는 action list 필터링 시작
+		/* 로그인 상태면 안되는 action list 필터링 시작 */
 		List<String> needToNonLoginActionList = new ArrayList<>();
 		needToNonLoginActionList.add("usr/member/doLoginForm");
 		needToNonLoginActionList.add("usr/member/doLogin");
@@ -203,7 +205,7 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 			}
 		}
-		// 로그인 상태면 안되는 action list 필터링 끝
+		/* 로그인 상태면 안되는 action list 필터링 끝 */
 		
 
 		Map<String, Object> rs = new HashMap<>();

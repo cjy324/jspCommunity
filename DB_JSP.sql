@@ -193,7 +193,7 @@ CREATE TABLE `like`(
     relTypeCode CHAR(30) NOT NULL,
     relId INT(10) UNSIGNED NOT NULL,
     memberId INT(10) UNSIGNED NOT NULL,
-    `point` SMALLINT(1) UNSIGNED NOT NULL  # 좋아요 시 +1, 싫어요 시 -1 등 가능
+    `point` SMALLINT(1)  # 좋아요 시 +1, 싫어요 시 -1 등 가능
 );
 
 SELECT * FROM `like`;

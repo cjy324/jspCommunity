@@ -375,6 +375,7 @@ public class UsrArticleController extends Controller {
 
 	// 좋아요 업데이트(without ajax)
 	public String updateLikesCount(HttpServletRequest request, HttpServletResponse response) {
+
 		// 게시물 번호가 입력됐는지 확인
 		int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
 		if (articleId == 0) {

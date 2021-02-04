@@ -488,7 +488,7 @@ public class ArticleDao {
 
 		sql.append("SELECT R.*");
 		sql.append(", M.nickname AS extra_memberNickname");
-		sql.append("FROM Reply AS R");
+		sql.append("FROM reply AS R");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON R.memberId = M.id");
 		sql.append("WHERE R.id = ?", id);
