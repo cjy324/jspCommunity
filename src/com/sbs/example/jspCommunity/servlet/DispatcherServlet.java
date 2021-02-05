@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sbs.example.jspCommunity.App;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.mysqlutil.MysqlUtil;
@@ -79,33 +80,45 @@ public abstract class DispatcherServlet extends HttpServlet {
 
 		// 만약, requestURIBits.length가 5보다 작으면
 		// 즉, /jspCommunity/jsp/usr/article/list 와 같은 형식이 아니면 중지
-		if (requestUriBits.length < 5) {
+		int minBitsCount = 5;
+
+		if (App.isProductMode()) {
+			minBitsCount = 4;
+		}
+
+		if (requestUriBits.length < minBitsCount) {
 			response.getWriter().append("잘못된 요청입니다.");
 			return null;
 		}
 
 		
-		// 환경별 DB접속정보 분기로직 적용(21.02.03)
-		String profilesActive = System.getProperty("spring.profiles.active");
-		
-		boolean isProductionMode = false;
-
-		if (profilesActive != null && profilesActive.equals("production")) {
-		  isProductionMode = true;
-		}
-				
-		if ( isProductionMode ) {
+		// 환경별 DB접속정보 분기로직 적용
+		if (App.isProductMode()) {
 		  MysqlUtil.setDBInfo("127.0.0.1", "sbsstLocal", "sbs123414", "jspCommunity");
 		}
 		else {
 		  MysqlUtil.setDBInfo("127.0.0.1", "sbsst", "sbs123414", "jspCommunity");
+		  MysqlUtil.setDevMode(true);
 		}
 		
 		
+		int controllerTypeNameIndex = 2;
+		int controllerNameIndex = 3;
+		int actionMethodNameIndex = 4;
 
-		String controllerTypeName = requestUriBits[2]; // usr or adm
-		String controllerName = requestUriBits[3]; // article or member
-		String actionMethodName = requestUriBits[4]; // doJoinForm or .....
+		if (App.isProductMode()) {
+			controllerTypeNameIndex = 1;
+			controllerNameIndex = 2;
+			actionMethodNameIndex = 3;
+		}
+
+		String controllerTypeName = requestUriBits[controllerTypeNameIndex];
+		String controllerName = requestUriBits[controllerNameIndex];
+		String actionMethodName = requestUriBits[actionMethodNameIndex];
+		
+		//String controllerTypeName = requestUriBits[2]; // usr or adm
+		//String controllerName = requestUriBits[3]; // article or member
+		//String actionMethodName = requestUriBits[4]; // doJoinForm or .....
 
 		String actionUrl = controllerTypeName + "/" + controllerName + "/" + actionMethodName;
 
