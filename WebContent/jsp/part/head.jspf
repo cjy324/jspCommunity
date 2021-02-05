@@ -50,7 +50,7 @@
 	<!-- 사이트 박스 시작 -->
 	<section class="site-box min-height-100vh flex flex-column">
 		<!-- 탑 헤더 시작 -->
-		<section class="head-bar-section">
+		<section class="head-bar-section visible-md-up">
 			<div class="head-bar con flex flex-jc-fe flex-jc-fe">
 				<c:if test="${isLogined}">
 				<c:if test="${isUsingTempPassword}">
@@ -147,7 +147,7 @@
 		<!-- 탑바 끝 -->
 
 		<!-- 모바일 탑바 시작 -->
-		<section class="top-bar-padding flex flex-ai-c visible-sm-down">
+		<section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down">
 			<div
 				class="mobile-top-bar_btn-toggle-side-bar flex-as-c visible-sm-down">
 				<div></div>
@@ -157,7 +157,7 @@
 		</section>
 		<header class="mobile-top-bar flex visible-sm-down">
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
-				<div class="title">
+				<div class="mobile-title">
 					<a href="../home/main">
 						Get <span>IT</span>
 					</a>
@@ -166,7 +166,8 @@
 		</header>
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
-  <aside class="mobile-side-bar visible-sm-down">
+  <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down">
+  <span>MENU</span>
     <nav class="mobile-side-bar_menu flex flex-jc-c">
       <ul class="">
         <li title="NOTICE">
@@ -215,5 +216,20 @@
         </li>
       </ul>
     </nav>
+    <div class="mobile-side-bar_menu flex flex-jc-c">
+     <c:if test="${isLogined}">
+     <c:if test="${isUsingTempPassword}">
+<div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
+</c:if>
+      <div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/showMyPage"><i class="fas fa-user-cog"></i> 회원정보</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/doLogout"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></div>
+      </c:if>
+ 	  <c:if test="${isLogined == false}">
+		<div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/doLoginForm"><i class="fas fa-sign-in-alt"></i> 로그인</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/doJoinForm"><i class="fas fa-user-check"></i> 회원가입</a></div>
+				</c:if>
+    </div>
   </aside>
   <!-- 모바일 사이드메뉴바 끝 -->
