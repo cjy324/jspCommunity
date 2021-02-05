@@ -28,7 +28,7 @@ function DoSearchForm_submit(form){
 
 	
   <!-- 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1">
+  <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
       <!-- 메인-리스트페이지 시작 -->
       <div class="section-article-list">
@@ -40,7 +40,7 @@ function DoSearchForm_submit(form){
           <header>
             <div class="article-list__cell-head">
               <div class="article-list__cell-id">번호</div>
-              <div class="article-list__cell-reg-date">작성일</div>
+              <div class="article-list__cell-update-date">작성일</div>
               <div class="article-list__cell-writer">작성자</div>
               <div class="article-list__cell-title">제목</div>
               <div class="article-list__cell-hitsCount">조회수</div>
@@ -52,7 +52,7 @@ function DoSearchForm_submit(form){
           	<c:forEach var="article" items="${articles}" varStatus="status">
             <div>
               <div class="article-list__cell-id">${article.id}</div>
-              <div class="article-list__cell-reg-date">${article.regDate}</div>
+              <div class="article-list__cell-update-date">${article.updateDate}</div>
               <div class="article-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="article-list__cell-title">
                 <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
@@ -84,10 +84,10 @@ function DoSearchForm_submit(form){
 					}
          		</script>
          		<input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
-         		<input type="submit" value="검색">
+         		<button class="btn" type="submit">검색</button>
          	</form>
             <c:if test="${sessionScope.loginedMemberId > 0}">           
-              <button type="button"><a style="text-decoration:none;" href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
+              <button class="btn" type="button"><a  href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
               </button>
          	</c:if>
             </div>
@@ -126,6 +126,101 @@ function DoSearchForm_submit(form){
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
+  
+  
+  <!-- 모바일 메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1 visible-sm-down" style="min-height:500px;">
+    <section class="main-box-section con ">
+      <!-- 모바일 메인-리스트페이지 시작 -->
+      <div class="mobile-section-article-list">
+        <div class="mobile-article-list">
+          <div class="mobile-article-list__cell-search flex flex-jc-c">
+            <form class="flex flex-ai-c" onsubmit="DoSearchForm_submit(this); return false;">
+              <input type="hidden" name="boardId" value="${param.boardId}">
+              <select name="searchKeywordType">
+                <option value="titleAndBody">제목+내용</option>
+                <option value="title">제목</option>
+                <option value="body">내용</option>
+              </select>
+              <script>
+                const param_searchKeywordType = '${param.searchKeywordType}';
+                if (param_searchKeywordType) {
+                  $('select[name="searchKeywordType"]').val(param_searchKeywordType);
+                }
+              </script>
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
+              <div><button class="btn" type="submit">검색</button></div>
+            </form>
+          </div>
+          <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
+          <div class="mobile-article-list-name">
+            <span>${articles.get(0).extra_boardName}</span>
+            <span>(Total : ${totalCount})</span>
+          </div>
+          <header>
+            <div class="mobile-article-list__cell-head">
+              <div class="mobile-article-list__cell-id">No.</div>
+              <div class="mobile-article-list__cell-title">제목</div>
+              <div class="mobile-article-list__cell-reply">Re</div>
+            </div>
+          </header>
+           
+          <div class="mobile-article-list__cell-body">
+          <c:forEach var="article" items="${articles}">
+              <div>
+                <div class="mobile-article-list__cell-id">${article.id}</div>                
+                <div class="mobile-article-list__cell-title flex flex-column">
+                  <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                  <div class="mobile-article-list__cell-title-contents flex">
+                    <div class="mobile-article-list__cell-writer">${article.extra_memberNickname}</div>
+                    <div class="mobile-article-list__cell-update-date">${article.updateDate}</div>
+                    <div class="mobile-article-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
+                    <div class="mobile-article-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
+                  </div>
+                </div>
+                <div class="mobile-article-list__cell-reply">${article.repliesCount}</div>
+              </div>
+              </c:forEach>
+          </div>
+          
+        </div>
+        <c:if test="${sessionScope.loginedMemberId > 0}">
+          <button class="btn" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
+        </c:if>
+      </div>
+      <!-- 모바일 메인-리스트페이지 끝 -->
+      <!-- 모바일 메인-리스트 하단 메뉴 시작 -->
+      <div class="mobile-article-page-menu-section">
+        <div class="mobile-article-page-menu">
+          <ul class="flex flex-jc-c">
+
+            <c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
+          	
+          	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
+          	</c:if>
+            <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
+				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
+				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
+            </c:forEach>
+            <c:if test="${boxEndNumAfterPageBtnNeedToShow}">
+          		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+          		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
+          	</c:if>
+          	
+          	<c:set var="aUrl" value="?page=${totalPages}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
+			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
+			
+          </ul>
+        </div>
+      </div>
+      <!-- 모바일 메인-리스트 하단 메뉴 끝 -->
+    </section>
+  </main>
+  <!-- 모바일 메인 컨텐츠 박스 끝 -->
 	
 	
 	
