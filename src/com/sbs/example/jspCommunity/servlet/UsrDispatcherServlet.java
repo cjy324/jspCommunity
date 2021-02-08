@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.controller.UsrArticleController;
 import com.sbs.example.jspCommunity.controller.UsrHomeController;
+import com.sbs.example.jspCommunity.controller.UsrLikeController;
 import com.sbs.example.jspCommunity.controller.UsrMemberController;
 import com.sbs.example.jspCommunity.dto.Member;
 
@@ -117,9 +118,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doDelete")) {
 				jspPath = articleController.doDelete(request, response);
 			}
-			if (actionMethodName.equals("updateLikesCount")) {
+		/*	if (actionMethodName.equals("updateLikesCount")) {
 				jspPath = articleController.updateLikesCount(request, response);
-			}
+			}*/
 			if (actionMethodName.equals("reply")) {
 				jspPath = articleController.reply(request, response);
 			}
@@ -129,6 +130,21 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			}
 			if (actionMethodName.equals("doDeleteReply")) {
 				jspPath = articleController.doDeleteReply(request, response);
+			}
+			
+		}
+		
+		else if (controllerName.equals("like")) {
+			UsrLikeController likeController = Container.usrLikeController;
+
+			if (actionMethodName.equals("doLike")) {
+				jspPath = likeController.doLike(request, response);
+			} else if (actionMethodName.equals("doCancelLike")) {
+				jspPath = likeController.doCancelLike(request, response);
+			} else if (actionMethodName.equals("doDislike")) {
+				jspPath = likeController.doDislike(request, response);
+			} else if (actionMethodName.equals("doCancelDislike")) {
+				jspPath = likeController.doCancelDislike(request, response);
 			}
 			
 		}

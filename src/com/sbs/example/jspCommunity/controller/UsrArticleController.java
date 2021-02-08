@@ -122,7 +122,13 @@ public class UsrArticleController extends Controller {
 		articleService.addArticleHitsCount(args);
 
 		// 업데이트된 게시물 정보 가져오기
-		Article article = articleService.getArticleById(id);
+	
+		Member loginedMember = (Member)request.getAttribute("loginedMember");
+		Article article = articleService.getForPrintArticleById(id, loginedMember);
+		
+		System.out.println(article.getExtra_likeOnlyPoint());
+		System.out.println(article.getExtra_likePoint());
+		System.out.println(article.getExtra_dislikeOnlyPoint());
 
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");

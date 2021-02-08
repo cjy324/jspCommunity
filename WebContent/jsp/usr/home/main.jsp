@@ -75,8 +75,8 @@
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.unLikesCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
             </div>
 			</c:forEach>
             
@@ -100,8 +100,8 @@
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.unLikesCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
             </div>
 			</c:forEach>
             
@@ -123,8 +123,8 @@
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.likesCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.unLikesCount}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
+              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
             </div>
 			</c:forEach>
             

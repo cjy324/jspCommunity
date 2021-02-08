@@ -1,5 +1,6 @@
 package com.sbs.example.jspCommunity.dto;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -16,9 +17,11 @@ public class Article {
 		this.boardId = (int) articlesMap.get("boardId");
 		this.memberId = (int) articlesMap.get("memberId");
 		this.hitsCount = (int) articlesMap.get("hitsCount");
-		this.likesCount = (int) articlesMap.get("likesCount");
-		this.unLikesCount = (int) articlesMap.get("unLikesCount");
+		this.extra = new LinkedHashMap<>();
+		//this.likesCount = (int) articlesMap.get("likesCount");
+		//this.unLikesCount = (int) articlesMap.get("unLikesCount");
 		this.repliesCount = (int) articlesMap.get("repliesCount");
+		
 		
 		if (articlesMap.containsKey("extra_memberId")) {
 			this.extra_memberId = (int) articlesMap.get("extra_memberId");
@@ -34,6 +37,17 @@ public class Article {
 		}
 		if (articlesMap.containsKey("extra_boardCode")) {
 			this.extra_boardCode = (String) articlesMap.get("extra_boardCode");
+		}
+		if (articlesMap.containsKey("extra_likePoint")) {
+			this.extra_likePoint = (int) articlesMap.get("extra_likePoint");
+		}
+
+		if (articlesMap.containsKey("extra_likeOnlyPoint")) {
+			this.extra_likeOnlyPoint = (int) articlesMap.get("extra_likeOnlyPoint");
+		}
+
+		if (articlesMap.containsKey("extra_dislikeOnlyPoint")) {
+			this.extra_dislikeOnlyPoint = (int) articlesMap.get("extra_dislikeOnlyPoint");
 		}
 
 	}
@@ -55,8 +69,13 @@ public class Article {
 	private String extra_boardName;
 	private String extra_boardCode;
 	private int hitsCount;
-	private int likesCount;
-	private int unLikesCount;
+	//private int likesCount;
+	//private int unLikesCount;
+	private Map<String, Object> extra;
+	private int extra_likePoint;
+	private int extra_likeOnlyPoint;
+	private int extra_dislikeOnlyPoint;
 	private int repliesCount;
+	
 	
 }

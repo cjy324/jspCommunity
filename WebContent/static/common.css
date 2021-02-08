@@ -1659,7 +1659,7 @@ a {
   
 }
 
-.updateLikesCount > .btn{
+.article-detail-cell-likesCount > .btn{
   font-size:0.8rem;
   height:25px;
   padding:0px 10px;
@@ -1968,15 +1968,12 @@ a {
   font-size:0.7rem;
 }
 
-.mobile-article-detail-cell__title-contents > * > * >.btn{
+.mobile-article-detail-cell-likesCount > .btn{
+  
   font-size:0.6rem;
   height:20px;
   padding:0px 7px;
   padding-top:2px;
-}
-
-.updateLikesCount{
-  
 }
 
 .addLike{
