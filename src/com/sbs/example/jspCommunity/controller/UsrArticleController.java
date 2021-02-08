@@ -125,10 +125,6 @@ public class UsrArticleController extends Controller {
 	
 		Member loginedMember = (Member)request.getAttribute("loginedMember");
 		Article article = articleService.getForPrintArticleById(id, loginedMember);
-		
-		System.out.println(article.getExtra_likeOnlyPoint());
-		System.out.println(article.getExtra_likePoint());
-		System.out.println(article.getExtra_dislikeOnlyPoint());
 
 		String articleBody = article.getBody();
 		articleBody = articleBody.replaceAll("script", "t-script");
