@@ -1,9 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sbs.example.util.Util"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="GetIt | ${article.title}" />
 <%@ include file="../../part/head.jspf"%>
+
+
+<script>
+	$(function() {
+		if ( param.focusReplyId ) {
+			const $target = $('.reply-list-box div[data-id="' + param.focusReplyId + '"]');
+			const $target2 = $('.mobile-reply-list-box div[data-id="' + param.focusReplyId + '"]');
+			$target.addClass('focus');
+			$target2.addClass('focus');
+		
+			setTimeout(function() {
+				const targetOffset = $target.offset();
+				const target2Offset = $target2.offset();
+				
+				$(window).scrollTop(targetOffset.top - 300);
+				//$(window).scrollTop(target2Offset.top - 100);
+				
+				setTimeout(function() {
+					$target.removeClass('focus');
+					$target2.removeClass('focus');
+				}, 1000);
+			}, 1000);
+		}
+	});
+</script>
+
+
+
 
 <script>
 
@@ -195,8 +224,10 @@ function checkModify(replyModifyForm){
         <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
           <input type="hidden" name="articleId" value="${article.id}">
           <input type="hidden" name="memberId" value="${loginedMemberId}">
+          <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
           <span>댓글</span>
-          <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+          <input type="text" name="replyBody" placeholder="댓글 입력">
           <div class="reply-write-box-form__option ">
             <button class="btn btn-go" type="submit">등록</button>
           </div>
@@ -205,11 +236,12 @@ function checkModify(replyModifyForm){
     </c:if>
     <c:forEach var="reply" items="${replies}">
       <div class="reply-list-box">
+      
         <div class="reply-list-box-writer">${reply.extra_memberNickname}</div>
         <div class="reply-list-box__cell flex flex-jc-sb">
           <div class="reply-list-box__cell-contents flex flex-ai-c">
             <div class="reply-list-box__cell-updateDate">${reply.updateDate}</div>
-            <div class="reply-list-box__cell-body">${reply.body}</div>
+            <div data-id="${reply.id}" class="reply-list-box__cell-body">${reply.body}</div>
           </div>
           <div class="reply-list-box-cell__option">
             <c:if test="${loginedMemberId == reply.memberId}">
@@ -217,7 +249,9 @@ function checkModify(replyModifyForm){
                 <input type="hidden" name="id" value="${reply.id}">
                 <input type="hidden" name="relId" value="${reply.relId}">
                 <input type="hidden" name="memberId" value="${loginedMemberId}">
-                <input class="replyBodyInput" type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
+                <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+                <input class="replyBodyInput" type="text" name="body" placeholder="${reply.body}" value="${reply.body}">
                 <div class="replyModifyForm__option flex flex-jc-fe">
                   <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
                   <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
@@ -387,8 +421,10 @@ function checkModify(replyModifyForm){
           <form class="mobile-reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
             <input type="hidden" name="articleId" value="${article.id}">
             <input type="hidden" name="memberId" value="${loginedMemberId}">
+            <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
             <span>댓글</span>
-            <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+            <input type="text" name="replyBody" placeholder="댓글 입력">
             <div class="mobile-reply-write-box-form__option ">
               <button class="btn btn-go" type="submit">등록</button>
             </div>
@@ -401,7 +437,7 @@ function checkModify(replyModifyForm){
           <div class="mobile-reply-list-box__cell flex flex-column">
             <div class="mobile-reply-list-box__cell-contents">
               <div class="mobile-reply-list-box__cell-updateDate">${reply.updateDate}</div>
-              <div class="mobile-reply-list-box__cell-body">${reply.body}</div>
+              <div data-id="${reply.id}" class="mobile-reply-list-box__cell-body">${reply.body}</div>
             </div>
             <div class="mobile-reply-list-box-cell__option">
               <c:if test="${loginedMemberId == reply.memberId}">
@@ -409,7 +445,9 @@ function checkModify(replyModifyForm){
                   <input type="hidden" name="id" value="${reply.id}">
                   <input type="hidden" name="relId" value="${reply.relId}">
                   <input type="hidden" name="memberId" value="${loginedMemberId}">
-                  <input class="mobile-replyBodyInput" type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
+                  <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+                  <input class="mobile-replyBodyInput" type="text" name="body" placeholder="${reply.body}" value="${reply.body}">
                   <div class="mobile-replyModifyForm__option flex flex-jc-fe">
                     <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
                     <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>

@@ -406,7 +406,7 @@ public class ArticleDao {
 		return MysqlUtil.selectRowIntValue(sql);
 	}
 
-	public void addReply(int id, int memberId, String relTypeCode, String replyBody) {
+	public int addReply(int id, int memberId, String relTypeCode, String replyBody) {
 		SecSql sql = new SecSql();
 
 		sql.append("INSERT INTO reply");
@@ -418,7 +418,7 @@ public class ArticleDao {
 		sql.append(", body = ?", replyBody);
 		
 
-		MysqlUtil.insert(sql);
+		return MysqlUtil.insert(sql);
 		
 	}
 

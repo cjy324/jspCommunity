@@ -1773,6 +1773,12 @@ a {
   width:90%;
   border-left:1px solid gray;
   white-space:normal;
+  transition:background-color 1s;
+}
+
+.reply-list-box__cell-body.focus {
+  background-color:yellow;
+  transition:background-color 0s;
 }
 
 
@@ -2097,6 +2103,12 @@ a {
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:pre-wrap;
+  transition:background-color 1s;
+}
+
+.mobile-reply-list-box__cell-body.focus {
+  background-color:yellow;
+  transition:background-color 0s;
 }
 
 

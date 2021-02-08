@@ -151,6 +151,8 @@ public abstract class DispatcherServlet extends HttpServlet {
 		request.setAttribute("loginedMember", loginedMember);
 		request.setAttribute("isUsingTempPassword", isUsingTempPassword);
 		
+		/* 세션에 로그인 정보 담기 끝 */
+		
 		
 		/// 현재 이동하려 시도했던 경로 저장(로그인 안되어있어서 취소된 경로)
 		String currentUrl = request.getRequestURI();
@@ -158,13 +160,19 @@ public abstract class DispatcherServlet extends HttpServlet {
 		if (request.getQueryString() != null) {
 			currentUrl += "?" + request.getQueryString();
 		}
-
+		
 		String encodedCurrentUrl = Util.getUrlEncoded(currentUrl);
 
 		request.setAttribute("currentUrl", currentUrl);
 		request.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
 				
-		/* 세션에 로그인 정보 담기 끝 */
+		Map<String, Object> param = Util.getParamMap(request);
+		String paramJson = Util.getJsonText(param);
+
+		request.setAttribute("paramMap", param);
+		request.setAttribute("paramJson", paramJson);
+		
+		
 		
 		
 		

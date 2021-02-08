@@ -95,8 +95,8 @@ public class ArticleService {
 		return articleDao.getArticleUnLikesCount(articleId);
 	}
 
-	public void addReply(int id, int memberId, String relTypeCode, String replyBody) {
-		articleDao.addReply(id, memberId, relTypeCode, replyBody);
+	public int addReply(int id, int memberId, String relTypeCode, String replyBody) {
+		return articleDao.addReply(id, memberId, relTypeCode, replyBody);
 
 	}
 

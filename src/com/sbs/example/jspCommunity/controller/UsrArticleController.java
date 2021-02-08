@@ -483,7 +483,7 @@ public class UsrArticleController extends Controller {
 		String relTypeCode = "article";
 
 		// 댓글 등록
-		articleService.addReply(articleId, memberId, relTypeCode, replyBody);
+		int replyId = articleService.addReply(articleId, memberId, relTypeCode, replyBody);
 
 		// 게시물에 대한 댓글수 가져오기
 		int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
@@ -495,8 +495,12 @@ public class UsrArticleController extends Controller {
 
 		articleService.articleModify(args2);
 
+		
 		// 새로고침
-		return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
+		//return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
+		String redirectUrl = request.getParameter("redirectUrl");
+		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", replyId + "");
+		return msgAndReplaceUrl(request, replyId + "번 댓글이 생성되었습니다.", redirectUrl);
 
 	}
 
@@ -528,7 +532,11 @@ public class UsrArticleController extends Controller {
 		articleService.replyModify(args);
 
 		// 수정 알림창 보여주고 새로고침
-		return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", String.format("detail?id=%d", relId));
+		//return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", String.format("detail?id=%d", relId));
+		
+		String redirectUrl = request.getParameter("redirectUrl");
+		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", id + "");
+		return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", redirectUrl);
 	}
 
 	// 댓글 삭제
