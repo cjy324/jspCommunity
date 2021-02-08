@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="로그인" />
+<c:set var="pageTitle" value="GetIt | Login" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
@@ -70,7 +70,7 @@
           </div>
           <div class="loginInput_cell">
             <div>
-            <button class="btn" type="submit">Login</button>
+            <button class="btn btn-go" type="submit">Login</button>
             <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
             </div>
             <div>

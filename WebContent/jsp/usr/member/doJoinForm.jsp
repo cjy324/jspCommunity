@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="신규 회원 가입" />
+<c:set var="pageTitle" value="GetIt | Sign-Up" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
@@ -202,7 +202,7 @@
             <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
           </div>
           <div class=joinInput-cell>
-            <button class="btn" type="submit">회원가입</button>
+            <button class="btn btn-go" type="submit">회원가입</button>
             <button class="btn btn-back" type="button" onclick="history.back();">뒤로가기</button>
           </div>
         </form>

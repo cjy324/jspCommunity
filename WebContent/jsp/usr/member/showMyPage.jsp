@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="MyPage"/>
+<c:set var="pageTitle" value="GetIt | MyPage"/>
 <%@ include file="../../part/head.jspf" %>
 	
   <!-- 메인 컨텐츠 박스 시작 -->
@@ -60,7 +60,7 @@
           <div class=MyPage_cell__body>
             <span>${loginedMember.regDate}</span>
           </div>
-          <button class ="doModifyBtn btn" type="button"><a href="../member/doModifyForm">수정</a></button>
+          <button class ="doModifyBtn btn btn-modify" type="button"><a href="../member/doModifyForm">수정</a></button>
         </div>
       	</div>
       </div>

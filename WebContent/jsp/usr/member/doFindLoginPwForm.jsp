@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="비밀번호 찾기" />
+<c:set var="pageTitle" value="GetIt | FindPW" />
 <%@ include file="../../part/head.jspf"%>
 
 <script>
@@ -63,7 +63,7 @@
             <input type="email" name="email" maxlength="50" placeholder="e-mail을 입력하세요.">
           </div>
           <div class="loginInput_cell">
-            <button class="btn" type="submit">PW 찾기</button>
+            <button class="btn btn-go" type="submit">PW 찾기</button>
             <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
           </div>
         </form>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="MyPage"/>
+<c:set var="pageTitle" value="GetIt | MyPage(Modify)"/>
 <%@ include file="../../part/head.jspf" %>
 	
 <!-- sha256 -->

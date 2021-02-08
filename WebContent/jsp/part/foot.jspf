@@ -4,17 +4,14 @@
   <!-- 맨 위 버튼 시작 -->
   <nav class="top-button btn flex flex-jc-c flex-ai-c">
     <div class="">
-      <a href="#header">▲ TOP</a>
-    </div>
+      <a href="#header"><i class="fas fa-chevron-up"></i></a> 
+    </div>     
   </nav>
   <!-- 맨 위 버튼 끝 -->
 
   <!-- 푸터 시작 -->
-  <footer class="bottom-bar con-min-width">
+  <footer class="bottom-bar con-min-width visible-md-up">
     <div class="con flex flex-ai-c">
-      <a href="index.html" class="logo logo--mini flex flex-ai-c" title="HOME">
-        <img class="logo--mini__img" src="images/Dev_J_logo/facebook_cover_photo_1.png" alt="">
-      </a>
       <div class="bottom-bar__site-info">
         <span><i class="far fa-envelope"></i> juy32400@gmail.com</span>
         <br>
@@ -24,6 +21,18 @@
     </div>
   </footer>
   <!-- 푸터 끝 -->
+  <!-- 모바일-푸터 시작 -->
+  <footer class="mobile-bottom-bar con-min-width visible-sm-down">
+    <div class="con flex flex-ai-c">
+      <div class="bottom-bar__site-info">
+        <span><i class="far fa-envelope"></i> juy32400@gmail.com</span>
+        <br>
+        <br>
+        <span>COPYRIGHT 2020. Dev_J. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+  <!-- 모바일-푸터 끝 -->
 </section>
 <!-- 사이트 박스 끝 -->
 </body>

@@ -50,8 +50,8 @@
 	<!-- 사이트 박스 시작 -->
 	<section class="site-box min-height-100vh flex flex-column">
 		<!-- 탑 헤더 시작 -->
-		<section class="head-bar-section visible-md-up">
-			<div class="head-bar con flex flex-jc-fe flex-jc-fe">
+		<section class="head-bar-section visible-md-up head-nav nav-down">
+			<div class="head-bar con flex flex-jc-fe">
 				<c:if test="${isLogined}">
 				<c:if test="${isUsingTempPassword}">
 <div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
@@ -82,10 +82,10 @@
 		<!-- 탑 헤더 끝 -->
 
 		<!-- 탑바 시작 -->
-		<div class="top-bar-padding visible-md-up"></div>
-		<header class="top-bar visible-md-up ">
+		<div class="top-bar-padding visible-md-up head-nav nav-down"></div>
+		<header class="top-bar visible-md-up head-nav nav-down">
 			<div class="con height-100p flex flex-jc-sb flex-ai-c">
-				<div class="title">
+				<div class="title head-nav nav-down">
 					<a href="../home/main">
 						Get <span>IT</span>
 					</a>
@@ -147,15 +147,15 @@
 		<!-- 탑바 끝 -->
 
 		<!-- 모바일 탑바 시작 -->
-		<section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down">
+		<section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down head-nav nav-down">
 			<div
-				class="mobile-top-bar_btn-toggle-side-bar flex-as-c visible-sm-down">
+				class="mobile-top-bar_btn-toggle-side-bar flex-as-c visible-sm-down head-nav nav-down">
 				<div></div>
 				<div></div>
 				<div></div>
 			</div>
 		</section>
-		<header class="mobile-top-bar flex visible-sm-down">
+		<header class="mobile-top-bar flex visible-sm-down head-nav nav-down">
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
 				<div class="mobile-title">
 					<a href="../home/main">
@@ -166,7 +166,7 @@
 		</header>
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
-  <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down">
+  <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down head-nav nav-down">
   <span>MENU</span>
     <nav class="mobile-side-bar_menu flex flex-jc-c">
       <ul class="">

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var ="pageTitle" value="게시물 수정"/>
+<c:set var ="pageTitle" value="GetIt | Modify"/>
 <%@ include file="../../part/head.jspf" %>
 
 <script>
@@ -68,7 +68,7 @@ function check(form){
                 <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
                 </div>
                 <div class="article-writeAndModify-cell__option flex flex-jc-fe">
-                  <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
+                  <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
                   <button class="btn btn-back" type="button" onclick="history.back();">
                     뒤로가기
                   </button>

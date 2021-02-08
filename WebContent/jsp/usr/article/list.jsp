@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var ="pageTitle" value="게시물 리스트"/>
+<c:set var ="pageTitle" value="GetIt | ${articles.get(0).extra_boardName}"/>
 <%@ include file="../../part/head.jspf" %>
 
 
@@ -87,7 +87,7 @@ function DoSearchForm_submit(form){
          		<button class="btn" type="submit">검색</button>
          	</form>
             <c:if test="${sessionScope.loginedMemberId > 0}">           
-              <button class="btn" type="button"><a  href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
+              <button class="btn btn-go" type="button"><a  href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
               </button>
          	</c:if>
             </div>
@@ -185,7 +185,7 @@ function DoSearchForm_submit(form){
           
         </div>
         <c:if test="${sessionScope.loginedMemberId > 0}">
-          <button class="btn" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
+          <button class="btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
         </c:if>
       </div>
       <!-- 모바일 메인-리스트페이지 끝 -->

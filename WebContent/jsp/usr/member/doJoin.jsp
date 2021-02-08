@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var ="pageTitle" value="회원 가입"/>
+<c:set var ="pageTitle" value="GetIt | Join"/>
 <%@ include file="../../part/head.jspf" %>
 	
 	
@@ -15,7 +15,7 @@
       	<form>
         <div class="section-MyPage-body">
         <div style="font-size:1rem; text-align:center;">
-        <h1>${member.nickname}님, 회원가입 완료!!</h1>
+        <h1>&lt&lt ${member.nickname}님, 회원가입 완료!! &gt&gt</h1>
         <br />
         <br />
 		회원번호 :
@@ -27,9 +27,13 @@
 		닉네임 :
 		${member.nickname}
 		<hr />
-		<a style="text-decoration:none;" href="../home/main"><i class="fas fa-home"></i> 메인으로 이동</a>
 		<br />
-		<a style="text-decoration:none;" href="../member/doLoginForm"><i class="fas fa-sign-in-alt"></i> 로그인하러 가기</a>
+		<a style="text-decoration:none;" href="../home/main"><i class="fas fa-home"></i> Home으로 이동</a>
+		<br />
+		<br />
+		<a style="text-decoration:none;" href="../member/doLoginForm"><i class="fas fa-sign-in-alt"></i> Login하러 가기</a>
+		<br />
+		<br />
 		</div>
         </div>
       	</form>

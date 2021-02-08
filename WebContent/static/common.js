@@ -1,4 +1,50 @@
 console.clear();
+/* Top-bar 스크롤 애니메이션 시작 */
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('.head-nav').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('.head-nav').removeClass('nav-down').addClass('nav-up');
+      $('.title').addClass('title-down');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('.head-nav').removeClass('nav-up').addClass('nav-down');
+          $('.title').removeClass('title-down');
+        }
+    }
+    
+    lastScrollTop = st;
+}
+
+/* Top-bar 스크롤 애니메이션 끝 */
+
+
+
 
 /* MobileTopBar 옵션 시작 */
 function MobileTopBar__init() {
@@ -18,7 +64,6 @@ function MobileTopBar__init() {
 
 MobileTopBar__init();
 /* MobileTopBar 옵션 끝 */
-
 
 /* mobile-side-bar_menu 옵션 시작 */
 
@@ -62,117 +107,6 @@ $(function() {
 });
 
 /* top-button 옵션 끝 */
-
-
-
-
-/* 홈 슬라이드 시작 */
-//current position
-var pos = 0;
-//number of slides
-var totalSlides = $('#slider-wrap ul li').length;
-//get the slide width
-var sliderWidth = $('#slider-wrap').width();
-
-
-$(document).ready(function(){
-  
-  
-  /*****************
-   BUILD THE SLIDER
-  *****************/
-  //set width to be 'x' times the number of slides
-  $('#slider-wrap ul#slider').width(sliderWidth*totalSlides);
-  
-    //next slide  
-  $('#next').click(function(){
-    slideRight();
-  });
-  
-  //previous slide
-  $('#previous').click(function(){
-    slideLeft();
-  });
-  
-  
-  
-  /*************************
-   //*> OPTIONAL SETTINGS
-  ************************/
-  //automatic slider
-  var autoSlider = setInterval(slideRight, 6000);
-  
-  //for each slide 
-  $.each($('#slider-wrap ul li'), function() { 
-
-     //create a pagination
-     var li = document.createElement('li');
-     $('#pagination-wrap ul').append(li);    
-  });
-  
-  //counter
-  countSlides();
-  
-  //pagination
-  pagination();
-  
-  //hide/show controls/btns when hover
-  //pause automatic slide when hover
-  $('#slider-wrap').hover(
-    function(){ $(this).addClass('active'); clearInterval(autoSlider); }, 
-    function(){ $(this).removeClass('active'); autoSlider = setInterval(slideRight, 3000); }
-  );
-  
-  
-
-});//DOCUMENT READY
-  
-
-
-/***********
- SLIDE LEFT
-************/
-function slideLeft(){
-  pos--;
-  if(pos==-1){ pos = totalSlides-1; }
-  $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos));  
-  
-  //*> optional
-  countSlides();
-  pagination();
-}
-
-
-/************
- SLIDE RIGHT
-*************/
-function slideRight(){
-  pos++;
-  if(pos==totalSlides){ pos = 0; }
-  $('#slider-wrap ul#slider').css('left', -(sliderWidth*pos)); 
-  
-  //*> optional 
-  countSlides();
-  pagination();
-}
-
-  
-/************************
- //*> OPTIONAL SETTINGS
-************************/
-function countSlides(){
-  $('#counter').html(pos+1 + ' / ' + totalSlides);
-}
-
-function pagination(){
-  $('#pagination-wrap ul li').removeClass('active');
-  $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
-}
-
-/*출처
-https://kutar37.tistory.com/entry/%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C%EC%87%BC-%EA%B5%AC%ED%98%84-cssjavascriptjquery
-*/
-/* 홈 슬라이드 끝 */
 
 
 
