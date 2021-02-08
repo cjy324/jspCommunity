@@ -418,11 +418,14 @@ function checkModify(replyModifyForm){
       <section class="mobile-section-3 con-min-width">
         <div class="con">
           <div class="mobile-article-detail-bottom-cell flex flex-jc-c">
-            <div class="./"><a href="#">&lt 이전글</a></div>
-            <div class="./">
-              <a href="list?boardId=${article.boardId}"><i class="fas fa-th-list"></i> 목록 </a>
-            </div>
-            <div class="./"><a href="#">다음글 &gt</a></div>
+                  ${beforeArticleBtn}
+					<div class="./">
+						<a href="list?boardId=${article.boardId}">
+							<i class="fas fa-th-list"></i>
+							목록
+						</a>
+					</div>
+					${afterArticleBtn}
           </div>
         </div>
       </section>

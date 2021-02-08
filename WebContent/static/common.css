@@ -603,17 +603,6 @@ a {
 
 
 
-/* 탑바 스크롤 애니메이션 시작 */
-.nav-up {
-  top: -40px;
-  font-size:1.2rem;
-}
-.title-down{
-  padding-top:55px
-}
-/* 탑바 스크롤 애니메이션 끝 */
-
-
 
 /* 메인 컨텐츠 박스 시작 */
 .main-box{
@@ -2324,3 +2313,18 @@ a {
 
 /* 맨 위 버튼 끝 */
 
+
+
+/* 탑바 스크롤 애니메이션 시작 */
+.nav-up {
+  top: -40px;
+  font-size:1.2rem;
+}
+.title-down{
+  padding-top:55px
+}
+
+.search-bar-up{
+  top:0;
+}
+/* 탑바 스크롤 애니메이션 끝 */
