@@ -12,7 +12,6 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
-import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
 
@@ -111,6 +110,8 @@ public class UsrArticleController extends Controller {
 		}
 
 		// 조회수 증가
+		
+	
 		articleService.addView(id);
 		int hitsCount = articleService.getViewCount(id);
 
