@@ -168,9 +168,9 @@ function DoSearchForm_submit(form){
           <div class="mobile-article-list__cell-body">
           <c:forEach var="article" items="${articles}">
               <div>
-                <div class="mobile-article-list__cell-id">${article.id}</div>                
+                <div class="mobile-article-list__cell-id">${article.id}</div>          
                 <div class="mobile-article-list__cell-title flex flex-column">
-                  <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                  <a href="../article/detail?id=${article.id}" class="hover-underline block">${article.title}</a>
                   <div class="mobile-article-list__cell-title-contents flex">
                     <div class="mobile-article-list__cell-writer">${article.extra_memberNickname}</div>
                     <div class="mobile-article-list__cell-update-date">${article.updateDate}</div>

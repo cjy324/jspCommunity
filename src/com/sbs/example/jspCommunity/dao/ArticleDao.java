@@ -473,10 +473,17 @@ public class ArticleDao {
 		SecSql sql = new SecSql();
 		sql.append("SELECT R.*");
 		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append(", IFNULL(SUM(L.point), 0) AS extra_likePoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra_likeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra_dislikeOnlyPoint");
 		sql.append("FROM reply AS R");
 		sql.append("INNER JOIN `member` AS M");
 		sql.append("ON R.memberId = M.id");
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON L.relTypeCode = 'reply'");
+		sql.append("AND R.id = L.relId");
 		sql.append("WHERE 1");
+
 
 		if (relTypeCode != null) {
 			sql.append("AND R.relTypeCode = ?", relTypeCode);
@@ -486,6 +493,7 @@ public class ArticleDao {
 			sql.append("AND R.relId = ?", id);
 		};
 
+		sql.append("GROUP BY R.id");
 
 		sql.append("ORDER BY R.id DESC");
 		

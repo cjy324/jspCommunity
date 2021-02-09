@@ -172,7 +172,7 @@ function checkModify(replyModifyForm){
 
                   <c:if test="${article.extra.actorCanCancelDislike}">
                     <button class="btn addUnLike" type="button">
-                      <a class="btn btn-info" href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                      <a href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                       </a>
@@ -236,7 +236,6 @@ function checkModify(replyModifyForm){
     </c:if>
     <c:forEach var="reply" items="${replies}">
       <div class="reply-list-box">
-      
         <div class="reply-list-box-writer">${reply.extra_memberNickname}</div>
         <div class="reply-list-box__cell flex flex-jc-sb">
           <div class="reply-list-box__cell-contents flex flex-ai-c">
@@ -244,6 +243,47 @@ function checkModify(replyModifyForm){
             <div data-id="${reply.id}" class="reply-list-box__cell-body">${reply.body}</div>
           </div>
           <div class="reply-list-box-cell__option">
+          <div class="article-detail-cell-likesCount flex">
+
+                  <c:if test="${reply.extra.actorCanLike}">
+
+                    <button class="btn addLike" type="button">
+                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                    </button>
+
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanCancelLike}">
+                    <button class="btn addLike" type="button">
+                      <a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanDislike}">
+                    <button class="btn addUnLike" type="button">
+                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanCancelDislike}">
+                    <button class="btn addUnLike" type="button">
+                      <a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                </div>
             <c:if test="${loginedMemberId == reply.memberId}">
               <form class="replyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
                 <input type="hidden" name="id" value="${reply.id}">
@@ -257,6 +297,7 @@ function checkModify(replyModifyForm){
                   <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
                 </div>
               </form>
+             
               <div class="reply-list-box-cell__option-btns flex flex-ai-c">
                 <button class="btn doModifyReplyForm" type="button">수정</button>
                 <button class="btn btn-danger" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
@@ -265,6 +306,7 @@ function checkModify(replyModifyForm){
               </div>
             </c:if>
           </div>
+           
         </div>
       </div>
     </c:forEach>
@@ -391,7 +433,7 @@ function checkModify(replyModifyForm){
 
               <c:if test="${article.extra.actorCanCancelDislike}">
                 <button class="btn addUnLike" type="button">
-                  <a class="btn btn-info" href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <a href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
                     <i class="fas fa-thumbs-down"></i>
                     &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                   </a>
@@ -439,6 +481,47 @@ function checkModify(replyModifyForm){
               <div class="mobile-reply-list-box__cell-updateDate">${reply.updateDate}</div>
               <div data-id="${reply.id}" class="mobile-reply-list-box__cell-body">${reply.body}</div>
             </div>
+            <div class="mobile-article-detail-cell-likesCount flex">
+
+                  <c:if test="${reply.extra.actorCanLike}">
+
+                    <button class="btn addLike" type="button">
+                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                    </button>
+
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanCancelLike}">
+                    <button class="btn addLike" type="button">
+                      <a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanDislike}">
+                    <button class="btn addUnLike" type="button">
+                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                  <c:if test="${reply.extra.actorCanCancelDislike}">
+                    <button class="btn addUnLike" type="button">
+                      <a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+                  </c:if>
+
+                </div>
             <div class="mobile-reply-list-box-cell__option">
               <c:if test="${loginedMemberId == reply.memberId}">
                 <form class="mobile-replyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
@@ -453,6 +536,7 @@ function checkModify(replyModifyForm){
                     <button class="btn btn-back" type="button" onclick="location.reload()">취소</button>
                   </div>
                 </form>
+                
                 <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c">
                   <button class="btn doModifyReplyForm" type="button">수정</button>
                   <button class="btn btn-danger" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">

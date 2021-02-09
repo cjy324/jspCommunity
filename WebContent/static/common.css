@@ -1390,7 +1390,7 @@ a {
   text-align:center;
   font-weight:bold;
   font-size:1rem;
-  margin-top:20px;
+  margin-top:25px;
 }
 .mobile-article-list-name > span:last-child{
   display:block;
@@ -1469,9 +1469,6 @@ a {
   margin-right:10px;
 }
 
-.mobile-article-list__cell-title-contents > div:not(:nth-child(2)){
-  padding-top:5px;
-}
 
 .mobile-article-list__cell-id {
   width:var(--mobile-article-list__cell-id__width);

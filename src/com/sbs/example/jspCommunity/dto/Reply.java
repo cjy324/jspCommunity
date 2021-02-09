@@ -1,5 +1,6 @@
 package com.sbs.example.jspCommunity.dto;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import lombok.Data;
@@ -15,9 +16,21 @@ public class Reply {
 		this.relTypeCode = (String) repliesMap.get("relTypeCode");
 		this.relId = (int) repliesMap.get("relId");
 		this.body = (String) repliesMap.get("body");
+		this.extra = new LinkedHashMap<>();
 		
 		if (repliesMap.containsKey("extra_memberNickname")) {
 			this.extra_memberNickname = (String) repliesMap.get("extra_memberNickname");
+		}
+		if (repliesMap.containsKey("extra_likePoint")) {
+			this.extra_likePoint = (int) repliesMap.get("extra_likePoint");
+		}
+
+		if (repliesMap.containsKey("extra_likeOnlyPoint")) {
+			this.extra_likeOnlyPoint = (int) repliesMap.get("extra_likeOnlyPoint");
+		}
+
+		if (repliesMap.containsKey("extra_dislikeOnlyPoint")) {
+			this.extra_dislikeOnlyPoint = (int) repliesMap.get("extra_dislikeOnlyPoint");
 		}
 
 	}
@@ -34,5 +47,9 @@ public class Reply {
 	private int relId;
 	private String body;
 	private String extra_memberNickname;
+	private Map<String, Object> extra;
+	private int extra_likePoint;
+	private int extra_likeOnlyPoint;
+	private int extra_dislikeOnlyPoint;
 	
 }

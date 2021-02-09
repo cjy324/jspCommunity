@@ -180,7 +180,7 @@ public class UsrArticleController extends Controller {
 		int pageLimitStartIndex = (page - 1) * repliesInAPage;
 
 		List<Reply> replies = articleService.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex,
-				repliesInAPage);
+				repliesInAPage, loginedMember);
 
 		int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
 		int totalRepliesCount = totalCount; // 전체 article의 수 카운팅

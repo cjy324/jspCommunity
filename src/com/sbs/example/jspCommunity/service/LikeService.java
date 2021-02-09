@@ -4,6 +4,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dao.LikeDao;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
+import com.sbs.example.jspCommunity.dto.Reply;
 
 public class LikeService {
 	
@@ -13,20 +14,82 @@ public class LikeService {
 		likeDao = Container.likeDao;
 	}
 
-	public boolean actorCanLike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) == 0;
+	public boolean actorCanLike(Object object, Member actor) {
+		String relTypeCode = "";
+		int relId = 0;
+		
+		if(object instanceof Article) {
+			relTypeCode = "article";
+			Article article = (Article) object;
+			relId = article.getId();
+		}
+		
+		if(object instanceof Reply) {
+			relTypeCode = "reply";
+			Reply reply = (Reply) object;
+			relId = reply.getId();
+		}
+
+		return likeDao.getPoint(relTypeCode, relId, actor.getId()) == 0;
 	}
 
-	public boolean actorCanCancelLike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) > 0;
+	public boolean actorCanCancelLike(Object object, Member actor) {
+		
+		String relTypeCode = "";
+		int relId = 0;
+		
+		if(object instanceof Article) {
+			relTypeCode = "article";
+			Article article = (Article) object;
+			relId = article.getId();
+		}
+		
+		if(object instanceof Reply) {
+			relTypeCode = "reply";
+			Reply reply = (Reply) object;
+			relId = reply.getId();
+		}
+		
+		
+		return likeDao.getPoint(relTypeCode, relId, actor.getId()) > 0;
 	}
 
-	public boolean actorCanDislike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) == 0;
+	public boolean actorCanDislike(Object object, Member actor) {
+		
+		String relTypeCode = "";
+		int relId = 0;
+		
+		if(object instanceof Article) {
+			relTypeCode = "article";
+			Article article = (Article) object;
+			relId = article.getId();
+		}
+		
+		if(object instanceof Reply) {
+			relTypeCode = "reply";
+			Reply reply = (Reply) object;
+			relId = reply.getId();
+		}
+		return likeDao.getPoint(relTypeCode, relId, actor.getId()) == 0;
 	}
 
-	public boolean actorCanCancelDislike(Article article, Member actor) {
-		return likeDao.getPoint("article", article.getId(), actor.getId()) < 0;
+	public boolean actorCanCancelDislike(Object object, Member actor) {
+		
+		String relTypeCode = "";
+		int relId = 0;
+		
+		if(object instanceof Article) {
+			relTypeCode = "article";
+			Article article = (Article) object;
+			relId = article.getId();
+		}
+		
+		if(object instanceof Reply) {
+			relTypeCode = "reply";
+			Reply reply = (Reply) object;
+			relId = reply.getId();
+		}
+		return likeDao.getPoint(relTypeCode, relId, actor.getId()) < 0;
 	}
 
 	public void setLikePoint(String relTypeCode, int relId, int actorId, int point) {
