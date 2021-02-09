@@ -55,7 +55,7 @@ function DoSearchForm_submit(form){
               <div class="article-list__cell-update-date">${article.updateDate}</div>
               <div class="article-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="article-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
@@ -170,7 +170,7 @@ function DoSearchForm_submit(form){
               <div>
                 <div class="mobile-article-list__cell-id">${article.id}</div>          
                 <div class="mobile-article-list__cell-title flex flex-column">
-                  <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                  <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline">${article.title}</a>
                   <div class="mobile-article-list__cell-title-contents flex">
                     <div class="mobile-article-list__cell-writer">${article.extra_memberNickname}</div>
                     <div class="mobile-article-list__cell-update-date">${article.updateDate}</div>

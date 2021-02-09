@@ -67,7 +67,7 @@ var param = ${paramJson};
 						<a href="../member/showMyPage">회원정보</a>
 					</div>
 					<div class="head-bar-button">
-						<a href="../member/doLogout">로그아웃</a>
+						<a href="../member/doLogout?beforeUrl=${encodedCurrentUrl}">로그아웃</a>
 					</div>
 				</c:if>
 				<c:if test="${isLogined == false}">
@@ -75,7 +75,7 @@ var param = ${paramJson};
 						<a href="../home/main">홈</a>
 					</div>
 					<div class="head-bar-button">
-						<a href="../member/doLoginForm">로그인</a>
+						<a href="../member/doLoginForm?beforeUrl=${encodedCurrentUrl}">로그인</a>
 					</div>
 					<div class="head-bar-button">
 						<a href="../member/doJoinForm">회원가입</a>

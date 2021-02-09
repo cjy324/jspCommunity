@@ -365,7 +365,7 @@ function checkModify(replyModifyForm){
           <div class="article-detail-bottom-cell flex flex-jc-c">
             ${beforeArticleBtn}
             <div class="./">
-              <a href="list?boardId=${article.boardId}">
+              <a href="${param.listUrl}">
                 <i class="fas fa-th-list"></i>
                 목록
               </a>
@@ -628,7 +628,7 @@ function checkModify(replyModifyForm){
         <div class="mobile-article-detail-bottom-cell flex flex-jc-c">
           ${beforeArticleBtn}
           <div class="./">
-            <a href="list?boardId=${article.boardId}">
+            <a href="${param.listUrl}">
               <i class="fas fa-th-list"></i>
               목록
             </a>

@@ -17,7 +17,7 @@ import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
 
-public class UsrMemberController extends Controller{
+public class UsrMemberController extends Controller {
 
 	private MemberService memberService;
 
@@ -34,35 +34,35 @@ public class UsrMemberController extends Controller{
 	// 회원가입
 	public String doJoin(HttpServletRequest request, HttpServletResponse response) {
 
-		String loginId = request.getParameter("loginId");		
-		if(Util.isEmpty(loginId)) {
+		String loginId = request.getParameter("loginId");
+		if (Util.isEmpty(loginId)) {
 			return msgAndBack(request, "아이디를 입력하세요.");
 		}
-		
+
 		// String loginPw = request.getParameter("loginPw");
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
-		if(Util.isEmpty(loginPw)) {
+		if (Util.isEmpty(loginPw)) {
 			return msgAndBack(request, "비밀번호를 입력하세요.");
 		}
-		
+
 		String name = request.getParameter("name");
-		if(Util.isEmpty(name)) {
+		if (Util.isEmpty(name)) {
 			return msgAndBack(request, "이름을 입력하세요.");
 		}
-		
+
 		String nickname = request.getParameter("nickname");
-		if(Util.isEmpty(nickname)) {
+		if (Util.isEmpty(nickname)) {
 			return msgAndBack(request, "닉네임을 입력하세요.");
 		}
-		
+
 		String email = request.getParameter("email");
-		if(Util.isEmpty(email)) {
+		if (Util.isEmpty(email)) {
 			return msgAndBack(request, "email을 입력하세요.");
 		}
-		
+
 		String cellPhoneNo = request.getParameter("cellPhoneNo");
-		if(Util.isEmpty(cellPhoneNo)) {
+		if (Util.isEmpty(cellPhoneNo)) {
 			return msgAndBack(request, "연락처를 입력하세요.");
 		}
 
@@ -73,14 +73,16 @@ public class UsrMemberController extends Controller{
 			if (members.get(i).getLoginId().equals(loginId) == true) {
 				return msgAndBack(request, "해당 아이디는 이미 사용중인 아이디입니다.");
 			}
-		};
+		}
+		;
 
 		// 해당 nickname이 사용가능한지 중복확인
 		for (int i = 0; i < members.size(); i++) {
 			if (members.get(i).getNickname().equals(nickname) == true) {
 				return msgAndBack(request, "해당 닉네임는 이미 사용중인 닉네임입니다.");
 			}
-		};
+		}
+		;
 
 		Map<String, Object> joinArg = new HashMap<>();
 		joinArg.put("loginId", loginId);
@@ -112,12 +114,10 @@ public class UsrMemberController extends Controller{
 		String endDate = sdf.format(cal.getTime());
 
 		// attr에 저장
-		Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
-				null);
+		Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate, null);
 		/* 비밀번호 변경기간 최초설정 끝 */
 
-		
-		/* 회원가입시 축하메일 발송 */	 
+		/* 회원가입시 축하메일 발송 */
 		Container.emailService.send(email, nickname + "님, 회원가입을 축하드립니다.", nickname + "님, 회원가입을 축하드립니다.");
 
 		return "usr/member/doJoin";
@@ -131,13 +131,13 @@ public class UsrMemberController extends Controller{
 	// 로그인
 	public String doLogin(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
-		if(Util.isEmpty(loginId)) {
+		if (Util.isEmpty(loginId)) {
 			return msgAndBack(request, "아이디를 입력하세요.");
 		}
 		// String loginPw = request.getParameter("loginPw");
 		// 암호화된 비밀번호 값을 받기
 		String loginPw = request.getParameter("loginPwReal");
-		if(Util.isEmpty(loginPw)) {
+		if (Util.isEmpty(loginPw)) {
 			return msgAndBack(request, "비밀번호를 입력하세요.");
 		}
 
@@ -157,16 +157,14 @@ public class UsrMemberController extends Controller{
 		HttpSession session = request.getSession();
 		session.setAttribute("loginedMemberId", member.getId());
 
-		
 		/* 임시패스워드 사용 여부 확인(개선) 시작 */
 		boolean isUsingTempPassword = memberService.getIsUsingTempPassword(member.getId());
 
 		// 임시패스워드 사용중이면 알림창 보여주고 회원정보로 이동
-		if(isUsingTempPassword) {
+		if (isUsingTempPassword) {
 			return msgAndReplaceUrl(request, "현재 임시비밀번호를 사용 중입니다. 비밀번호를 변경해 주세요.", "../member/showMyPage");
 		}
 		/* 임시패스워드 사용 여부 확인(개선) 끝 */
-
 
 		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 시작 */
 		String limitDate = Container.attrService.getValue("member__" + member.getId() + "__extra__isPwChangeDateLimit");
@@ -184,21 +182,27 @@ public class UsrMemberController extends Controller{
 		// 오늘 날짜와 제한기간 날짜 비교
 		int compare = todayDate.compareTo(limitDate);
 
-		// 만약 오늘날짜가 지정날짜보다 크거나 같으면 기간만료 알림창 보여주고 메인으로 이동
-		if (compare >= 0) {
-			return msgAndReplaceUrl(request, "비밀번호 변경 후 90일이 지났습니다. 비밀번호를 변경해 주세요.", "../home/main");
-		}
 		/* 비밀번호 변경날짜 90일 이상 지났는지 여부 확인 끝 */
 
-		// 로그인 알림창 보여주고 메인화면으로 이동
-		String replaceUrl = "../home/main";
 		
-		if ( Util.isEmpty(request.getParameter("nextUrlAfterLogin")) == false ) {
+		// 로그인 알림창 보여주고 화면으로 이동
+		String replaceUrl = "../home/main";
+
+		if (Util.isEmpty(request.getParameter("nextUrlAfterLogin")) == false) {
 			replaceUrl = request.getParameter("nextUrlAfterLogin");
 		}
 		
-		return msgAndReplaceUrl(request, member.getNickname() + ", 님 반갑습니다.", replaceUrl);
+		if (Util.isEmpty(request.getParameter("beforeUrl")) == false) {
+			replaceUrl = request.getParameter("beforeUrl");
+		}
 		
+		// 만약 오늘날짜가 지정날짜보다 크거나 같으면 기간만료 알림창 보여주고 메인으로 이동
+		if (compare >= 0) {
+			return msgAndReplaceUrl(request, "비밀번호 변경 후 90일이 지났습니다. 비밀번호를 변경해 주세요.", replaceUrl);
+		}
+
+		return msgAndReplaceUrl(request, member.getNickname() + ", 님 반갑습니다.", replaceUrl);
+
 	}
 
 	// 로그아웃
@@ -207,8 +211,14 @@ public class UsrMemberController extends Controller{
 		// 로그인 여부를 세션에서 삭제
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginedMemberId");
+		
+		String replaceUrl = "../home/main";
+		
+		if (Util.isEmpty(request.getParameter("beforeUrl")) == false) {
+			replaceUrl = request.getParameter("beforeUrl");
+		}
 
-		return msgAndReplaceUrl(request, "로그아웃 되었습니다.", "../home/main");
+		return msgAndReplaceUrl(request, "로그아웃 되었습니다.", replaceUrl);
 
 	}
 
@@ -262,7 +272,7 @@ public class UsrMemberController extends Controller{
 			code = "F-2";
 			msg = "해당 닉네임은 사용이 불가능합니다.";
 		}
-		
+
 		return jsonWithData(request, new ResultData(code, msg, "nickname", nickname));
 	}
 
@@ -278,38 +288,38 @@ public class UsrMemberController extends Controller{
 
 	// 회원 정보 수정
 	public String doModifyInfo(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		int id = Util.getAsInt(request.getParameter("id"), 0);
-		if(id == 0) {
+		if (id == 0) {
 			return msgAndBack(request, "회원 번호를 입력하세요.");
-		}	
+		}
 
 		String loginPw = request.getParameter("loginPwReal");
-	
+
 		// 비밀번호 null여부 확인
 		if (loginPw != null && loginPw.trim().length() == 0) {
 			loginPw = null;
 		}
 
 		String name = request.getParameter("name");
-		if(Util.isEmpty(name)) {
+		if (Util.isEmpty(name)) {
 			return msgAndBack(request, "이름을 입력하세요.");
 		}
-		
+
 		String nickname = request.getParameter("nickname");
-		
+
 		// 닉네임 null여부 확인
 		if (nickname != null && nickname.trim().length() == 0) {
-				nickname = null;
+			nickname = null;
 		}
-		
+
 		String email = request.getParameter("email");
-		if(Util.isEmpty(email)) {
+		if (Util.isEmpty(email)) {
 			return msgAndBack(request, "email을 입력하세요.");
 		}
-		
+
 		String cellphoneNo = request.getParameter("cellphoneNo");
-		if(Util.isEmpty(cellphoneNo)) {
+		if (Util.isEmpty(cellphoneNo)) {
 			return msgAndBack(request, "연락처를 입력하세요.");
 		}
 
@@ -353,11 +363,9 @@ public class UsrMemberController extends Controller{
 
 			// attr에서 기존 기록 삭제 신규 기간 저장
 			Container.attrService.remove("member__" + member.getId() + "__extra__isPwChangeDateLimit");
-			Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate,
-					null);
+			Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", endDate, null);
 		}
 		/* 비밀번호 변경 시 변경기간 재설정 끝 */
-
 
 		return msgAndReplaceUrl(request, "수정되었습니다.", "../member/showMyPage");
 	}
@@ -370,11 +378,11 @@ public class UsrMemberController extends Controller{
 	// 아이디 찾기
 	public String doFindLoginId(HttpServletRequest request, HttpServletResponse response) {
 		String name = request.getParameter("name");
-		if(Util.isEmpty(name)) {
+		if (Util.isEmpty(name)) {
 			return msgAndBack(request, "이름을 입력하세요.");
 		}
 		String email = request.getParameter("email");
-		if(Util.isEmpty(email)) {
+		if (Util.isEmpty(email)) {
 			return msgAndBack(request, "email을 입력하세요.");
 		}
 
@@ -386,7 +394,8 @@ public class UsrMemberController extends Controller{
 		}
 
 		// 로그인아이디 알림창 보여주고 로그인화면으로 이동
-		return msgAndReplaceUrl(request, name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.", "../member/doLoginForm");
+		return msgAndReplaceUrl(request, name + "회원님의 아이디는 \"" + member.getLoginId() + "\"입니다.",
+				"../member/doLoginForm");
 	}
 
 	// 비밀번호 찾기 폼
@@ -397,12 +406,12 @@ public class UsrMemberController extends Controller{
 	// 비밀번호 찾기
 	public String doFindLoginPw(HttpServletRequest request, HttpServletResponse response) {
 		String loginId = request.getParameter("loginId");
-		if(Util.isEmpty(loginId)) {
+		if (Util.isEmpty(loginId)) {
 			return msgAndBack(request, "아이디를 입력하세요.");
 		}
 
 		String email = request.getParameter("email");
-		if(Util.isEmpty(email)) {
+		if (Util.isEmpty(email)) {
 			return msgAndBack(request, "email을 입력하세요.");
 		}
 

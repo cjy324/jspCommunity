@@ -166,6 +166,9 @@ public abstract class DispatcherServlet extends HttpServlet {
 		request.setAttribute("currentUrl", currentUrl);
 		request.setAttribute("encodedCurrentUrl", encodedCurrentUrl);
 				
+		
+		
+		
 		Map<String, Object> param = Util.getParamMap(request);
 		String paramJson = Util.getJsonText(param);
 
@@ -191,6 +194,8 @@ public abstract class DispatcherServlet extends HttpServlet {
 		needToLoginActionList.add("usr/article/doDeleteReply");
 		needToLoginActionList.add("usr/member/showMyPage");
 		needToLoginActionList.add("usr/member/doModifyForm");
+		
+		
 
 		/// 로그인 여부 확인
 		if (needToLoginActionList.contains(actionUrl)) {
