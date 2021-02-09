@@ -60,7 +60,7 @@ function DoSearchForm_submit(form){
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
               <div class="article-list__cell-likesCount">
-              	<i class="far fa-thumbs-up"></i> ${article.extra_likeOnlyPoint}  
+              	<i class="far fa-thumbs-up"></i> ${article.extra_likeOnlyPoint} /  
  				<i class="far fa-thumbs-down"></i> ${article.extra_dislikeOnlyPoint}
               </div>
             </div>
@@ -170,12 +170,12 @@ function DoSearchForm_submit(form){
               <div>
                 <div class="mobile-article-list__cell-id">${article.id}</div>          
                 <div class="mobile-article-list__cell-title flex flex-column">
-                  <a href="../article/detail?id=${article.id}" class="hover-underline block">${article.title}</a>
+                  <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
                   <div class="mobile-article-list__cell-title-contents flex">
                     <div class="mobile-article-list__cell-writer">${article.extra_memberNickname}</div>
                     <div class="mobile-article-list__cell-update-date">${article.updateDate}</div>
                     <div class="mobile-article-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-                    <div class="mobile-article-list__cell-likesCount"><i class="far fa-thumbs-up"></i> ${article.extra_likeOnlyPoint}<i class="far fa-thumbs-down"></i> ${article.extra_dislikeOnlyPoint}</div>
+                    <div class="mobile-article-list__cell-likesCount"><i class="far fa-thumbs-up"></i> ${article.extra_likeOnlyPoint} / <i class="far fa-thumbs-down"></i> ${article.extra_dislikeOnlyPoint}</div>
                   </div>
                 </div>
                 <div class="mobile-article-list__cell-reply">${article.repliesCount}</div>

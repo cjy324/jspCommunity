@@ -1,7 +1,7 @@
 /* 폰트 1*/
 @font-face {
-    font-family: 'IBMPlexSansKR-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-family: 'paybooc-ExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/paybooc-ExtraBold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -67,6 +67,10 @@ a {
 
 .flex-ai-fe {
   align-items:flex-end;
+}
+
+.flex-ai-fs{
+  align-items:flex-start;
 }
 
 .flex-as-c {
@@ -532,7 +536,7 @@ a {
 .mobile-side-bar_menu ul > li > a{
   max-width:200px;
   padding:10px;
-  font-size:1rem;
+  font-size:0.9rem;
 
 }
 
@@ -1373,6 +1377,7 @@ a {
 }
 
 .mobile-section-article-list{
+  
   width:100%;
   text-align:center;
   background-color:rgba(250, 250, 250, 0.4);
@@ -1446,27 +1451,32 @@ a {
 .mobile-article-list > .mobile-article-list__cell-body > * > div{
   box-sizing:border-box;
   text-align:center;
-  padding-top:5px;
-  padding-bottom:10px;
-  font-size:0.8rem;
+  padding-top:15px;
+  padding-bottom:15px;
+  font-size:0.75rem;
 }
 
-.mobile-article-list__cell-title{
-  text-align:left;
-  padding-left:10px;
+.mobile-article-list > .mobile-article-list__cell-body > * >.mobile-article-list__cell-title{ 
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
+  text-overflow: ellipsis; 
+  font-size:0.8rem;
+  text-align:left;
+  align-items:flex-start;
+  padding-left:10px;
 }
 
 .mobile-article-list__cell-title-contents{
-  font-size:0.6rem;
+  padding-top:10px;
+  font-size:0.5rem;
+  color:gray;
 }
 .mobile-article-list__cell-title-contents > div{
   white-space: nowrap;
   overflow:hidden;
   padding-top:3px;
-  margin-right:10px;
+  margin-right:8px;
 }
 
 
@@ -1483,13 +1493,13 @@ a {
   width:30px;
 }
 .mobile-article-list__cell-update-date{
-  width:60%;
+  width:40%;
 }
 .mobile-article-list__cell-hitsCount {
   width:25px;
 }
 .mobile-article-list__cell-likesCount {
-  width:20px;
+  width:50px;
 }
 
 
@@ -1688,7 +1698,9 @@ a {
 
 
 .article-detail-cell__body .tui-editor-contents{
+  font-family: 'GongGothicMedium';
   font-size:1rem;
+  
 }
 
 .article-detail-cell__tag{
@@ -2004,6 +2016,7 @@ a {
 
 
 .mobile-article-detail-cell__body .tui-editor-contents{
+  font-family: 'GongGothicMedium';
   font-size:0.9rem;
 }
 
