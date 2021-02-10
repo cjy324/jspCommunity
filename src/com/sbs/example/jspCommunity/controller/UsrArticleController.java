@@ -12,6 +12,7 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
+import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
 
@@ -108,19 +109,6 @@ public class UsrArticleController extends Controller {
 		if (oldArticle == null) {
 			return msgAndBack(request, id + "번 게시물은 존재하지 않습니다. 게시물 번호를 확인하세요.");
 		}
-
-		// 조회수 증가
-		
-	
-		articleService.addView(id);
-		int hitsCount = articleService.getViewCount(id);
-
-		// 게시물 정보에 조회수 업데이트
-		Map<String, Object> args = new HashMap<>();
-		args.put("id", id);
-		args.put("hitsCount", hitsCount);
-
-		articleService.addArticleHitsCount(args);
 
 		// 업데이트된 게시물 정보 가져오기
 	
@@ -585,5 +573,27 @@ public class UsrArticleController extends Controller {
 		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);
 
 	}
+	
+	//조회수 증가
+	public String addHitCounts(HttpServletRequest request, HttpServletResponse response) {
+		int articleId = Integer.parseInt(request.getParameter("articleId"));
+
+		// 조회수 증가
+	
+			articleService.addView(articleId);
+			int hitsCount = articleService.getViewCount(articleId);
+
+			// 게시물 정보에 조회수 업데이트
+			Map<String, Object> args = new HashMap<>();
+			args.put("id", articleId);
+			args.put("hitsCount", hitsCount);
+
+			articleService.addArticleHitsCount(args);
+		
+			
+		return jsonWithData(request, null);
+	}
+	
+	
 
 }

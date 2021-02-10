@@ -7,6 +7,26 @@
 
 
 <script>
+function saveHitsCount(el){
+	const hit = localStorage.getItem("hit");
+	const a = $(el).closest('a').get(0);
+	
+	//해당 페이지 재방문 여부 확인
+	if(hit === a){
+		return;
+	}
+	
+	//저장
+	localStorage.setItem("hit",a);
+	//24시간 후 기록 삭제
+	setTimeout(localStorage.clear("hit"), 8640000);
+	
+} 
+
+</script>	
+
+
+<script>
 let DoSearchForm_submited = false;
 
 function DoSearchForm_submit(form){
@@ -55,7 +75,7 @@ function DoSearchForm_submit(form){
               <div class="article-list__cell-update-date">${article.updateDate}</div>
               <div class="article-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="article-list__cell-title">
-                <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline">${article.title}</a>
+                <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
@@ -170,7 +190,7 @@ function DoSearchForm_submit(form){
               <div>
                 <div class="mobile-article-list__cell-id">${article.id}</div>          
                 <div class="mobile-article-list__cell-title flex flex-column">
-                  <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline">${article.title}</a>
+                  <a href="../article/detail?id=${article.id}&listUrl=${encodedCurrentUrl}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
                   <div class="mobile-article-list__cell-title-contents flex">
                     <div class="mobile-article-list__cell-writer">${article.extra_memberNickname}</div>
                     <div class="mobile-article-list__cell-update-date">${article.updateDate}</div>

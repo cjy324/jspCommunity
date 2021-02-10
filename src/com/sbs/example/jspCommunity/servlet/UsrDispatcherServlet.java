@@ -121,6 +121,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 		/*	if (actionMethodName.equals("updateLikesCount")) {
 				jspPath = articleController.updateLikesCount(request, response);
 			}*/
+			if (actionMethodName.equals("addHitCounts")) {
+				jspPath = articleController.addHitCounts(request, response);
+			}
 			if (actionMethodName.equals("reply")) {
 				jspPath = articleController.reply(request, response);
 			}

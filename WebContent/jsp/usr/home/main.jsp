@@ -5,6 +5,29 @@
 <c:set var ="pageTitle" value="GetIT | HOME"/>
 <%@ include file="../../part/head.jspf" %>
 	
+	
+<script>
+function saveHitsCount(el){
+	const hit = localStorage.getItem("hit");
+	const a = $(el).closest('a').get(0);
+	
+	//해당 페이지 재방문 여부 확인
+	if(hit === a){
+		return;
+	}
+	
+	//저장
+	localStorage.setItem("hit",a);
+	//24시간 후 기록 삭제
+	setTimeout(localStorage.clear("hit"), 8640000);
+	
+} 
+
+</script>	
+	
+	
+	
+	
   <!-- 메인 홈 시작 -->
           <div class="section-home-slide flex visible-md-up">
             <div class="home-slide_img">
@@ -71,7 +94,7 @@
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <a id="test" href="../article/detail?id=${article.id}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
@@ -96,7 +119,7 @@
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <a href="../article/detail?id=${article.id}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
@@ -119,7 +142,7 @@
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline">${article.title}</a>
+                <a href="../article/detail?id=${article.id}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>

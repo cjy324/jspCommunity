@@ -8,6 +8,7 @@
 
 
 <script>
+ 	/* 새 댓글 하이라이팅 시작 */
 	$(function() {
 		if ( param.focusReplyId ) {
 			const $target = $('.reply-list-box div[data-id="' + param.focusReplyId + '"]');
@@ -29,6 +30,41 @@
 			}, 1000);
 		}
 	});
+	/* 새 댓글 하이라이팅 끝 */
+	
+	/* 조회수 증가(feat.로컬스토리지) 시작 */
+ window.onload = function loadHitsCount(){
+		
+		const hit = localStorage.getItem("hit");
+		const url = "https://getit.devj.me/usr/article/detail?id=" + ${article.id};
+		
+		//새로고침 여부 확인
+		if(hit === url){
+			return;
+		}
+				
+		//10000초 후 addHitCounts() 실행
+		setTimeout(addHitCounts, 1000);
+		localStorage.setItem("hit",url);
+ 	 	} 
+	function addHitCounts(){
+		const articleId = ${article.id};
+		$.post(
+				'addHitCounts',  //요청할 주소
+				{		
+					articleId     //데이터 보내기
+				},
+				function(data){},			
+				'json'
+			);
+
+		}
+
+	/* 조회수 증가(feat.로컬스토리지) 끝 */
+	
+
+
+	
 </script>
 
 
@@ -99,7 +135,6 @@ function checkModify(replyModifyForm){
           </div>
           <div class="article-detail-cell__head-contents-box">
             <div class="article-detail-cell__head-contents-1 flex">
-
               <div class="article-detail-cell__id">
                 <div>
                   <span>번호 : </span>
