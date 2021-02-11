@@ -8,19 +8,32 @@
 	
 <script>
 function saveHitsCount(el){
-	const hit = localStorage.getItem("hit");
-	const a = $(el).closest('a').get(0);
+
+	const visitUrl = $(el).closest('a').get(0);
+
+	// url의 파라미터를 찾는 함수
+	$.urlParam = function(name){
+	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(visitUrl);
+	    if (results==null){
+	       return null;
+	    }
+	    else{
+	       return results[1] || 0;
+	    }
+	}
+
+	const hitId = localStorage.getItem("hitId");
+	const visitArticleId = $.urlParam('id');
+	const hitCount = localStorage.getItem("hitCount");
+
 	
 	//해당 페이지 재방문 여부 확인
-	if(hit === a){
+ 	if(hitCount == 1){
 		return;
-	}
-	
+	} 
 	//저장
-	localStorage.setItem("hit",a);
-	//24시간 후 기록 삭제
-	setTimeout(localStorage.clear("hit"), 8640000);
-	
+	localStorage.setItem("hitId", visitArticleId);
+	localStorage.setItem("hitCount", hitCount);
 } 
 
 </script>	

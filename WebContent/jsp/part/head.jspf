@@ -49,7 +49,22 @@ var param = ${paramJson};
 
 
 </head>
-<body>
+<body onload="localStorageClear();">
+
+<script>
+
+function localStorageClear(){
+	const today = new Date().getDate();
+	const lastVisitDay = localStorage.getItem("lastVisitDay");
+
+ 	if(today != lastVisitDay){
+		localStorage.clear();
+	} 
+}
+
+
+</script>	
+
 
 	<!-- 사이트 박스 시작 -->
 	<section class="site-box min-height-100vh flex flex-column">

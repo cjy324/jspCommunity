@@ -33,20 +33,31 @@
 	/* 새 댓글 하이라이팅 끝 */
 	
 	/* 조회수 증가(feat.로컬스토리지) 시작 */
- window.onload = function loadHitsCount(){
+ 		window.onload = function loadHitsCount(){
 		
-		const hit = localStorage.getItem("hit");
-		const url = "https://getit.devj.me/usr/article/detail?id=" + ${article.id};
-		
+		const hitId = localStorage.getItem("hitId");
+		const id = ${article.id};
+		const hitCount = localStorage.getItem("hitCount");
+
 		//새로고침 여부 확인
-		if(hit === url){
+		if(hitId == id && hitCount == 1){
 			return;
 		}
-				
-		//10000초 후 addHitCounts() 실행
-		setTimeout(addHitCounts, 1000);
-		localStorage.setItem("hit",url);
+
+		//10000초 후 addHitCounts() 실행(조회수 증가)
+		setTimeout(addHitCounts, 10000);
+		
+		//localStorage에 현재 url 저장
+		localStorage.setItem("hitId", id);
+		localStorage.setItem("hitCount", 1);
+
+
+		//localStorage에 오늘 날짜 저장
+		const today = new Date().getDate();
+		localStorage.setItem("lastVisitDay", today); 
+	
  	 	} 
+
 	function addHitCounts(){
 		const articleId = ${article.id};
 		$.post(
@@ -59,6 +70,11 @@
 			);
 
 		}
+
+	function removeLocalstorage(){
+		localStorage.removeItem("hitId");
+		alert('기록삭제');
+	}
 
 	/* 조회수 증가(feat.로컬스토리지) 끝 */
 	
@@ -398,19 +414,22 @@ function checkModify(replyModifyForm){
       <section class="section-3 con-min-width">
         <div class="con">
           <div class="article-detail-bottom-cell flex flex-jc-c">
-            ${beforeArticleBtn}
-            <div class="./">
-                <c:if test="${not empty param.listUrl}">
-            	<a href="${param.listUrl}">
-            	</c:if>
-            	<c:if test="${empty param.listUrl}">
-            	<a href="../article/list?boardId=${param.boardId}">
-            	</c:if>
-                <i class="fas fa-th-list"></i>
-                목록
-              </a>
-            </div>
-            ${afterArticleBtn}
+            <c:if test ="${beforeArticleBtn}">	
+          <div class="./"><a href="../article/detail?id=${beforeArticleIndex}&boardId=${article.boardId}">&lt 이전글</a></div>
+        </c:if>
+          <div class="./">
+            <c:if test="${not empty param.listUrl}">
+             <a href="${param.listUrl}">
+            </c:if>
+            <c:if test="${empty param.listUrl}">
+            <a href="../article/list?boardId=${article.boardId}">
+            </c:if>
+              목록
+            </a>
+          </div>
+         <c:if test ="${afterArticleBtn}">	
+          <div class="./"><a href="../article/detail?id=${afterArticleIndex}&boardId=${article.boardId}">다음글 &gt</a></div>
+        </c:if>
           </div>
         </div>
       </section>
@@ -666,18 +685,23 @@ function checkModify(replyModifyForm){
     <section class="mobile-section-3 con-min-width">
       <div class="con">
         <div class="mobile-article-detail-bottom-cell flex flex-jc-c">
-          ${beforeArticleBtn}
+        <c:if test ="${beforeArticleBtn}">	
+          <div class="./"><a href="../article/detail?id=${beforeArticleIndex}&boardId=${article.boardId}">&lt 이전글</a></div>
+        </c:if>
           <div class="./">
             <c:if test="${not empty param.listUrl}">
              <a href="${param.listUrl}">
             </c:if>
             <c:if test="${empty param.listUrl}">
-            <a href="../article/list?boardId=${param.boardId}">
+            <a href="../article/list?boardId=${article.boardId}">
             </c:if>
               목록
             </a>
           </div>
-          ${afterArticleBtn}
+         <c:if test ="${afterArticleBtn}">	
+          <div class="./"><a href="../article/detail?id=${afterArticleIndex}&boardId=${article.boardId}">다음글 &gt</a></div>
+        </c:if>
+          
         </div>
       </div>
     </section>

@@ -136,18 +136,18 @@ public class UsrArticleController extends Controller {
 
 		int x = currentArticleIndex;
 
-		String beforeArticleBtn = "";
-		String afterArticleBtn = "";
+		boolean beforeArticleBtn = false;
+		boolean afterArticleBtn = false;
 
 		if (x - 1 >= 0) {
-			beforeArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + articles.get(x - 1).getId()
-					+ "\">&lt 이전글</a></div>";
+			beforeArticleBtn = true; 
+			request.setAttribute("beforeArticleIndex", articles.get(x - 1).getId());
 			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
 		}
 
 		if (x < articles.size() - 1) {
-			afterArticleBtn = "<div class=\"./\"><a href=\"../article/detail?id=" + articles.get(x + 1).getId()
-					+ "\">다음글 &gt</a></div>";
+			afterArticleBtn = true; 
+			request.setAttribute("afterArticleIndex", articles.get(x + 1).getId());
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
 
