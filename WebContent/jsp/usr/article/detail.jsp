@@ -400,7 +400,12 @@ function checkModify(replyModifyForm){
           <div class="article-detail-bottom-cell flex flex-jc-c">
             ${beforeArticleBtn}
             <div class="./">
-              <a href="${param.listUrl}">
+                <c:if test="${not empty param.listUrl}">
+            	<a href="${param.listUrl}">
+            	</c:if>
+            	<c:if test="${empty param.listUrl}">
+            	<a href="../article/list?boardId=${param.boardId}">
+            	</c:if>
                 <i class="fas fa-th-list"></i>
                 목록
               </a>
@@ -663,8 +668,12 @@ function checkModify(replyModifyForm){
         <div class="mobile-article-detail-bottom-cell flex flex-jc-c">
           ${beforeArticleBtn}
           <div class="./">
-            <a href="${param.listUrl}">
-              <i class="fas fa-th-list"></i>
+            <c:if test="${not empty param.listUrl}">
+             <a href="${param.listUrl}">
+            </c:if>
+            <c:if test="${empty param.listUrl}">
+            <a href="../article/list?boardId=${param.boardId}">
+            </c:if>
               목록
             </a>
           </div>

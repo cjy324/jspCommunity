@@ -94,7 +94,7 @@ function saveHitsCount(el){
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a id="test" href="../article/detail?id=${article.id}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
+                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
@@ -119,7 +119,7 @@ function saveHitsCount(el){
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
+                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
@@ -142,7 +142,7 @@ function saveHitsCount(el){
               <div class="home-list__cell-id">${article.id}</div>
               <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
               <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
+                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
                 <span>[${article.repliesCount}]</span>
               </div>
               <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
