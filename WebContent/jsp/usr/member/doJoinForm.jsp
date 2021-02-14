@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="GetIt | Sign-Up" />
+<c:set var="pageTitle" value="GetIT | Sign-Up" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->

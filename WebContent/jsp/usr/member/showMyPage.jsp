@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="GetIt | MyPage"/>
+<c:set var="pageTitle" value="GetIT | MyPage"/>
 <%@ include file="../../part/head.jspf" %>
 	
   <!-- 메인 컨텐츠 박스 시작 -->

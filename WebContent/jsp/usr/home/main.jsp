@@ -4,173 +4,111 @@
 
 <c:set var ="pageTitle" value="GetIT | HOME"/>
 <%@ include file="../../part/head.jspf" %>
-	
-	
-<script>
-function saveHitsCount(el){
 
-	const visitUrl = $(el).closest('a').get(0);
-
-	// url의 파라미터를 찾는 함수
-	$.urlParam = function(name){
-	    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(visitUrl);
-	    if (results==null){
-	       return null;
-	    }
-	    else{
-	       return results[1] || 0;
-	    }
-	}
-
-	const hitId = localStorage.getItem("hitId");
-	const visitArticleId = $.urlParam('id');
-	const hitCount = localStorage.getItem("hitCount");
-
-	
-	//해당 페이지 재방문 여부 확인
- 	if(hitCount == 1){
-		return;
-	} 
-	//저장
-	localStorage.setItem("hitId", visitArticleId);
-	localStorage.setItem("hitCount", hitCount);
-} 
-
-</script>	
-	
-	
-	
-	
-  <!-- 메인 홈 시작 -->
-          <div class="section-home-slide flex visible-md-up">
-            <div class="home-slide_img">
-            <nav class="flex flex-jc-c ">
-              <a href="../article/list?boardId=1">
-                <div>
-                  <div class="home-slide_img-box">
-                    <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
-                    <div class="home-slide_img-txt">
-                      Notice
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </nav>
-          </div>
-            <div class="home-slide_img">
-            <nav class="flex flex-jc-c">
-              <a href="../article/list?boardId=2">
-                <div>
-                  <div class="home-slide_img-box">
-                    <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
-                    <div class="home-slide_img-txt">
-                      News
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </nav>
-          </div>
-            <div class="home-slide_img">
-            <nav class="flex flex-jc-c">
-              <a href="../article/list?boardId=3">
-                <div>
-                  <div class="home-slide_img-box">
-                    <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
-                    <div class="home-slide_img-txt">
-                      Free
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </nav>
-          </div>  
-          </div>
-  <!-- 메인 홈 끝 -->	
-	
-	
 	
   <!-- 메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1 visible-md-up">
-    <section class="main-box-section con ">
-      <!-- 메인 홈 시작 -->
-      <div class="section-home flex flex-column">
-        
-        <div class="section-home-list section-home-list1 flex">
-          <div class="home-list home-list1">
-            <div><span>NOTICE</span></div>
-            <header><a href="../article/list?boardId=1">더보기 &gt&gt</a></header>
-            <div class="home-list__cell-body">
-            
-            <c:forEach var="article" items="${articles1}" end="4">
-            <div>
-              <div class="home-list__cell-id">${article.id}</div>
-              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
-              <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline" onclick="saveHitsCount(this);">${article.title}</a>
-                <span>[${article.repliesCount}]</span>
-              </div>
-              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
-            </div>
-			</c:forEach>
-            
-            </div>
+    <!-- 메인 홈 시작 -->
+    <div class="section-home flex flex-column">
+      <div class="section-home-box section-home-box1 flex flex-jc-sb">
+        <div class="home-box_letter home-box_letter1 flex flex-column flex-jc-c">
+          <header>Get NOTICE</header>
+          <div class="">
+            사이트 관련 주요 알림들을 확인하세요~!
           </div>
-          
-        </div>
-        <div class="section-home-list section-home-list2 flex">
-          
-          <div class="home-list home-list2 flex flex-column">
-            <div><span>NEWS</span></div>
-            <header><a href="../article/list?boardId=2">&lt&lt 더보기</a></header>
-            <div class="home-list__cell-body">
-            
-            <c:forEach var="article" items="${articles2}" end="4">
-            <div>
-              <div class="home-list__cell-id">${article.id}</div>
-              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
-              <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
-                <span>[${article.repliesCount}]</span>
-              </div>
-              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
-            </div>
-			</c:forEach>
-            
-            </div>
+          <div class="">
+            - 공지사항
+            <br>
+            - 사이트 소개
+          </div>
+          <div class="flex flex-jc-c">
+            <nav>
+            More <i class="fas fa-arrow-right"></i>
+            </nav>
           </div>
         </div>
-        <div class="section-home-list section-home-list3 flex">
-          <div class="home-list home-list3">
-            <div><span>FREE BOARD</span></div>
-            <header><a href="../article/list?boardId=3">더보기 &gt&gt</a></header>
-            <div class="home-list__cell-body">
-            
-            <c:forEach var="article" items="${articles3}" end="4">
-            <div>
-              <div class="home-list__cell-id">${article.id}</div>
-              <div class="home-list__cell-writer">${article.extra_memberNickname}</div>
-              <div class="home-list__cell-title">
-                <a href="../article/detail?id=${article.id}&boardId=${article.boardId}" class="hover-underline"  onclick="saveHitsCount(this);">${article.title}</a>
-                <span>[${article.repliesCount}]</span>
+        <div class="home-box_img">
+          <nav class="flex flex-jc-c">
+            <a href="../article/list?boardId=1">
+              <div>
+                <div class="img-box">
+                  <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+                  <div class="img-txt">
+                    Notice
+                  </div>
+                </div>
               </div>
-              <div class="home-list__cell-hitsCount"><i class="far fa-eye"></i>${article.hitsCount}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-up"></i>${article.extra_likeOnlyPoint}</div>
-              <div class="home-list__cell-likesCount"><i class="far fa-thumbs-down"></i>${article.extra_dislikeOnlyPoint}</div>
-            </div>
-			</c:forEach>
-            
-            </div>
+            </a>
+          </nav>
+        </div>
+      </div>
+      <div class="section-home-box section-home-box2 flex flex-jc-sb">
+        <div class="home-box_img">
+          <nav class="flex flex-jc-c">
+            <a href="../article/list?boardId=2">
+              <div>
+                <div class="img-box">
+                  <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                  <div class="img-txt">
+                    News
+                  </div>
+                </div>
+              </div>
+            </a>
+          </nav>
+        </div>
+        <div class="home-box_letter home-box_letter2 flex flex-column flex-jc-c">
+          <header>Get NEWS</header>
+          <div class="">
+            애플, 삼성, 그 외 Smart 기기들의 최신소식을 빠르게 챙겨가세요~!
+          </div>
+          <div class="">
+            - iPhone / iPad / apple watch 
+            <br>
+            - galaxy / galaxy tab / galaxy watch
+          </div>
+          <div class="flex flex-jc-c">
+            <nav>
+              <i class="fas fa-arrow-left"></i> More 
+            </nav>
           </div>
         </div>
 
       </div>
-      <!-- 메인 홈 끝 -->
-    </section>
+      <div class="section-home-box section-home-box3 flex flex-jc-sb">
+        <div class="home-box_letter home-box_letter3 flex flex-column flex-jc-c">
+          <header>Get TIP's</header>
+          <div class="">
+            애플, 삼성, LG Smart 기기들에 대한 소소한 Tip들을 모두 챙겨가세요~!
+          </div>
+          <div class="">
+            - Apple device Tip's
+            <br>
+            - Samsung device Tip's
+          </div>
+          <div class="flex flex-jc-c">
+            <nav>
+            More <i class="fas fa-arrow-right"></i>
+            </nav>
+          </div>
+        </div>
+        <div class="home-box_img">
+          <nav class="flex flex-jc-c">
+            <a href="../article/list?boardId=3">
+              <div>
+                <div class="img-box">
+                  <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
+                  <div class="img-txt">
+                    Notice
+                  </div>
+                </div>
+              </div>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- 메인 홈 끝 -->
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
   
@@ -188,7 +126,7 @@ function saveHitsCount(el){
                   <div class="mobile-img-box">
                     <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
                     <div class="mobile-img-txt">
-                      Notice
+                      Notice <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
                 </div>
@@ -204,7 +142,7 @@ function saveHitsCount(el){
                   <div class="mobile-img-box">
                     <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
                     <div class="mobile-img-txt">
-                      News
+                      News <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
                 </div>
@@ -220,7 +158,7 @@ function saveHitsCount(el){
                   <div class="mobile-img-box">
                     <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
                     <div class="mobile-img-txt">
-                      Free
+                      Free <i class="fas fa-arrow-right"></i>
                     </div>
                   </div>
                 </div>

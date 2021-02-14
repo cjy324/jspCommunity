@@ -3,7 +3,7 @@
 <%@ page import="com.sbs.example.util.Util"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var="pageTitle" value="GetIt | ${article.title}" />
+<c:set var="pageTitle" value="GetIT | ${article.title}" />
 <%@ include file="../../part/head.jspf"%>
 
 
