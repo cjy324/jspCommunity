@@ -121,7 +121,7 @@ function DoSearchForm_submit(form){
          		<button class="btn" type="submit">검색</button>
          	</form>
             <c:if test="${sessionScope.loginedMemberId > 0}">           
-              <button class="btn btn-go" type="button"><a  href="doWriteForm?boardId=${param.boardId}">글쓰기</a>
+              <button class="btn btn-go" type="button"><a  href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a>
               </button>
          	</c:if>
             </div>
@@ -132,10 +132,10 @@ function DoSearchForm_submit(form){
       <div class="article-page-menu-section">
         <div class="article-page-menu">
           <ul class="flex flex-jc-c">
- 
+ 			<c:if test="${totalPages > 1}"> 
 			<c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
-          	
+          	</c:if>
           	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
           		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
           		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
@@ -149,10 +149,10 @@ function DoSearchForm_submit(form){
           		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
           		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
           	</c:if>
-          	
+          	<c:if test="${totalPages > 1}"> 
           	<c:set var="aUrl" value="?page=${totalPages}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
-          	
+          	</c:if>
           </ul>
         </div>
       </div>
@@ -195,7 +195,7 @@ function DoSearchForm_submit(form){
             <div class="mobile-article-list__cell-head">
               <div class="mobile-article-list__cell-id">No.</div>
               <div class="mobile-article-list__cell-title">제목</div>
-              <div class="mobile-article-list__cell-reply">Re</div>
+              <div class="mobile-article-list__cell-reply"><i class="far fa-comment-dots"></i></div>
             </div>
           </header>
            
@@ -219,7 +219,7 @@ function DoSearchForm_submit(form){
           
         </div>
         <c:if test="${sessionScope.loginedMemberId > 0}">
-          <button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
+          <button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a></button>
         </c:if>
       </div>
       <!-- 모바일 메인-리스트페이지 끝 -->
@@ -227,10 +227,10 @@ function DoSearchForm_submit(form){
       <div class="mobile-article-page-menu-section">
         <div class="mobile-article-page-menu">
           <ul class="flex flex-jc-c">
-
+			<c:if test="${totalPages > 1}"> 
             <c:set var="aUrl" value="?page=1&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 			<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c">&lt;&lt; </a></li>
-          	
+          	</c:if>
           	<c:if test="${boxStartNumBeforePageBtnNeedToShow}">
           		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxStartNumBeforePage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
           		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
@@ -244,10 +244,10 @@ function DoSearchForm_submit(form){
           		<c:set var="aUrl" value="?boardId=${param.boardId}&page=${boxEndNumAfterPage}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
           		<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c">다음 &gt;</a></li>
           	</c:if>
-          	
+          	<c:if test="${totalPages > 1}"> 
           	<c:set var="aUrl" value="?page=${totalPages}&boardId=${param.boardId}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 			<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>
-			
+			</c:if>
           </ul>
         </div>
       </div>

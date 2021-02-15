@@ -232,6 +232,8 @@ function doModifyReplyForm__init() {
   $('.doModifyReplyForm').click(function() {
 
       $('.doModifyReplyForm').addClass('active');
+      $('.reply-detail-cell-likesCount').addClass('active');
+      $('.mobile-reply-list-box__cell-body').addClass('active');
       $(this).parents().parents().prev('.reply-list-box__cell-contents').addClass('active');
       $(this).parents().parents().addClass('active');
       $(this).parents().addClass('active');

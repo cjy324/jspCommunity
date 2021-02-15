@@ -242,11 +242,11 @@ function localStorageClear(){
 </c:if>
       <div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
       <div class="mobile-side-bar-button"><a href="../member/showMyPage"><i class="fas fa-user-cog"></i> 회원정보</a></div>
-      <div class="mobile-side-bar-button"><a href="../member/doLogout"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/doLogout?beforeUrl=${encodedCurrentUrl}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></div>
       </c:if>
  	  <c:if test="${isLogined == false}">
 		<div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
-      <div class="mobile-side-bar-button"><a href="../member/doLoginForm"><i class="fas fa-sign-in-alt"></i> 로그인</a></div>
+      <div class="mobile-side-bar-button"><a href="../member/doLoginForm?beforeUrl=${encodedCurrentUrl}"><i class="fas fa-sign-in-alt"></i> 로그인</a></div>
       <div class="mobile-side-bar-button"><a href="../member/doJoinForm"><i class="fas fa-user-check"></i> 회원가입</a></div>
 				</c:if>
     </div>

@@ -1588,6 +1588,7 @@ body{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
+  font-weight:bold;
 }
 
 .article-detail-cell__head-contents-1 >div:not(:last-child){
@@ -1601,6 +1602,7 @@ body{
 
 .article-detail-cell__title > *{
   padding-top:2px;
+  font-weight:bold;
 }
 
 .article-detail-cell__title-contents > *{
@@ -1632,15 +1634,9 @@ body{
   font-size:1rem;
 
 }
-.article-detail-bottom-cell > div{
-  padding:15px;
-  padding-top:25px;
-  padding-bottom:5px;
-}
-
 
 .article-detail-cell__body .tui-editor-contents{
-  font-family: 'GongGothicMedium';
+  font-family: 'Noto Sans KR', sans-serif;
   font-size:1rem;
   
 }
@@ -1670,8 +1666,9 @@ body{
 /* 게시물 상세페이지 끝 */
 /* 댓글창 시작 */
 .reply-write-box{
-  margin:20px 0;
+  padding:20px 0;
   white-space:nowrap;
+  border-bottom:4px solid gray;
 }
 
 .reply-write-box-form > span{
@@ -1687,6 +1684,15 @@ body{
 .reply-write-box-form__option{
   padding:0px 10px;
 
+}
+
+.reply-count-box{
+  margin-top:10px;
+  text-align:right;
+  padding-right:40px;
+  font-size:1rem;
+  font-weight:bold;
+  
 }
 
 .reply-list-box{
@@ -1730,6 +1736,13 @@ body{
 .reply-list-box__cell-body.focus {
   background-color:yellow;
   transition:background-color 0s;
+}
+
+.reply-detail-cell-likesCount > *{
+  font-size:0.8rem;
+  border: none;
+  background-color: rgba(200,200,200,0);
+  padding:10px;
 }
 
 
@@ -1778,6 +1791,9 @@ body{
 .reply-list-box-cell__option-btns.active{
   display:none;
 }
+.reply-detail-cell-likesCount.active{
+  display:none;
+}
 .doModifyReplyForm.active{
 	display:none;
 }
@@ -1797,47 +1813,46 @@ body{
 }
 
 .reply-page-menu > ul > li > a {
-  border:1px solid transparent;
-  padding:7px;
+  padding:3px;
+  border:2px solid white;
 
 }
 
-.reply-page-menu > ul > .before-btn, .after-btn {
+.reply-page-menu > ul > li:hover > a {
+  font-weight:bold;
+  color:red;
+
+}
+
+.reply-page-menu > ul > .before-btn, .reply-page-menu > ul > .after-btn {
   margin-top:-3px;
+  padding-top:3px;
 }
 
-.reply-page-menu > ul > li:first-child, li:last-child {
-  margin-top:0px;
+.reply-page-menu > ul > li:first-child, .reply-page-menu > ul > li:last-child {
+  padding-top:-3px;
+}
+
+
+.reply-page-menu > ul > li:not(.before-btn):not(.after-btn):hover > a {
+  border:2px solid gray;
+  border-radius:10px;
 }
 
 
 .reply-page-menu > ul > li:not(.before-btn):not(.after-btn) > a {
-  padding-left:0;
-  padding-right:0;
   min-width:30px;
   justify-content:center;
 }
 
-.reply-page-menu > ul > li:hover > a {
-  font-weight:bold;
-  background-color:rgba(220,220,220,1);
-  border-radius:50%;
-}
-
-.reply-page-menu__link--selected {
+.reply-page-menu > ul > li > .reply-page-menu__link--selected {
   color:red;
   font-weight:bold;
-  background-color:rgba(220,220,220,0.5);
-  border-radius:50%;
+  border:2px solid rgba(200,200,200,0.9);
+  border-radius:10px;
   text-decoration:underline;
 
 }
-
-.reply-page-menu > ul > li:hover > a {
-  font-weight:bold;
-  color:red;
-}
-
 
 /* 댓글창 하단 메뉴 끝 */
 /* 게시물 상세페이지 하단 메뉴 시작 */
@@ -1848,21 +1863,21 @@ body{
 .article-detail-bottom-cell{
   font-size:1rem;
 }
+
 .article-detail-bottom-cell > div{
-
-
+  padding:15px;
+  padding-top:25px;
+  padding-bottom:5px;
 }
 
-.article-detail-bottom-cell > div > a{
 
+.article-detail-bottom-cell > div > a{
   padding:8px 3px;
 }
 
 .article-detail-bottom-cell > div:hover > a{
   color:red;
   font-weight:bold;
-  background-color:rgba(220,220,220,0.9);
-  border-radius:30%;
 
 }
 
@@ -1945,15 +1960,10 @@ body{
   font-size:1rem;
 
 }
-.mobile-article-detail-bottom-cell > div{
-  padding:15px;
-  padding-top:25px;
-  padding-bottom:5px;
-}
 
 
 .mobile-article-detail-cell__body .tui-editor-contents{
-  font-family: 'GongGothicMedium';
+  font-family: 'Noto Sans KR', sans-serif;
   font-size:0.9rem;
 }
 
@@ -1976,23 +1986,21 @@ body{
   background-color:rgba(220,220,220,0.5);
 }
 
-.mobile-article-detail-cell__option{
-  padding-top:10px;
-}
 
-.mobile-article-detail-cell__option .btn{
-  margin-right:5px;
+.mobile-article-detail-cell__option button{
+  width:50%;
+  border-radius:0;
   font-size:0.7rem;
-  height:30px;
-  padding:0px 10px;
+
 }
 
 /* 모바일-게시물 상세페이지 끝 */
 /* 모바일-댓글창 시작 */
 .mobile-reply-write-box{
-  margin:20px 0;
+  padding:20px 0;
   white-space:nowrap;
   font-size:0.8rem;
+  border-bottom:2px solid gray;
 }
 
 .mobile-reply-write-box-form > span{
@@ -2008,6 +2016,14 @@ body{
 .mobile-reply-write-box-form__option > .m-btn{
   height:31px;
   border-radius:0;
+}
+
+.mobile-reply-count-box{
+  margin-top:10px;
+  text-align:right;
+  padding-right:20px;
+  font-size:0.8rem;
+  font-weight:bold;
 }
 
 .mobile-reply-list-box{
@@ -2053,6 +2069,14 @@ body{
 .mobile-reply-list-box__cell-body.focus {
   background-color:yellow;
   transition:background-color 0s;
+}
+
+.mobile-reply-detail-cell-likesCount > *{
+  font-size:0.7rem;
+  border: none;
+  background-color: rgba(200,200,200,0);
+  padding:10px;
+
 }
 
 
@@ -2110,6 +2134,12 @@ body{
 .mobile-reply-list-box-cell__option-btns.active{
   display:none;
 }
+.mobile-reply-list-box__cell-body.active{
+  display:none;
+}
+.mobile-reply-detail-cell-likesCount.active{
+  display:none;
+}
 .mobile-doModifyReplyForm.active{
 	display:none;
 }
@@ -2120,8 +2150,8 @@ body{
 /* 모바일-댓글창 끝 */
 /* 모바일-댓글창 하단 메뉴 시작 */
 .mobile-reply-page-menu-section{
-  margin-top:10px;
-  padding-bottom:20px;
+  margin-top:15px;
+  padding-bottom:30px;
 }
 
 .mobile-reply-page-menu {
@@ -2129,47 +2159,46 @@ body{
 }
 
 .mobile-reply-page-menu > ul > li > a {
-  border:1px solid transparent;
-  padding:7px;
+  padding:3px;
+  border:2px solid white;
 
 }
 
-.mobile-reply-page-menu > ul > .before-btn, .after-btn {
+.mobile-reply-page-menu > ul > li:hover > a {
+  font-weight:bold;
+  color:red;
+
+}
+
+.mobile-reply-page-menu > ul > .before-btn, .mobile-reply-page-menu > ul > .after-btn {
   margin-top:-3px;
+  padding-top:3px;
 }
 
-.mobile-reply-page-menu > ul > li:first-child, li:last-child {
-  margin-top:0px;
+.mobile-reply-page-menu > ul > li:first-child, .mobile-reply-page-menu > ul > li:last-child {
+  padding-top:-3px;
+}
+
+
+.mobile-reply-page-menu > ul > li:not(.before-btn):not(.after-btn):hover > a {
+  border:2px solid gray;
+  border-radius:10px;
 }
 
 
 .mobile-reply-page-menu > ul > li:not(.before-btn):not(.after-btn) > a {
-  padding-left:0;
-  padding-right:0;
-  min-width:30px;
+  min-width:20px;
   justify-content:center;
 }
 
-.mobile-reply-page-menu > ul > li:hover > a {
-  font-weight:bold;
-  background-color:rgba(220,220,220,1);
-  border-radius:50%;
-}
-
-.mobile-reply-page-menu__link--selected {
+.mobile-reply-page-menu > ul > li > .mobile-reply-page-menu__link--selected {
   color:red;
   font-weight:bold;
-  background-color:rgba(220,220,220,0.5);
-  border-radius:50%;
+  border:2px solid rgba(200,200,200,0.9);
+  border-radius:10px;
   text-decoration:underline;
 
 }
-
-.mobile-reply-page-menu > ul > li:hover > a {
-  font-weight:bold;
-  color:red;
-}
-
 
 /* 모바일-댓글창 하단 메뉴 끝 */
 /* 모바일-게시물 상세페이지 하단 메뉴 시작 */
@@ -2181,8 +2210,9 @@ body{
   font-size:0.8rem;
 }
 .mobile-article-detail-bottom-cell > div{
-
-
+  padding:10px;
+  padding-top:25px;
+  padding-bottom:5px;
 }
 
 .mobile-article-detail-bottom-cell > div > a{
@@ -2192,8 +2222,6 @@ body{
 .mobile-article-detail-bottom-cell > div:hover > a{
   color:red;
   font-weight:bold;
-  background-color:rgba(220,220,220,0.9);
-  border-radius:30%;
 
 }
 
