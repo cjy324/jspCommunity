@@ -76,23 +76,23 @@ function localStorageClear(){
 <div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
 </c:if>
 					<div class="head-bar-button">
-						<a href="../home/main">홈</a>
+						<a href="../home/main" title="Home">홈</a>
 					</div>
 					<div class="head-bar-button">
-						<a href="../member/showMyPage">회원정보</a>
+						<a href="../member/showMyPage" title="MyPage">회원정보</a>
 					</div>
-					<div class="head-bar-button">
+					<div class="head-bar-button" title="Logout">
 						<a href="../member/doLogout?beforeUrl=${encodedCurrentUrl}">로그아웃</a>
 					</div>
 				</c:if>
 				<c:if test="${isLogined == false}">
-					<div class="head-bar-button">
+					<div class="head-bar-button" title="Home">
 						<a href="../home/main">홈</a>
 					</div>
-					<div class="head-bar-button">
+					<div class="head-bar-button" title="Login">
 						<a href="../member/doLoginForm?beforeUrl=${encodedCurrentUrl}">로그인</a>
 					</div>
-					<div class="head-bar-button">
+					<div class="head-bar-button" title="Sign-up">
 						<a href="../member/doJoinForm">회원가입</a>
 					</div>
 				</c:if>
@@ -105,7 +105,7 @@ function localStorageClear(){
 		<header class="top-bar visible-md-up head-nav nav-down">
 			<div class="con height-100p flex flex-jc-sb flex-ai-c">
 				<div class="title head-nav nav-down">
-					<a href="../home/main">
+					<a href="../home/main" title="Home">
 						Get <span>IT</span>
 					</a>
 				</div>
@@ -177,7 +177,7 @@ function localStorageClear(){
 		<header class="mobile-top-bar flex visible-sm-down head-nav nav-down">
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
 				<div class="mobile-title">
-					<a href="../home/main">
+					<a href="../home/main" title="Home">
 						Get <span>IT</span>
 					</a>
 				</div>

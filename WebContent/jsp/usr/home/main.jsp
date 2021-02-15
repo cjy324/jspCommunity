@@ -22,12 +22,14 @@
             - 사이트 소개
           </div>
           <div class="flex flex-jc-c">
-            <nav>
-            More <i class="fas fa-arrow-right"></i>
-            </nav>
+            <a href="../article/list?boardId=1">
+              <nav title="게시판으로 이동">
+                More <i class="fas fa-arrow-right"></i>
+              </nav>
+            </a>  
           </div>
         </div>
-        <div class="home-box_img">
+        <div class="home-box_img" title="게시판으로 이동">
           <nav class="flex flex-jc-c">
             <a href="../article/list?boardId=1">
               <div>
@@ -43,7 +45,7 @@
         </div>
       </div>
       <div class="section-home-box section-home-box2 flex flex-jc-sb">
-        <div class="home-box_img">
+        <div class="home-box_img" title="게시판으로 이동">
           <nav class="flex flex-jc-c">
             <a href="../article/list?boardId=2">
               <div>
@@ -68,9 +70,11 @@
             - galaxy / galaxy tab / galaxy watch
           </div>
           <div class="flex flex-jc-c">
-            <nav>
-              <i class="fas fa-arrow-left"></i> More 
-            </nav>
+            <a href="../article/list?boardId=2">
+              <nav title="게시판으로 이동">   
+                <i class="fas fa-arrow-left"></i> More
+              </nav>
+            </a>
           </div>
         </div>
 
@@ -87,12 +91,14 @@
             - Samsung device Tip's
           </div>
           <div class="flex flex-jc-c">
-            <nav>
-            More <i class="fas fa-arrow-right"></i>
-            </nav>
+            <a href="../article/list?boardId=3">
+              <nav title="게시판으로 이동">  
+                More <i class="fas fa-arrow-right"></i>
+              </nav>
+            </a>
           </div>
         </div>
-        <div class="home-box_img">
+        <div class="home-box_img" title="게시판으로 이동">
           <nav class="flex flex-jc-c">
             <a href="../article/list?boardId=3">
               <div>

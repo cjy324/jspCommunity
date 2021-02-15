@@ -88,15 +88,18 @@ MobileTopBar__init();
 /* mobile-side-bar_menu 옵션 끝 */
 
 
-/* top-button 옵션 시작 */
+/* top & bottom-button 옵션 시작 */
 $(function() {  
+  var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
   // 보이기 | 숨기기
   $(window).scroll(function() { 
     if ($(this).scrollTop() < 200) { 
     //200 넘으면 버튼이 보임 
-     $('.top-button').fadeOut(); 
+     $('.top-button').fadeOut(),
+       $('.bottom-button').fadeOut();  
   } else { 
-    $('.top-button').fadeIn();
+    $('.top-button').fadeIn(),
+      $('.bottom-button').fadeIn(); 
   } 
   }); 
   // 버튼 클릭시 0 까지 animation 이동합니다. 
@@ -104,11 +107,16 @@ $(function() {
     $('html, body').animate({ 
       scrollTop : 0 }, 200); // 속도 200 
     return false; 
+  }),
+    $(".bottom-button").click(function() {
+    $('html, body').animate({ 
+      scrollTop : scrollBottom }, 200); // 속도 200 
+    return false; 
   }); 
 
 });
 
-/* top-button 옵션 끝 */
+/* top & bottom-button 옵션 끝 */
 
 
 

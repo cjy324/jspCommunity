@@ -183,11 +183,11 @@ function DoSearchForm_submit(form){
                 }
               </script>
               <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
-              <div><button class="btn" type="submit">검색</button></div>
+              <div><button class="m-btn" type="submit">검색</button></div>
             </form>
           </div>
           <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
-          <div class="mobile-article-list-name">
+          <div class="mobile-article-list-name flex flex-jc-sb">
             <span>${articles.get(0).extra_boardName}</span>
             <span>(Total : ${totalCount})</span>
           </div>
@@ -219,7 +219,7 @@ function DoSearchForm_submit(form){
           
         </div>
         <c:if test="${sessionScope.loginedMemberId > 0}">
-          <button class="btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
+          <button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}">글쓰기</a></button>
         </c:if>
       </div>
       <!-- 모바일 메인-리스트페이지 끝 -->
@@ -236,7 +236,7 @@ function DoSearchForm_submit(form){
           		<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; 이전</a></li>
           	</c:if>
             <c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">
-				<c:set var="aClass" value="${page == i ? 'article-page-menu__link--selected' : '???' }" />           
+				<c:set var="aClass" value="${page == i ? 'mobile-article-page-menu__link--selected' : '???' }" />           
 				<c:set var="aUrl" value="?boardId=${param.boardId}&page=${i}&searchKeywordType=${param.searchKeywordType}&searchKeyword=${param.searchKeyword}" />
 				<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>
             </c:forEach>
