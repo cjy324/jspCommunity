@@ -44,7 +44,7 @@ function check(form){
 
 
   <!-- 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1">
+  <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
       <!-- 메인-글쓰기,수정페이지 시작 -->
       <section class="section-2 min-height-50vh">
@@ -52,7 +52,7 @@ function check(form){
           <div class="article-writeAndModify-cell height-100p">
             <div class="article-writeAndModify-cell__board-name">
               <div>
-                <span>${article.id}번 ${pageTitle}</span>
+                <span>${article.id}번 게시물 수정</span>
               </div>
             </div>
             <div class="article-writeAndModify-cell__contents-box">
@@ -68,9 +68,9 @@ function check(form){
                 <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
                 </div>
                 <div class="article-writeAndModify-cell__option flex flex-jc-fe">
-                  <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}">수정</button>
+                  <button class="btn btn-go" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" type="button" onclick="history.back();">
-                    뒤로가기
+                    <i class="fas fa-ban"></i> 취소
                   </button>
                 </div>
               </form>
@@ -82,6 +82,47 @@ function check(form){
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
+  
+  
+  <!-- 모바일-메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1 visible-sm-down">
+    <section class="main-box-section con">
+      <!-- 모바일-글쓰기,수정페이지 시작 -->
+      <section class="mobile-section-2 min-height-50vh">
+        <div class="height-100p">
+          <div class="mobile-article-writeAndModify-cell height-100p">
+            <div class="mobile-article-writeAndModify-cell__board-name">
+              <div>
+                <span>${article.id}번 게시물 수정</span>
+              </div>
+            </div>
+            <div class="mobile-article-writeAndModify-cell__contents-box">
+              <form name="form" onsubmit="check(this); return false;" action="doWrite" method="POST">
+                <input type="hidden" name="boardId" value="${param.boardId}">
+                <input type="hidden" name="body">
+                <span>TITLE</span>
+                <br />
+                <input type="text" name="title" maxlength="50" placeholder="수정할 제목 입력" value="${article.title}">
+                <hr />
+                <span>BODY</span>
+                <script type="text/x-template">${articleBody}</script>
+                <div class="mobile-article-writeAndModify-cell__body toast-ui-editor2 height-70p">
+                </div>
+                <div class="mobile-article-writeAndModify-cell__option flex flex-jc-fe">
+                  <button class="btn btn-go" type="submit"><i class="far fa-edit"></i> 수정</button>
+                  <button class="btn btn-back" type="button" onclick="history.back();">
+                    <i class="fas fa-ban"></i> 취소
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- 모바일-글쓰기,수정페이지 시작 -->
+    </section>
+  </main>
+  <!-- 모바일-메인 컨텐츠 박스 끝 -->
 
 	
 <%@ include file="../../part/foot.jspf" %>

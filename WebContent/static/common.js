@@ -196,6 +196,23 @@ function Editor__init() {
   });
 }
 
+
+function Editor__init2() {
+  $('.toast-ui-editor2').each(function(index, node) {
+    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
+
+    var editor = new toastui.Editor({
+      el: node,
+      previewStyle: 'tab',
+      initialValue: initialValue,
+      height:500,
+      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+    });
+
+	$(node).data('data-toast-editor', editor);
+  });
+}
+
 /* toastui-editor 함수 끝 */
 
 
@@ -218,6 +235,7 @@ function EditorViewer__init() {
 }
 	EditorViewer__init();
 	Editor__init();
+	Editor__init2();
 }
 
 ArticleDetail__Body__init();

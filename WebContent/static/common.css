@@ -659,25 +659,33 @@ body{
 
 /* 로그인 페이지 시작 */
 .section-login{
-  
+  margin-top:200px;
 }
 .section-login > form{
   text-align:center;
   border-radius:10% 10% 10% 10%;
   box-shadow:5px 10px 10px 10px gray;
-  width:300px;
+  width:380px;
   font-size:1rem;
   font-weight:bold;
   padding:20px 10px;
 }
-.section-login > form > div{
+.section-login > form > div:not(.login-title){
   padding:5px;
   
 }
 
+.login-title{
+  font-size:1.9rem;
+  margin:10px;
+  margin-bottom:40px;
+  border-bottom:4px solid gray;
+  padding-bottom:15px;
+}
+
 .section-login > form > div > span{
   padding-bottom:3px;
-  border-bottom:4px solid;
+  border-bottom:2.5px solid gray;
 }
 
 .login_cell__title{
@@ -688,7 +696,7 @@ body{
   font-size:1rem;
   font-weight:bold;
   border:none;
-  border-bottom:2px solid #333;
+  border-bottom:1.5px solid #333;
   padding:5px;
   height:35px;
   width:90%;
@@ -723,6 +731,84 @@ body{
 
 
 /* 로그인 페이지 끝 */
+/* 모바일-로그인 페이지 시작 */
+.mobile-section-login{
+  
+}
+.mobile-section-login > form{
+  text-align:left;
+  width:100%;
+  font-size:0.9rem;
+  font-weight:bold;
+  padding:20px 10px;
+}
+.mobile-section-login > form > div{
+  padding:5px;
+  
+}
+
+.mobile-login-title{
+  text-align:center;
+  font-size:1.3rem;
+  margin:10px;
+  margin-bottom:30px;
+  border-bottom:4px solid gray;
+  
+}
+
+.mobile-section-login > form > div > span{
+  padding-bottom:3px;
+  border-bottom:2.5px solid gray;
+}
+
+.mobile-login_cell__title{
+  color:black;
+}
+
+.mobile-login_cell__body > input{
+  font-size:0.8rem;
+  font-weight:bold;
+  border:none;
+  border-bottom:1.5px solid #333;
+  padding:5px;
+  height:35px;
+  width:90%;
+  min-width:150px;
+}
+.mobile-loginInput_cell{
+  margin-top:10px;
+  font-size:0.9rem;
+
+}
+.mobile-loginInput_cell > div:first-child{
+  display:flex;
+  flex-direction:column;
+}
+
+.mobile-loginInput_cell > div > button{
+  margin:5px 2px;
+  padding:0 20px;
+}
+
+.mobile-loginInput_cell > div:last-child{
+  text-align:center;
+  padding-top:10px;
+  
+}
+
+.mobile-loginInput_cell > div:last-child > a{
+  padding:7px;
+}
+
+.mobile-loginInput_cell > div > a:hover{
+  color:red;
+  font-weight:bold;
+  text-decoration:underline;
+}
+
+
+
+/* 모바일-로그인 페이지 끝 */
 
 
 
@@ -781,69 +867,157 @@ body{
 
 /* 회원정보 페이지 시작 */
 .section-MyPage{
-  padding-top:50px;
+  padding-top:100px;
   padding-bottom:50px;
+  
+  
 }
-.section-MyPage > * > .section-MyPage-body{
+.section-MyPage > form{
+  width:900px;
+}
+
+.section-MyPage > form > .section-MyPage-body{
   text-align:left;
-  width:310px;
+  
   font-size:1rem;
   font-weight:bold;
   border-radius:20px 20px 20px 20px;
   box-shadow:5px 10px 10px 10px gray;
-  padding:5px;
-  padding-top:20px;
-}
-.section-MyPage-body > div{
-  padding:5px;
-  padding-left:20px;
+  padding:50px;
+
 }
 
+.section-MyPage-body > div:first-child{
+  font-size:2rem;
+
+}
+
+.section-MyPage-body__cell{
+  padding:10px 70px;
+  
+}
+
+.section-MyPage-body__cell:last-child{
+  padding:10px 30px;
+  
+}
+
+.section-MyPage-body__cell:nth-child(2){
+  padding-top:30px;
+  border-right:4px solid gray;
+}
+
+
 .MyPage_cell__title{
- 
+  margin-bottom:10px;
+  font-size:1.1rem;
 }
 .MyPage_cell__title > span{
   padding-bottom:3px;
-  border-bottom:4px solid;
+  border-bottom:3px solid gray;
 }
 
 .MyPage_cell__body{
-  font-size:1rem;
+  font-size:0.9rem;
+  font-weight:normal;
   background-color:white;
   height:50px;
+  padding-top:10px;
   display:flex;
   align-items:center;
 }
 
 .MyPage_cell__body > input{
-  font-size:1rem;
+  font-size:0.9rem;
   height:30px;
+  padding-top:10px;
+  font-weight:normal;
   border:none;
-  border-bottom:2px solid #333;
+  
+  border-bottom:1.5px solid #333;
   display:flex;
   align-items:center;
 }
 
 .MyPage_cell__body > .btn{
-  margin-left:10px;
+  margin-left:5px;
   font-size:0.7rem;
-  width:75px;
+  width:90px;
 }
 
-.submitModifyBtn{
-  margin-top:10px;
-  margin-bottom:10px;
-  margin-right:5px;
-  margin-left:175px;
-}
-
-.doModifyBtn{
-  margin:10px;
-  margin-left:235px;
-  width:60px;
+.section-MyPage-body__option button{
+  margin-left:10px;
 }
 
 /* 회원정보 페이지 끝 */
+/* 모바일-회원정보 페이지 시작 */
+.mobile-section-MyPage{
+  padding-top:100px;
+  padding-bottom:50px;
+  
+}
+
+.mobile-section-MyPage > form{
+  width:90%;
+  
+}
+
+.mobile-section-MyPage > form > .mobile-section-MyPage-body{
+  text-align:center;
+  font-weight:bold;
+}
+
+.mobile-section-MyPage-body > div:first-child{
+  text-align:center;
+  font-size:1.3rem;
+  padding-bottom:10px;
+  margin:10px;
+  margin-bottom:30px;
+  border-bottom:4px solid gray;
+}
+
+
+.mobile-MyPage_cell__title{
+  margin-bottom:10px;
+  font-size:0.9rem;
+}
+.mobile-MyPage_cell__title > span{
+  padding-bottom:3px;
+  border-bottom:2.5px solid gray;
+}
+
+.mobile-MyPage_cell__body{
+  padding-top:15px;
+  font-size:0.7rem;
+  font-weight:normal;
+  background-color:white;
+  height:50px;
+
+}
+
+.mobile-MyPage_cell__body > input{
+  font-size:0.7rem;
+  font-weight:normal;
+  padding-top:10px;
+  height:30px;
+  border:none;
+  border-bottom:1.5px solid #333;
+
+}
+
+.mobile-MyPage_cell__title > .btn{
+  margin-left:5px;
+  font-size:0.7rem;
+  width:155px;
+}
+
+.mobile-section-MyPage-body__option button{
+  margin-top:5px;
+}
+
+/* 모바일-회원정보 페이지 끝 */
+
+
 
 /* 홈 시작 */
 .section-home > div{
@@ -2266,6 +2440,46 @@ body{
 }
 
 /* 게시물 글쓰기(수정)페이지 시작 */
+/* 모바일-게시물 글쓰기(수정)페이지 시작 */
+.mobile-article-writeAndModify-cell__board-name{
+  font-size:1.1rem;
+  padding:10px;
+  margin-top:20px;
+  margin-bottom:20px;
+  border-bottom:3px solid;
+  font-weight:bold;
+}
+
+.mobile-article-writeAndModify-cell__contents-box > form > span{
+  font-size:1.1rem;
+  font-weight:bold;
+  margin:10px;
+}
+
+.mobile-article-writeAndModify-cell__contents-box input{
+  margin:10px;
+  height:30px;
+  width:90%;
+}
+
+
+.mobile-article-writeAndModify-cell__body{
+  margin-top:10px;
+  border:1px solid gray;
+  border-top:5px double gray;
+  padding:30px;
+  font-size:1rem;
+}
+
+
+.mobile-article-writeAndModify-cell__option button{
+  width:50%;
+  border-radius:0;
+  font-size:0.7rem;
+
+}
+
+/* 모바일-게시물 글쓰기(수정)페이지 시작 */
 
 
 

@@ -48,7 +48,7 @@
 </script>
 
   <!-- 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1">
+  <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
       <!-- 메인-로그인 페이지 시작 -->
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
@@ -57,6 +57,9 @@
           <input type="hidden" name="nextUrlAfterLogin" value="${param.nextUrlAfterLogin}">
           <input type="hidden" name="loginPwReal">
           <input type="hidden" name="beforeUrl" value="${param.beforeUrl}">
+          <div class="login-title">
+           LOGIN
+          </div>
           <div class="login_cell__title">
             <span>아이디</span>
           </div>
@@ -71,8 +74,8 @@
           </div>
           <div class="loginInput_cell">
             <div>
-            <button class="btn btn-go" type="submit">Login</button>
-            <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
+            <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> Back</button>
             </div>
             <div>
             <a href="../member/doFindLoginIdForm">ID 찾기</a>
@@ -85,6 +88,47 @@
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
+  
+  
+  <!-- 모바일-메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1 visible-sm-down">
+    <section class="main-box-section con">
+      <!-- 모바일-로그인 페이지 시작 -->
+      <div class="mobile-section-login min-height-50vh flex flex-jc-c flex-ai-c">
+
+        <form name="form" onsubmit="check(this); return false;" action="doLogin" method="POST">
+          <input type="hidden" name="loginPwReal">
+          <div class="mobile-login-title">
+           LOGIN
+          </div>
+          <div class="mobile-login_cell__title">
+            <span>아이디</span>
+          </div>
+          <div class="mobile-login_cell__body">
+            <input type="text" name="loginId" maxlength="50" placeholder="ID">
+          </div>
+          <div class="mobile-login_cell__title">
+            <span>비밀번호</span>
+          </div>
+          <div class="mobile-login_cell__body">
+            <input type="password" name="loginPw" maxlength="50" placeholder="Password">
+          </div>
+          <div class="mobile-loginInput_cell">
+            <div>
+            <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> Back</button>
+            </div>
+            <div>
+            <a href="../member/doFindLoginIdForm">ID 찾기</a>
+           / <a href="../member/doFindLoginPwForm">PW 찾기</a>
+              </div>
+            </div>
+        </form>
+      </div>
+      <!-- 모바일-로그인 페이지 끝 -->
+    </section>
+  </main>
+  <!-- 모바일-메인 컨텐츠 박스 끝 -->
 
 
 

@@ -115,82 +115,194 @@
 </script>
 	
   <!-- 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1">
+  <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
-      <!-- 메인-회원정보 페이지 시작 -->
-      <div class="section-MyPage min-height-50vh flex flex-jc-c flex-ai-c">
-      	<form name="form" onsubmit="check(this); return false;" action="doModifyInfo" method="POST">
-      		<input type="hidden" name="id" value="${loginedMember.id}">
-      		<input type="hidden" name="loginPwReal">
-        <div class="section-MyPage-body">
-          <div class="MyPage_cell__title">
-            <span>회원번호</span>
+      <!-- 회원정보 페이지 시작 -->
+      <div class="section-MyPage min-height-50vh flex flex-jc-c flex-ai-c ">
+        <form name="form" onsubmit="check(this); return false;" action="doModifyInfo" method="POST">
+          <input type="hidden" name="id" value="${loginedMember.id}">
+          <input type="hidden" name="loginPwReal">
+
+          <div class="section-MyPage-body flex flex-jc-c">
+            <div>MY PAGE<br>(Modify)</div>
+            <div class="section-MyPage-body__cell">
+              <div class="MyPage_cell__title">
+                <span>회원번호</span>
+                <div class="MyPage_cell__body">
+                  <span>${loginedMember.id}</span>
+                </div>
+              </div>
+
+              <div class="MyPage_cell__title">
+                <span>회원ID</span>
+                <div class="MyPage_cell__body">
+                  <span>${loginedMember.loginId}</span>
+                </div>
+              </div>
+
+              <div class=MyPage_cell__title>
+                <span>Password</span>
+                <div class=MyPage_cell__body>
+                  <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+                </div>
+              </div>
+
+              <div class=MyPage_cell__title>
+                <span>Password Check</span>
+                <div class=MyPage_cell__body>
+                  <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 확인">
+                </div>
+              </div>
+
+              <div class="MyPage_cell__title">
+                <span>회원이름</span>
+                <div class=MyPage_cell__body>
+                  <input type="text" name="name" value="${loginedMember.name}">
+                </div>
+              </div>
+            </div>
+
+            <div class="section-MyPage-body__cell">
+              <div class="MyPage_cell__title">
+                <span>닉네임</span>
+                <div class="MyPage_cell__body">
+                  <input type="text" name="nickname" placeholder="${loginedMember.nickname}">
+                  <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+                </div>
+              </div>
+              <div class=MyPage_cell__title>
+                <span>e-mail</span>
+                <div class=MyPage_cell__body>
+                  <input type="email" name="email" value="${loginedMember.email}">
+                </div>
+              </div>
+
+              <div class=MyPage_cell__title>
+                <span>연락처</span>
+                <div class=MyPage_cell__body>
+                  <input type="number" name="cellphoneNo" value="${loginedMember.cellphoneNo}">
+                </div>
+              </div>
+
+              <div class=MyPage_cell__title>
+                <span>회원등급</span>
+                <div class=MyPage_cell__body>
+                  <span>${loginedMember.authLevel}</span>
+                </div>
+              </div>
+
+              <div class=MyPage_cell__title>
+                <span>회원가입일</span>
+                <div class=MyPage_cell__body>
+                  <span>${loginedMember.regDate}</span>
+                </div>
+              </div>
+              <div class="section-MyPage-body__option flex flex-jc-fe flex-ai-fe">
+                <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 변경</button>
+                <button class="cleModifyBtn btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 취소</button>
+              </div>
+            </div>
           </div>
-          <div class="MyPage_cell__body">
-            <span>${loginedMember.id}</span>
-          </div>
-          <div class="MyPage_cell__title">
-            <span>회원ID</span>
-          </div>
-          <div class="MyPage_cell__body">
-          	<span>${loginedMember.loginId}</span>
-          </div>
-          <div class=MyPage_cell__title>
-            <span>Password</span>
-          </div>
-          <div class=MyPage_cell__body>
-            <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
-          </div>
-          <div class=MyPage_cell__title>
-            <span>Password Check</span>
-          </div>
-          <div class=MyPage_cell__body>
-            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 확인">
-          </div>
-          <div class="MyPage_cell__title">
-            <span>회원이름</span>
-          </div>
-          <div class=MyPage_cell__body>
-           <input type="text" name="name" value="${loginedMember.name}">
-          </div>
-          <div class=MyPage_cell__title>
-            <span>닉네임</span>
-          </div>
-          <div class=MyPage_cell__body>
-         	<input type="text" name="nickname" placeholder="${loginedMember.nickname}">
-			<button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
-		  </div>
-          <div class=MyPage_cell__title>
-            <span>e-Mail</span>        
-          </div>
-          <div class=MyPage_cell__body>          
-           <input type="email" name="email" value="${loginedMember.email}">        
-          </div>
-          <div class=MyPage_cell__title>
-            <span>연락처</span>
-          </div>
-          <div class=MyPage_cell__body>
-           <input type="number" name="cellphoneNo" value="${loginedMember.cellphoneNo}">
-          </div>
-          <div class=MyPage_cell__title>
-            <span>회원등급</span>
-          </div>
-          <div class=MyPage_cell__body>
-            <span>${loginedMember.authLevel}</span>
-          </div>
-          <div class=MyPage_cell__title>
-            <span>회원가입일</span>
-          </div>
-          <div class=MyPage_cell__body>
-            <span>${loginedMember.regDate}</span>
-          </div>
-          <button class ="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}">변경</button>
-          <button class ="cleModifyBtn btn btn-back" type="button" onclick="history.back();">취소</button>
-        </div>
-      	</form>
+        </form>
       </div>
-      <!-- 메인-회원정보 페이지 끝 -->
+      <!-- 회원정보 페이지 끝 -->
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
+
+  <!-- 모바일-메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1 visible-sm-down">
+    <section class="main-box-section con">
+      <!-- 모바일-회원정보 페이지 시작 -->
+      <div class="mobile-section-MyPage min-height-50vh flex flex-jc-c flex-ai-c ">
+        <form name="form" onsubmit="check(this); return false;" action="doModifyInfo" method="POST">
+          <input type="hidden" name="id" value="${loginedMember.id}">
+          <input type="hidden" name="loginPwReal">
+
+          <div class="mobile-section-MyPage-body flex flex-jc-c flex-column">
+            <div>
+              MY PAGE<br>(Modify)
+            </div>
+            <div class="mobile-MyPage_cell__title">
+              <span>회원번호</span>
+              <div class="mobile-MyPage_cell__body">
+                <span>${loginedMember.id}</span>
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>회원ID</span>
+              <div class="mobile-MyPage_cell__body">
+                <span>${loginedMember.loginId}</span>
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>Password</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>Password Check</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 확인">
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>회원이름</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="text" name="name" value="${loginedMember.name}">
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>닉네임</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="text" name="nickname" placeholder="${loginedMember.nickname}">
+              </div>
+              <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+            </div>
+            <div class="mobile-MyPage_cell__title">
+              <span>e-mail</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="email" name="email" value="${loginedMember.email}">
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>연락처</span>
+              <div class="mobile-MyPage_cell__body">
+                <input type="number" name="cellphoneNo" value="${loginedMember.cellphoneNo}">
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>회원등급</span>
+              <div class="mobile-MyPage_cell__body">
+                <span>${loginedMember.authLevel}</span>
+              </div>
+            </div>
+
+            <div class="mobile-MyPage_cell__title">
+              <span>회원가입일</span>
+              <div class="mobile-MyPage_cell__body">
+                <span>${loginedMember.regDate}</span>
+              </div>
+            </div>
+            <div class="mobile-section-MyPage-body__option flex flex-column">
+              <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 변경</button>
+              <button class="cleModifyBtn btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 취소</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <!-- 모바일-회원정보 페이지 끝 -->
+    </section>
+  </main>
+  <!-- 모바일-메인 컨텐츠 박스 끝 -->
+  
 <%@ include file="../../part/foot.jspf" %>
