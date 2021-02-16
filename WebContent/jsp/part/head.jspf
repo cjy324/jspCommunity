@@ -166,15 +166,15 @@ function localStorageClear(){
 		<!-- 탑바 끝 -->
 
 		<!-- 모바일 탑바 시작 -->
-		<section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down head-nav nav-down">
+		<section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down">
 			<div
-				class="mobile-top-bar_btn-toggle-side-bar flex-as-c visible-sm-down head-nav nav-down">
+				class="mobile-top-bar_btn-toggle-side-bar flex-as-c visible-sm-down">
 				<div></div>
 				<div></div>
 				<div></div>
 			</div>
 		</section>
-		<header class="mobile-top-bar flex visible-sm-down head-nav nav-down">
+		<header class="mobile-top-bar flex visible-sm-down">
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
 				<div class="mobile-title">
 					<a href="../home/main" title="Home">
@@ -185,7 +185,7 @@ function localStorageClear(){
 		</header>
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
-  <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down head-nav nav-down">
+  <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down">
   <span>MENU</span>
     <nav class="mobile-side-bar_menu flex flex-jc-c">
       <ul class="">

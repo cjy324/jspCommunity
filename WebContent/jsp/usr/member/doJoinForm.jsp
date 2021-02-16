@@ -150,67 +150,141 @@
 
 
   <!-- 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1">
+  <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
-      <!-- 메인-회원가입 페이지 시작 -->
+      <!-- 회원가입 페이지 시작 -->
       <div class="section-join min-height-50vh flex flex-jc-c flex-ai-c">
 
-        <form name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
+        <form class="flex flex-jc-c flex-ai-c" name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
           <input type="hidden" name="loginPwReal">
-          <div class=join_cell__title>
-            <span>신규 ID</span>
+          
+          <div>Sign-up</div>
+          
+          <div class="section-join__cell">
+            <div class="join_cell__title">
+              <span>신규 ID</span>
+            </div>
+            <div class="join_cell__body">
+              <input class="idInput" type="text" name="loginId" maxlength="50" placeholder="ID 입력">
+              <button class="btn btn-check" name="dupIdCheck" onclick="checkDupId(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+            </div>
+            <div class="join_cell__title">
+              <span>Password</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+            </div>
+            <div class="join_cell__title">
+              <span>Password Check</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 입력">
+            </div>
+            <div class="join_cell__title">
+              <span>이름</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="text" name="name" maxlength="50" placeholder="이름 입력">
+            </div>
           </div>
-          <div class=join_cell__body>
-            <input type="text" name="loginId" maxlength="50" placeholder="ID 입력">
-            <button class="btn btn-check" name="dupIdCheck" onclick="checkDupId(this);" type="button">중복체크</button>
-          </div>
-          <div class=join_cell__title>
-            <span>Password</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
-          </div>
-          <div class=join_cell__title>
-            <span>Password Check</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 확인">
-          </div>
-          <div class=join_cell__title>
-            <span>이름</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="text" name="name" maxlength="50" placeholder="이름 입력">
-          </div>
-          <div class=join_cell__title>
-            <span>닉네임</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
-            <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type = "button">중복체크</button>
-          </div>
-          <div class=join_cell__title>
-            <span>E-Mail</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="email" name="email" maxlength="100" placeholder="이메일 입력">
-          </div>
-          <div class=join_cell__title>
-            <span>연락처</span>
-          </div>
-          <div class=join_cell__body>
-            <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="연락처 입력">
-          </div>
-          <div class=joinInput-cell>
-            <button class="btn btn-go" type="submit">회원가입</button>
-            <button class="btn btn-back" type="button" onclick="history.back();">뒤로가기</button>
+
+          <div class="section-join__cell">
+            <div class="join_cell__title">
+              <span>닉네임</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
+              <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+            </div>
+            <div class="join_cell__title">
+              <span>e-mail</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="email" name="email" maxlength="100" placeholder="이메일 주소 입력">
+            </div>
+            <div class="join_cell__title">
+              <span>연락처</span>
+            </div>
+            <div class="join_cell__body">
+              <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="'-' 생략하고 입력">
+            </div>
+            <div class="joinInput-cell">
+              <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
+              <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 뒤로가기</button>
+            </div>
           </div>
         </form>
       </div>
-      <!-- 메인-회원가입 페이지 끝 -->
+      <!-- 회원가입 페이지 끝 -->
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
+
+  <!-- 모바일-메인 컨텐츠 박스 시작 -->
+  <main class="main-box flex-grow-1 visible-sm-down">
+    <section class="main-box-section con">
+      <!-- 모바일-회원가입 페이지 시작 -->
+      <div class="mobile-section-join min-height-50vh flex flex-jc-c flex-ai-c">
+
+        <form class="" name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
+          <input type="hidden" name="loginPwReal">
+
+          <div>Sign-up</div>
+          
+          <div class="mobile-join_cell__title">
+            <span>신규 ID</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input class="idInput" type="text" name="loginId" maxlength="50" placeholder="ID 입력">
+            <button class="btn btn-check" name="dupIdCheck" onclick="checkDupId(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>Password</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="password" name="loginPw" maxlength="50" placeholder="PW 입력">
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>Password Check</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="password" name="loginPwConfirm" maxlength="50" placeholder="PW 입력">
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>이름</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="text" name="name" maxlength="50" placeholder="이름 입력">
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>닉네임</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="text" name="nickname" maxlength="50" placeholder="닉네임 입력">
+            <button class="btn btn-check" name="dupNickCheck" onclick="checkDupNick(this);" type="button"><i class="far fa-check-circle"></i> 중복체크</button>
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>e-mail</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="email" name="email" maxlength="100" placeholder="이메일 주소 입력">
+          </div>
+          <div class="mobile-join_cell__title">
+            <span>연락처</span>
+          </div>
+          <div class="mobile-join_cell__body">
+            <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="'-' 생략하고 입력">
+          </div>
+          <div class="mobile-joinInput-cell flex flex-column ">
+            <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
+            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 뒤로가기</button>
+          </div>
+        </form>
+      </div>
+      <!-- 모바일-회원가입 페이지 끝 -->
+    </section>
+  </main>
+  <!-- 모바일-메인 컨텐츠 박스 끝 -->
 
 
 

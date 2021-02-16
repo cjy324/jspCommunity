@@ -14,7 +14,7 @@
           <input type="hidden" name="id" value="${loginedMember.id}">
           <input type="hidden" name="loginPwReal">
 
-          <div class="section-MyPage-body flex flex-jc-c">
+          <div class="section-MyPage-body flex flex-jc-c flex-ai-c">
             <div>MY PAGE</div>
             <div class="section-MyPage-body__cell">
               <div class="MyPage_cell__title">

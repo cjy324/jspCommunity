@@ -186,26 +186,9 @@ function Editor__init() {
 
     var editor = new toastui.Editor({
       el: node,
-      previewStyle: 'vertical',
-      initialValue: initialValue,
-      height:600,
-      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
-    });
-
-	$(node).data('data-toast-editor', editor);
-  });
-}
-
-
-function Editor__init2() {
-  $('.toast-ui-editor2').each(function(index, node) {
-    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-
-    var editor = new toastui.Editor({
-      el: node,
       previewStyle: 'tab',
       initialValue: initialValue,
-      height:500,
+      height:600,
       plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
     });
 
@@ -235,7 +218,6 @@ function EditorViewer__init() {
 }
 	EditorViewer__init();
 	Editor__init();
-	Editor__init2();
 }
 
 ArticleDetail__Body__init();

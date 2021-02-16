@@ -256,24 +256,34 @@ body{
 	z-index:300;
   color:black;
   background-color:white;
+  height:40px;
 }
 
 .head-bar > *{
   display:flex;
+
 }
 
 .head-bar-button{
   display:block;
-  border:2px solid white;
+  text-align:center;
+  border:2.5px solid white;
   margin-top:10px;
-  margin-right:15px;
   font-size:0.9rem;
+  width:70px;
+}
+.head-bar-button:first-child{
+  width:40px;
+}
+
+.head-bar-button:last-child{
+  margin-right:15px;
 }
 
 .head-bar-button::after{
   display:block;
   content: '';
-  border-bottom: solid 3px black; 
+  border-bottom: solid 2.5px #777; 
   transform: scaleX(0);  
   transition: transform 250ms ease-in-out;
   z-index:30;
@@ -284,7 +294,7 @@ body{
 }
 
 .head-bar-button:hover::after{
-  transform: scaleX(0.7); 
+  transform: scaleX(0.5); 
   z-index:30;
 }
 
@@ -293,7 +303,7 @@ body{
 
 /* 탑바 시작 */
 :root {
-  --top-bar__height:76px;
+  --top-bar__height:78px;
 }
 
 .top-bar-padding{
@@ -306,7 +316,7 @@ body{
   background-color:white;
   z-index:200;
   height:var(--top-bar__height);
-  border-bottom:3px outset white;
+  border-bottom:3px solid gray;
   box-shadow:5px 5px 5px rgba(220, 220, 220, 0.7);
 }
 
@@ -318,10 +328,10 @@ body{
   font-family: 'Noto Sans TC', sans-serif;
   text-align:center;
   font-size:1.8rem;
-  padding-left:4%;
   padding-top:30px;
-  padding-bottom:10px;
+  padding-bottom:0px;
   font-weight:bold;
+  width:200px;
   color: black;
   z-index:5000;
 
@@ -445,16 +455,15 @@ body{
   width:100%;
   background-color:white;
   z-index:100;
-  border-bottom:1px outset gray;
+  border-bottom:1px solid gray;
 }
 .mobile-title{
   font-family: 'Noto Sans TC', sans-serif;
   text-align:center;
   font-size:1.2rem;
-  padding-left:4%;
   font-weight:bold;
   color: black;
-
+  width:200px;
 }
 
 .mobile-title span{
@@ -659,7 +668,7 @@ body{
 
 /* 로그인 페이지 시작 */
 .section-login{
-  margin-top:200px;
+  margin-top:150px;
 }
 .section-login > form{
   text-align:center;
@@ -747,6 +756,11 @@ body{
   
 }
 
+.mobile-section-login > form > div:not(:last-child){
+  padding:5px 20px;
+  
+}
+
 .mobile-login-title{
   text-align:center;
   font-size:1.3rem;
@@ -815,34 +829,56 @@ body{
 /* 회원가입 페이지 시작 */
 .section-join{
   padding-top:50px;
-  
+  width:100%;
 }
 .section-join > form{
   text-align:left;
-  width:310px;
+  width:950px;
   font-size:1rem;
   font-weight:bold;
   border-radius:20px 20px 20px 20px;
   box-shadow:5px 10px 10px 10px gray;
-  padding:10px;
-  padding-top:20px;
+  padding:50px 10px;
+
   
 }
 .section-join > form > div{
-  padding:5px;
-  margin-top:10px;
+  padding:10px;
+  
+}
+
+.section-join > form > div:first-child{
+  font-size:2rem;
+}
+
+.section-join > form > div:not(:last-child){
+  border-right:4px solid gray;
+  padding-right:40px;
+}
+.section-join > form > div:not(:first-child){
+  padding-left:40px;
+}
+
+.join_cell__title{
+  margin:10px 0;
+  
 }
 
 .join_cell__title > span{
   padding-bottom:3px;
-  border-bottom:4px solid;
+  border-bottom:3px solid gray;
+  
+}
+
+.join_cell__body{
+  margin:15px 0;
 }
 
 .join_cell__body > input{
-  font-size:1rem;
-  font-weight:bold;
+  font-size:0.9rem;
+  
   border:none;
-  border-bottom:2px solid #333;
+  border-bottom:1.5px solid #333;
   padding:5px;
   margin-top:5px;
   height:25px;
@@ -857,11 +893,82 @@ body{
 }
 
 .joinInput-cell{
-  text-align:center;
+  margin-top:80px;
+  text-align:right;
 }
 
 
 /* 회원가입 페이지 끝 */
+/* 모바일-회원가입 페이지 시작 */
+.mobile-section-join{
+
+  width:100%;
+}
+.mobile-section-join > form{
+  text-align:left;
+  width:950px;
+  font-size:0.9rem;
+  font-weight:bold;
+  padding:50px 10px;
+
+  
+}
+.mobile-section-join > form > div{
+  padding:10px;
+  
+}
+
+.mobile-section-join > form > div:first-child{
+  text-align:center;
+  font-size:1.3rem;
+  padding-bottom:10px;
+  margin:10px;
+  margin-bottom:30px;
+  border-bottom:4px solid gray;
+}
+
+
+.mobile-join_cell__title{
+  margin:10px 0;
+  
+}
+
+.mobile-join_cell__title > span{
+  padding-bottom:3px;
+  border-bottom:3px solid gray;
+  
+}
+
+.mobile-join_cell__body{
+  margin:10px 0;
+}
+
+.mobile-join_cell__body > input{
+  font-size:0.7rem;
+  
+  border:none;
+  border-bottom:1.5px solid #333;
+  padding:5px;
+  margin-top:5px;
+  height:25px;
+  width:95%;
+  min-width:150px;
+}
+.mobile-join_cell__body > .btn-check {
+  margin-top:5px;
+  margin-left:7px;
+  width:95%;
+  font-size:0.7rem;
+}
+
+.mobile-joinInput-cell > *{
+  margin-top:5px;
+  
+}
+
+
+/* 모바일-회원가입 페이지 끝 */
+
 
 
 
@@ -873,7 +980,7 @@ body{
   
 }
 .section-MyPage > form{
-  width:900px;
+  width:950px;
 }
 
 .section-MyPage > form > .section-MyPage-body{
@@ -889,16 +996,12 @@ body{
 
 .section-MyPage-body > div:first-child{
   font-size:2rem;
-
+  padding-right:40px;
+  border-right:4px solid gray;
 }
 
 .section-MyPage-body__cell{
-  padding:10px 70px;
-  
-}
-
-.section-MyPage-body__cell:last-child{
-  padding:10px 30px;
+  padding:10px 50px;
   
 }
 
@@ -1225,6 +1328,8 @@ body{
   left:50%;
   transform:translateX(-50%) translateY(-50%);
   border:3px solid white;
+  text-align:center;
+  width:150px;
   padding:5px 15px;
   background-color:rgba(0,0,0,0.22);
   border-radius:10px;
@@ -1498,17 +1603,10 @@ body{
   
 }
 
-.mobile-article-list{
-
-  font-size:0.9rem;
-  margin:auto;
- 
-}
-
 .mobile-article-list-name{
   text-align:center;
   font-weight:bold;
-  font-size:1rem;
+  font-size:1.1rem;
 
 }
 .mobile-article-list-name > span{
@@ -1525,7 +1623,7 @@ body{
 .mobile-article-list > header{
   background-color:rgba(230, 230, 230, 1);
   font-weight:bold;
-  font-size:0.8rem;
+  font-size:1rem;
   border-top:1.8px solid gray;
   border-bottom:1.8px solid gray;
 }
@@ -1571,14 +1669,14 @@ body{
   text-align:center;
   padding-top:15px;
   padding-bottom:15px;
-  font-size:0.75rem;
+  font-size:0.9rem;
 }
 
 .mobile-article-list > .mobile-article-list__cell-body > * >.mobile-article-list__cell-title{ 
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
-  font-size:0.9rem;
+  font-size:1rem;
   text-align:left;
   align-items:flex-start;
   padding-left:10px;
@@ -1586,7 +1684,7 @@ body{
 
 .mobile-article-list__cell-title-contents{
   padding-top:10px;
-  font-size:0.6rem;
+  font-size:0.75rem;
   color:gray;
 }
 .mobile-article-list__cell-title-contents > div{
@@ -1607,7 +1705,7 @@ body{
   width:var(--mobile-article-list__cell-reply__width);
 }
 .mobile-article-list__cell-writer {
-  width:30px;
+  width:35px;
 }
 .mobile-article-list__cell-update-date{
   width:40%;
@@ -1616,7 +1714,7 @@ body{
   width:40px;
 }
 .mobile-article-list__cell-likesCount {
-  width:50px;
+  width:60px;
 }
 
 
@@ -1774,10 +1872,12 @@ body{
   max-width:70px;
 }
 
-.article-detail-cell__title > *{
-  padding-top:2px;
+.article-detail-cell__title >* {
+  font-size:1.1rem;
+  padding-left:5px;
   font-weight:bold;
 }
+
 
 .article-detail-cell__title-contents > *{
   padding:5px;
@@ -1812,26 +1912,13 @@ body{
 .article-detail-cell__body .tui-editor-contents{
   font-family: 'Noto Sans KR', sans-serif;
   font-size:1rem;
-  
+  overflow:hidden;
+  word-wrap:break-word;
 }
 
-.article-detail-cell__tag{
-  margin-top:10px;
-  
+.article-detail-cell__option{
+  margin-top:10px;  
 }
-
-.article-detail-cell__tag > nav{
-  font-size:0.7rem;
-  margin-right:10px;
-  padding:2px;
-  border:1px solid gray;
-  border-radius:10px 5px 5px 5px; 
-  
-}
-.article-detail-cell__tag > nav:hover{
-  background-color:rgba(220,220,220,0.5);
-}
-
 
 .article-detail-cell__option .btn{
   margin-left:5px;
@@ -2066,7 +2153,7 @@ body{
 }
 
 .mobile-article-detail-cell__board-name{
-  font-size:1rem;
+  font-size:1.1rem;
   margin-top:20px;
   font-weight:bold;
   padding:10px;
@@ -2077,12 +2164,11 @@ body{
 .mobile-article-detail-cell__head-contents-box{
   border-top:2px solid gray;
   background-color:rgba(240, 240, 240, 0.5);
+  padding-left:10px;
 }
 
 
 .mobile-article-detail-cell__head-contents-box > div{
-
-  font-size:0.8rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
@@ -2098,25 +2184,32 @@ body{
   max-width:70px;
 }
 
+.mobile-article-detail-cell__title > *{
+  padding-top:2px;
+  font-size:0.9rem;
+}
+
+
+
 .mobile-article-detail-cell__title > div:nth-child(2){
   font-size:1.1rem;
+  font-weight:bold;
   padding:10px 0;
 }
 
-.mobile-article-detail-cell__title > *{
-  padding-top:2px;
-  font-size:0.7rem;
+.mobile-article-detail-cell__body-contents{
+  padding-bottom:5px;
+  border-bottom:5px double gray;
 }
-
 
 .mobile-article-detail-cell__body-contents > *{
   padding:5px;
-  font-size:0.7rem;
+  font-size:0.85rem;
   
 }
 
 .mobile-article-detail-cell-likesCount > *{
-  font-size:0.7rem;
+  font-size:0.85rem;
   border: none;
   background-color: rgba(200,200,200,0.0);
   height:20px;
@@ -2127,37 +2220,20 @@ body{
 
 
 
-.mobile-article-detail-cell__body{
 
+.mobile-article-detail-cell__body{
   border-top:5px double gray;
   padding:30px;
-  font-size:1rem;
-
+  
 }
 
 
 .mobile-article-detail-cell__body .tui-editor-contents{
   font-family: 'Noto Sans KR', sans-serif;
-  font-size:0.9rem;
-}
-
-.mobile-article-detail-cell__tag{
-  margin-top:10px;
-  padding-left:10px;
-  padding-bottom:10px;
-  border-bottom:5px double gray;
-}
-
-.mobile-article-detail-cell__tag > nav{
-  font-size:0.7rem;
-  margin-right:10px;
-  padding:2px;
-  border:1px solid gray;
-  border-radius:10px 5px 5px 5px; 
+  font-size:1rem;
+  overflow:hidden;
+  word-wrap:break-word;
   
-}
-.mobile-article-detail-cell__tag > nav:hover{
-  background-color:rgba(220,220,220,0.5);
 }
 
 
@@ -2196,7 +2272,7 @@ body{
   margin-top:10px;
   text-align:right;
   padding-right:20px;
-  font-size:0.8rem;
+  font-size:0.9rem;
   font-weight:bold;
 }
 
@@ -2206,7 +2282,7 @@ body{
 }
 
 .mobile-reply-list-box-writer {
-  font-size:0.8rem;
+  font-size:0.9rem;
   margin:5px 0;
   border-bottom:1px solid gray;
   overflow:hidden;
@@ -2220,7 +2296,7 @@ body{
 }
 
 .mobile-reply-list-box__cell-updateDate{
-  font-size:0.6rem;
+  font-size:0.7rem;
   top:0px;
   padding-bottom:5px;
   color:gray;
@@ -2231,7 +2307,7 @@ body{
   padding-left:5px;
   padding-top:1px;
   margin-left:5px;
-  font-size:0.8rem;
+  font-size:0.9rem;
   min-width:50px;
   border-left:1px solid gray;
   overflow:hidden;
@@ -2246,7 +2322,7 @@ body{
 }
 
 .mobile-reply-detail-cell-likesCount > *{
-  font-size:0.7rem;
+  font-size:0.8rem;
   border: none;
   background-color: rgba(200,200,200,0);
   padding:10px;
@@ -2329,7 +2405,7 @@ body{
 }
 
 .mobile-reply-page-menu {
-  font-size:0.8rem;
+  font-size:0.9rem;
 }
 
 .mobile-reply-page-menu > ul > li > a {
@@ -2377,11 +2453,11 @@ body{
 /* 모바일-댓글창 하단 메뉴 끝 */
 /* 모바일-게시물 상세페이지 하단 메뉴 시작 */
 .mobile-section-3{
-  padding-bottom:30px;
+  padding-bottom:20px;
 }
 
 .mobile-article-detail-bottom-cell{
-  font-size:0.8rem;
+  font-size:1rem;
 }
 .mobile-article-detail-bottom-cell > div{
   padding:10px;
@@ -2450,28 +2526,6 @@ body{
   font-weight:bold;
 }
 
-.mobile-article-writeAndModify-cell__contents-box > form > span{
-  font-size:1.1rem;
-  font-weight:bold;
-  margin:10px;
-}
-
-.mobile-article-writeAndModify-cell__contents-box input{
-  margin:10px;
-  height:30px;
-  width:90%;
-}
-
-
-.mobile-article-writeAndModify-cell__body{
-  margin-top:10px;
-  border:1px solid gray;
-  border-top:5px double gray;
-  padding:30px;
-  font-size:1rem;
-}
-
-
 .mobile-article-writeAndModify-cell__option button{
   width:50%;
   border-radius:0;
@@ -2500,10 +2554,9 @@ body{
   z-index:500;
 }
 .top-button:hover{
-  background-color:#333;
+  background-color:#222;
   text-shadow: 1px 1px 20px white;
-  box-shadow: 0px 15px 10px rgba(180, 180, 180, 0.8);
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 
 }
 
@@ -2524,10 +2577,9 @@ body{
   z-index:500;
 }
 .bottom-button:hover{
-  background-color:#333;
+  background-color:#222;
   text-shadow: 1px 1px 20px white;
-  box-shadow: 0px 15px 10px rgba(180, 180, 180, 0.8);
-  transform: translateY(5px);
+  transform: translateY(3px);
 
 }
 
@@ -2541,7 +2593,7 @@ body{
   font-size:1.2rem;
 }
 .title-down{
-  padding-top:55px
+  padding-top:40px
 }
 
 .search-bar-up{

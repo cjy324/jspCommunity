@@ -153,25 +153,25 @@ function checkModify(replyModifyForm){
             <div class="article-detail-cell__head-contents-1 flex">
               <div class="article-detail-cell__id">
                 <div>
-                  <span>번호 : </span>
+                  <span>No. </span>
                   <span>${article.id}</span>
                 </div>
               </div>
               <div class="article-detail-cell__memberNickname">
                 <div>
-                  <span>작성자 : </span>
+                  <span><i class="far fa-user-circle"></i> </span>
                   <span>${article.extra_memberNickname}</span>
                 </div>
               </div>
               <div class="article-detail-cell__reg-date">
                 <div>
-                  <span>작성일 : </span>
+                  <span><i class="far fa-clock"></i> </span>
                   <span>${article.regDate}</span>
                 </div>
               </div>
               <div class="article-detail-cell__update-date">
                 <div>
-                  <span> 수정일 : </span>
+                  <span><i class="fas fa-clock"></i> </span>
                   <span>${article.updateDate}</span>
                 </div>
               </div>
@@ -181,7 +181,6 @@ function checkModify(replyModifyForm){
             <div class="article-detail-cell__head-contents-2 flex flex-jc-sb flex-ai-c">
               <div class="article-detail-cell__title">
                 <div>
-                  <span>제목 : </span>
                   <span>${article.title}</span>
                 </div>
               </div>
@@ -251,20 +250,6 @@ function checkModify(replyModifyForm){
 			</script>
           <div class="article-detail-cell__body height-70p toast-ui-viewer">
           </div>
-          <div class="article-detail-cell__tag flex">
-            <nav>
-              #
-              <a href="#" target="_blank">tag1</a>
-            </nav>
-            <nav>
-              #
-              <a href="#" target="_blank">tag2</a>
-            </nav>
-            <nav>
-              #
-              <a href="#" target="_blank">tag3</a>
-            </nav>
-          </div>
           <div class="article-detail-cell__option flex flex-jc-fe">
             <c:if test="${loginedMemberId == article.extra_memberId}">
               <button class="btn" type="button">
@@ -288,7 +273,7 @@ function checkModify(replyModifyForm){
           <input type="hidden" name="memberId" value="${loginedMemberId}">
           <input type="hidden" name="redirectUrl"
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
-          <span>댓글</span>
+          <span><i class="far fa-comment-dots"></i></span>
           <input type="text" name="replyBody" placeholder="댓글 입력">
           <div class="reply-write-box-form__option ">
             <button class="btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
@@ -296,10 +281,10 @@ function checkModify(replyModifyForm){
         </form>
       </div>
     </c:if>
-    <div class="reply-count-box"><i class="far fa-comment-dots"></i> Total ${article.repliesCount}</div>
+    <div class="reply-count-box"><i class="far fa-comments"></i> Total ${article.repliesCount}</div>
     <c:forEach var="reply" items="${replies}">
       <div class="reply-list-box">
-        <div class="reply-list-box-writer">${reply.extra_memberNickname}</div>
+        <div class="reply-list-box-writer"><i class="far fa-user-circle"></i> ${reply.extra_memberNickname}</div>
         <div class="reply-list-box__cell flex flex-jc-sb">
           <div class="reply-list-box__cell-contents flex flex-ai-c">
             <div class="reply-list-box__cell-updateDate">${reply.updateDate}</div>
@@ -455,7 +440,7 @@ function checkModify(replyModifyForm){
         <div class="mobile-article-detail-cell height-100p">
           <div class="mobile-article-detail-cell__board-name">
             <div>
-              <span>${article.extra_boardName}</span>
+              <span><i class="fas fa-th-list"></i> ${article.extra_boardName}</span>
             </div>
           </div>
 
@@ -464,7 +449,7 @@ function checkModify(replyModifyForm){
             <div class="mobile-article-detail-cell__head-contents-2 flex flex-ai-c">
               <div class="mobile-article-detail-cell__title">
                 <div class="mobile-article-detail-cell__id">
-                  <span>${article.id}</span>
+                  <span>No. ${article.id}</span>
                 </div>
                 <div>
                   <span>${article.title}</span>
@@ -472,12 +457,12 @@ function checkModify(replyModifyForm){
                 <div class="mobile-article-detail-cell__head-contents-1 flex">
                   <div class="mobile-article-detail-cell__memberNickname">
                     <div>
-                      <span>${article.extra_memberNickname} </span>
+                      <span><i class="far fa-user-circle"></i> ${article.extra_memberNickname} </span>
                     </div>
                   </div>
                   <div class="mobile-article-detail-cell__update-date">
                     <div>
-                      <span> / ${article.updateDate}</span>
+                      <span> / <i class="fas fa-clock"></i> ${article.updateDate}</span>
                     </div>
                   </div>
                 </div>
@@ -547,11 +532,6 @@ function checkModify(replyModifyForm){
             </div>
           </div>
         </div>
-        <div class="mobile-article-detail-cell__tag flex">
-          <nav># <a href="#" target="_blank">tag1</a></nav>
-          <nav># <a href="#" target="_blank">tag2</a></nav>
-          <nav># <a href="#" target="_blank">tag3</a></nav>
-        </div>
         <div class="mobile-article-detail-cell__option flex">
           <c:if test="${loginedMemberId == article.extra_memberId}">
             <button class="btn" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a></button>
@@ -569,7 +549,7 @@ function checkModify(replyModifyForm){
             <input type="hidden" name="memberId" value="${loginedMemberId}">
             <input type="hidden" name="redirectUrl"
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
-            <span>댓글</span>
+            <span><i class="far fa-comment-dots"></i></span>
             <input type="text" name="replyBody" placeholder="댓글 입력">
             <div class="mobile-reply-write-box-form__option ">
               <button class="m-btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
@@ -577,10 +557,10 @@ function checkModify(replyModifyForm){
           </form>
         </div>
       </c:if>
-      <div class="mobile-reply-count-box"><i class="far fa-comment-dots"></i> Total ${article.repliesCount}</div>
+      <div class="mobile-reply-count-box"><i class="far fa-comments"></i> Total ${article.repliesCount}</div>
       <c:forEach var="reply" items="${replies}">
         <div class="mobile-reply-list-box">
-          <div class="mobile-reply-list-box-writer">${reply.extra_memberNickname}</div>
+          <div class="mobile-reply-list-box-writer"><i class="far fa-user-circle"></i> ${reply.extra_memberNickname}</div>
           <div class="mobile-reply-list-box__cell flex flex-column">
             <div class="mobile-reply-list-box__cell-contents">
               <div class="mobile-reply-list-box__cell-updateDate">${reply.updateDate}</div>
