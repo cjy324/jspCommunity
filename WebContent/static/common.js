@@ -30,13 +30,13 @@ function hasScrolled() {
         // Scroll Down
         $('.head-nav').removeClass('nav-down').addClass('nav-up');
       $('.title').addClass('title-down');
-      $('.mobile-article-list__cell-search').addClass('search-bar-up');
+
     } else {
         // Scroll Up
         if(st + $(window).height() < $(document).height()) {
             $('.head-nav').removeClass('nav-up').addClass('nav-down');
           $('.title').removeClass('title-down');
-          $('.mobile-article-list__cell-search').removeClass('search-bar-up');
+
         }
     }
     

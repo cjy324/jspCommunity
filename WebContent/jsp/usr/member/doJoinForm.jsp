@@ -158,7 +158,7 @@
         <form class="flex flex-jc-c flex-ai-c" name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
           <input type="hidden" name="loginPwReal">
           
-          <div>Sign-up</div>
+          <div>Sign-Up</div>
           
           <div class="section-join__cell">
             <div class="join_cell__title">
@@ -229,7 +229,7 @@
         <form class="" name="form" onsubmit="check(this); return false;" action="doJoin" method="POST">
           <input type="hidden" name="loginPwReal">
 
-          <div>Sign-up</div>
+          <div>Sign-Up</div>
           
           <div class="mobile-join_cell__title">
             <span>신규 ID</span>

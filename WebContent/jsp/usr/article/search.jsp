@@ -83,12 +83,12 @@ function DoSearchForm_submit(form){
                   $('select[name="searchKeywordType"]').val(param_searchKeywordType);
                 }
               </script>
-              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword 입력">
               <button class="btn" type="submit">검색</button>
             </form>
           </div>
           <div class="search-list__cell-recommendKeyword flex flex-column flex-ai-c">
-            <div><span><i class="far fa-keyboard"></i>  추천 Keywords</span></div>
+            <div><span><i class="far fa-keyboard"></i> 추천 Keywords</span></div>
             <div class="recommendKeyword-box">
               <div>아이폰</div>
               <div>갤럭시</div>
@@ -167,7 +167,7 @@ function DoSearchForm_submit(form){
   
   
   <!-- 모바일 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1 visible-sm-down " style="min-height:5000px;">
+  <main class="main-box flex-grow-1 visible-sm-down " style="min-height:500px;">
     <section class="main-box-section con ">
       <!-- 모바일 메인-검색 리스트페이지 시작 -->
       <div class="mobile-section-search-list">
@@ -185,14 +185,14 @@ function DoSearchForm_submit(form){
                   $('select[name="searchKeywordType"]').val(param_searchKeywordType);
                 }
               </script>
-              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword 입력">
               <div><button class="m-btn" type="submit">검색</button></div>
             </form>
           </div>
           <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
           <div class="mobile-search-list-name flex flex-jc-sb">
             <span><i class="fas fa-search"></i> SEARCH</span>
-            <span><i class="far fa-copy"></i>Total : ${totalCount}</span>
+            <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           </div>
           <header>
             <div class="mobile-article-list__cell-head">

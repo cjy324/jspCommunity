@@ -474,8 +474,8 @@ body{
   width:20px;
   height:20px;
   position:fixed;
-  margin-left:10px;
-  
+  right:0;
+  margin-right:10px;
   z-index:1000;
   cursor:pointer;
   
@@ -483,7 +483,7 @@ body{
 .mobile-top-bar_btn-toggle-side-bar > div {
   position:absolute;
   top:0;
-  left:0;
+  right:0;
   width:100%;
   height:20%;
   background-color:black;
@@ -519,12 +519,12 @@ body{
 .mobile-side-bar {
   position:fixed;
   top:var(--mobile-top-bar__height);
-  left:-100%;
+  right:-100%;
   width:100%;
   bottom:0;
   color:white;
   background-color:rgba(10, 10, 10, 0.8);
-  transition:left .3s;
+  transition:right .3s;
   display:flex;
   align-items:center;
   padding-bottom:var(--mobile-top-bar__height);
@@ -532,7 +532,7 @@ body{
 }
 
 .mobile-side-bar.active {
-  left:0;
+  right:0;
 }
 
 .mobile-side-bar>span{
@@ -828,7 +828,7 @@ body{
 
 /* 회원가입 페이지 시작 */
 .section-join{
-  padding-top:50px;
+  margin-top:100px;
   width:100%;
 }
 .section-join > form{
@@ -1409,9 +1409,12 @@ body{
 
 .article-list-name > span:nth-child(2){
   position:absolute;
+  text-align:right;
   right:0;
   bottom:0;
   font-size:1rem;
+  min-width:150px;
+
 }
 
 .article-list > header{
@@ -1451,8 +1454,6 @@ body{
 .article-list > * > div > div {
   box-sizing:border-box;
   text-align:center;
-  padding-top:10px;
-  padding-bottom:10px;
 }
 
 .article-list > .article-list__cell-body > * > div{
@@ -1625,6 +1626,8 @@ body{
 .mobile-article-list-name > span:last-child{
   font-size:0.8rem;
   padding-top:10px;
+  width:100px;
+  
 }
 
 
@@ -1668,8 +1671,6 @@ body{
 .mobile-article-list > * > div > div {
   box-sizing:border-box;
   text-align:center;
-  padding-top:5px;
-  padding-bottom:5px;
 }
 
 .mobile-article-list > .mobile-article-list__cell-body > * > div{
@@ -1746,19 +1747,19 @@ body{
 
 }
 .mobile-article-list__cell-search > form > input{
-  height:85%;
+  height:24px;
   width:90%;
   border: none;
-  border:1px solid gray;
+  border:2px solid gray;
 }
 .mobile-article-list__cell-search > form > select{
-  height:100%;
+  height:30px;
   width:100px;
-  border:1px solid gray;
+  border:2px solid gray;
 
 }
 .mobile-article-list__cell-search > form .m-btn{  
-  height:30px;
+  height:29px;
   border-radius:0;
   box-shadow:0px 0px 0px;
 }
@@ -1918,6 +1919,9 @@ body{
 }
 
 .search-list__cell-search > form {
+  display:flex;
+  align-items:center;
+  justify-content:center;
   width:100%;
   height:100%;
   white-space: nowrap;
@@ -1926,6 +1930,7 @@ body{
 .search-list__cell-search > form > input{
   height:80%;
   width:70%;
+  
   font-size:1.2rem;
   border-radius:10px;
   border:3px solid gray;
@@ -1936,10 +1941,11 @@ body{
   border:2px solid gray;
   border-radius:10px;
 }
-
-.section-search-list >*> button{
-  width:70%;
+.search-list__cell-search > form >.btn {
+  
+  
 }
+
 
 .search-list__cell-recommendKeyword{
   height:250px;
@@ -1960,8 +1966,7 @@ body{
   width:70%;
   position:relative;
   border-radius:20px;
-  background-color:rgba(240,240,240,0.6);
-  box-shadow:3px 3px 3px gray;
+
 }
 
 .recommendKeyword-box > div{
@@ -2096,19 +2101,19 @@ body{
 
 }
 .mobile-search-list__cell-search > form > input{
-  height:85%;
+  height:24px;
   width:90%;
-  border: none;
-  border:1px solid gray;
+  border:none;
+  border:2px solid gray;
 }
 .mobile-search-list__cell-search > form > select{
-  height:100%;
+  height:30px;
   width:100px;
-  border:1px solid gray;
+  border:2px solid gray;
 
 }
 .mobile-search-list__cell-search > form .m-btn{  
-  height:30px;
+  height:29px;
   border-radius:0;
   box-shadow:0px 0px 0px;
 }
@@ -2182,6 +2187,7 @@ body{
   font-size:1.1rem;
   padding-left:5px;
   font-weight:bold;
+  min-width:500px;
 }
 
 
