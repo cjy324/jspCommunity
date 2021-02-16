@@ -134,6 +134,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doDeleteReply")) {
 				jspPath = articleController.doDeleteReply(request, response);
 			}
+			if (actionMethodName.equals("search")) {
+				jspPath = articleController.search(request, response);
+			}
 			
 		}
 		

@@ -583,6 +583,81 @@ public class ArticleDao {
 
 	}
 
+	public int getArticlesCountBySearchKeyword(String searchKeywordType, String searchKeyword) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT COUNT(*) AS cnt");
+		sql.append("FROM article AS A");
+		sql.append("WHERE 1");
+
+		if (searchKeyword != null) {
+			if (searchKeywordType == null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("titleAndBody")) {
+				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyword,
+						searchKeyword);
+			}
+		};
+
+		return MysqlUtil.selectRowIntValue(sql);
+	}
+
+	public List<Article> getArticlesForPrintBySearchKeyword(int pageLimitStartIndex, int articlesInAPage,
+			String searchKeywordType, String searchKeyword) {
+		List<Article> articles = new ArrayList<>();
+
+		SecSql sql = new SecSql();
+		sql.append("SELECT A.*");
+		sql.append(", M.id AS extra_memberId");
+		sql.append(", M.name AS extra_memberName");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append(", B.name AS extra_boardName");
+		sql.append(", B.code AS extra_boardCode");
+		sql.append(", IFNULL(SUM(L.point), 0) AS extra_likePoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra_likeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra_dislikeOnlyPoint");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("INNER JOIN `board` AS B");
+		sql.append("ON A.boardId = B.id");
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON L.relTypeCode = 'article'");
+		sql.append("AND A.id = L.relId");
+		sql.append("WHERE 1");
+
+		if (searchKeyword != null) {
+			if (searchKeywordType == null || searchKeywordType.equals("title")) {
+				sql.append("AND A.title LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("body")) {
+				sql.append("AND A.body LIKE CONCAT('%', ? '%')", searchKeyword);
+			} else if (searchKeywordType.equals("titleAndBody")) {
+				sql.append("AND (A.title LIKE CONCAT('%', ? '%') OR A.body LIKE CONCAT('%', ? '%'))", searchKeyword, searchKeyword);
+			}
+		};
+		
+		sql.append("GROUP BY A.id");
+		
+		sql.append("ORDER BY A.id DESC");
+		
+		if ( articlesInAPage != -1 ) {
+			sql.append("LIMIT ?, ?", pageLimitStartIndex, articlesInAPage);
+		}
+
+		List<Map<String, Object>> articlesMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> articlesMap : articlesMapList) {
+			Article article = new Article(articlesMap);
+
+			articles.add(article);
+
+		}
+		// Collections.reverse(articles);
+		return articles;
+	}
+
 	
 	
 

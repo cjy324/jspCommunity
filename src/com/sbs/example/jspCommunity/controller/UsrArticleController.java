@@ -111,8 +111,8 @@ public class UsrArticleController extends Controller {
 		}
 
 		// 업데이트된 게시물 정보 가져오기
-	
-		Member loginedMember = (Member)request.getAttribute("loginedMember");
+
+		Member loginedMember = (Member) request.getAttribute("loginedMember");
 		Article article = articleService.getForPrintArticleById(id, loginedMember);
 
 		String articleBody = article.getBody();
@@ -140,13 +140,13 @@ public class UsrArticleController extends Controller {
 		boolean afterArticleBtn = false;
 
 		if (x - 1 >= 0) {
-			beforeArticleBtn = true; 
+			beforeArticleBtn = true;
 			request.setAttribute("beforeArticleIndex", articles.get(x - 1).getId());
 			request.setAttribute("beforeArticleBtn", beforeArticleBtn);
 		}
 
 		if (x < articles.size() - 1) {
-			afterArticleBtn = true; 
+			afterArticleBtn = true;
 			request.setAttribute("afterArticleIndex", articles.get(x + 1).getId());
 			request.setAttribute("afterArticleBtn", afterArticleBtn);
 		}
@@ -484,9 +484,8 @@ public class UsrArticleController extends Controller {
 
 		articleService.articleModify(args2);
 
-		
 		// 새로고침
-		//return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
+		// return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
 		String redirectUrl = request.getParameter("redirectUrl");
 		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", replyId + "");
 		return msgAndReplaceUrl(request, replyId + "번 댓글이 생성되었습니다.", redirectUrl);
@@ -521,8 +520,9 @@ public class UsrArticleController extends Controller {
 		articleService.replyModify(args);
 
 		// 수정 알림창 보여주고 새로고침
-		//return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", String.format("detail?id=%d", relId));
-		
+		// return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.",
+		// String.format("detail?id=%d", relId));
+
 		String redirectUrl = request.getParameter("redirectUrl");
 		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", id + "");
 		return msgAndReplaceUrl(request, id + "번 댓글이 수정되었습니다.", redirectUrl);
@@ -573,27 +573,93 @@ public class UsrArticleController extends Controller {
 		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);
 
 	}
-	
-	//조회수 증가
+
+	// 조회수 증가
 	public String addHitCounts(HttpServletRequest request, HttpServletResponse response) {
 		int articleId = Integer.parseInt(request.getParameter("articleId"));
 
 		// 조회수 증가
-	
-			articleService.addView(articleId);
-			int hitsCount = articleService.getViewCount(articleId);
 
-			// 게시물 정보에 조회수 업데이트
-			Map<String, Object> args = new HashMap<>();
-			args.put("id", articleId);
-			args.put("hitsCount", hitsCount);
+		articleService.addView(articleId);
+		int hitsCount = articleService.getViewCount(articleId);
 
-			articleService.addArticleHitsCount(args);
-		
-			
+		// 게시물 정보에 조회수 업데이트
+		Map<String, Object> args = new HashMap<>();
+		args.put("id", articleId);
+		args.put("hitsCount", hitsCount);
+
+		articleService.addArticleHitsCount(args);
+
 		return jsonWithData(request, null);
 	}
-	
-	
+
+	// 검색 페이지
+	public String search(HttpServletRequest request, HttpServletResponse response) {
+
+		String searchKeywordType = request.getParameter("searchKeywordType");
+		String searchKeyword = request.getParameter("searchKeyword");
+
+		// 총 게시물 수 카운트
+		int totalCount = articleService.getArticlesCountBySearchKeyword(searchKeywordType, searchKeyword);
+
+		// 페이징
+		int articlesInAPage = 20; // 한 페이지에 들어갈 article 수 설정
+		int page = Util.getAsInt(request.getParameter("page"), 1); // pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로
+																	// 변환
+		int pageLimitStartIndex = (page - 1) * articlesInAPage;
+
+		List<Article> articles = articleService.getArticlesForPrintBySearchKeyword(pageLimitStartIndex,
+				articlesInAPage, searchKeywordType, searchKeyword);
+
+		int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
+		int totalArticlesCount = totalCount; // 전체 article의 수 카운팅
+		int totalPages = (int) Math.ceil((double) totalArticlesCount / articlesInAPage); // 총 필요 페이지 수 카운팅
+
+		// 총 필요 페이지 수까지 버튼 만들기
+		// 하단 페이지 이동 버튼 메뉴 만들기
+		// 1. pageMenuBox내 시작 번호, 끝 번호 설정
+
+		int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
+		int boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
+		int boxEndNum = pageMenuBoxSize + boxStartNum - 1;
+
+		if (boxEndNum > totalPages) {
+			boxEndNum = totalPages;
+		}
+
+		// 2. '이전','다음' 버튼 페이지 계산
+		int boxStartNumBeforePage = boxStartNum - 1;
+		if (boxStartNumBeforePage < 1) {
+			boxStartNumBeforePage = 1;
+		}
+		int boxEndNumAfterPage = boxEndNum + 1;
+		if (boxEndNumAfterPage > totalPages) {
+			boxEndNumAfterPage = totalPages;
+		}
+
+		// 3. '이전','다음' 버튼 필요 유무 판별
+		boolean boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
+		boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
+
+		// 만약, 해당 게시판 번호의 게시판이 없으면 알림 메시지와 뒤로 돌아가기 실시
+
+		if (articles.size() <= 0) {
+			return msgAndBack(request, "해당 키워드가 포함된 게시물이 존재하지 않습니다.");
+		}
+
+		request.setAttribute("articles", articles);
+		request.setAttribute("totalCount", totalCount);
+		request.setAttribute("page", page);
+		request.setAttribute("totalPages", totalPages);
+
+		request.setAttribute("boxStartNum", boxStartNum);
+		request.setAttribute("boxEndNum", boxEndNum);
+		request.setAttribute("boxStartNumBeforePage", boxStartNumBeforePage);
+		request.setAttribute("boxEndNumAfterPage", boxEndNumAfterPage);
+		request.setAttribute("boxStartNumBeforePageBtnNeedToShow", boxStartNumBeforePageBtnNeedToShow);
+		request.setAttribute("boxEndNumAfterPageBtnNeedToShow", boxEndNumAfterPageBtnNeedToShow);
+
+		return "usr/article/search";
+	}
 
 }

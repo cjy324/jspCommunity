@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:set var ="pageTitle" value="GetIT | ${articles.get(0).extra_boardName}"/>
+<c:set var ="pageTitle" value="GetIT | Search"/>
 <%@ include file="../../part/head.jspf" %>
 
 
@@ -64,16 +64,45 @@ function DoSearchForm_submit(form){
   <!-- 메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1 visible-md-up">
     <section class="main-box-section con">
-      <!-- 메인-리스트페이지 시작 -->
-      <div class="section-article-list">
-        <div class="article-list">
-          <div class="article-list-name flex">
-            <span>${articles.get(0).extra_boardName}</span>
+      <!-- 메인-검색 리스트페이지 시작 -->
+      <div class="section-search-list">
+        <div class="search-list">
+          <div class="search-list-name">
+            <span><i class="fas fa-search"></i> SEARCH</span>
+          </div>
+          <div class="search-list__cell-search flex flex-jc-c ">
+            <form onsubmit="DoSearchForm_submit(this); return false;">
+              <select name="searchKeywordType">
+                <option value="titleAndBody">제목+내용</option>
+                <option value="title">제목</option>
+                <option value="body">내용</option>
+              </select>
+              <script>
+                const param_searchKeywordType = '${param.searchKeywordType}';
+                if (param_searchKeywordType) {
+                  $('select[name="searchKeywordType"]').val(param_searchKeywordType);
+                }
+              </script>
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
+              <button class="btn" type="submit">검색</button>
+            </form>
+          </div>
+          <div class="search-list__cell-recommendKeyword flex flex-column flex-ai-c">
+            <div><span><i class="far fa-keyboard"></i>  추천 Keywords</span></div>
+            <div class="recommendKeyword-box">
+              <div>아이폰</div>
+              <div>갤럭시</div>
+              <div>아이패드</div>
+              <div>갤럭시탭</div>
+              <div>워치</div>
+            </div>
+          </div>
+          <div class="search-totalCount">
             <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           </div>
           <header>
             <div class="article-list__cell-head">
-              <div class="article-list__cell-id">No.</div>
+              <div class="article-list__cell-id">번호</div>
               <div class="article-list__cell-update-date">작성일</div>
               <div class="article-list__cell-writer">작성자</div>
               <div class="article-list__cell-title">제목</div>
@@ -99,32 +128,7 @@ function DoSearchForm_submit(form){
               </div>
             </div>
 			</c:forEach>
-			
-			
           </div>
-          <div class="article-list__cell-search flex flex-jc-c">
-         	<form onsubmit="DoSearchForm_submit(this); return false;">
-         		<input type="hidden" name="boardId" value="${param.boardId}">
-         		<select name="searchKeywordType">
-         			<option value="titleAndBody">제목+내용</option>
-         			<option value="title">제목</option>
-         			<option value="body">내용</option>
-         		</select>
-         		<script>
-					const param_searchKeywordType = '${param.searchKeywordType}';
-
-					if(param_searchKeywordType){
-						$('select[name="searchKeywordType"]').val(param_searchKeywordType);
-					}
-         		</script>
-         		<input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="검색어 입력">
-         		<button class="btn" type="submit">검색</button>
-         	</form>
-            <c:if test="${sessionScope.loginedMemberId > 0}">           
-              <button class="btn btn-go" type="button"><a  href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a>
-              </button>
-         	</c:if>
-            </div>
         </div>
       </div>
       <!-- 메인-리스트페이지 끝 -->
@@ -156,21 +160,20 @@ function DoSearchForm_submit(form){
           </ul>
         </div>
       </div>
-      <!-- 메인-리스트 하단 메뉴 끝 -->
+      <!-- 메인-검색 리스트 하단 메뉴 끝 -->
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
   
   
   <!-- 모바일 메인 컨텐츠 박스 시작 -->
-  <main class="main-box flex-grow-1 visible-sm-down" style="min-height:500px;">
+  <main class="main-box flex-grow-1 visible-sm-down " style="min-height:5000px;">
     <section class="main-box-section con ">
-      <!-- 모바일 메인-리스트페이지 시작 -->
-      <div class="mobile-section-article-list">
-        <div class="mobile-article-list">
-          <div class="mobile-article-list__cell-search flex flex-jc-c">
+      <!-- 모바일 메인-검색 리스트페이지 시작 -->
+      <div class="mobile-section-search-list">
+        <div class="mobile-search-list">
+          <div class="mobile-search-list__cell-search flex flex-jc-c">
             <form class="flex flex-ai-c" onsubmit="DoSearchForm_submit(this); return false;">
-              <input type="hidden" name="boardId" value="${param.boardId}">
               <select name="searchKeywordType">
                 <option value="titleAndBody">제목+내용</option>
                 <option value="title">제목</option>
@@ -187,9 +190,9 @@ function DoSearchForm_submit(form){
             </form>
           </div>
           <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
-          <div class="mobile-article-list-name flex flex-jc-sb">
-            <span>${articles.get(0).extra_boardName}</span>
-            <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
+          <div class="mobile-search-list-name flex flex-jc-sb">
+            <span><i class="fas fa-search"></i> SEARCH</span>
+            <span><i class="far fa-copy"></i>Total : ${totalCount}</span>
           </div>
           <header>
             <div class="mobile-article-list__cell-head">
@@ -199,7 +202,7 @@ function DoSearchForm_submit(form){
             </div>
           </header>
            
-          <div class="mobile-article-list__cell-body">
+          <div class="mobile-search-list__cell-body">
           <c:forEach var="article" items="${articles}">
               <div>
                 <div class="mobile-article-list__cell-id">${article.id}</div>          
@@ -215,15 +218,11 @@ function DoSearchForm_submit(form){
                 <div class="mobile-article-list__cell-reply">${article.repliesCount}</div>
               </div>
               </c:forEach>
-          </div>
-          
+          </div>     
         </div>
-        <c:if test="${sessionScope.loginedMemberId > 0}">
-          <button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a></button>
-        </c:if>
       </div>
-      <!-- 모바일 메인-리스트페이지 끝 -->
-      <!-- 모바일 메인-리스트 하단 메뉴 시작 -->
+      <!-- 모바일 메인-검색 리스트페이지 끝 -->
+      <!-- 모바일 메인-검색 리스트 하단 메뉴 시작 -->
       <div class="mobile-article-page-menu-section">
         <div class="mobile-article-page-menu">
           <ul class="flex flex-jc-c">

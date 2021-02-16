@@ -656,7 +656,7 @@ body{
 /* 푸터 끝 */
 /* 모바일-푸터 시작 */
 .mobile-bottom-bar{
-  font-size:0.6rem;
+  font-size:0.7rem;
   color:black;
   background-color:white;
   border-top:2px solid gray;
@@ -674,7 +674,7 @@ body{
   text-align:center;
   border-radius:10% 10% 10% 10%;
   box-shadow:5px 10px 10px 10px gray;
-  width:380px;
+  width:400px;
   font-size:1rem;
   font-weight:bold;
   padding:20px 10px;
@@ -686,8 +686,8 @@ body{
 
 .login-title{
   font-size:1.9rem;
-  margin:10px;
-  margin-bottom:40px;
+  margin-top:5px;
+  margin-bottom:30px;
   border-bottom:4px solid gray;
   padding-bottom:15px;
 }
@@ -712,7 +712,7 @@ body{
   min-width:150px;
 }
 .loginInput_cell{
-  margin-top:10px;
+  margin-top:30px;
   font-size:0.9rem;
 
 }
@@ -847,7 +847,7 @@ body{
   
 }
 
-.section-join > form > div:first-child{
+.section-join > form > div:nth-child(2){
   font-size:2rem;
 }
 
@@ -855,8 +855,9 @@ body{
   border-right:4px solid gray;
   padding-right:40px;
 }
-.section-join > form > div:not(:first-child){
+.section-join > form > div:not(:nth-child(2)){
   padding-left:40px;
+  
 }
 
 .join_cell__title{
@@ -907,7 +908,7 @@ body{
 .mobile-section-join > form{
   text-align:left;
   width:950px;
-  font-size:0.9rem;
+  font-size:1rem;
   font-weight:bold;
   padding:50px 10px;
 
@@ -918,9 +919,9 @@ body{
   
 }
 
-.mobile-section-join > form > div:first-child{
+.mobile-section-join > form > div:nth-child(2){
   text-align:center;
-  font-size:1.3rem;
+  font-size:1.5rem;
   padding-bottom:10px;
   margin:10px;
   margin-bottom:30px;
@@ -935,7 +936,7 @@ body{
 
 .mobile-join_cell__title > span{
   padding-bottom:3px;
-  border-bottom:3px solid gray;
+  border-bottom:2.5px solid gray;
   
 }
 
@@ -944,7 +945,7 @@ body{
 }
 
 .mobile-join_cell__body > input{
-  font-size:0.7rem;
+  font-size:0.9rem;
   
   border:none;
   border-bottom:1.5px solid #333;
@@ -958,7 +959,6 @@ body{
   margin-top:5px;
   margin-left:7px;
   width:95%;
-  font-size:0.7rem;
 }
 
 .mobile-joinInput-cell > *{
@@ -985,7 +985,6 @@ body{
 
 .section-MyPage > form > .section-MyPage-body{
   text-align:left;
-  
   font-size:1rem;
   font-weight:bold;
   border-radius:20px 20px 20px 20px;
@@ -996,18 +995,21 @@ body{
 
 .section-MyPage-body > div:first-child{
   font-size:2rem;
-  padding-right:40px;
+  padding-right:30px;
   border-right:4px solid gray;
 }
 
 .section-MyPage-body__cell{
   padding:10px 50px;
-  
+  width:280px;
 }
 
 .section-MyPage-body__cell:nth-child(2){
-  padding-top:30px;
-  border-right:4px solid gray;
+  padding-right:0px;
+}
+
+.section-MyPage-body__cell:last-child{
+  border-left:4px solid gray;
 }
 
 
@@ -1055,7 +1057,7 @@ body{
 /* 회원정보 페이지 끝 */
 /* 모바일-회원정보 페이지 시작 */
 .mobile-section-MyPage{
-  padding-top:100px;
+  padding-top:50px;
   padding-bottom:50px;
   
 }
@@ -1072,7 +1074,7 @@ body{
 
 .mobile-section-MyPage-body > div:first-child{
   text-align:center;
-  font-size:1.3rem;
+  font-size:1.5rem;
   padding-bottom:10px;
   margin:10px;
   margin-bottom:30px;
@@ -1082,7 +1084,7 @@ body{
 
 .mobile-MyPage_cell__title{
   margin-bottom:10px;
-  font-size:0.9rem;
+  font-size:1rem;
 }
 .mobile-MyPage_cell__title > span{
   padding-bottom:3px;
@@ -1091,7 +1093,7 @@ body{
 
 .mobile-MyPage_cell__body{
   padding-top:15px;
-  font-size:0.7rem;
+  font-size:0.9rem;
   font-weight:normal;
   background-color:white;
   height:50px;
@@ -1099,7 +1101,7 @@ body{
 }
 
 .mobile-MyPage_cell__body > input{
-  font-size:0.7rem;
+  font-size:0.9rem;
   font-weight:normal;
   padding-top:10px;
   height:30px;
@@ -1375,7 +1377,7 @@ body{
   --article-list__cell-update-date__width:10%;
   --article-list__cell-writer__width:100px;
   --article-list__cell-hitsCount__width:100px;
-  --article-list__cell-likesCount__width:100px;
+  --article-list__cell-likesCount__width:135px;
   --article-list__cell-title__width:calc(100% - var(--article-list__cell-id__width) - var(--article-list__cell-update-date__width) - var(--article-list__cell-writer__width) - var(--article-list__cell-hitsCount__width) - var(--article-list__cell-likesCount__width));
 }
 
@@ -1383,7 +1385,6 @@ body{
   margin-top:70px;
   width:100%;
   text-align:center;
-  background-color:rgba(250, 250, 250, 0.4);
 }
 
 .article-list{
@@ -1394,12 +1395,18 @@ body{
 }
 
 .article-list-name{
+  padding-left:10px;
   text-align:left;
   font-weight:bold;
   font-size:1.6rem;
   margin-bottom:25px;
   position:relative;
 }
+.article-list-name > span:first-child{
+  padding-bottom:5px;
+  border-bottom:4px solid gray;
+}
+
 .article-list-name > span:nth-child(2){
   position:absolute;
   right:0;
@@ -1596,27 +1603,28 @@ body{
 }
 
 .mobile-section-article-list{
-  
   width:100%;
   text-align:center;
-  background-color:rgba(250, 250, 250, 0.4);
-  
 }
 
 .mobile-article-list-name{
   text-align:center;
   font-weight:bold;
   font-size:1.1rem;
-
+  margin-bottom:7px;
+  padding:5px 10px;
 }
 .mobile-article-list-name > span{
-  padding:10px;
-  padding-top:3px;
+  
+}
+
+.mobile-article-list-name > span:first-child{
+  border-bottom:2.5px solid gray;
 }
 
 .mobile-article-list-name > span:last-child{
   font-size:0.8rem;
-  padding-top:6px;
+  padding-top:10px;
 }
 
 
@@ -1818,6 +1826,299 @@ body{
 
 
 
+/* 메인 검색 페이지 시작 */
+.section-search-list{
+  margin-top:70px;
+  width:100%;
+  text-align:center;
+}
+
+.search-list{
+  width:90%;
+  font-size:0.9rem;
+  margin:auto;
+  margin-top:20px;
+}
+
+.search-list-name{
+  padding-left:10px;
+  text-align:left;
+  font-weight:bold;
+  font-size:1.6rem;
+  margin-bottom:45px;
+  position:relative;
+}
+.search-list-name > span{
+  padding-bottom:5px;
+  border-bottom:4px solid gray;
+}
+
+.search-totalCount{
+  text-align:center;
+  font-size:1rem;
+  font-weight:bold;
+  margin:15px;
+}
+
+.search-list > header{
+  background-color:rgba(230, 230, 230, 1);
+  font-weight:bold;
+  font-size:1rem;
+  border-top:2px solid gray;
+  border-bottom:2px solid gray;
+}
+
+.search-list > * > div{
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+.search-list > .article-list__cell-body > * > div{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.search-list > header > div > div {
+  position:relative;
+}
+
+.search-list > header > div > div:not(:last-child):after {
+  content:"";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  right:0;
+  width:2px;
+  height:15px;
+  background-color:black;
+}
+
+.search-list > * > div > div {
+  box-sizing:border-box;
+  text-align:center;
+}
+
+.search-list > .article-list__cell-body > * > div{
+  box-sizing:border-box;
+  text-align:center;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.search-list > .article-list__cell-body > * > div {
+  border-bottom:1px solid black;
+}
+
+.search-list__cell-search{
+  width:100%;
+  height:40px;
+  white-space: nowrap;
+  margin-top:20px; 
+}
+
+.search-list__cell-search > form {
+  width:100%;
+  height:100%;
+  white-space: nowrap;
+  
+}
+.search-list__cell-search > form > input{
+  height:80%;
+  width:70%;
+  font-size:1.2rem;
+  border-radius:10px;
+  border:3px solid gray;
+}
+.search-list__cell-search > form > select{
+  height:100%;
+  width:100px;
+  border:2px solid gray;
+  border-radius:10px;
+}
+
+.section-search-list >*> button{
+  width:70%;
+}
+
+.search-list__cell-recommendKeyword{
+  height:250px;
+  padding:40px 0;
+  font-size:1.2rem;
+  font-weight:bold;
+  text-align:center;
+}
+.search-list__cell-recommendKeyword > div:first-child{
+  font-size:1.6rem;
+  padding-bottom:10px;
+  border-bottom:3px solid gray;
+}
+
+.recommendKeyword-box{
+  height:100%;
+  margin-top:20px;
+  width:70%;
+  position:relative;
+  border-radius:20px;
+  background-color:rgba(240,240,240,0.6);
+  box-shadow:3px 3px 3px gray;
+}
+
+.recommendKeyword-box > div{
+  position:absolute;
+  text-shadow:5px 5px 5px gray;
+}
+
+.recommendKeyword-box > div:first-child{
+  top:10%;
+  left:10%;
+}
+.recommendKeyword-box > div:nth-child(2){
+  top:70%;
+  left:20%;
+}
+.recommendKeyword-box > div:nth-child(3){
+  top:30%;
+  left:40%;
+}
+.recommendKeyword-box > div:nth-child(4){
+  top:20%;
+  left:80%;
+}
+.recommendKeyword-box > div:last-child{
+  top:50%;
+  left:65%;
+}
+
+
+/* 메인 검색 페이지 끝 */
+/* 모바일 메인 검색 페이지 시작 */
+.mobile-section-search-list{  
+  width:100%;
+  text-align:center;
+}
+
+.mobile-search-list-name{
+  text-align:center;
+  font-weight:bold;
+  font-size:1.1rem;
+  margin-bottom:7px;
+  padding:5px 10px;
+}
+
+.mobile-search-list-name > span:first-child{
+  border-bottom:2.5px solid gray;
+}
+
+.mobile-search-list-name > span:last-child{
+  font-size:0.8rem;
+  padding-top:10px;
+}
+
+
+.mobile-search-list > header{
+  background-color:rgba(230, 230, 230, 1);
+  font-weight:bold;
+  font-size:1rem;
+  border-top:1.8px solid gray;
+  border-bottom:1.8px solid gray;
+}
+
+.mobile-search-list > * > div{
+  display:flex;
+  justify-content:center;
+  white-space: nowrap;
+  overflow:hidden;
+}
+
+.mobile-search-list > .mobile-search-list__cell-body > * > div{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.mobile-search-list > header > div > div {
+  position:relative;
+  
+}
+
+.mobile-search-list > header > div > div:not(:last-child):after {
+  content:"";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  right:0;
+  width:2px;
+  height:15px;
+  background-color:black;
+}
+
+.mobile-search-list > * > div > div {
+  box-sizing:border-box;
+  text-align:center;
+}
+
+.mobile-search-list > .mobile-search-list__cell-body > * > div{
+  box-sizing:border-box;
+  text-align:center;
+  padding-top:15px;
+  padding-bottom:15px;
+  font-size:0.9rem;
+}
+
+.mobile-search-list > .mobile-search-list__cell-body > * >.mobile-article-list__cell-title{ 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+  font-size:1rem;
+  text-align:left;
+  align-items:flex-start;
+  padding-left:10px;
+}
+
+.mobile-search-list > .mobile-search-list__cell-body > * > div {
+  border-bottom:1px solid gray;
+}
+
+.mobile-search-list__cell-search{
+  position:fixed;
+  width:100%;
+  z-index:10;
+  background-color:white;
+
+}
+
+.mobile-search-list__cell-search > form {
+  width:100%;
+  height:30px;
+  white-space: nowrap;
+  z-index:500;
+
+}
+.mobile-search-list__cell-search > form > input{
+  height:85%;
+  width:90%;
+  border: none;
+  border:1px solid gray;
+}
+.mobile-search-list__cell-search > form > select{
+  height:100%;
+  width:100px;
+  border:1px solid gray;
+
+}
+.mobile-search-list__cell-search > form .m-btn{  
+  height:30px;
+  border-radius:0;
+  box-shadow:0px 0px 0px;
+}
+
+
+
+/* 모바일 메인 검색 페이지 끝 */
+
+
+
 
 /* 게시물 상세페이지 시작 */
 
@@ -1833,9 +2134,14 @@ body{
   font-weight:bold;
   padding:10px;
   margin-bottom:20px;
-  border-bottom:4px solid;
+  
 
 }
+.article-detail-cell__board-name > div > span{
+  padding-bottom:5px;
+  border-bottom:4px solid gray;
+}
+
 .article-detail-cell__head-contents-box{
   background-color:rgba(240, 240, 240, 0.5);
 }
@@ -2155,12 +2461,20 @@ body{
 .mobile-article-detail-cell__board-name{
   font-size:1.1rem;
   margin-top:20px;
+  margin-bottom:5px;
   font-weight:bold;
   padding:10px;
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:wrap;
 }
+
+.mobile-article-detail-cell__board-name > div > span{
+  padding-bottom:3px;
+  border-bottom:2.5px solid gray;
+  
+}
+
 .mobile-article-detail-cell__head-contents-box{
   border-top:2px solid gray;
   background-color:rgba(240, 240, 240, 0.5);
@@ -2484,9 +2798,13 @@ body{
   font-size:1.3rem;
   padding:10px;
   margin-bottom:20px;
-  border-bottom:4px solid;
   font-weight:bold;
 }
+.article-writeAndModify-cell__board-name > div > span{
+  padding-bottom:5px;
+  border-bottom:4px solid gray;
+}
+
 
 .article-writeAndModify-cell__contents-box > form > span{
   font-size:1.1rem;
@@ -2522,8 +2840,12 @@ body{
   padding:10px;
   margin-top:20px;
   margin-bottom:20px;
-  border-bottom:3px solid;
   font-weight:bold;
+}
+
+.mobile-article-writeAndModify-cell__board-name > div > span{
+  padding-bottom:3px;
+  border-bottom:2.5px solid gray;
 }
 
 .mobile-article-writeAndModify-cell__option button{
@@ -2597,7 +2919,7 @@ body{
 }
 
 .search-bar-up{
-  top:0;
+  display:none;
 }
 /* 탑바 스크롤 애니메이션 끝 */
 

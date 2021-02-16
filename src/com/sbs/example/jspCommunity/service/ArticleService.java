@@ -114,16 +114,16 @@ public class ArticleService {
 	}
 
 	public List<Reply> getRepliesForPrintByArticleId(int id, String relTypeCode, int pageLimitStartIndex,
-			int repliesInAPage, Member actor) {	
-		List<Reply> replies = articleDao.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex, repliesInAPage);
-		
+			int repliesInAPage, Member actor) {
+		List<Reply> replies = articleDao.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex,
+				repliesInAPage);
+
 		if (actor != null) {
-			for(Reply reply : replies) {
+			for (Reply reply : replies) {
 				updateInfoForPrint(reply, actor);
 			}
 		}
-		
-		
+
 		return replies;
 	}
 
@@ -138,7 +138,7 @@ public class ArticleService {
 
 	public void replyModify(Map<String, Object> args) {
 		articleDao.replyModify(args);
-		
+
 	}
 
 	public int getArticleRepliesCount(int articleId) {
@@ -160,33 +160,43 @@ public class ArticleService {
 	}
 
 	private void updateInfoForPrint(Object object, Member actor) {
-	
-		if(object instanceof Article) {
+
+		if (object instanceof Article) {
 			Article article = (Article) object;
 			boolean actorCanLike = likeService.actorCanLike(article, actor);
 			boolean actorCanCancelLike = likeService.actorCanCancelLike(article, actor);
 			boolean actorCanDislike = likeService.actorCanDislike(article, actor);
 			boolean actorCanCancelDislike = likeService.actorCanCancelDislike(article, actor);
-			
+
 			article.getExtra().put("actorCanLike", actorCanLike);
 			article.getExtra().put("actorCanCancelLike", actorCanCancelLike);
 			article.getExtra().put("actorCanDislike", actorCanDislike);
 			article.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);
 		}
-		
-		if(object instanceof Reply) {
+
+		if (object instanceof Reply) {
 			Reply reply = (Reply) object;
 			boolean actorCanLike = likeService.actorCanLike(reply, actor);
 			boolean actorCanCancelLike = likeService.actorCanCancelLike(reply, actor);
 			boolean actorCanDislike = likeService.actorCanDislike(reply, actor);
 			boolean actorCanCancelDislike = likeService.actorCanCancelDislike(reply, actor);
-			
+
 			reply.getExtra().put("actorCanLike", actorCanLike);
 			reply.getExtra().put("actorCanCancelLike", actorCanCancelLike);
 			reply.getExtra().put("actorCanDislike", actorCanDislike);
 			reply.getExtra().put("actorCanCancelDislike", actorCanCancelDislike);
 		}
-	
+
+	}
+
+	public int getArticlesCountBySearchKeyword(String searchKeywordType, String searchKeyword) {
+		return articleDao.getArticlesCountBySearchKeyword(searchKeywordType, searchKeyword);
+	}
+
+	public List<Article> getArticlesForPrintBySearchKeyword(int pageLimitStartIndex, int articlesInAPage,
+			String searchKeywordType, String searchKeyword) {
+		return articleDao.getArticlesForPrintBySearchKeyword(pageLimitStartIndex, articlesInAPage, searchKeywordType,
+				searchKeyword);
 	}
 
 }

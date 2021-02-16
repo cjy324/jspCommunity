@@ -136,7 +136,7 @@ function localStorageClear(){
               </ul>
             </li>
             <li title="SEARCH">
-              <a href="search.html" class="block">
+              <a href="../article/search" class="block">
                 <span>SEARCH</span>
               </a>
             </li>
@@ -212,7 +212,7 @@ function localStorageClear(){
           </ul>
         </li>
         <li title="SEARCH">
-          <a href="search.html" class="block">
+          <a href="../article/search" class="block">
             <span>SEARCH</span>
           </a>
         </li>
