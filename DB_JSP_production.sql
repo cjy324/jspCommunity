@@ -1,4 +1,4 @@
-USE jspCommunity;
+`textBoard`USE jspCommunity;
 
 
 SELECT * FROM `member`;
