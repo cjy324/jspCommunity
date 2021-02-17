@@ -88,7 +88,7 @@ function DoSearchForm_submit(form){
             </form>
           </div>
           <div class="search-list__cell-recommendKeyword flex flex-column flex-ai-c">
-            <div><span><i class="far fa-keyboard"></i> 추천 Keywords</span></div>
+            <div><span><i class="far fa-keyboard"></i> Keywords</span></div>
             <div class="recommendKeyword-box">
               <div>아이폰</div>
               <div>갤럭시</div>
@@ -192,6 +192,18 @@ function DoSearchForm_submit(form){
           <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
           <div class="mobile-search-list-name flex flex-jc-sb">
             <span><i class="fas fa-search"></i> SEARCH</span>
+          </div>
+          <div class="mobile-search-list__cell-recommendKeyword flex flex-column flex-ai-c">
+            <div><span><i class="far fa-keyboard"></i> Keywords</span></div>
+            <div class="mobile-recommendKeyword-box">
+              <div>아이폰</div>
+              <div>갤럭시</div>
+              <div>아이패드</div>
+              <div>갤럭시탭</div>
+              <div>워치</div>
+            </div>
+          </div>
+          <div class="mobile-search-totalCount">
             <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           </div>
           <header>

@@ -198,7 +198,7 @@
                 </div>
               </div>
               <div class="section-MyPage-body__option flex flex-jc-fe flex-ai-fe">
-                <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 변경</button>
+                <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="fas fa-user-check"></i> 변경</button>
                 <button class="cleModifyBtn btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 취소</button>
               </div>
             </div>
@@ -293,7 +293,7 @@
               </div>
             </div>
             <div class="mobile-section-MyPage-body__option flex flex-column">
-              <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 변경</button>
+              <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="fas fa-user-check"></i> 변경</button>
               <button class="cleModifyBtn btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 취소</button>
             </div>
 

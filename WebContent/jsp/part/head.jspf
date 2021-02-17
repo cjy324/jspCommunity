@@ -248,7 +248,7 @@ function localStorageClear(){
 		<div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
       <div class="mobile-side-bar-button"><a href="../member/doLoginForm?beforeUrl=${encodedCurrentUrl}"><i class="fas fa-sign-in-alt"></i> 로그인</a></div>
       <div class="mobile-side-bar-button"><a href="../member/doJoinForm"><i class="fas fa-user-check"></i> 회원가입</a></div>
-				</c:if>
+	</c:if>
     </div>
   </aside>
   <!-- 모바일 사이드메뉴바 끝 -->

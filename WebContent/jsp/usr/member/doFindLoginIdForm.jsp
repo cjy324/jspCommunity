@@ -47,6 +47,9 @@
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
         <form name="form" onsubmit="check(this); return false;" action="doFindLoginId" method="POST">
+          <div class="mobile-login-title">
+           ID 찾기
+          </div>
           <div class="login_cell__title">
             <span>이름</span>
           </div>
@@ -60,8 +63,8 @@
             <input type="email" name="email" maxlength="50" placeholder="email 입력">
           </div>
           <div class="loginInput_cell">
-            <button class="btn btn-go" type="submit">ID 찾기</button>
-            <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
+            <button class="btn btn-go" type="submit"><i class="fas fa-search"></i> ID 찾기</button>
+            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo-alt"></i> Back</button>
           </div>
         </form>
       </div>

@@ -14,12 +14,12 @@
         <div class="home-box_letter home-box_letter1 flex flex-column flex-jc-c">
           <header>Get NOTICE</header>
           <div class="">
-            사이트 관련 주요 알림들을 확인하세요~!
+            Get IT 사이트 관련 주요 알림들을 확인하세요~!
           </div>
           <div class="">
-            - 공지사항
+            <i class="fas fa-bullhorn"></i> 공지사항들을 확인하고 싶다면?
             <br>
-            - 사이트 소개
+            <i class="fas fa-exclamation-circle"></i> Get IT 사이트에 대한 정보를 알고싶다면?
           </div>
           <div class="flex flex-jc-c">
             <a href="../article/list?boardId=1">
@@ -62,12 +62,19 @@
         <div class="home-box_letter home-box_letter2 flex flex-column flex-jc-c">
           <header>Get NEWS</header>
           <div class="">
-            애플, 삼성, 그 외 Smart 기기들의 최신소식을 빠르게 챙겨가세요~!
+            Apple, Samsung, 그 외 Smart 기기들과 관련된
+            <br>
+            최신정보들을 빠르게 가져가세요~!
           </div>
           <div class="">
-            - iPhone / iPad / apple watch 
+            <i class="fas fa-mobile-alt"></i>
+            iPhone / galaxy 
             <br>
-            - galaxy / galaxy tab / galaxy watch
+            <i class="fas fa-tablet-alt"></i>
+            iPad / galaxy tab
+            <br>
+            
+            etc.
           </div>
           <div class="flex flex-jc-c">
             <a href="../article/list?boardId=2">
@@ -83,12 +90,13 @@
         <div class="home-box_letter home-box_letter3 flex flex-column flex-jc-c">
           <header>Get TIP's</header>
           <div class="">
-            애플, 삼성, LG Smart 기기들에 대한 소소한 Tip들을 모두 챙겨가세요~!
+            내가 쓰고 있는 Smart 기기들에 대한
+            <br>
+            소소한 Tip들을 공유해요~!
           </div>
           <div class="">
-            - Apple device Tip's
-            <br>
-            - Samsung device Tip's
+            <i class="fas fa-users"></i>
+            Tip's
           </div>
           <div class="flex flex-jc-c">
             <a href="../article/list?boardId=3">
@@ -105,7 +113,7 @@
                 <div class="img-box">
                   <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
                   <div class="img-txt">
-                    Notice
+                    Tip's
                   </div>
                 </div>
               </div>

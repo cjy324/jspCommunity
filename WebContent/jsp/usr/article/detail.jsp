@@ -252,7 +252,7 @@ function checkModify(replyModifyForm){
           </div>
           <div class="article-detail-cell__option flex flex-jc-fe">
             <c:if test="${loginedMemberId == article.extra_memberId}">
-              <button class="btn" type="button">
+              <button class="btn btn-modify" type="button">
                 <a href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a>
               </button>
               <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
@@ -353,13 +353,13 @@ function checkModify(replyModifyForm){
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
                 <input class="replyBodyInput" type="text" name="body" placeholder="${reply.body}" value="${reply.body}">
                 <div class="replyModifyForm__option flex flex-jc-fe">
-                  <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                  <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
                 </div>
               </form>
              
               <div class="reply-list-box-cell__option-btns flex flex-ai-c">
-                <button class="btn doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                <button class="btn btn-modify doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                 <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
                   <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
                 </button>
@@ -440,7 +440,7 @@ function checkModify(replyModifyForm){
         <div class="mobile-article-detail-cell height-100p">
           <div class="mobile-article-detail-cell__board-name">
             <div>
-              <span><i class="fas fa-th-list"></i> ${article.extra_boardName}</span>
+              <span>${article.extra_boardName}</span>
             </div>
           </div>
 
@@ -534,7 +534,7 @@ function checkModify(replyModifyForm){
         </div>
         <div class="mobile-article-detail-cell__option flex">
           <c:if test="${loginedMemberId == article.extra_memberId}">
-            <button class="btn" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a></button>
+            <button class="btn btn-modify" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a></button>
             <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=${article.id}"><i class="far fa-trash-alt"></i> 삭제</a></button>
           </c:if>
         </div>
@@ -629,13 +629,13 @@ function checkModify(replyModifyForm){
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
                   <input class="mobile-replyBodyInput" type="text" name="body" placeholder="${reply.body}" value="${reply.body}">
                   <div class="mobile-replyModifyForm__option flex flex-jc-fe">
-                    <button class="btn" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                    <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
                     <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
                   </div>
                 </form>
                 
                 <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c">
-                  <button class="btn doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                  <button class="btn btn-modify doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
                     <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
                   </button>

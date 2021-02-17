@@ -76,7 +76,7 @@
                 </div>
               </div>
               <div class="section-MyPage-body__option flex flex-jc-fe flex-ai-fe">
-                <button class ="doModifyBtn btn btn-go" type="button"><a href="../member/doModifyForm"><i class="far fa-edit"></i> 수정</a></button>
+                <button class ="doModifyBtn btn btn-go" type="button"><a href="../member/doModifyForm"><i class="fas fa-user-cog"></i> 수정</a></button>
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@
               </div>
             </div>
             <div class="mobile-section-MyPage-body__option flex flex-column">
-              <button class ="doModifyBtn btn btn-go" type="button"><a href="../member/doModifyForm"><i class="far fa-edit"></i> 수정</a></button>
+              <button class ="doModifyBtn btn btn-go" type="button"><a href="../member/doModifyForm"><i class="fas fa-user-cog"></i> 수정</a></button>
             </div>
 
           </div>

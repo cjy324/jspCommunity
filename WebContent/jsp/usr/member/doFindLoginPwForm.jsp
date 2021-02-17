@@ -50,6 +50,9 @@
       <div class="section-login min-height-50vh flex flex-jc-c flex-ai-c">
 
         <form name="form" onsubmit="check(this); return false;" action="doFindLoginPw" method="POST">
+          <div class="mobile-login-title">
+           PW 찾기
+          </div>
           <div class="login_cell__title">
             <span>아이디</span>
           </div>
@@ -63,8 +66,8 @@
             <input type="email" name="email" maxlength="50" placeholder="e-mail을 입력하세요.">
           </div>
           <div class="loginInput_cell">
-            <button class="btn btn-go" type="submit">PW 찾기</button>
-            <button class="btn btn-back" type="button" onclick="history.back();">Back</button>
+            <button class="btn btn-go" type="submit"><i class="fas fa-search"></i> PW 찾기</button>
+            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo-alt"></i> Back</button>
           </div>
         </form>
       </div>
