@@ -30,13 +30,13 @@ function hasScrolled() {
         // Scroll Down
         $('.head-nav').removeClass('nav-down').addClass('nav-up');
       $('.title').addClass('title-down');
-
+      $('.mobile-article-list__cell-search').addClass('search-bar-up');
     } else {
         // Scroll Up
         if(st + $(window).height() < $(document).height()) {
             $('.head-nav').removeClass('nav-up').addClass('nav-down');
           $('.title').removeClass('title-down');
-
+          $('.mobile-article-list__cell-search').removeClass('search-bar-up');
         }
     }
     
@@ -56,10 +56,16 @@ function MobileTopBar__init() {
     if ( $this.hasClass('active') ) {
       $this.removeClass('active');
       $('.mobile-side-bar').removeClass('active');
+      $('.mobile-side-bar').off('scroll touchmove mousewheel');
     }
     else {
       $this.addClass('active');
       $('.mobile-side-bar').addClass('active');
+      $('.mobile-side-bar').on('scroll touchmove mousewheel', function(e) {
+         e.preventDefault();
+         e.stopPropagation();
+       return false;
+      })
     }
   });
 }
@@ -118,6 +124,26 @@ $(function() {
 
 /* top & bottom-button 옵션 끝 */
 
+
+
+/* 댓글 수정 버튼 시작 */
+function doModifyReplyForm__init() {
+  $('.doModifyReplyForm').click(function() {
+
+      $('.doModifyReplyForm').addClass('active');
+      $('.reply-detail-cell-likesCount').addClass('active');
+      $('.mobile-reply-list-box__cell-body').addClass('active');
+      $(this).parents().parents().prev('.reply-list-box__cell-contents').addClass('active');
+      $(this).parents().parents().addClass('active');
+      $(this).parents().addClass('active');
+      $(this).parents().prev().addClass('active');
+      $(this).next().addClass('active');
+
+  });
+}
+
+doModifyReplyForm__init();
+/* 댓글 수정 버튼 끝 */
 
 
 

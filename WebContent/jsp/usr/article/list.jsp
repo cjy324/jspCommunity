@@ -67,10 +67,13 @@ function DoSearchForm_submit(form){
       <!-- 메인-리스트페이지 시작 -->
       <div class="section-article-list">
         <div class="article-list">
-          <div class="article-list-name flex">
-            <span>${articles.get(0).extra_boardName}</span>
-            <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
-          </div>
+          <nav class="article-list-img flex">
+            <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+            <div class="article-list-name">
+            	<span>${articles.get(0).extra_boardName}</span>
+            	<span><i class="far fa-copy"></i> Total : ${totalCount}</span>
+          	</div>
+          </nav>
           <header>
             <div class="article-list__cell-head">
               <div class="article-list__cell-id">No.</div>
@@ -186,11 +189,18 @@ function DoSearchForm_submit(form){
               <div><button class="m-btn" type="submit">검색</button></div>
             </form>
           </div>
-          <section class="mobile-top-bar-padding flex flex-ai-c visible-sm-down"></section>
-          <div class="mobile-article-list-name flex flex-jc-sb">
-            <span>${articles.get(0).extra_boardName}</span>
-            <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
-          </div>
+          
+          
+          <nav class="mobile-article-list-img flex">
+            <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+            <div class="mobile-article-list-name">
+            	<span>${articles.get(0).extra_boardName}</span>
+            	<span><i class="far fa-copy"></i> Total : ${totalCount}</span>
+          	</div>
+          </nav>
+          <c:if test="${sessionScope.loginedMemberId > 0}">
+          	<button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a></button>
+          </c:if>
           <header>
             <div class="mobile-article-list__cell-head">
               <div class="mobile-article-list__cell-id">No.</div>
@@ -215,12 +225,8 @@ function DoSearchForm_submit(form){
                 <div class="mobile-article-list__cell-reply">${article.repliesCount}</div>
               </div>
               </c:forEach>
-          </div>
-          
+          </div>         
         </div>
-        <c:if test="${sessionScope.loginedMemberId > 0}">
-          <button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a></button>
-        </c:if>
       </div>
       <!-- 모바일 메인-리스트페이지 끝 -->
       <!-- 모바일 메인-리스트 하단 메뉴 시작 -->

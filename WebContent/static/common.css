@@ -207,7 +207,7 @@ body{
 .m-btn {
   height:25px;
   width:65px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   line-height: 1rem;
   text-shadow: 1px 1px 20px white;
   padding:0 15px;
@@ -536,7 +536,7 @@ body{
 }
 
 .mobile-side-bar>span{
-  font-size:1.2rem;
+  font-size:1.3rem;
   padding-bottom:10px;
 }
 
@@ -558,7 +558,7 @@ body{
 .mobile-side-bar_menu ul > li > a{
   max-width:200px;
   padding:10px;
-  font-size:0.9rem;
+  font-size:1rem;
 
 }
 
@@ -1394,23 +1394,48 @@ body{
   margin-top:20px;
 }
 
+
+
+.article-list-img{
+  height:230px;
+  overflow:hidden;
+  margin-bottom:20px;
+  position:relative;
+  border-radius:10px;
+}
+
+.article-list-img > img{
+  width:100%;
+  position:absolute;
+  top:-100%;
+  left:0;
+  
+}
+
 .article-list-name{
+  width:100%;
   padding-left:10px;
   text-align:left;
   font-weight:bold;
+  color:white;
   font-size:1.6rem;
   margin-bottom:25px;
   position:relative;
+  z-index:500px;
 }
 .article-list-name > span:first-child{
+  position:absolute;
+  left:20px;
+  bottom:0;
   padding-bottom:5px;
   border-bottom:4px solid gray;
+  z-index:500px;
 }
 
 .article-list-name > span:nth-child(2){
   position:absolute;
   text-align:right;
-  right:0;
+  right:20px;
   bottom:0;
   font-size:1rem;
   min-width:150px;
@@ -1608,28 +1633,48 @@ body{
   text-align:center;
 }
 
+.mobile-article-list-img{
+  height:200px;
+  overflow:hidden;
+  position:relative;
+}
+
+.mobile-article-list-img > img{
+  width:100%;
+  position:absolute;
+  top:-20%;
+  left:0;
+  
+}
+
 .mobile-article-list-name{
+  width:100%;
   text-align:center;
   font-weight:bold;
   font-size:1.1rem;
+  color:white;
   margin-bottom:7px;
   padding:5px 10px;
-}
-.mobile-article-list-name > span{
-  
+  position:relative;
 }
 
 .mobile-article-list-name > span:first-child{
+  position:absolute;
+  left:10px;
+  bottom:0;
   border-bottom:2.5px solid gray;
+  z-index:20;
 }
 
 .mobile-article-list-name > span:last-child{
+  position:absolute;
+  right:10px;
+  bottom:0;
   font-size:0.8rem;
-  padding-top:10px;
   width:100px;
+  z-index:20;
   
 }
-
 
 .mobile-article-list > header{
   background-color:rgba(230, 230, 230, 1);
@@ -1734,23 +1779,25 @@ body{
 .mobile-article-list__cell-search{
   position:fixed;
   width:100%;
-  z-index:10;
+  z-index:500;
   background-color:white;
-
+  
 }
 
 .mobile-article-list__cell-search > form {
   width:100%;
   height:30px;
   white-space: nowrap;
-  z-index:500;
+
 
 }
 .mobile-article-list__cell-search > form > input{
   height:24px;
   width:90%;
+  font-size:1rem;
   border: none;
   border:2px solid gray;
+
 }
 .mobile-article-list__cell-search > form > select{
   height:30px;
@@ -1761,10 +1808,12 @@ body{
 .mobile-article-list__cell-search > form .m-btn{  
   height:29px;
   border-radius:0;
+  font-size:0.8rem;
   box-shadow:0px 0px 0px;
+
 }
 
-.mobile-section-article-list > button{
+.mobile-section-article-list .m-btn{
   border-radius:0;
   height:30px;
   width:100%;
@@ -1774,7 +1823,7 @@ body{
 /* 모바일 메인 리스트 페이지 끝 */
 /* 모바일 게시물 리스트 하단 메뉴 시작 */
 .mobile-article-page-menu-section{
-  margin-top:30px;
+  margin-top:20px;
   padding-bottom:50px;
 }
 
