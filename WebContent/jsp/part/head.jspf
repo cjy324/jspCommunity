@@ -5,7 +5,63 @@
 <!doctype html>
 <html lang="ko">
 <head>
+<script data-ad-client="ca-pub-7996879977557531" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X5RMP83794"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X5RMP83794');
+</script>
 <meta charset="UTF-8" />
+
+<!-- 구글 검색엔진 등록-소유권 확인 -->
+<meta name="google-site-verification" content="37R4KcEaJU5LfiKL7GI1hu1_spJgWOazN6xy48OHhD4" />
+
+<!-- Meta Tag & Open Graph -->
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=1200">
+<meta name="apple-mobile-web-app-title" content="Get IT" />
+<!-- 메타태그정보 //-->
+<!-- META -->
+<link rel="canonical" href="https://getit.devj.me" />
+<meta name="subject" content="스마트폰, 테블릿"/>
+<meta name="title" content="Get IT" />
+<meta name="keywords" content="스마트폰, 테블릿" />
+<meta name="copyright" content="Get IT" />
+<meta name="pubdate" content="[날짜]" />
+<meta name="lastmod" content="[날짜]" />
+<!-- OPENGRAPH -->
+<meta property="og:site_name" content="Get IT" />
+<meta property="og:type" content="site" />
+<meta property="og:title" content="Get IT" />
+<meta property="og:description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:image" content="images/Dev_J_logo/logo.png" />
+<meta property="og:image:alt" content="https://getit.devj.me" />
+<meta property="og:image:width" content="486" />
+<meta property="og:image:height" content="254" />
+<meta property="og:updated_time" content="[날짜]"/>
+<meta property="og:pubdate" content="[날짜]" />
+<meta property="og:url" content="https://getit.devj.me" />
+<!-- TWITTER -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Get IT" />
+<meta name="twitter:site" content="@Get IT" />
+<meta name="twitter:creator" content="@Get IT" />
+<meta name="twitter:image" content="images/GetIT_logo/logo.png">
+<meta name="twitter:description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
+<!-- GOOGLE+ -->
+<meta itemprop="headline" content="Get IT" />
+<meta itemprop="name" content="Get IT" />
+<meta itemprop="description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
+<meta itemprop="image" content="images/GetIT_logo/logo.png" />
+
+<!-- 파비콘 -->
+<link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
+<link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
