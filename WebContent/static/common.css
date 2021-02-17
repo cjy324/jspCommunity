@@ -1721,7 +1721,7 @@ body{
   right:0;
   width:2px;
   height:15px;
-  background-color:black;
+  background-color:#666;
 }
 
 .mobile-article-list > * > div > div {
@@ -2131,7 +2131,7 @@ body{
   right:0;
   width:2px;
   height:15px;
-  background-color:black;
+  background-color:#666;
 }
 
 .mobile-search-list > * > div > div {
