@@ -2825,7 +2825,7 @@ body{
 .mobile-replyBodyInput{
   width:99%;
   height:25px;
-  
+  font-size:0.9rem;
 }
 .mobile-replyModifyForm__option{
   margin-top:5px;

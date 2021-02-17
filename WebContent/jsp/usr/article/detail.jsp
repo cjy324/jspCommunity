@@ -253,7 +253,7 @@ function checkModify(replyModifyForm){
           <div class="article-detail-cell__option flex flex-jc-fe">
             <c:if test="${loginedMemberId == article.extra_memberId}">
               <button class="btn btn-modify" type="button">
-                <a href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a>
+                <a href="doModifyForm?id=${article.id}"><i class="far fa-edit"></i> 수정</a>
               </button>
               <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
                 <a href="doDelete?id=${article.id}"><i class="far fa-trash-alt"></i> 삭제</a>
@@ -534,7 +534,7 @@ function checkModify(replyModifyForm){
         </div>
         <div class="mobile-article-detail-cell__option flex">
           <c:if test="${loginedMemberId == article.extra_memberId}">
-            <button class="btn btn-modify" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}&boardId=${article.boardId}&title=${article.title}&body=${article.body}"><i class="far fa-edit"></i> 수정</a></button>
+            <button class="btn btn-modify" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}"><i class="far fa-edit"></i> 수정</a></button>
             <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button"><a style="text-decoration:none;" href="doDelete?id=${article.id}"><i class="far fa-trash-alt"></i> 삭제</a></button>
           </c:if>
         </div>
