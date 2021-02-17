@@ -68,7 +68,15 @@ function DoSearchForm_submit(form){
       <div class="section-article-list">
         <div class="article-list">
           <nav class="article-list-img flex">
+          	<c:if test="${param.boardId == 1}">
             <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+            </c:if>
+            <c:if test="${param.boardId == 2}">
+            <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+            </c:if>
+            <c:if test="${param.boardId == 3}">
+            <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
+            </c:if>
             <div class="article-list-name">
             	<span>${articles.get(0).extra_boardName}</span>
             	<span><i class="far fa-copy"></i> Total : ${totalCount}</span>
@@ -192,7 +200,15 @@ function DoSearchForm_submit(form){
           
           
           <nav class="mobile-article-list-img flex">
+            <c:if test="${param.boardId == 1}">
             <img src="https://images.unsplash.com/photo-1509395062183-67c5ad6faff9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="">
+            </c:if>
+            <c:if test="${param.boardId == 2}">
+            <img src="https://images.unsplash.com/photo-1585719022717-87adb5bc279d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+            </c:if>
+            <c:if test="${param.boardId == 3}">
+            <img src="https://insight-prd-data.s3.ap-northeast-2.amazonaws.com/wp-content/uploads/2017/07/%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C%ED%94%84%EB%A1%9C_%EB%A6%AC%EB%B7%B0_01.png" alt="">
+            </c:if>
             <div class="mobile-article-list-name">
             	<span>${articles.get(0).extra_boardName}</span>
             	<span><i class="far fa-copy"></i> Total : ${totalCount}</span>
