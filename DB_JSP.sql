@@ -58,7 +58,7 @@ INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'notice',
-`name` = '공지사항';
+`name` = 'NOTICE';
 
 # NEWS 게시판 생성
 INSERT INTO board
@@ -71,8 +71,8 @@ updateDate = NOW(),
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
-`code` = 'free',
-`name` = '자유';
+`code` = 'tip',
+`name` = 'TIP`s';
 
 
 # 게시물 테이블 생성

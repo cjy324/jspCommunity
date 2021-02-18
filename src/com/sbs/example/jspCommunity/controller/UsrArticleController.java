@@ -662,4 +662,43 @@ public class UsrArticleController extends Controller {
 		return "usr/article/search";
 	}
 
+	// 댓글 ajax
+	public String replyAjax(HttpServletRequest request, HttpServletResponse response) {
+		// 게시물 번호가 입력됐는지 확인
+				int articleId = Util.getAsInt(request.getParameter("id"), 0);
+				if (articleId == 0) {
+					return msgAndBack(request, "게시물 번호를 입력하세요.");
+				}
+
+				// 회원 아이디 확인
+				int memberId = (int) request.getAttribute("loginedMemberId");
+				
+
+				// 댓글이 입력됐는지 확인
+				String replyBody = request.getParameter("body");
+				if (Util.isEmpty(replyBody)) {
+					return msgAndBack(request, "내용을 입력하세요.");
+				}
+
+				String relTypeCode = "article";
+
+				// 댓글 등록
+				int replyId = articleService.addReply(articleId, memberId, relTypeCode, replyBody);
+
+				// 게시물에 대한 댓글수 가져오기
+				int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
+
+				// 게시물 정보 수정
+				Map<String, Object> args2 = new HashMap<>();
+				args2.put("id", articleId);
+				args2.put("repliesCount", getArticleRepliesCount);
+
+				articleService.articleModify(args2);
+			
+				String msg = "댓글 등록 완료";
+				String code = "S-1";
+				
+				return jsonWithData(request, new ResultData(code, msg));
+	}
+
 }

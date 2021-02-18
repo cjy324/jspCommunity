@@ -83,12 +83,45 @@
 	
 </script>
 
+<script>
 
+let replyForm_submited = false;
+
+		function ArticleWriteReplyForm__submit(form) {
+			form.replyBody.value = form.replyBody.value.trim();
+
+			if(replyForm_submited){
+
+				alert('처리중입니다.');
+					return;
+			}
+			
+			if (form.replyBody.value.length == 0) {
+				alert('댓글을 입력해주세요.');
+				form.replyBody.focus();
+				return;
+			}
+			
+			$.post(
+				'replyAjax',
+				 {
+				id : form.articleId.value,
+				body : form.replyBody.value
+			}, 
+			function(data) {
+				alert(data.msg);
+			}, 
+			'json'
+			);
+			form.replyBody.value = '';
+			replyForm_submited = true;
+		};
+	</script>
 
 
 <script>
 
-let replyForm_submited = false;
+/* let replyForm_submited = false;
 
 function checkWrite(form){
 
@@ -104,11 +137,22 @@ function checkWrite(form){
 
 		return false;
 	}
+	
+	$.post(
+			'replyAjax',
+			 {
+			id : form.articleId.value,
+			body : form.replyBody.value
+		}, 
+		function(data) {
+			alert(data.msg);
+		}, 
+		'json'
+		);
+		form.replyBody.value = '';
 
-
-	form.submit();
 	replyForm_submited = true;
-}
+} */
 
 
 let replyModifyForm_submited = false;
@@ -268,9 +312,9 @@ function checkModify(replyModifyForm){
     <!-- 댓글창 시작 -->
     <c:if test="${isLogined}">
       <div class="reply-write-box">
-        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="ArticleWriteReplyForm__submit(this); return false;" action="replyAjax" method="POST">
           <input type="hidden" name="articleId" value="${article.id}">
-          <input type="hidden" name="memberId" value="${loginedMemberId}">
+         
           <input type="hidden" name="redirectUrl"
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
           <span><i class="far fa-comment-dots"></i></span>
@@ -402,6 +446,8 @@ function checkModify(replyModifyForm){
       </div>
 
       <!-- 댓글창 끝 -->
+      
+      
 
       <!-- 메인-상세 하단 메뉴 시작 -->
       <section class="section-3 con-min-width">
