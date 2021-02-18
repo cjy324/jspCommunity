@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Board;
+import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
 import com.sbs.example.mysqlutil.MysqlUtil;
 import com.sbs.example.mysqlutil.SecSql;
@@ -656,6 +657,52 @@ public class ArticleDao {
 		}
 		// Collections.reverse(articles);
 		return articles;
+	}
+
+	public List<Reply> getRepliesForPrintByArticleId2(int articleId, String relTypeCode, Member loginedMember, int lastLoadedId) {
+		List<Reply> replies = new ArrayList<>();
+
+		SecSql sql = new SecSql();
+		sql.append("SELECT R.*");
+		sql.append(", M.nickname AS extra_memberNickname");
+		sql.append(", IFNULL(SUM(L.point), 0) AS extra_likePoint");
+		sql.append(", IFNULL(SUM(IF(L.point > 0, L.point, 0)), 0) AS extra_likeOnlyPoint");
+		sql.append(", IFNULL(SUM(IF(L.point < 0, L.point * -1, 0)), 0) extra_dislikeOnlyPoint");
+		sql.append("FROM reply AS R");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON R.memberId = M.id");
+		sql.append("LEFT JOIN `like` AS L");
+		sql.append("ON L.relTypeCode = 'reply'");
+		sql.append("AND R.id = L.relId");
+		sql.append("WHERE 1");
+
+
+		if (relTypeCode != null) {
+			sql.append("AND R.relTypeCode = ?", relTypeCode);
+		};
+		
+		if (articleId != 0) {
+			sql.append("AND R.relId = ?", articleId);
+		};
+		
+		if (lastLoadedId != 0) {
+			sql.append("AND R.id >= ?", lastLoadedId);
+		};
+
+		sql.append("GROUP BY R.id");
+
+		sql.append("ORDER BY R.id ASC");
+		
+		List<Map<String, Object>> repliesMapList = MysqlUtil.selectRows(sql);
+
+		for (Map<String, Object> repliesMap : repliesMapList) {
+			Reply reply = new Reply(repliesMap);
+
+			replies.add(reply);
+
+		}
+		// Collections.reverse(articles);
+		return replies;
 	}
 
 	

@@ -199,4 +199,8 @@ public class ArticleService {
 				searchKeyword);
 	}
 
+	public List<Reply> getRepliesForPrintByArticleId2(int articleId, String relTypeCode, Member loginedMember, int lastLoadedId) {
+		return articleDao.getRepliesForPrintByArticleId2( articleId, relTypeCode, loginedMember, lastLoadedId);
+	}
+
 }
