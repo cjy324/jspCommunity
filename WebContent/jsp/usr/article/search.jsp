@@ -83,7 +83,7 @@ function DoSearchForm_submit(form){
                   $('select[name="searchKeywordType"]').val(param_searchKeywordType);
                 }
               </script>
-              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword 입력">
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword를 입력하세요.">
               <button class="btn" type="submit">검색</button>
             </form>
           </div>
@@ -185,7 +185,7 @@ function DoSearchForm_submit(form){
                   $('select[name="searchKeywordType"]').val(param_searchKeywordType);
                 }
               </script>
-              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword 입력">
+              <input type="text" name="searchKeyword" value="${param.searchKeyword }" placeholder="keyword를 입력하세요.">
               <div><button class="m-btn" type="submit">검색</button></div>
             </form>
           </div>
