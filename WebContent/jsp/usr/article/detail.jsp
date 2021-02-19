@@ -261,6 +261,7 @@ function checkModify(replyModifyForm){
           <div class="reply-list-box__cell-contents flex flex-ai-c">
             <div class="reply-list-box__cell-updateDate">${reply.updateDate}</div>
             <div data-id="${reply.id}" class="reply-list-box__cell-body">${reply.body}</div>
+            <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
           </div>
           <div class="reply-list-box-cell__option">
           <div class="reply-detail-cell-likesCount flex">
@@ -338,11 +339,72 @@ function checkModify(replyModifyForm){
               </div>
             </c:if>
           </div>
-           
         </div>
+        
+        <!-- 대댓글창 시작 -->
+          <div class="reReply-write-box">
+            <form class="reReply-write-box-form flex flex-jc-fe flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+              <input type="hidden" name="replyId" value="${reply.id}">
+              <input type="hidden" name="memberId" value="${loginedMemberId}">
+              <span><i class="fas fa-reply"></i></span>
+              <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+              <div class="reReply-write-box-form__option ">
+                <button class="btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
+              </div>
+            </form>
+          </div>
+        </div> 
+            <c:forEach var="reply" items="${reReplies}">
+          <div class="reReply-list-box">
+            <div class="reReply-list-box-writer"><i class="far fa-user-circle"></i> ${reply.extra_memberNickname}</div>
+            <div class="reReply-list-box__cell flex flex-jc-sb">
+              <div class="reReply-list-box__cell-contents flex flex-ai-c">
+                <div class="reReply-list-box__cell-updateDate">${reply.updateDate}</div>
+                <div class="reReply-list-box__cell-body">${reply.body}</div>
+              </div>
+              
+              <div class="reReply-list-box-cell__option">
+                <div class="reReply-detail-cell-likesCount flex">
+                    <button class="addLike" type="button">
+                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                </button>
+
+                    <button class="addUnLike" type="button">
+                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+                </div>
+                <c:if test="${loginedMemberId == reply.memberId}">
+                  <form class="reReplyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                    <input type="hidden" name="id" value="${reply.id}">
+                    <input type="hidden" name="relId" value="${reply.relId}">
+                    <input type="hidden" name="memberId" value="${loginedMemberId}">
+                    <input class="reReplyBodyInput" type="text" name="body" maxlength="50" placeholder="${reply.body}" value="${reply.body}">
+                    <div class="reReplyModifyForm__option flex flex-jc-fe">
+                      <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                      <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
+                    </div>
+                  </form>              
+                  <div class="reReply-list-box-cell__option-btns flex flex-ai-c">
+                    <button class="btn btn-modify doModifyreReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                    <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+                      <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                    </button>
+                  </div>
+                </c:if>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+          <!-- 대댓글창 끝 -->
+        
       </div>
     </c:forEach>
-
     </div>
 
     <div class="reply-page-menu-section">
@@ -537,6 +599,7 @@ function checkModify(replyModifyForm){
             <div class="mobile-reply-list-box__cell-contents">
               <div class="mobile-reply-list-box__cell-updateDate">${reply.updateDate}</div>
               <div data-id="${reply.id}" class="mobile-reply-list-box__cell-body">${reply.body}</div>
+              <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
             </div>
             <div class="mobile-reply-detail-cell-likesCount flex">
 				<c:if test="${isLogined == false}">
@@ -615,6 +678,74 @@ function checkModify(replyModifyForm){
               </c:if>
             </div>
           </div>
+        
+        
+        <!-- 모바일 대댓글창 시작 -->
+
+          <div class="mobile-reReply-write-box">
+            <form class="mobile-reReply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+              <input type="hidden" name="replyId" value="${reply.id}">
+              <input type="hidden" name="memberId" value="${loginedMemberId}">
+              <span><i class="fas fa-reply"></i></span>
+              <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+              <div class="mobile-reReply-write-box-form__option ">
+                <button class="m-btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
+              </div>
+            </form>
+          </div>
+
+        <c:forEach var="reply" items="${reReplies}">
+          <div class="mobile-reReply-list-box">
+            <div class="mobile-reReply-list-box-writer"><i class="far fa-user-circle"></i> ${reply.extra_memberNickname}</div>
+            <div class="mobile-reReply-list-box__cell flex flex-column">
+              <div class="mobile-reReply-list-box__cell-contents">
+                <div class="mobile-reReply-list-box__cell-updateDate">${reply.updateDate}</div>
+                <div class="mobile-reReply-list-box__cell-body">${reply.body}asdfasdfasdfasdfasdf asdfaasfadsfsdf</div>
+              </div>
+              </div>
+              <div class="mobile-reReply-detail-cell-likesCount flex">
+                    <button class="addLike" type="button">
+                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
+                </button>
+
+                    <button class="addUnLike" type="button">
+                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
+                    </button>
+
+                </div>
+              <div class="mobile-reReply-list-box-cell__option">
+                <c:if test="${loginedMemberId == reply.memberId}">
+                  <form class="mobile-reReplyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                    <input type="hidden" name="id" value="${reply.id}">
+                    <input type="hidden" name="relId" value="${reply.relId}">
+                    <input type="hidden" name="memberId" value="${loginedMemberId}">
+                    <input class="mobile-reReplyBodyInput" type="text" name="body" placeholder="${reply.body}" value="${reply.body}">
+                    <div class="mobile-reReplyModifyForm__option flex flex-jc-fe">
+                      <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                      <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
+                    </div>
+                  </form>
+                  <div class="mobile-reReply-list-box-cell__option-btns flex flex-ai-c">
+                    <button class="btn btn-modify doModifyreReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                    <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+                      <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                    </button>
+                  </div>
+                </c:if>
+              </div>
+            </div>
+          </div>
+        </c:forEach>
+        </div>
+          <!-- 모바일 대댓글창 끝 -->
+        
+        
         </div>
       </c:forEach>
       </div>

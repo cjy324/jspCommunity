@@ -2444,18 +2444,6 @@ body{
   border-bottom:1px solid gray;
 }
 
-
-
-.reply-list-box__cell-contents > *:first-child{
-  
-  
-}
-
-
-.reply-list-box-form{
-  
-}
-
 .reply-list-box__cell-updateDate{
   font-size:0.8rem;
   top:0px;
@@ -2470,6 +2458,23 @@ body{
   border-left:1px solid gray;
   white-space:normal;
   transition:background-color 1s;
+}
+
+.reply-list-box__cell-reReply{
+  font-size:0.8rem;
+  padding-left:5px;
+  color:graytext;
+  cursor:pointer;
+}
+
+.reply-list-box__cell-reReply > i{
+  transform:rotate(180deg);
+}
+
+.reply-list-box__cell-reReply:hover{
+  color:black;
+  text-decoration:underline;
+  
 }
 
 .reply-list-box__cell-body.focus {
@@ -2541,6 +2546,139 @@ body{
 }
 
 /* 댓글창 끝 */
+/* 대댓글창 시작 */
+.reReply-write-box{
+  padding:20px 0;
+  white-space:nowrap;
+  display:none;
+  
+}
+
+.reReply-write-box-form > span{
+  padding:10px;
+  transform:rotate(180deg);
+}
+
+.reReply-write-box-form > input{
+  height:30px;
+  width:86%;
+}
+
+.reReply-write-box-form__option{
+  padding:0px 10px;
+
+}
+
+
+.reReply-list-box{
+  white-space:nowrap;
+  padding-left:30px;
+  position:relative;
+}
+
+.reReply-list-box:before{
+  content:"";
+  position:absolute;
+  height:50%;
+  width:2px;
+  left:10px;
+  top:10px;
+  background-color:gray;
+}
+
+.reReply-list-box-writer {
+  margin:5px 0;
+  border-bottom:1px solid gray;
+}
+
+
+.reReply-list-box__cell-updateDate{
+  font-size:0.8rem;
+  top:0px;
+}
+
+.reReply-list-box__cell-body{
+  padding-right:20px;
+  padding-left:10px;
+  padding-top:1px;
+  margin-left:10px;
+  width:90%;
+  border-left:1px solid gray;
+  white-space:normal;
+  transition:background-color 1s;
+}
+
+.reReply-list-box__cell-body.focus {
+  background-color:yellow;
+  transition:background-color 0s;
+}
+
+.reReply-detail-cell-likesCount > *{
+  font-size:0.8rem;
+  border: none;
+  background-color: rgba(200,200,200,0);
+  padding:10px;
+}
+
+
+.reReply-list-box-cell__option{
+
+}
+
+.reReply-list-box-cell__option-btns{
+  height:100%;
+}
+.reReply-list-box-cell__option-btns > button{
+  margin-left:5px;
+}
+
+.reReplyModifyForm{
+	display:none;
+  width:100%;
+}
+
+.reReplyBodyInput{
+  width:99%;
+  height:30px;
+  
+}
+.reReplyModifyForm__option{
+  margin-top:5px;
+}
+.reReplyModifyForm__option > *{
+  margin-left:5px;
+}
+
+
+.reReply-write-box.active{
+	display:block;
+}
+
+.reReply-list-box__cell-contents.active{
+  display:none;
+}
+
+.reReply-list-box-cell__option.active{
+  width:100%;
+}
+
+.reReply-list-box-cell__option button:last-child.active{
+  display:none;
+}
+.reReply-list-box-cell__option-btns.active{
+  display:none;
+}
+.reReply-detail-cell-likesCount.active{
+  display:none;
+}
+.doModifyreReplyForm.active{
+	display:none;
+}
+.reReplyModifyForm.active{
+	display:block;
+}
+
+/* 대댓글창 끝 */
 /* 댓글창 하단 메뉴 시작 */
 .reply-page-menu-section{
   margin-top:15px;
@@ -2793,6 +2931,7 @@ body{
   padding-left:5px;
   padding-top:1px;
   margin-left:5px;
+  margin-bottom:5px;
   font-size:0.9rem;
   min-width:50px;
   border-left:1px solid gray;
@@ -2881,6 +3020,163 @@ body{
 }
 
 /* 모바일-댓글창 끝 */
+/* 모바일-대댓글창 시작 */
+.mobile-reReply-write-box{
+  padding:20px 0;
+  white-space:nowrap;
+  display:none;
+}
+
+.mobile-reReply-write-box-form > span{
+  padding:10px;
+  transform:rotate(180deg);
+}
+
+.mobile-reReply-write-box-form > input{
+  height:25px;
+  font-size:0.9rem;
+  width:90%;
+}
+
+.mobile-reReply-write-box-form__option > .m-btn{
+  height:31px;
+  width:76px;
+  margin:0 5px;
+}
+
+.mobile-reReply-list-box{
+  white-space:nowrap;
+  padding:0 10px;
+  padding-left:40px;
+  position:relative;
+}
+
+.mobile-reReply-list-box:before{
+  content:"";
+  position:absolute;
+  height:50%;
+  width:1px;
+  left:29px;
+  top:10px;
+  background-color:rgba(200, 200, 200, 1);
+}
+
+.mobile-reReply-list-box-writer {
+  font-size:0.9rem;
+  margin:5px 0;
+  border-bottom:0.8px solid gray;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:wrap;
+}
+
+.mobile-reReply-list-box__cell-contents{
+  width:95%;
+  
+}
+
+.mobile-reReply-list-box__cell-updateDate{
+  font-size:0.7rem;
+  top:0px;
+  padding-bottom:5px;
+  color:gray;
+}
+
+.mobile-reReply-list-box__cell-body{
+  padding-right:20px;
+  padding-left:5px;
+  padding-top:1px;
+  margin-left:5px;
+  font-size:0.9rem;
+  min-width:50px;
+  border-left:1px solid gray;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:pre-wrap;
+  transition:background-color 1s;
+}
+
+.mobile-reReply-list-box__cell-body.focus {
+  background-color:yellow;
+  transition:background-color 0s;
+}
+
+.mobile-reReply-detail-cell-likesCount > *{
+  font-size:0.8rem;
+  border: none;
+  background-color: rgba(200,200,200,0);
+  padding:10px;
+
+}
+
+
+.mobile-reReply-list-box-cell__option{
+  align-self:flex-end;
+  margin-top:5px;
+}
+
+.mobile-reReply-list-box-cell__option-btns{
+  height:100%;
+  
+}
+.mobile-reReply-list-box-cell__option-btns > button{
+  margin-right:5px;
+  height:30px;
+  padding:0px 10px;
+}
+
+.mobile-reReplyModifyForm{
+	display:none;
+  width:100%;
+}
+
+.mobile-reReplyBodyInput{
+  width:99%;
+  height:25px;
+  font-size:0.9rem;
+}
+.mobile-reReplyModifyForm__option{
+  margin-top:5px;
+}
+.mobile-reReplyModifyForm__option > *{
+  margin-right:5px;
+  height:30px;
+  padding:0px 10px;
+}
+
+
+.mobile-reReply-write-box.active{
+  display:block;
+}
+
+.mobile-reReply-list-box__cell-contents.active{
+  display:none;
+}
+
+.mobile-reReply-list-box-cell__option.active{
+  width:100%;
+}
+
+.mobile-reReply-list-box-cell__option button:last-child.active{
+  display:none;
+}
+.mobile-reReply-list-box-cell__option-btns.active{
+  display:none;
+}
+.mobile-reReply-list-box__cell-body.active{
+  display:none;
+}
+.mobile-reReply-detail-cell-likesCount.active{
+  display:none;
+}
+.mobile-doModifyreReplyForm.active{
+	display:none;
+}
+.mobile-reReplyModifyForm.active{
+	display:block;
+}
+
+/* 모바일-대댓글창 끝 */
 /* 모바일-댓글창 하단 메뉴 시작 */
 .mobile-reply-page-menu-section{
   margin-top:15px;

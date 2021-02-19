@@ -357,10 +357,37 @@ function doModifyReplyForm__init() {
       $(this).parents().parents().addClass('active');
       $(this).parents().addClass('active');
       $(this).parents().prev().addClass('active');
-      $(this).next().addClass('active');
+      $('.reply-list-box-cell__option-btns').next().addClass('active');
 
   });
 }
 
 doModifyReplyForm__init();
 /* 댓글 수정 버튼 끝 */
+/* 대댓글 등록 버튼 시작 */
+function doRereplyForm__init() {
+  $('.reply-list-box__cell-reReply').click(function() {
+      $(this).parents().parents().next().addClass('active');
+  });
+}
+
+doRereplyForm__init();
+/* 대댓글 등록 버튼 끝 */
+/* 대댓글 수정 버튼 시작 */
+function doModifyreReplyForm__init() {
+  $('.doModifyreReplyForm').click(function() {
+
+      $('.doModifyreReplyForm').addClass('active');
+      $('.reReply-detail-cell-likesCount').addClass('active');
+      $('.mobile-reReply-list-box__cell-body').addClass('active');
+      $(this).parents().parents().prev('.reReply-list-box__cell-contents').addClass('active');
+      $(this).parents().parents().addClass('active');
+      $(this).parents().addClass('active');
+      $(this).parents().prev().addClass('active');
+      $('.reReply-list-box-cell__option-btns').next().addClass('active');
+
+  });
+}
+
+doModifyreReplyForm__init();
+/* 대댓글 수정 버튼 끝 */

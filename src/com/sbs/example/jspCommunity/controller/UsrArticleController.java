@@ -12,7 +12,6 @@ import com.sbs.example.jspCommunity.container.Container;
 import com.sbs.example.jspCommunity.dto.Article;
 import com.sbs.example.jspCommunity.dto.Member;
 import com.sbs.example.jspCommunity.dto.Reply;
-import com.sbs.example.jspCommunity.dto.ResultData;
 import com.sbs.example.jspCommunity.service.ArticleService;
 import com.sbs.example.util.Util;
 
@@ -170,6 +169,11 @@ public class UsrArticleController extends Controller {
 
 		List<Reply> replies = articleService.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex,
 				repliesInAPage, loginedMember);
+		
+		/*
+		 * List<Reply> reReplies = articleService.getRepliesForPrintByReplyId(id,
+		 * relTypeCode, pageLimitStartIndex, repliesInAPage, loginedMember);
+		 */
 
 		int pageMenuBoxSize = 3; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
 		int totalRepliesCount = totalCount; // 전체 article의 수 카운팅
@@ -451,11 +455,23 @@ public class UsrArticleController extends Controller {
 	// 댓글 등록
 	public String reply(HttpServletRequest request, HttpServletResponse response) {
 
+		String relTypeCode = "article";
+		int relId = 0;
+		
 		// 게시물 번호가 입력됐는지 확인
 		int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
-		if (articleId == 0) {
-			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		if(articleId != 0) {
+			relTypeCode = "article";
+			relId = articleId;
 		}
+
+		// 댓글 번호가 입력됐는지 확인
+		int originReplyId = Util.getAsInt(request.getParameter("replyId"), 0);
+		if(originReplyId != 0) {
+			relTypeCode = "reply";
+			relId = originReplyId;
+		}
+
 
 		// 회원 아이디 확인
 		int memberId = Util.getAsInt(request.getParameter("memberId"), 0);
@@ -469,11 +485,10 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(request, "내용을 입력하세요.");
 		}
 
-		String relTypeCode = "article";
-
+		
 		// 댓글 등록
-		int replyId = articleService.addReply(articleId, memberId, relTypeCode, replyBody);
-
+		int replyId = articleService.addReply(relId, memberId, relTypeCode, replyBody);
+		
 		// 게시물에 대한 댓글수 가져오기
 		int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
 
@@ -488,7 +503,7 @@ public class UsrArticleController extends Controller {
 		// return noMsgAndReplaceUrl(request, "detail?id=" + articleId);
 		String redirectUrl = request.getParameter("redirectUrl");
 		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", replyId + "");
-		return msgAndReplaceUrl(request, replyId + "번 댓글이 생성되었습니다.", redirectUrl);
+		return msgAndReplaceUrl(request, replyId + "번 댓글이 등록되었습니다.", redirectUrl);
 
 	}
 
@@ -608,8 +623,8 @@ public class UsrArticleController extends Controller {
 																	// 변환
 		int pageLimitStartIndex = (page - 1) * articlesInAPage;
 
-		List<Article> articles = articleService.getArticlesForPrintBySearchKeyword(pageLimitStartIndex,
-				articlesInAPage, searchKeywordType, searchKeyword);
+		List<Article> articles = articleService.getArticlesForPrintBySearchKeyword(pageLimitStartIndex, articlesInAPage,
+				searchKeywordType, searchKeyword);
 
 		int pageMenuBoxSize = 5; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
 		int totalArticlesCount = totalCount; // 전체 article의 수 카운팅
