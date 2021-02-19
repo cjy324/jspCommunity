@@ -38,26 +38,21 @@
 		const hitId = localStorage.getItem("hitId");
 		const id = ${article.id};
 		const hitCount = localStorage.getItem("hitCount");
-
 		//새로고침 여부 확인
 		if(hitId == id && hitCount == 1){
 			return;
 		}
-
 		//10000초 후 addHitCounts() 실행(조회수 증가)
 		setTimeout(addHitCounts, 10000);
 		
 		//localStorage에 현재 url 저장
 		localStorage.setItem("hitId", id);
 		localStorage.setItem("hitCount", 1);
-
-
 		//localStorage에 오늘 날짜 저장
 		const today = new Date().getDate();
 		localStorage.setItem("lastVisitDay", today); 
 	
  	 	} 
-
 	function addHitCounts(){
 		const articleId = ${article.id};
 		$.post(
@@ -68,137 +63,48 @@
 				function(data){},			
 				'json'
 			);
-
 		}
-
 	function removeLocalstorage(){
 		localStorage.removeItem("hitId");
 		alert('기록삭제');
 	}
-
 	/* 조회수 증가(feat.로컬스토리지) 끝 */
 	
-
-
 	
 </script>
 
-<script>
 
+
+
+<script>
 let replyForm_submited = false;
-
-		function ArticleWriteReplyForm__submit(form) {
-			form.replyBody.value = form.replyBody.value.trim();
-
-			if(replyForm_submited){
-
-				alert('처리중입니다.');
-					return;
-			}
-			
-			if (form.replyBody.value.length == 0) {
-				alert('댓글을 입력해주세요.');
-				form.replyBody.focus();
-				return;
-			}
-			
-			$.post(
-				'replyAjax',
-				 {
-				id : form.articleId.value,
-				body : form.replyBody.value
-			}, 
-			function(data) {
-				alert(data.msg);
-			}, 
-			'json'
-			);
-			form.replyBody.value = '';
-			replyForm_submited = true;
-		};
-	</script>
-	
-<script>
-function replyPage__submit(form){
-
-	$.post(
-			'getReplies',
-			 {
-			page : form.page.value
-
-		}, 
-		function(data) {
-			alert(data.body.page);
-		}, 
-		'json'
-		);
-
-
-	
-};
-
-
-</script>
-
-
-<script>
-
-/* let replyForm_submited = false;
-
 function checkWrite(form){
-
 	if(replyForm_submited){
-
 		alert('처리중입니다.');
 			return;
 	}
-
 	if(form.reply.value.trim().length == 0){
 		alert("댓글을 입력하세요.")
 		form.reply.focus();
-
 		return false;
 	}
-	
-	$.post(
-			'replyAjax',
-			 {
-			id : form.articleId.value,
-			body : form.replyBody.value
-		}, 
-		function(data) {
-			alert(data.msg);
-		}, 
-		'json'
-		);
-		form.replyBody.value = '';
-
+	form.submit();
 	replyForm_submited = true;
-} */
-
-
+}
 let replyModifyForm_submited = false;
-
 function checkModify(replyModifyForm){
-
 	if(replyModifyForm_submited){
-
 		alert('처리중입니다.');
 			return;
 	}
-
 	if(replyModifyForm.body.value.trim().length == 0){
 		alert("댓글을 입력하세요.")
 		replyModifyForm.body.focus();
-
 		return false;
 	}
-
-
 	replyModifyForm.submit();
 	replyModifyForm_submited = true;
 }
-
 </script>
 
 
@@ -260,10 +166,12 @@ function checkModify(replyModifyForm){
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                      </a>
                     </button>
                     <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                      </a>
                     </button>
 					</c:if>
                   <c:if test="${article.extra.actorCanLike}">
@@ -332,9 +240,9 @@ function checkModify(replyModifyForm){
     <!-- 댓글창 시작 -->
     <c:if test="${isLogined}">
       <div class="reply-write-box">
-        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="ArticleWriteReplyForm__submit(this); return false;" action="replyAjax" method="POST">
+        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
           <input type="hidden" name="articleId" value="${article.id}">
-         
+          <input type="hidden" name="memberId" value="${loginedMemberId}">
           <input type="hidden" name="redirectUrl"
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
           <span><i class="far fa-comment-dots"></i></span>
@@ -361,10 +269,12 @@ function checkModify(replyModifyForm){
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                      </a>
                     </button>
                     <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                      </a>
                     </button>
 					</c:if>
                   <c:if test="${reply.extra.actorCanLike}">
@@ -462,206 +372,8 @@ function checkModify(replyModifyForm){
 	
         </ul>
       </div>
-     </div>
 
       <!-- 댓글창 끝 -->
-      
-      <!-- ajax로 댓글리스팅 시작 -->
-    <div class="reply-list-box">
-      <div class="reply-box">
-        
-      </div>
-    </div>
-    
-    <div class="reply-page-menu-section2">
-    	<div class="reply-page-menu">
-    	
-    	</div>
-    </div>
-    
-    <script>
-	var ArticleReplyList__$box = $('.reply-list-box');
-	var ArticleReplyList__$replyBox = ArticleReplyList__$box.find('.reply-box');
-	var ArticleReplyList__$replyPageBox = $('.reply-page-menu-section2');
-	var ArticleReplyList__$replyPageBtnBox = ArticleReplyList__$replyPageBox.find('.reply-page-menu');
-	var ArticleReplyList__lastLoadedId = 0;
-	
-	function ArticleReplyList__loadMore() {
-		
-		$.get(
-			'getReplies', 
-			
-			{
-				articleId : ${article.id},
-				lastLoadedId : ArticleReplyList__lastLoadedId + 1
-			}, 
-
-			function(data) {
-				
-				
-			if ( data.body.replies && data.body.replies.length > 0) {
-				ArticleReplyList__lastLoadedId = data.body.replies[data.body.replies.length - 1].id;
-				ArticleReplyList__drawReplies(data.body.replies, data.body.totalCount, data.body.page);
-			}
-
-			setTimeout(ArticleReplyList__loadMore, 5000);
-		}, 
-
-		'json'
-
-		);
-	}
-	function ArticleReplyList__drawReplies(replies, totalCount, page) {
-		
-		// 페이징
-		var repliesInAPage = 5;
-		// 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
-		var pageMenuBoxSize = 3;
-		var totalRepliesCount = totalCount; // 전체 reply의 수 카운팅
-		var totalPages = Math.ceil(totalRepliesCount / repliesInAPage);
-		
-		// 총 필요 페이지 수까지
-		buildReplyListPage(replies, repliesInAPage, pageMenuBoxSize, totalPages, page);
-
-
-	}
-	function buildReplyListPage(replies, repliesInAPage, pageMenuBoxSize, totalPages, page){
-		
-		var startPoint = (page - 1) * repliesInAPage; // page=1일때 index=0(즉,id = 1) 2 10(11) 3 20(21)
-		var endPoint = startPoint + repliesInAPage - 1; // page=1일때 index0~9 -> id1~10
-		
-		if (endPoint >= replies.length) {
-			endPoint = replies.length;
-		}
-		
-		for ( var i = startPoint; i <= endPoint; i++ ) {
-			var reply = replies[i];
-			ArticleReplyList__drawReply(reply);
-			
-		}
-		
-		var previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
-		var boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
-		var boxEndNum = pageMenuBoxSize + boxStartNum - 1;
-
-		if (boxEndNum > totalPages) {
-			boxEndNum = totalPages;
-		}
-
-		
-		
-		// 2. '이전','다음' 버튼 페이지 계산
-		var boxStartNumBeforePage = boxStartNum - 1;
-		if (boxStartNumBeforePage < 1) {
-			boxStartNumBeforePage = 1;
-		}
-		var boxEndNumAfterPage = boxEndNum + 1;
-		if (boxEndNumAfterPage > totalPages) {
-			boxEndNumAfterPage = totalPages;
-		}
-
-		
-		
-		// 3. '이전','다음' 버튼 필요 유무 판별
-		var boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
-		var boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage !== boxEndNum;
-		
-		
-		buildReplyPageBtn(boxStartNumBeforePageBtnNeedToShow, boxEndNumAfterPageBtnNeedToShow, boxStartNum, boxEndNum, page);
-
-	}
-	
-	function ArticleReplyList__drawReply(reply) {
-		var html = '';
-		html += '<div class="reply-list-box-writer"><i class="far fa-user-circle"></i> ' + reply.extra_memberNickname + '</div>';
-		html += '<div class="reply-list-box__cell flex flex-jc-sb"><div class="reply-list-box__cell-contents flex flex-ai-c">';
-
-		html += '<div class="reply-list-box__cell-updateDate">' + reply.updateDate + '</div>';
-		html += '<div data-id="${reply.id}" class="reply-list-box__cell-body">' + reply.body + '</div>';
-		html += '</div>';
-		
-		html += '<div class="reply-list-box-cell__option"><div class="reply-detail-cell-likesCount flex">';
-		html += '<c:if test="${isLogined == false}">';
-		html += '<button class="addLike" type="button" onclick="alert(\'로그인 후 이용해 주세요.\')"><i class="far fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></button>';
-		html += '<button class="addUnLike" type="button" onclick="alert(\'로그인 후 이용해 주세요.\')"><i class="far fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanLike}">';
-		html += '<button class="addLike" type="button"><a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`좋아요` 처리 하시겠습니까?\') ) return false;"><i class="far fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanCancelLike}">';
-		html += '<button class="addLike" type="button"><a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`좋아요`를 취소 처리 하시겠습니까?\') ) return false;"><i class="fas fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';		
-		html += '<c:if test="${reply.extra.actorCanDislike}">';
-		html += '<button class="addUnLike" type="button"><a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`싫어요` 처리 하시겠습니까?\') ) return false;"><i class="far fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanCancelDislike}">';
-		html += '<button class="addUnLike" type="button"><a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`싫어요`를 취소 처리 하시겠습니까?\') ) return false;"><i class="fas fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		
-    	  html += '</div>';
-
-		html += '</div>';
-		html += '</div>';
-
-		
-		ArticleReplyList__$replyBox.prepend(html);
-	}
-	
-	function buildReplyPageBtn(boxStartNumBeforePageBtnNeedToShow, boxEndNumAfterPageBtnNeedToShow, boxStartNum, boxEndNum, page){
-		var html = '';
-		
-		html += '<form class="flex flex-jc-c" onsubmit="replyPage__submit(this); return false;" action="getReplies" method="POST">';
-		html += '<c:if test="${totalPages > 1}">';
-		html += '<input type="hidden" name="page" value="2">';
-		html += '<li class="before-btn"><button type="submit" class="flex flex-ai-c">&lt;&lt; </button></li>';
-		html += '</c:if>';  
-		  
-		
-		if (boxStartNumBeforePageBtnNeedToShow) {
-			html += '<c:if test="${boxStartNumBeforePageBtnNeedToShow}">';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${boxStartNumBeforePage}" />';
-			html += '<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; </a></li>';
-			html += '</c:if>';  
-	
-		}
-
-		for (var i = boxStartNum; i <= boxEndNum; i++) {
-			var selectedPageNum = "";
-			if (i == page) {
-				selectedPageNum = "article-page-menu__link--selected";
-			}
-
-			html += '<c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">';
-			html += '<c:set var="aClass" value="${page == i ? \'reply-page-menu__link--selected\' : \'???\' }" />';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${i}" />';
-			html += '<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>'; 
-			html += '</c:forEach>';  
-
-		}
-		if (boxEndNumAfterPageBtnNeedToShow) {
-
-			html += '<c:if test="${boxEndNumAfterPageBtnNeedToShow}">';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${boxEndNumAfterPage}" />';
-			html += '<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;</a></li>';  
-			html += '</c:if>';  
-
-		} 
-
-		html += '<c:if test="${totalPages > 1}">';
-		html += '<c:set var="aUrl" value="?page=${totalPages}&id=${param.id}" />';
-		html += '<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>';
-		html += '</c:if>';  
-		html += '</form>';
-
-		ArticleReplyList__$replyPageBtnBox.append(html);
-	}
-
-	
-	ArticleReplyList__loadMore();
-</script>
-    <!-- ajax로 댓글리스팅 끝 -->
-      
-      
 
       <!-- 메인-상세 하단 메뉴 시작 -->
       <section class="section-3 con-min-width">
@@ -831,12 +543,12 @@ function checkModify(replyModifyForm){
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      
+                      </a>
                     </button>
                     <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      
+                      </a>
                     </button>
 					</c:if>	
 					
