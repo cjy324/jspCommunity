@@ -83,9 +83,9 @@ function checkWrite(form){
 		alert('처리중입니다.');
 			return;
 	}
-	if(form.reply.value.trim().length == 0){
-		alert("댓글을 입력하세요.")
-		form.reply.focus();
+	if(form.replyBody.value.trim().length == 0){
+		alert("내용을 입력하세요.")
+		form.replyBody.focus();
 		return false;
 	}
 	form.submit();
@@ -98,7 +98,7 @@ function checkModify(replyModifyForm){
 			return;
 	}
 	if(replyModifyForm.body.value.trim().length == 0){
-		alert("댓글을 입력하세요.")
+		alert("내용을 입력하세요.")
 		replyModifyForm.body.focus();
 		return false;
 	}
