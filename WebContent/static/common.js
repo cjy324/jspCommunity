@@ -367,7 +367,15 @@ doModifyReplyForm__init();
 /* 대댓글 등록 버튼 시작 */
 function doRereplyForm__init() {
   $('.reply-list-box__cell-reReply').click(function() {
-      $(this).parents().parents().next().addClass('active');
+    const target = $(this).parents().parents().next();
+    
+    if(target.hasClass('active')){
+      target.removeClass('active');
+    }
+    else{
+      target.addClass('active');
+    }
+      
   });
 }
 

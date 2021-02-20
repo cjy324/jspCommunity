@@ -32,6 +32,10 @@ public class App {
 		return getAppUrl();
 	}
 	
+	public static String getLoginUrl() {
+		return getAppUrl() + "/usr/member/doLoginForm";
+	}
+	
 	private static String getAppUrl() {
 		String appUrl = getSiteProtocol() + "://" + getSiteDomain();
 
@@ -54,9 +58,6 @@ public class App {
 		return "http";
 	}
 
-	public static String getLoginUrl() {
-		return "http://" + getSiteDomain() + ":" + getSitePort() + "/" + getContextName() + "/usr/member/doLoginForm";
-	}
 	
 	private static int getSitePort() {
 		if (isProductMode()) {

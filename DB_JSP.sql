@@ -20,12 +20,12 @@ CREATE TABLE `member` (
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-`name` = "홍길동",
-`nickname` = "의적",
-`email` = "abc1234@gmail.com",
-cellphoneNo = "010-1234-1234",
-loginId = "user1",
-loginPw = "user1",
+`name` = "관리자",
+`nickname` = "관리자",
+`email` = "juy32400@gmail.com",
+cellphoneNo = "01012341234",
+loginId = "admin",
+loginPw = "admin",
 authLevel = 4;
 
 # 회원2 생성
@@ -34,10 +34,10 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `name` = "임꺽정",
 `nickname` = "산적",
-`email` = "asdo4566@gmail.com",
-cellphoneNo = "010-4324-4444",
-loginId = "user2",
-loginPw = "user2";
+`email` = "juy32400@gmail.com",
+cellphoneNo = "01043244444",
+loginId = "user1",
+loginPw = "user1";
 
 # 회원 비밀번호 암호화 수행
 UPDATE `member`
@@ -100,16 +100,16 @@ title = '제목1',
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 1,
-boardId = 1,
+memberId = 2,
+boardId = 2,
 title = '제목2',
 `body` = '내용2';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 1,
-boardId = 1,
+memberId = 2,
+boardId = 3,
 title = '제목3',
 `body` = '내용3';
 
@@ -125,7 +125,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 1,
+boardId = 3,
 title = '제목5',
 `body` = '내용5';
 
@@ -133,7 +133,7 @@ INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
-boardId = 2,
+boardId = 1,
 title = '제목5',
 `body` = '내용5';
 

@@ -244,6 +244,9 @@ function localStorageClear(){
 				</div>
 			</div>
 		</header>
+		<c:if test="${isUsingTempPassword}">
+<div class="visible-sm-down" style="color:red; font-weight:bold; width:100%; text-align:center;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
+</c:if>
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
   <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down">
@@ -303,9 +306,6 @@ function localStorageClear(){
     </nav>
     <div class="mobile-side-bar_menu flex flex-jc-c">
      <c:if test="${isLogined}">
-     <c:if test="${isUsingTempPassword}">
-<div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
-</c:if>
       <div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
       <div class="mobile-side-bar-button"><a href="../member/showMyPage"><i class="fas fa-user-cog"></i> 회원정보</a></div>
       <div class="mobile-side-bar-button"><a href="../member/doLogout?beforeUrl=${encodedCurrentUrl}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></div>
