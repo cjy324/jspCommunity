@@ -169,11 +169,10 @@ public class UsrArticleController extends Controller {
 
 		List<Reply> replies = articleService.getRepliesForPrintByArticleId(id, relTypeCode, pageLimitStartIndex,
 				repliesInAPage, loginedMember);
-		
-		/*
-		 * List<Reply> reReplies = articleService.getRepliesForPrintByReplyId(id,
-		 * relTypeCode, pageLimitStartIndex, repliesInAPage, loginedMember);
-		 */
+
+		// 대댓글 리스팅
+		relTypeCode = "reply";
+		List<Reply> reReplies = articleService.getRepliesForPrintByRelTyopeCode(relTypeCode, loginedMember);
 
 		int pageMenuBoxSize = 3; // 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
 		int totalRepliesCount = totalCount; // 전체 article의 수 카운팅
@@ -206,6 +205,7 @@ public class UsrArticleController extends Controller {
 		boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
 
 		request.setAttribute("replies", replies);
+		request.setAttribute("reReplies", reReplies);
 		request.setAttribute("totalCount", totalCount);
 		request.setAttribute("page", page);
 		request.setAttribute("totalPages", totalPages);
@@ -455,23 +455,22 @@ public class UsrArticleController extends Controller {
 	// 댓글 등록
 	public String reply(HttpServletRequest request, HttpServletResponse response) {
 
-		String relTypeCode = "article";
+		String relTypeCode = "";
 		int relId = 0;
-		
+
 		// 게시물 번호가 입력됐는지 확인
 		int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
-		if(articleId != 0) {
+		if (articleId != 0) {
 			relTypeCode = "article";
 			relId = articleId;
 		}
 
 		// 댓글 번호가 입력됐는지 확인
 		int originReplyId = Util.getAsInt(request.getParameter("replyId"), 0);
-		if(originReplyId != 0) {
+		if (originReplyId != 0) {
 			relTypeCode = "reply";
 			relId = originReplyId;
 		}
-
 
 		// 회원 아이디 확인
 		int memberId = Util.getAsInt(request.getParameter("memberId"), 0);
@@ -485,10 +484,9 @@ public class UsrArticleController extends Controller {
 			return msgAndBack(request, "내용을 입력하세요.");
 		}
 
-		
 		// 댓글 등록
 		int replyId = articleService.addReply(relId, memberId, relTypeCode, replyBody);
-		
+
 		// 게시물에 대한 댓글수 가져오기
 		int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
 
@@ -509,6 +507,7 @@ public class UsrArticleController extends Controller {
 
 	// 댓글 수정
 	public String doModifyReply(HttpServletRequest request, HttpServletResponse response) {
+
 		// 댓글 번호가 입력됐는지 확인
 		int id = Util.getAsInt(request.getParameter("id"), 0);
 		if (id == 0) {
@@ -547,6 +546,12 @@ public class UsrArticleController extends Controller {
 	public String doDeleteReply(HttpServletRequest request, HttpServletResponse response) {
 		int memberId = (int) request.getAttribute("loginedMemberId");
 
+		// 댓글들이 달린 게시물 번호
+		int articleId = Util.getAsInt(request.getParameter("articleId"), 0);
+		if (articleId == 0) {
+			return msgAndBack(request, "게시물 번호를 입력하세요.");
+		}
+
 		// 댓글 번호가 입력됐는지 확인
 		int id = Util.getAsInt(request.getParameter("id"), 0);
 		if (id == 0) {
@@ -575,17 +580,17 @@ public class UsrArticleController extends Controller {
 		articleService.replyDelete(id);
 
 		// 게시물에 대한 댓글수 가져오기
-		int getArticleRepliesCount = articleService.getArticleRepliesCount(relId);
+		int getArticleRepliesCount = articleService.getArticleRepliesCount(articleId);
 
 		// 게시물 정보 수정
 		Map<String, Object> args2 = new HashMap<>();
-		args2.put("id", relId);
+		args2.put("id", articleId);
 		args2.put("repliesCount", getArticleRepliesCount);
 
 		articleService.articleModify(args2);
 
 		// 삭제 알림창 보여주고 새로고침
-		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + relId);
+		return msgAndReplaceUrl(request, "삭제되었습니다.", "detail?id=" + articleId);
 
 	}
 
