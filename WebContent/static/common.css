@@ -2359,7 +2359,7 @@ body{
 
 .article-detail-cell__title-contents > *{
   padding:5px;
-  
+  font-weight:bold;
 }
 
 .article-detail-cell-likesCount form > button{
@@ -2381,6 +2381,7 @@ body{
 	cursor:pointer;
   	margin-right:5px;
   color:#4169E1;
+  font-weight:bold;
 }
 
 .addUnLike{
@@ -2392,6 +2393,7 @@ body{
 	overflow:visible; 
 	cursor:pointer;
   color:#CC6666;
+  font-weight:bold;
 }
 
 
@@ -2860,7 +2862,7 @@ body{
 .mobile-article-detail-cell__body-contents > *{
   padding:5px;
   font-size:0.85rem;
-  
+  font-weight:bold;
 }
 
 .mobile-article-detail-cell-likesCount > *{
