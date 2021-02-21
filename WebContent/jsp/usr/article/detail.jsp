@@ -221,19 +221,22 @@ function checkModify(replyModifyForm){
               </div>
               <div class="article-detail-cell__title-contents flex flex-jc-fe flex-ai-c">
                 <div class="article-detail-cell-hitsCount">
-                  <i class="far fa-eye"></i>
+                  <i class="far fa-eye"></i>&nbsp;
                   <span>${article.hitsCount}</span>
                 </div>
                 <div class="article-detail-cell-likesCount flex">
+                
                 	<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                    </button>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
 					</c:if>	
 					
                   <c:if test="${article.extra.actorCanLike}">
@@ -336,15 +339,17 @@ function checkModify(replyModifyForm){
           <div class="reply-detail-cell-likesCount flex">
 				
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                    </button>
-				</c:if>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>	
 				
                   <c:if test="${reply.extra.actorCanLike}">
 					
@@ -445,15 +450,17 @@ function checkModify(replyModifyForm){
                 <div class="reReply-detail-cell-likesCount flex">
 				
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
-                    </button>
-					</c:if>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
 					
                   <c:if test="${reReply.extra.actorCanLike}">
 					
@@ -633,18 +640,21 @@ function checkModify(replyModifyForm){
           <div class="mobile-article-detail-cell__body height-70p toast-ui-viewer">
           </div>
           <div class="mobile-article-detail-cell__body-contents flex flex-jc-fe flex-ai-c">
-            <div class="mobile-article-detail-cell-hitsCount"><i class="far fa-eye"></i><span>${article.hitsCount}</span></div>
+            <div class="mobile-article-detail-cell-hitsCount"><i class="far fa-eye"></i>&nbsp;<span>${article.hitsCount}</span></div>
             <div class="mobile-article-detail-cell-likesCount flex">
+            	
             	<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                    </button>
-					</c:if>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
 				
                   <c:if test="${article.extra.actorCanLike}">
 					
@@ -730,16 +740,19 @@ function checkModify(replyModifyForm){
               <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
             </div>
             <div class="mobile-reply-detail-cell-likesCount flex">
+            
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                    </button>
-					</c:if>	
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
 					
                   <c:if test="${reply.extra.actorCanLike}">
 					
@@ -789,7 +802,7 @@ function checkModify(replyModifyForm){
                 </div>
             <div class="mobile-reply-list-box-cell__option">
               <c:if test="${loginedMemberId == reply.memberId}">
-                <form class="mobile-replyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                <form class="mobile-replyModifyForm flex" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
                   <input type="hidden" name="id" value="${reply.id}">
                   <input type="hidden" name="relId" value="${reply.relId}">
                   <input type="hidden" name="memberId" value="${loginedMemberId}">
@@ -802,7 +815,7 @@ function checkModify(replyModifyForm){
                   </div>
                 </form>
                 
-                <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c">
+                <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c flex-jc-fe">
                   <button class="btn btn-modify doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
                     <a href="doDeleteReply?id=${reply.id}&articleId=${article.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
@@ -840,16 +853,19 @@ function checkModify(replyModifyForm){
               </div>
               </div>
               <div class="mobile-reReply-detail-cell-likesCount flex">
+              
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
-                    </button>
-				</c:if>	
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
 					
                   <c:if test="${reReply.extra.actorCanLike}">
 					
@@ -899,7 +915,7 @@ function checkModify(replyModifyForm){
                 </div>
               <div class="mobile-reReply-list-box-cell__option">
                 <c:if test="${loginedMemberId == reReply.memberId}">
-                  <form class="mobile-reReplyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                  <form class="mobile-reReplyModifyForm flex" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
                     <input type="hidden" name="id" value="${reReply.id}">
                     <input type="hidden" name="relId" value="${reReply.relId}">
                     <input type="hidden" name="memberId" value="${loginedMemberId}">
@@ -911,7 +927,7 @@ function checkModify(replyModifyForm){
                       <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
                     </div>
                   </form>
-                  <div class="mobile-reReply-list-box-cell__option-btns flex flex-ai-c">
+                  <div class="mobile-reReply-list-box-cell__option-btns flex flex-ai-c flex-jc-fe">
                     <button class="btn btn-modify doModifyreReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                     <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
                       <a href="doDeleteReply?id=${reReply.id}&articleId=${article.id}&relId=${reReply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
