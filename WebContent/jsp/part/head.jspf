@@ -129,8 +129,10 @@ function localStorageClear(){
 			<div class="head-bar con flex flex-jc-fe">
 				<c:if test="${isLogined}">
 				<c:if test="${isUsingTempPassword}">
-<div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
-</c:if>
+					<div style="color:red; font-weight:bold; width:50%;">
+						임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.
+					</div>
+				</c:if>
 					<div class="head-bar-button">
 						<a href="../home/main" title="Home">홈</a>
 					</div>
