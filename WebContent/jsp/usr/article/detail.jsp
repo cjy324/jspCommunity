@@ -232,6 +232,8 @@ function checkModify(replyModifyForm){
                         	<i class="fas fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
                     	</button>
+                    </form>	
+                    <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         	<i class="fas fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
@@ -336,7 +338,7 @@ function checkModify(replyModifyForm){
             <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
           </div>
           <div class="reply-list-box-cell__option">
-          <div class="reply-detail-cell-likesCount flex">
+          <div class="reply-detail-cell-likesCount flex flex-jc-fe">
 				
 				<c:if test="${isLogined == false}">
                 	<form>
@@ -447,7 +449,7 @@ function checkModify(replyModifyForm){
               </div>
               
               <div class="reReply-list-box-cell__option">
-                <div class="reReply-detail-cell-likesCount flex">
+                <div class="reReply-detail-cell-likesCount flex flex-jc-fe">
 				
 				<c:if test="${isLogined == false}">
                 	<form>
@@ -649,6 +651,8 @@ function checkModify(replyModifyForm){
                         	<i class="fas fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
                     	</button>
+                    </form>
+                    <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         	<i class="fas fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
@@ -747,6 +751,8 @@ function checkModify(replyModifyForm){
                         	<i class="fas fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
                     	</button>
+                    </form>
+                    <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
                         	<i class="fas fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>

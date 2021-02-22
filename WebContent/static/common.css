@@ -2354,12 +2354,18 @@ body{
   padding-left:5px;
   font-weight:bold;
   min-width:500px;
+  
+}
+
+.article-detail-cell__title-contents{
+  width:230px;
 }
 
 
 .article-detail-cell__title-contents > *{
   padding:5px;
   font-weight:bold;
+  
 }
 
 .article-detail-cell-likesCount form > button{
@@ -2372,21 +2378,21 @@ body{
 
 .addLike{
   font-family: 'Noto Sans KR', sans-serif;
-	background: inherit ; 
+	background: inherit; 
 	border:none; 
   box-shadow:none; 
 	border-radius:0; 
 	padding:0; 
 	overflow:visible; 
 	cursor:pointer;
-  	margin-right:5px;
+  margin-right:5px;
   color:#4169E1;
   font-weight:bold;
 }
 
 .addUnLike{
   font-family: 'Noto Sans KR', sans-serif;
-  	background: inherit ; 
+  background: inherit; 
 	border:none; box-shadow:none; 
 	border-radius:0; 
 	padding:0; 
