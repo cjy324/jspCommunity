@@ -659,7 +659,7 @@ public class ArticleDao {
 		return articles;
 	}
 
-	public List<Reply> getRepliesForPrintByArticleId2(int articleId, String relTypeCode, Member loginedMember, int lastLoadedId) {
+	public List<Reply> getRepliesForPrintByRelTyopeCode(String relTypeCode, Member loginedMember) {
 		List<Reply> replies = new ArrayList<>();
 
 		SecSql sql = new SecSql();
@@ -680,19 +680,12 @@ public class ArticleDao {
 		if (relTypeCode != null) {
 			sql.append("AND R.relTypeCode = ?", relTypeCode);
 		};
-		
-		if (articleId != 0) {
-			sql.append("AND R.relId = ?", articleId);
-		};
-		
-		if (lastLoadedId != 0) {
-			sql.append("AND R.id >= ?", lastLoadedId);
-		};
 
 		sql.append("GROUP BY R.id");
 
-		sql.append("ORDER BY R.id ASC");
+		sql.append("ORDER BY R.id DESC");
 		
+
 		List<Map<String, Object>> repliesMapList = MysqlUtil.selectRows(sql);
 
 		for (Map<String, Object> repliesMap : repliesMapList) {
@@ -705,7 +698,6 @@ public class ArticleDao {
 		return replies;
 	}
 
-	
 	
 
 }

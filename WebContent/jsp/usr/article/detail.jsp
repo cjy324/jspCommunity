@@ -38,26 +38,21 @@
 		const hitId = localStorage.getItem("hitId");
 		const id = ${article.id};
 		const hitCount = localStorage.getItem("hitCount");
-
 		//새로고침 여부 확인
 		if(hitId == id && hitCount == 1){
 			return;
 		}
-
 		//10000초 후 addHitCounts() 실행(조회수 증가)
 		setTimeout(addHitCounts, 10000);
 		
 		//localStorage에 현재 url 저장
 		localStorage.setItem("hitId", id);
 		localStorage.setItem("hitCount", 1);
-
-
 		//localStorage에 오늘 날짜 저장
 		const today = new Date().getDate();
 		localStorage.setItem("lastVisitDay", today); 
 	
  	 	} 
-
 	function addHitCounts(){
 		const articleId = ${article.id};
 		$.post(
@@ -68,137 +63,111 @@
 				function(data){},			
 				'json'
 			);
-
 		}
-
 	function removeLocalstorage(){
 		localStorage.removeItem("hitId");
 		alert('기록삭제');
 	}
-
 	/* 조회수 증가(feat.로컬스토리지) 끝 */
 	
-
-
 	
 </script>
 
 <script>
-
-let replyForm_submited = false;
-
-		function ArticleWriteReplyForm__submit(form) {
-			form.replyBody.value = form.replyBody.value.trim();
-
-			if(replyForm_submited){
-
-				alert('처리중입니다.');
-					return;
-			}
-			
-			if (form.replyBody.value.length == 0) {
-				alert('댓글을 입력해주세요.');
-				form.replyBody.focus();
-				return;
-			}
-			
-			$.post(
-				'replyAjax',
-				 {
-				id : form.articleId.value,
-				body : form.replyBody.value
-			}, 
-			function(data) {
-				alert(data.msg);
-			}, 
-			'json'
-			);
-			form.replyBody.value = '';
-			replyForm_submited = true;
-		};
-	</script>
-	
-<script>
-function replyPage__submit(form){
+/* 좋아요, 싫어요 ajax 시작 */
+function addLike_submit(form) {
 
 	$.post(
-			'getReplies',
-			 {
-			page : form.page.value
-
-		}, 
-		function(data) {
-			alert(data.body.page);
-		}, 
-		'json'
-		);
-
-
-	
+		'../like/doLike',
+		 {
+		relTypeCode : form.relTypeCode.value,
+		relId : form.relId.value
+	}, 
+	function(data) {
+		alert(data.msg);
+	}, 
+	'json'
+	);
 };
 
+function cancelLike_submit(form) {
 
-</script>
+	$.post(
+		'../like/doCancelLike',
+		 {
+		relTypeCode : form.relTypeCode.value,
+		relId : form.relId.value
+	}, 
+	function(data) {
+		alert(data.msg);
+	}, 
+	'json'
+	);
+};
+
+function addUnLike_submit(form) {
+
+	$.post(
+		'../like/doDislike',
+		 {
+		relTypeCode : form.relTypeCode.value,
+		relId : form.relId.value
+	}, 
+	function(data) {
+		alert(data.msg);
+	}, 
+	'json'
+	);
+};
+
+function cancelUnLike_submit(form) {
+
+	$.post(
+		'../like/doCancelDislike',
+		 {
+		relTypeCode : form.relTypeCode.value,
+		relId : form.relId.value
+	}, 
+	function(data) {
+		alert(data.msg);
+	}, 
+	'json'
+	);
+};
+
+/* 좋아요, 싫어요 ajax 끝 */
+</script>	
 
 
 <script>
-
-/* let replyForm_submited = false;
-
+let replyForm_submited = false;
 function checkWrite(form){
-
 	if(replyForm_submited){
-
 		alert('처리중입니다.');
 			return;
 	}
-
-	if(form.reply.value.trim().length == 0){
-		alert("댓글을 입력하세요.")
-		form.reply.focus();
-
+	if(form.replyBody.value.trim().length == 0){
+		alert("내용을 입력하세요.")
+		form.replyBody.focus();
 		return false;
 	}
-	
-	$.post(
-			'replyAjax',
-			 {
-			id : form.articleId.value,
-			body : form.replyBody.value
-		}, 
-		function(data) {
-			alert(data.msg);
-		}, 
-		'json'
-		);
-		form.replyBody.value = '';
-
+	form.submit();
 	replyForm_submited = true;
-} */
-
-
+}
 let replyModifyForm_submited = false;
-
 function checkModify(replyModifyForm){
-
 	if(replyModifyForm_submited){
-
 		alert('처리중입니다.');
 			return;
 	}
-
 	if(replyModifyForm.body.value.trim().length == 0){
-		alert("댓글을 입력하세요.")
+		alert("내용을 입력하세요.")
 		replyModifyForm.body.focus();
-
 		return false;
 	}
-
-
 	replyModifyForm.submit();
 	replyModifyForm_submited = true;
 }
-
 </script>
 
 
@@ -252,56 +221,69 @@ function checkModify(replyModifyForm){
               </div>
               <div class="article-detail-cell__title-contents flex flex-jc-fe flex-ai-c">
                 <div class="article-detail-cell-hitsCount">
-                  <i class="far fa-eye"></i>
+                  <i class="far fa-eye"></i>&nbsp;
                   <span>${article.hitsCount}</span>
                 </div>
                 <div class="article-detail-cell-likesCount flex">
+                
                 	<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                    </button>
-					</c:if>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                    	</button>
+                    </form>	
+                    <form>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+					</c:if>	
+					
                   <c:if test="${article.extra.actorCanLike}">
-
-                    <button class="addLike" type="button">
-                      <a href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                      </a>
-                    </button>
-
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
                   </c:if>
 
                   <c:if test="${article.extra.actorCanCancelLike}">
-                    <button class="addLike" type="button">
-                      <a href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${article.extra.actorCanDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${article.extra.actorCanCancelDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                 </div>
@@ -332,9 +314,9 @@ function checkModify(replyModifyForm){
     <!-- 댓글창 시작 -->
     <c:if test="${isLogined}">
       <div class="reply-write-box">
-        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="ArticleWriteReplyForm__submit(this); return false;" action="replyAjax" method="POST">
+        <form class="reply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
           <input type="hidden" name="articleId" value="${article.id}">
-         
+          <input type="hidden" name="memberId" value="${loginedMemberId}">
           <input type="hidden" name="redirectUrl"
 				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
           <span><i class="far fa-comment-dots"></i></span>
@@ -350,59 +332,70 @@ function checkModify(replyModifyForm){
       <div class="reply-list-box">
         <div class="reply-list-box-writer"><i class="far fa-user-circle"></i> ${reply.extra_memberNickname}</div>
         <div class="reply-list-box__cell flex flex-jc-sb">
-          <div class="reply-list-box__cell-contents flex flex-ai-c">
+          <div class="reply-list-box__cell-contents flex flex-ai-fs">
             <div class="reply-list-box__cell-updateDate">${reply.updateDate}</div>
             <div data-id="${reply.id}" class="reply-list-box__cell-body">${reply.body}</div>
+            <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
           </div>
           <div class="reply-list-box-cell__option">
-          <div class="reply-detail-cell-likesCount flex">
+          <div class="reply-detail-cell-likesCount flex flex-jc-fe">
 				
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                    </button>
-					</c:if>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>	
+				
                   <c:if test="${reply.extra.actorCanLike}">
-
-                    <button class="addLike" type="button">
-                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      </a>
-                    </button>
-
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanCancelLike}">
-                    <button class="addLike" type="button">
-                      <a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanCancelDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                 </div>
@@ -423,16 +416,128 @@ function checkModify(replyModifyForm){
               <div class="reply-list-box-cell__option-btns flex flex-ai-c">
                 <button class="btn btn-modify doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                 <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
-                  <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                  <a href="doDeleteReply?id=${reply.id}&articleId=${article.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
                 </button>
               </div>
             </c:if>
           </div>
-           
         </div>
+        
+        <!-- 대댓글창 시작 -->
+          <div class="reReply-write-box">
+            <form class="reReply-write-box-form flex flex-jc-fe flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+              <input type="hidden" name="replyId" value="${reply.id}">
+              <input type="hidden" name="memberId" value="${loginedMemberId}">
+              <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+              <span><i class="fas fa-reply"></i></span>
+              <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+              <div class="reReply-write-box-form__option ">
+                <button class="btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
+              </div>
+            </form>
+          </div>
+        </div> 
+            <c:forEach var="reReply" items="${reReplies}">
+            <c:if test="${reReply.relId == reply.id}">
+          <div class="reReply-list-box">
+            <div class="reReply-list-box-writer"><i class="fas fa-reply"></i><i class="far fa-user-circle"></i> ${reReply.extra_memberNickname}</div>
+            <div class="reReply-list-box__cell flex flex-jc-sb">
+              <div class="reReply-list-box__cell-contents flex flex-ai-fs">
+                <div class="reReply-list-box__cell-updateDate">${reReply.updateDate}</div>
+                <div class="reReply-list-box__cell-body">${reReply.body}</div>
+              </div>
+              
+              <div class="reReply-list-box-cell__option">
+                <div class="reReply-detail-cell-likesCount flex flex-jc-fe">
+				
+				<c:if test="${isLogined == false}">
+                	<form>
+                		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
+					
+                  <c:if test="${reReply.extra.actorCanLike}">
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanCancelLike}">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanDislike}">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanCancelDislike}">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                </div>
+                <c:if test="${loginedMemberId == reReply.memberId}">
+                  <form class="reReplyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                    <input type="hidden" name="id" value="${reReply.id}">
+                    <input type="hidden" name="relId" value="${reReply.relId}">
+                    <input type="hidden" name="memberId" value="${loginedMemberId}">
+                    <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+                    <input class="reReplyBodyInput" type="text" name="body" maxlength="50" placeholder="${reReply.body}" value="${reReply.body}">
+                    <div class="reReplyModifyForm__option flex flex-jc-fe">
+                      <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                      <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
+                    </div>
+                  </form>              
+                  <div class="reReply-list-box-cell__option-btns flex flex-ai-c">
+                    <button class="btn btn-modify doModifyreReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                    <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+                      <a href="doDeleteReply?id=${reReply.id}&articleId=${article.id}&relId=${reReply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                    </button>
+                  </div>
+                </c:if>
+              </div>
+            </div>
+          </div>
+          </c:if>
+        </c:forEach>
+          <!-- 대댓글창 끝 -->
       </div>
     </c:forEach>
-
     </div>
 
     <div class="reply-page-menu-section">
@@ -462,206 +567,8 @@ function checkModify(replyModifyForm){
 	
         </ul>
       </div>
-     </div>
 
       <!-- 댓글창 끝 -->
-      
-      <!-- ajax로 댓글리스팅 시작 -->
-    <div class="reply-list-box">
-      <div class="reply-box">
-        
-      </div>
-    </div>
-    
-    <div class="reply-page-menu-section2">
-    	<div class="reply-page-menu">
-    	
-    	</div>
-    </div>
-    
-    <script>
-	var ArticleReplyList__$box = $('.reply-list-box');
-	var ArticleReplyList__$replyBox = ArticleReplyList__$box.find('.reply-box');
-	var ArticleReplyList__$replyPageBox = $('.reply-page-menu-section2');
-	var ArticleReplyList__$replyPageBtnBox = ArticleReplyList__$replyPageBox.find('.reply-page-menu');
-	var ArticleReplyList__lastLoadedId = 0;
-	
-	function ArticleReplyList__loadMore() {
-		
-		$.get(
-			'getReplies', 
-			
-			{
-				articleId : ${article.id},
-				lastLoadedId : ArticleReplyList__lastLoadedId + 1
-			}, 
-
-			function(data) {
-				
-				
-			if ( data.body.replies && data.body.replies.length > 0) {
-				ArticleReplyList__lastLoadedId = data.body.replies[data.body.replies.length - 1].id;
-				ArticleReplyList__drawReplies(data.body.replies, data.body.totalCount, data.body.page);
-			}
-
-			setTimeout(ArticleReplyList__loadMore, 5000);
-		}, 
-
-		'json'
-
-		);
-	}
-	function ArticleReplyList__drawReplies(replies, totalCount, page) {
-		
-		// 페이징
-		var repliesInAPage = 5;
-		// 한 메인페이지 화면에 나올 하단 페이지 메뉴 버튼 수 ex) 1 2 3 4 5 6 7 8 9 10
-		var pageMenuBoxSize = 3;
-		var totalRepliesCount = totalCount; // 전체 reply의 수 카운팅
-		var totalPages = Math.ceil(totalRepliesCount / repliesInAPage);
-		
-		// 총 필요 페이지 수까지
-		buildReplyListPage(replies, repliesInAPage, pageMenuBoxSize, totalPages, page);
-
-
-	}
-	function buildReplyListPage(replies, repliesInAPage, pageMenuBoxSize, totalPages, page){
-		
-		var startPoint = (page - 1) * repliesInAPage; // page=1일때 index=0(즉,id = 1) 2 10(11) 3 20(21)
-		var endPoint = startPoint + repliesInAPage - 1; // page=1일때 index0~9 -> id1~10
-		
-		if (endPoint >= replies.length) {
-			endPoint = replies.length;
-		}
-		
-		for ( var i = startPoint; i <= endPoint; i++ ) {
-			var reply = replies[i];
-			ArticleReplyList__drawReply(reply);
-			
-		}
-		
-		var previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
-		var boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
-		var boxEndNum = pageMenuBoxSize + boxStartNum - 1;
-
-		if (boxEndNum > totalPages) {
-			boxEndNum = totalPages;
-		}
-
-		
-		
-		// 2. '이전','다음' 버튼 페이지 계산
-		var boxStartNumBeforePage = boxStartNum - 1;
-		if (boxStartNumBeforePage < 1) {
-			boxStartNumBeforePage = 1;
-		}
-		var boxEndNumAfterPage = boxEndNum + 1;
-		if (boxEndNumAfterPage > totalPages) {
-			boxEndNumAfterPage = totalPages;
-		}
-
-		
-		
-		// 3. '이전','다음' 버튼 필요 유무 판별
-		var boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
-		var boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage !== boxEndNum;
-		
-		
-		buildReplyPageBtn(boxStartNumBeforePageBtnNeedToShow, boxEndNumAfterPageBtnNeedToShow, boxStartNum, boxEndNum, page);
-
-	}
-	
-	function ArticleReplyList__drawReply(reply) {
-		var html = '';
-		html += '<div class="reply-list-box-writer"><i class="far fa-user-circle"></i> ' + reply.extra_memberNickname + '</div>';
-		html += '<div class="reply-list-box__cell flex flex-jc-sb"><div class="reply-list-box__cell-contents flex flex-ai-c">';
-
-		html += '<div class="reply-list-box__cell-updateDate">' + reply.updateDate + '</div>';
-		html += '<div data-id="${reply.id}" class="reply-list-box__cell-body">' + reply.body + '</div>';
-		html += '</div>';
-		
-		html += '<div class="reply-list-box-cell__option"><div class="reply-detail-cell-likesCount flex">';
-		html += '<c:if test="${isLogined == false}">';
-		html += '<button class="addLike" type="button" onclick="alert(\'로그인 후 이용해 주세요.\')"><i class="far fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></button>';
-		html += '<button class="addUnLike" type="button" onclick="alert(\'로그인 후 이용해 주세요.\')"><i class="far fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanLike}">';
-		html += '<button class="addLike" type="button"><a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`좋아요` 처리 하시겠습니까?\') ) return false;"><i class="far fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanCancelLike}">';
-		html += '<button class="addLike" type="button"><a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`좋아요`를 취소 처리 하시겠습니까?\') ) return false;"><i class="fas fa-thumbs-up"></i>&nbsp;<span class="likesCount">' + reply.extra_likeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';		
-		html += '<c:if test="${reply.extra.actorCanDislike}">';
-		html += '<button class="addUnLike" type="button"><a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`싫어요` 처리 하시겠습니까?\') ) return false;"><i class="far fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		html += '<c:if test="${reply.extra.actorCanCancelDislike}">';
-		html += '<button class="addUnLike" type="button"><a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm(\'`싫어요`를 취소 처리 하시겠습니까?\') ) return false;"><i class="fas fa-thumbs-down"></i>&nbsp;<span class="unLikesCount">' + reply.extra_dislikeOnlyPoint + '</span></a></button>';
-		html += '</c:if>';
-		
-    	  html += '</div>';
-
-		html += '</div>';
-		html += '</div>';
-
-		
-		ArticleReplyList__$replyBox.prepend(html);
-	}
-	
-	function buildReplyPageBtn(boxStartNumBeforePageBtnNeedToShow, boxEndNumAfterPageBtnNeedToShow, boxStartNum, boxEndNum, page){
-		var html = '';
-		
-		html += '<form class="flex flex-jc-c" onsubmit="replyPage__submit(this); return false;" action="getReplies" method="POST">';
-		html += '<c:if test="${totalPages > 1}">';
-		html += '<input type="hidden" name="page" value="2">';
-		html += '<li class="before-btn"><button type="submit" class="flex flex-ai-c">&lt;&lt; </button></li>';
-		html += '</c:if>';  
-		  
-		
-		if (boxStartNumBeforePageBtnNeedToShow) {
-			html += '<c:if test="${boxStartNumBeforePageBtnNeedToShow}">';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${boxStartNumBeforePage}" />';
-			html += '<li class="before-btn"><a href="${aUrl}" class="flex flex-ai-c"> &lt; </a></li>';
-			html += '</c:if>';  
-	
-		}
-
-		for (var i = boxStartNum; i <= boxEndNum; i++) {
-			var selectedPageNum = "";
-			if (i == page) {
-				selectedPageNum = "article-page-menu__link--selected";
-			}
-
-			html += '<c:forEach var="i" begin="${boxStartNum}" end="${boxEndNum}" step="1">';
-			html += '<c:set var="aClass" value="${page == i ? \'reply-page-menu__link--selected\' : \'???\' }" />';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${i}" />';
-			html += '<li><a href="${aUrl}" class="page-btn flex flex-ai-c ${aClass}">${i}</a></li>'; 
-			html += '</c:forEach>';  
-
-		}
-		if (boxEndNumAfterPageBtnNeedToShow) {
-
-			html += '<c:if test="${boxEndNumAfterPageBtnNeedToShow}">';
-			html += '<c:set var="aUrl" value="?id=${param.id}&page=${boxEndNumAfterPage}" />';
-			html += '<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;</a></li>';  
-			html += '</c:if>';  
-
-		} 
-
-		html += '<c:if test="${totalPages > 1}">';
-		html += '<c:set var="aUrl" value="?page=${totalPages}&id=${param.id}" />';
-		html += '<li class="after-btn"><a href="${aUrl}" class="flex flex-ai-c"> &gt;&gt;</a></li>';
-		html += '</c:if>';  
-		html += '</form>';
-
-		ArticleReplyList__$replyPageBtnBox.append(html);
-	}
-
-	
-	ArticleReplyList__loadMore();
-</script>
-    <!-- ajax로 댓글리스팅 끝 -->
-      
-      
 
       <!-- 메인-상세 하단 메뉴 시작 -->
       <section class="section-3 con-min-width">
@@ -735,59 +642,68 @@ function checkModify(replyModifyForm){
           <div class="mobile-article-detail-cell__body height-70p toast-ui-viewer">
           </div>
           <div class="mobile-article-detail-cell__body-contents flex flex-jc-fe flex-ai-c">
-            <div class="mobile-article-detail-cell-hitsCount"><i class="far fa-eye"></i><span>${article.hitsCount}</span></div>
+            <div class="mobile-article-detail-cell-hitsCount"><i class="far fa-eye"></i>&nbsp;<span>${article.hitsCount}</span></div>
             <div class="mobile-article-detail-cell-likesCount flex">
+            	
             	<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                    	</button>
+                    </form>
+                    <form>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
+				
+                  <c:if test="${article.extra.actorCanLike}">
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
+                  </c:if>
+
+                  <c:if test="${article.extra.actorCanCancelLike}">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                      </a>
                     </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                    </form>
+                  </c:if>
+
+                  <c:if test="${article.extra.actorCanDislike}">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
-					</c:if>
-            
-            
-              <c:if test="${article.extra.actorCanLike}">
+                    </form>
+                  </c:if>
 
-                <button class="addLike" type="button">
-                  <a href="../like/doLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-                    <i class="far fa-thumbs-up"></i>
-                    &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                  </a>
-                </button>
-
-              </c:if>
-
-              <c:if test="${article.extra.actorCanCancelLike}">
-                <button class="addLike" type="button">
-                  <a href="../like/doCancelLike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
-                    <i class="fas fa-thumbs-up"></i>
-                    &nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
-                  </a>
-                </button>
-              </c:if>
-
-              <c:if test="${article.extra.actorCanDislike}">
-                <button class="addUnLike" type="button">
-                  <a href="../like/doDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
-                    <i class="far fa-thumbs-down"></i>
-                    &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                  </a>
-                </button>
-              </c:if>
-
-              <c:if test="${article.extra.actorCanCancelDislike}">
-                <button class="addUnLike" type="button">
-                  <a href="../like/doCancelDislike?relTypeCode=article&relId=${article.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
-                    <i class="fas fa-thumbs-down"></i>
-                    &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
-                  </a>
-                </button>
-              </c:if>
+                  <c:if test="${article.extra.actorCanCancelDislike}">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="article">
+          				<input type="hidden" name="relId" value="${article.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
 
             </div>
           </div>
@@ -825,63 +741,74 @@ function checkModify(replyModifyForm){
             <div class="mobile-reply-list-box__cell-contents">
               <div class="mobile-reply-list-box__cell-updateDate">${reply.updateDate}</div>
               <div data-id="${reply.id}" class="mobile-reply-list-box__cell-body">${reply.body}</div>
+              <nav class="reply-list-box__cell-reReply"><i class="fas fa-reply"></i> 답글쓰기</nav>
             </div>
             <div class="mobile-reply-detail-cell-likesCount flex">
+            
 				<c:if test="${isLogined == false}">
+                	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      
-                    </button>
-                    <button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        <i class="far fa-thumbs-down"></i>
-                        &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      
-                    </button>
-					</c:if>	
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    </form>
+                    <form>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
 					
                   <c:if test="${reply.extra.actorCanLike}">
-
-                    <button class="addLike" type="button">
-                      <a href="../like/doLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
-                        <i class="far fa-thumbs-up"></i>
-                        &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      </a>
-                    </button>
-
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanCancelLike}">
-                    <button class="addLike" type="button">
-                      <a href="../like/doCancelLike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-up"></i>
                         &nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                   <c:if test="${reply.extra.actorCanCancelDislike}">
-                    <button class="addUnLike" type="button">
-                      <a href="../like/doCancelDislike?relTypeCode=reply&relId=${reply.id}&redirectUrl=${encodedCurrentUrl}" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
                         <i class="fas fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
-                      </a>
                     </button>
+                    </form>
                   </c:if>
 
                 </div>
             <div class="mobile-reply-list-box-cell__option">
               <c:if test="${loginedMemberId == reply.memberId}">
-                <form class="mobile-replyModifyForm flex flex-jc-a" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                <form class="mobile-replyModifyForm flex" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
                   <input type="hidden" name="id" value="${reply.id}">
                   <input type="hidden" name="relId" value="${reply.relId}">
                   <input type="hidden" name="memberId" value="${loginedMemberId}">
@@ -894,15 +821,134 @@ function checkModify(replyModifyForm){
                   </div>
                 </form>
                 
-                <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c">
+                <div class="mobile-reply-list-box-cell__option-btns flex flex-ai-c flex-jc-fe">
                   <button class="btn btn-modify doModifyReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
-                    <a href="doDeleteReply?id=${reply.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                    <a href="doDeleteReply?id=${reply.id}&articleId=${article.id}&relId=${reply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
                   </button>
                 </div>
               </c:if>
             </div>
           </div>
+        
+        
+        <!-- 모바일 대댓글창 시작 -->
+
+          <div class="mobile-reReply-write-box">
+            <form class="mobile-reReply-write-box-form flex flex-jc-c flex-ai-c" name="form" onsubmit="checkWrite(this); return false;" action="reply" method="POST">
+              <input type="hidden" name="replyId" value="${reply.id}">
+              <input type="hidden" name="memberId" value="${loginedMemberId}">
+              <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+              <span><i class="fas fa-reply"></i></span>
+              <input type="text" name="replyBody" maxlength="50" placeholder="댓글 입력">
+              <div class="mobile-reReply-write-box-form__option ">
+                <button class="m-btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
+              </div>
+            </form>
+          </div>
+		</div>
+        <c:forEach var="reReply" items="${reReplies}">
+         <c:if test="${reReply.relId == reply.id}">
+          <div class="mobile-reReply-list-box">
+            <div class="mobile-reReply-list-box-writer"><i class="fas fa-reply"></i><i class="far fa-user-circle"></i> ${reReply.extra_memberNickname}</div>
+            <div class="mobile-reReply-list-box__cell flex flex-column">
+              <div class="mobile-reReply-list-box__cell-contents">
+                <div class="mobile-reReply-list-box__cell-updateDate">${reReply.updateDate}</div>
+                <div class="mobile-reReply-list-box__cell-body">${reReply.body}</div>
+              </div>
+              </div>
+              <div class="mobile-reReply-detail-cell-likesCount flex">
+              
+				<c:if test="${isLogined == false}">
+                	<form>
+                		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-up"></i>
+                        	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    	</button>
+                    	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
+                        	<i class="fas fa-thumbs-down"></i>
+                        	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    	</button>
+                    </form>
+				</c:if>
+					
+                  <c:if test="${reReply.extra.actorCanLike}">
+					
+					<form class="addLike" name="form" onsubmit="addLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    	<button class="addLike" type="submit" onclick="if ( !confirm('`좋아요` 처리 하시겠습니까?') ) return false;">
+                       		<i class="far fa-thumbs-up"></i>
+                       		&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                   		</button>
+					</form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanCancelLike}">
+                  <form class="addLike" name="form" onsubmit="cancelLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addLike" type="submit" onclick="if ( !confirm('`좋아요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-up"></i>
+                        &nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanDislike}">
+                  <form class="addUnLike" name="form" onsubmit="addUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요` 처리 하시겠습니까?') ) return false;">
+                        <i class="far fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                  <c:if test="${reReply.extra.actorCanCancelDislike}">
+                  <form class="addUnLike" name="form" onsubmit="cancelUnLike_submit(this);" method="POST">
+          				<input type="hidden" name="relTypeCode" value="reply">
+          				<input type="hidden" name="relId" value="${reReply.id}">
+                    <button class="addUnLike" type="submit" onclick="if ( !confirm('`싫어요`를 취소 처리 하시겠습니까?') ) return false;">
+                        <i class="fas fa-thumbs-down"></i>
+                        &nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
+                    </button>
+                    </form>
+                  </c:if>
+
+                </div>
+              <div class="mobile-reReply-list-box-cell__option">
+                <c:if test="${loginedMemberId == reReply.memberId}">
+                  <form class="mobile-reReplyModifyForm flex" name="replyModifyForm" action="doModifyReply" method="POST" onsubmit="checkModify(this); return false;">
+                    <input type="hidden" name="id" value="${reReply.id}">
+                    <input type="hidden" name="relId" value="${reReply.relId}">
+                    <input type="hidden" name="memberId" value="${loginedMemberId}">
+                    <input type="hidden" name="redirectUrl"
+				value="${Util.getNewUrl(currentUrl, 'focusReplyId', '[NEW_REPLY_ID]')}" />
+                    <input class="mobile-reReplyBodyInput" type="text" name="body" placeholder="${reReply.body}" value="${reReply.body}">
+                    <div class="mobile-reReplyModifyForm__option flex flex-jc-fe">
+                      <button class="btn btn-modify" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
+                      <button class="btn btn-back" type="button" onclick="location.reload()"><i class="fas fa-ban"></i> 취소</button>
+                    </div>
+                  </form>
+                  <div class="mobile-reReply-list-box-cell__option-btns flex flex-ai-c flex-jc-fe">
+                    <button class="btn btn-modify doModifyreReplyForm" type="button"><i class="far fa-edit"></i> 수정</button>
+                    <button class="btn btn-back" onclick="if(confirm('정말 삭제하시겠습니까?') == false) {return false;}" type="button">
+                      <a href="doDeleteReply?id=${reReply.id}&articleId=${article.id}&relId=${reReply.relId}"><i class="far fa-trash-alt"></i> 삭제</a>
+                    </button>
+                  </div>
+                </c:if>
+              </div>
+            </div>
+          
+          </c:if>
+        </c:forEach>
+        </div>
+          <!-- 모바일 대댓글창 끝 -->
+        
+        
         </div>
       </c:forEach>
       </div>

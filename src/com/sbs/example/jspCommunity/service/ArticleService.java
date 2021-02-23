@@ -199,8 +199,16 @@ public class ArticleService {
 				searchKeyword);
 	}
 
-	public List<Reply> getRepliesForPrintByArticleId2(int articleId, String relTypeCode, Member loginedMember, int lastLoadedId) {
-		return articleDao.getRepliesForPrintByArticleId2( articleId, relTypeCode, loginedMember, lastLoadedId);
+	public List<Reply> getRepliesForPrintByRelTyopeCode(String relTypeCode, Member actor) {
+		List<Reply> replies = articleDao.getRepliesForPrintByRelTyopeCode(relTypeCode, actor);
+
+		if (actor != null) {
+			for (Reply reply : replies) {
+				updateInfoForPrint(reply, actor);
+			}
+		}
+
+		return replies;
 	}
 
 }

@@ -4,68 +4,65 @@ console.clear();
 var didScroll;
 var lastScrollTop = 0;
 var delta = 5;
-var navbarHeight = $('.head-nav').outerHeight();
+var navbarHeight = $(".head-nav").outerHeight();
 
-$(window).scroll(function(event){
-    didScroll = true;
+$(window).scroll(function (event) {
+  didScroll = true;
 });
 
-setInterval(function() {
-    if (didScroll) {
-        hasScrolled();
-        didScroll = false;
-    }
-}, 250);
+setInterval(function () {
+  if (didScroll) {
+    hasScrolled();
+    didScroll = false;
+  }
+}, 200);
 
 function hasScrolled() {
-    var st = $(this).scrollTop();
-    
-    // Make sure they scroll more than delta
-    if(Math.abs(lastScrollTop - st) <= delta)
-        return;
-    
-    // If they scrolled down and are past the navbar, add class .nav-up.
-    // This is necessary so you never see what is "behind" the navbar.
-    if (st > lastScrollTop && st > navbarHeight){
-        // Scroll Down
-        $('.head-nav').removeClass('nav-down').addClass('nav-up');
-      $('.title').addClass('title-down');
-      $('.mobile-article-list__cell-search').addClass('search-bar-up');
-    } else {
-        // Scroll Up
-        if(st + $(window).height() < $(document).height()) {
-            $('.head-nav').removeClass('nav-up').addClass('nav-down');
-          $('.title').removeClass('title-down');
-          $('.mobile-article-list__cell-search').removeClass('search-bar-up');
-        }
+  var st = $(this).scrollTop();
+
+  // Make sure they scroll more than delta
+  if (Math.abs(lastScrollTop - st) <= delta) return;
+
+  // If they scrolled down and are past the navbar, add class .nav-up.
+  // This is necessary so you never see what is "behind" the navbar.
+  if (st > lastScrollTop && st > navbarHeight) {
+    // Scroll Down
+    $(".head-nav").removeClass("nav-down").addClass("nav-up");
+    $(".title").addClass("title-down");
+    $(".mobile-article-list__cell-search").addClass("search-bar-up");
+  } else {
+    // Scroll Up
+    if (st + $(window).height() < $(document).height()) {
+      $(".head-nav").removeClass("nav-up").addClass("nav-down");
+      $(".title").removeClass("title-down");
+      $(".mobile-article-list__cell-search").removeClass("search-bar-up");
     }
-    
-    lastScrollTop = st;
+  }
+
+  lastScrollTop = st;
 }
 
 /* Top-bar 스크롤 애니메이션 끝 */
 
 
 
-
 /* MobileTopBar 옵션 시작 */
 function MobileTopBar__init() {
-  $('.mobile-top-bar_btn-toggle-side-bar').click(function() {
+  $(".mobile-top-bar_btn-toggle-side-bar").click(function () {
     let $this = $(this);
-    
-    if ( $this.hasClass('active') ) {
-      $this.removeClass('active');
-      $('.mobile-side-bar').removeClass('active');
-      $('.mobile-side-bar').off('scroll touchmove mousewheel');
-    }
-    else {
-      $this.addClass('active');
-      $('.mobile-side-bar').addClass('active');
-      $('.mobile-side-bar').on('scroll touchmove mousewheel', function(e) {
-         e.preventDefault();
-         e.stopPropagation();
-       return false;
-      })
+
+    if ($this.hasClass("active")) {
+      $this.removeClass("active");
+      $(".mobile-side-bar").removeClass("active");
+      $(".mobile-side-bar").off("scroll touchmove mousewheel");
+    } else {
+      $this.addClass("active");
+      $(".mobile-side-bar").addClass("active");
+      $(".mobile-side-bar").on("scroll touchmove mousewheel", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      });
     }
   });
 }
@@ -73,78 +70,174 @@ function MobileTopBar__init() {
 MobileTopBar__init();
 /* MobileTopBar 옵션 끝 */
 
+
+
 /* mobile-side-bar_menu 옵션 시작 */
 
-    $(document).ready(function(){
+$(document).ready(function () {
+  $(".mobile-side-bar_menu>ul>li>a").click(function () {
+    var submenu = $(this).next(".hide");
 
-        $(".mobile-side-bar_menu>ul>li>a").click(function(){
-            var submenu = $(this).next(".hide");
- 
-
-            if( submenu.is(":visible") ){
-                submenu.slideUp();
-            }else{
-                submenu.slideDown();
-            }
-        });
-    });
-
+    if (submenu.is(":visible")) {
+      submenu.slideUp();
+    } else {
+      submenu.slideDown();
+    }
+  });
+});
 
 //출처: https://stove99.tistory.com/103 [스토브 훌로구]
 /* mobile-side-bar_menu 옵션 끝 */
 
 
-/* top & bottom-button 옵션 시작 */
-$(function() {  
-  var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
-  // 보이기 | 숨기기
-  $(window).scroll(function() { 
-    if ($(this).scrollTop() < 200) { 
-    //200 넘으면 버튼이 보임 
-     $('.top-button').fadeOut(),
-       $('.bottom-button').fadeOut();  
-  } else { 
-    $('.top-button').fadeIn(),
-      $('.bottom-button').fadeIn(); 
-  } 
-  }); 
-  // 버튼 클릭시 0 까지 animation 이동합니다. 
-  $(".top-button").click(function() {
-    $('html, body').animate({ 
-      scrollTop : 0 }, 200); // 속도 200 
-    return false; 
-  }),
-    $(".bottom-button").click(function() {
-    $('html, body').animate({ 
-      scrollTop : scrollBottom }, 200); // 속도 200 
-    return false; 
-  }); 
 
+/* top & bottom-button 옵션 시작 */
+$(function () {
+  var scrollBottom =
+    $(document).height() - $(window).height() - $(window).scrollTop();
+  // 보이기 | 숨기기
+  $(window).scroll(function () {
+    if ($(this).scrollTop() < 200) {
+      //200 넘으면 버튼이 보임
+      $(".top-button").fadeOut(), $(".bottom-button").fadeOut();
+    } else {
+      $(".top-button").fadeIn(), $(".bottom-button").fadeIn();
+    }
+  });
+  // 버튼 클릭시 0 까지 animation 이동합니다.
+  $(".top-button").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: 0
+      },
+      200
+    ); // 속도 200
+    return false;
+  }),
+    $(".bottom-button").click(function () {
+      $("html, body").animate(
+        {
+          scrollTop: scrollBottom
+        },
+        200
+      ); // 속도 200
+      return false;
+    });
 });
 
 /* top & bottom-button 옵션 끝 */
 
 
 
-/* 댓글 수정 버튼 시작 */
-function doModifyReplyForm__init() {
-  $('.doModifyReplyForm').click(function() {
+/* 홈 스크롤 애니메이션 시작 */
+var Pages__nowWorking = false;
 
-      $('.doModifyReplyForm').addClass('active');
-      $('.reply-detail-cell-likesCount').addClass('active');
-      $('.mobile-reply-list-box__cell-body').addClass('active');
-      $(this).parents().parents().prev('.reply-list-box__cell-contents').addClass('active');
-      $(this).parents().parents().addClass('active');
-      $(this).parents().addClass('active');
-      $(this).parents().prev().addClass('active');
-      $(this).next().addClass('active');
+function Pages__goToScroll(top) {
+  if (Pages__nowWorking) {
+    return false;
+  }
 
+  Pages__nowWorking = true;
+
+  $("html,body")
+    .stop()
+    .animate(
+      {
+        scrollTop: top - 40
+      },
+      500,
+      function () {
+        Pages__nowWorking = false;
+      }
+    );
+}
+
+function Pages__goTo(index) {
+  var $page = $(".section-home > .section-home-box");
+
+  if (index < 0) {
+    index = 0;
+  } else if (index >= $page.length) {
+    index = $page.length - 1;
+  }
+
+  var top = parseInt(
+    $(".section-home > .section-home-box").eq(index).attr("data-offsetTop")
+  );
+
+  Pages__goToScroll(top);
+}
+
+var Pages__activedMenuItem = -1;
+
+function Pages__activeMenuItem(index) {
+  if (Pages__activedMenuItem == index) {
+    return false;
+  }
+  Pages__activedMenuItem = index;
+}
+
+function Pages__init() {
+  $(".section-home > .section-home-box").on(
+    "mousewheel DOMMouseScroll",
+    function (e) {
+      var index = $(this).index();
+
+      // html, body 에 마우스 휠 이벤트와 돔마우스스크롤 이벤트를 걸었습니다.
+      var E = e.originalEvent;
+      // 변수 E 에다가는 이벤트 객체의 속성으로 사용할 수 있는 속성 인 originalEvent 를 넣었습니다.
+      delta = 0;
+      if (E.detail) {
+        delta = E.detail * -40;
+      } else {
+        delta = E.wheelDelta;
+      }
+
+      if (delta > 0) {
+        Pages__goTo(index - 1);
+      } else {
+        Pages__goTo(index + 1);
+      }
+
+      return false;
+    }
+  );
+
+  $(window).scroll(function () {
+    var scrollTop = $(this).scrollTop();
+    $(".section-home > .section-home-box").each(function (index, node) {
+      var offsetTop = parseInt($(this).attr("data-offsetTop"));
+
+      if (scrollTop <= offsetTop) {
+        Pages__activeMenuItem(index);
+        return false;
+      }
+    });
+  });
+
+  $(window)
+    .resize(function () {
+      Pages__updatePageShapeInfo();
+
+      $(window).scroll();
+    })
+    .resize();
+}
+
+function Pages__updatePageShapeInfo() {
+  $(".section-home > .section-home-box").each(function (index, node) {
+    var width = $(this).width();
+    var height = $(this).height();
+    var offsetTop = $(this).offset().top;
+
+    $(this).attr("data-width", width);
+    $(this).attr("data-height", height);
+    $(this).attr("data-offsetTop", offsetTop);
   });
 }
 
-doModifyReplyForm__init();
-/* 댓글 수정 버튼 끝 */
-
+Pages__init();
+/* 홈 스크롤 애니메이션 끝 */
 
 
 
@@ -264,10 +357,45 @@ function doModifyReplyForm__init() {
       $(this).parents().parents().addClass('active');
       $(this).parents().addClass('active');
       $(this).parents().prev().addClass('active');
-      $(this).next().addClass('active');
+      $('.reply-list-box-cell__option-btns').next().addClass('active');
 
   });
 }
 
 doModifyReplyForm__init();
 /* 댓글 수정 버튼 끝 */
+/* 대댓글 등록 버튼 시작 */
+function doRereplyForm__init() {
+  $('.reply-list-box__cell-reReply').click(function() {
+    const target = $(this).parents().parents().next();
+    
+    if(target.hasClass('active')){
+      target.removeClass('active');
+    }
+    else{
+      target.addClass('active');
+    }
+      
+  });
+}
+
+doRereplyForm__init();
+/* 대댓글 등록 버튼 끝 */
+/* 대댓글 수정 버튼 시작 */
+function doModifyreReplyForm__init() {
+  $('.doModifyreReplyForm').click(function() {
+
+      $('.doModifyreReplyForm').addClass('active');
+      $('.reReply-detail-cell-likesCount').addClass('active');
+      $('.mobile-reReply-list-box__cell-body').addClass('active');
+      $(this).parents().parents().prev('.reReply-list-box__cell-contents').addClass('active');
+      $(this).parents().parents().addClass('active');
+      $(this).parents().addClass('active');
+      $(this).parents().prev().addClass('active');
+      $('.reReply-list-box-cell__option-btns').next().addClass('active');
+
+  });
+}
+
+doModifyreReplyForm__init();
+/* 대댓글 수정 버튼 끝 */

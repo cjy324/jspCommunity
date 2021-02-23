@@ -129,8 +129,10 @@ function localStorageClear(){
 			<div class="head-bar con flex flex-jc-fe">
 				<c:if test="${isLogined}">
 				<c:if test="${isUsingTempPassword}">
-<div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
-</c:if>
+					<div style="color:red; font-weight:bold; width:50%;">
+						임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.
+					</div>
+				</c:if>
 					<div class="head-bar-button">
 						<a href="../home/main" title="Home">홈</a>
 					</div>
@@ -184,9 +186,9 @@ function localStorageClear(){
                     <span>NEWS</span>
                   </a>
                 </li>
-                <li title="FREE">
+                <li title="TIP's">
                   <a href="../article/list?boardId=3" class="block">
-                    <span>FREE</span>
+                    <span>TIP's</span>
                   </a>
                 </li>
               </ul>
@@ -201,14 +203,19 @@ function localStorageClear(){
             <span>LINK</span>
           </a>
           <ul>
-            <li title="T-STORY">
-              <a href="https://cjy324.tistory.com/" target="_blank" class="block">
-                <span>T-STORY</span>
+            <li title="APPLE">
+              <a href="https://to2.kr/b7D" target="_blank" class="block">
+                <span>APPLE</span>
               </a>
             </li>
-            <li title="GITHUB">
-              <a href="https://github.com/cjy324/TIL_Jooyoung#til_jooyoung" target="_blank" class="block">
-                <span>GITHUB</span>
+            <li title="SAMSUNG">
+              <a href="https://www.samsung.com/sec/" target="_blank" class="block">
+                <span>SAMSUNG</span>
+              </a>
+            </li>
+            <li title="LG">
+              <a href="https://to2.kr/b7E" target="_blank" class="block">
+                <span>LG</span>
               </a>
             </li>
           </ul>
@@ -239,6 +246,9 @@ function localStorageClear(){
 				</div>
 			</div>
 		</header>
+		<c:if test="${isUsingTempPassword}">
+<div class="visible-sm-down" style="color:red; font-weight:bold; width:100%; text-align:center;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
+</c:if>
 		<!-- 모바일 탑바 끝 -->
 		<!-- 모바일 사이드메뉴바 시작-->
   <aside class="mobile-side-bar flex flex-column flex-jc-c visible-sm-down">
@@ -260,9 +270,9 @@ function localStorageClear(){
                 <span>NEWS</span>
               </a>
             </li>
-            <li title="FREE">
+            <li title="TIP's">
               <a href="../article/list?boardId=3" class="block">
-                <span>FREE</span>
+                <span>TIP's</span>
               </a>
             </li>
           </ul>
@@ -277,14 +287,19 @@ function localStorageClear(){
             <span>LINK</span>
           </a>
           <ul class="hide">
-            <li title="T-STORY">
-              <a href="https://cjy324.tistory.com/" target="_blank" class="block">
-                <span>T-STORY</span>
+            <li title="APPLE">
+              <a href="https://to2.kr/b7D" target="_blank" class="block">
+                <span>APPLE</span>
               </a>
             </li>
-            <li title="GITHUB">
-              <a href="https://github.com/cjy324/TIL_Jooyoung#til_jooyoung" target="_blank" class="block">
-                <span>GITHUB</span>
+            <li title="SAMSUNG">
+              <a href="https://www.samsung.com/sec/" target="_blank" class="block">
+                <span>SAMSUNG</span>
+              </a>
+            </li>
+            <li title="LG">
+              <a href="https://to2.kr/b7E" target="_blank" class="block">
+                <span>LG</span>
               </a>
             </li>
           </ul>
@@ -293,9 +308,6 @@ function localStorageClear(){
     </nav>
     <div class="mobile-side-bar_menu flex flex-jc-c">
      <c:if test="${isLogined}">
-     <c:if test="${isUsingTempPassword}">
-<div style="color:red; font-weight:bold; width:50%;">임시 비밀번호를 사용중입니다. 비밀번호를 변경해 주세요.</div>
-</c:if>
       <div class="mobile-side-bar-button"><a href="../home/main"><i class="fas fa-home"></i> 홈</a></div>
       <div class="mobile-side-bar-button"><a href="../member/showMyPage"><i class="fas fa-user-cog"></i> 회원정보</a></div>
       <div class="mobile-side-bar-button"><a href="../member/doLogout?beforeUrl=${encodedCurrentUrl}"><i class="fas fa-sign-out-alt"></i> 로그아웃</a></div>

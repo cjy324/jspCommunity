@@ -127,12 +127,12 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("reply")) {
 				jspPath = articleController.reply(request, response);
 			}
-			if (actionMethodName.equals("replyAjax")) {
-				jspPath = articleController.replyAjax(request, response);
-			}
-			if (actionMethodName.equals("getReplies")) {
-				jspPath = articleController.getReplies(request, response);
-			}
+			/*
+			 * if (actionMethodName.equals("replyAjax")) { jspPath =
+			 * articleController.replyAjax(request, response); } if
+			 * (actionMethodName.equals("getReplies")) { jspPath =
+			 * articleController.getReplies(request, response); }
+			 */
 
 			if (actionMethodName.equals("doModifyReply")) {
 				jspPath = articleController.doModifyReply(request, response);

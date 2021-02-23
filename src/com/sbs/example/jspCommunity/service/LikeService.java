@@ -29,7 +29,7 @@ public class LikeService {
 			Reply reply = (Reply) object;
 			relId = reply.getId();
 		}
-
+		
 		return likeDao.getPoint(relTypeCode, relId, actor.getId()) == 0;
 	}
 

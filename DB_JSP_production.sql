@@ -23,7 +23,7 @@ WHERE id != 14;
 INSERT INTO `article`
 SET `regDate` = NOW(),
 `updateDate` = NOW(),
-`title` = CONCAT('제목입니다._',RAND()),
-`body` = CONCAT('내용입니다._',RAND()),
-`boardId` = FLOOR(RAND()*2) + 1,
+`title` = CONCAT('테스트제목입니다._',RAND()),
+`body` = CONCAT('테스트내용입니다._',RAND()),
+`boardId` = FLOOR(RAND()*3) + 1,
 `memberId` = FLOOR(RAND()*2) + 1;
