@@ -76,7 +76,6 @@
 <script>
 /* 좋아요, 싫어요 ajax 시작 */
 function addLike_submit(form) {
-
 	$.post(
 		'../like/doLike',
 		 {
@@ -89,9 +88,7 @@ function addLike_submit(form) {
 	'json'
 	);
 };
-
 function cancelLike_submit(form) {
-
 	$.post(
 		'../like/doCancelLike',
 		 {
@@ -104,9 +101,7 @@ function cancelLike_submit(form) {
 	'json'
 	);
 };
-
 function addUnLike_submit(form) {
-
 	$.post(
 		'../like/doDislike',
 		 {
@@ -119,9 +114,7 @@ function addUnLike_submit(form) {
 	'json'
 	);
 };
-
 function cancelUnLike_submit(form) {
-
 	$.post(
 		'../like/doCancelDislike',
 		 {
@@ -134,7 +127,6 @@ function cancelUnLike_submit(form) {
 	'json'
 	);
 };
-
 /* 좋아요, 싫어요 ajax 끝 */
 </script>	
 

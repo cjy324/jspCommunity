@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -68,7 +67,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
 <!-- 반응형 필수 -->
-<meta name="viewport" content="width=device-width, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <!--제이쿼리-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -96,8 +95,17 @@
 <script src="${pageContext.request.contextPath}/static/common.js" defer></script>
 
 <%="<script>"%>
-var param = ${paramJson};
+const param = ${paramJson};
 <%="</script>"%>
+
+<script>
+/* ios상에서 발생하는 캐시 오류 방지 */
+window.onpageshow =  function(event) { // BFCahe
+    if ( event.persisted ) {
+        window.location.reload();
+    }
+}
+</script>
 
 
 <title>${pageTitle}</title>
