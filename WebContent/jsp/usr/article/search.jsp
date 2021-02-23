@@ -123,8 +123,8 @@ function DoSearchForm_submit(form){
               </div>
               <div class="article-list__cell-hitsCount">${article.hitsCount}</div>
               <div class="article-list__cell-likesCount">
-              	<i class="far fa-thumbs-up"></i> ${article.extra_likeOnlyPoint} /
- 				<i class="far fa-thumbs-down"></i> ${article.extra_dislikeOnlyPoint}
+              	<i class="far fa-thumbs-up"></i>&nbsp;${article.extra_likeOnlyPoint}&nbsp;/&nbsp;
+ 				<i class="far fa-thumbs-down"></i>&nbsp;${article.extra_dislikeOnlyPoint}
               </div>
             </div>
 			</c:forEach>
