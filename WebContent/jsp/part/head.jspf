@@ -38,7 +38,7 @@
 <meta property="og:title" content="Get IT" />
 <meta property="og:description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:image" content="images/Dev_J_logo/logo.png" />
+<meta property="og:image" content="${pageContext.request.contextPath}/images/GetIT_logo/square.png" />
 <meta property="og:image:alt" content="https://getit.devj.me" />
 <meta property="og:image:width" content="486" />
 <meta property="og:image:height" content="254" />
@@ -46,21 +46,21 @@
 <meta property="og:pubdate" content="[날짜]" />
 <meta property="og:url" content="https://getit.devj.me" />
 <!-- TWITTER -->
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="${pageContext.request.contextPath}/images/GetIT_logo/square.png" />
 <meta name="twitter:title" content="Get IT" />
 <meta name="twitter:site" content="@Get IT" />
 <meta name="twitter:creator" content="@Get IT" />
-<meta name="twitter:image" content="images/GetIT_logo/logo.png">
+<meta name="twitter:image" content="${pageContext.request.contextPath}/images/GetIT_logo/square.png">
 <meta name="twitter:description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
 <!-- GOOGLE+ -->
 <meta itemprop="headline" content="Get IT" />
 <meta itemprop="name" content="Get IT" />
 <meta itemprop="description" content="스마트기기들에 대한 최신 정보 공유 커뮤니티" />
-<meta itemprop="image" content="images/GetIT_logo/logo.png" />
+<meta itemprop="image" content="${pageContext.request.contextPath}/images/GetIT_logo/square.png" />
 
 <!-- 파비콘 -->
-<link rel="shortcut icon" href="images/favicon/favicon.ico" type="image/x-icon">
-<link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico" type="image/x-icon">
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet"
@@ -172,7 +172,7 @@ function localStorageClear(){
 			<div class="con height-100p flex flex-jc-sb flex-ai-c">
 				<div class="title head-nav nav-down">
 					<a href="../home/main" title="Home">
-						Get <span>IT</span>
+						<img src="${pageContext.request.contextPath}/images/GetIT_logo/logo.png">
 					</a>
 				</div>
 				<!-- 메뉴바 시작-->
@@ -249,7 +249,7 @@ function localStorageClear(){
 			<div class="flex-1-0-0 flex flex-jc-c flex-ai-c">
 				<div class="mobile-title">
 					<a href="../home/main" title="Home">
-						Get <span>IT</span>
+						<img src="${pageContext.request.contextPath}/images/GetIT_logo/logo.png">
 					</a>
 				</div>
 			</div>

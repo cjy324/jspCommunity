@@ -336,20 +336,17 @@ body{
 
 /* 타이틀 시작 */
 .title{
-  font-family: 'Noto Sans TC', sans-serif;
-  text-align:center;
-  font-size:1.8rem;
-  padding-top:30px;
-  padding-bottom:0px;
-  font-weight:bold;
   width:200px;
-  color: black;
   z-index:5000;
-
+  position:relative;
  
 }
-.title span{
-  color:#555;
+.title img{
+  position:absolute;
+  top:65%;
+  left:20%;
+  height:30px;
+  z-index:5000;
    
 }
 /* 타이틀 끝 */
@@ -469,16 +466,17 @@ body{
   border-bottom:1px solid gray;
 }
 .mobile-title{
-  font-family: 'Noto Sans TC', sans-serif;
-  text-align:center;
-  font-size:1.2rem;
-  font-weight:bold;
-  color: black;
+  position:relative;
   width:200px;
+  height:100%;
 }
 
-.mobile-title span{
-  color:#444;
+.mobile-title img{
+  position:absolute;
+  top:17%;
+  left:32%;
+  height:23px;
+  z-index:5000;
 }
 
 .mobile-top-bar_btn-toggle-side-bar {
@@ -3456,7 +3454,8 @@ body{
   font-size:1.2rem;
 }
 .title-down{
-  padding-top:40px
+  top:8%;
+  z-index:5000;
 }
 
 .search-bar-up{
