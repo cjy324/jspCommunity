@@ -2,7 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400&display=swap');
 
 /* 폰트 2 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@500&display=swap');
+@font-face {
+    font-family: 'TmoneyRoundWindRegular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 
 html{
@@ -161,18 +166,18 @@ appearance: none;
   text-decoration:underline;
 }
 
-@media ( max-width:720px ) {
-  .visible-md-up {
-    
-    display:none !important;
-  }
-}
-
 @media ( min-width:721px ) {
   .visible-sm-down {
     display:none !important;
   }
 }
+
+@media ( max-width:720px ) {
+  .visible-md-up {
+    display:none !important;
+  }
+}
+
 
 /* 커스텀 */
 :root {
@@ -618,7 +623,7 @@ body{
 .mobile-side-bar-button{
   display:inline-block;
   margin-top:10px;
-  font-size:1rem;
+  font-size:0.9rem;
   color:graytext;
   max-width:200px;
   margin:20px 10px;
@@ -1353,9 +1358,9 @@ body{
   top:50%;
   left:50%;
   transform:translateX(-50%) translateY(-50%);
-  border:3px solid white;
+  border:2px solid white;
   text-align:center;
-  width:150px;
+  width:110px;
   padding:8px 12px;
   background-color:rgba(0,0,0,0.22);
   border-radius:10px;
@@ -1368,7 +1373,7 @@ body{
 }
 
 .mobile-img-txt::before{
-  content:"GO to ";
+  content:"";
   
 }
 
@@ -1754,7 +1759,7 @@ body{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
-  font-size:1rem;
+  font-size:0.9rem;
   text-align:left;
   align-items:flex-start;
   padding-left:10px;
@@ -1797,7 +1802,7 @@ body{
 
 
 .mobile-article-list > .mobile-article-list__cell-body > * > div {
-  border-bottom:0.8px solid rgba(230, 230, 230, 1);
+  border-bottom:0.8px solid rgba(200, 200, 200, 1);
 }
 
 .mobile-article-list__cell-search{
@@ -2169,14 +2174,14 @@ body{
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow:hidden;
-  font-size:1rem;
+  font-size:0.9rem;
   text-align:left;
   align-items:flex-start;
   padding-left:10px;
 }
 
 .mobile-search-list > .mobile-search-list__cell-body > * > div {
-  border-bottom:0.8px solid rgba(230, 230, 230, 1);
+  border-bottom:0.8px solid rgba(200, 200, 200, 1);
 }
 
 
@@ -2367,12 +2372,11 @@ body{
 }
 .article-detail-cell__title-contents > *{
   padding:5px;
-  font-weight:bold;
-
 }
 .article-detail-cell__title-contents > *:first-child{
   text-align:right;
   width:40%;
+  margin-right:3px;
 }
 .article-detail-cell__title-contents form{
   width:100%;
@@ -2398,8 +2402,6 @@ body{
 	overflow:visible; 
 	cursor:pointer;
   margin-right:5px;
-  color:#4169E1;
-  font-weight:bold;
   
 }
 
@@ -2411,8 +2413,6 @@ body{
 	padding:0; 
 	overflow:visible; 
 	cursor:pointer;
-  color:#CC6666;
-  font-weight:bold;
 }
 
 
@@ -2839,7 +2839,7 @@ body{
 }
 
 .mobile-article-detail-cell__head-contents-box{
-  background-color:rgba(240, 240, 240, 0.3);
+  background-color:rgba(240, 240, 240, 0.5);
   padding:0 10px;
 }
 
@@ -2876,15 +2876,17 @@ body{
 
 .mobile-article-detail-cell__body-contents{
   padding-bottom:5px;
-  border-bottom:0.8px solid rgba(230, 230, 230, 1);
+  border-bottom:0.8px solid rgba(200, 200, 200, 1);
 
 }
 
 .mobile-article-detail-cell__body-contents > *{
   padding:5px;
   font-size:0.85rem;
-  font-weight:bold;
-  
+}
+
+.mobile-article-detail-cell__body-contents > *:first-child{
+  margin-right:5px;
 }
 
 .mobile-article-detail-cell-likesCount form {
@@ -2892,6 +2894,7 @@ body{
 }
 
 .mobile-article-detail-cell-likesCount form > *{
+  font-family: 'TmoneyRoundWindRegular';
   font-size:0.85rem; 
   width:100%;
   height:20px;
@@ -2901,19 +2904,15 @@ body{
   margin-right:8px;
 }
 
-
-
-
-
 .mobile-article-detail-cell__body{
-  border-top:0.8px solid rgba(230, 230, 230, 1);
+  border-top:0.8px solid rgba(200, 200, 200, 1);
   padding:30px;
   
 }
 
 
 .mobile-article-detail-cell__body .tui-editor-contents{
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'TmoneyRoundWindRegular';
   font-size:1rem;
   overflow:hidden;
   word-wrap:break-word;
@@ -2953,7 +2952,7 @@ body{
 }
 
 .mobile-reply-count-box{
-  border-top:1px solid rgba(230, 230, 230, 1);
+  border-top:1px solid rgba(200, 200, 200, 1);
   padding-top:15px;
   text-align:right;
   padding-right:20px;
@@ -3008,6 +3007,7 @@ body{
 }
 
 .mobile-reply-detail-cell-likesCount > *{
+  font-family: 'TmoneyRoundWindRegular';
   font-size:0.8rem;
   border: none;
   padding-top:10px;
@@ -3173,6 +3173,7 @@ body{
 }
 
 .mobile-reReply-detail-cell-likesCount > *{
+  font-family: 'TmoneyRoundWindRegular';
   font-size:0.8rem;
   border: none;
   padding-top:10px;
@@ -3463,3 +3464,9 @@ body{
 }
 /* 탑바 스크롤 애니메이션 끝 */
 
+@media ( max-width:720px ) {
+
+  .visible-sm-down {
+    font-family: 'TmoneyRoundWindRegular';
+  }
+}

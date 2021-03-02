@@ -221,13 +221,13 @@ function checkModify(replyModifyForm){
                 	<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
                     	</button>
                     </form>	
                     <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>
@@ -335,11 +335,11 @@ function checkModify(replyModifyForm){
 				<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
                     	</button>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>
@@ -446,11 +446,11 @@ function checkModify(replyModifyForm){
 				<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
                     	</button>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>
@@ -640,13 +640,13 @@ function checkModify(replyModifyForm){
             	<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${article.extra_likeOnlyPoint}</span>
                     	</button>
                     </form>
                     <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>
@@ -683,7 +683,7 @@ function checkModify(replyModifyForm){
                         <i class="far fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                     </button>
-                    </form>
+                  </form>
                   </c:if>
 
                   <c:if test="${article.extra.actorCanCancelDislike}">
@@ -694,7 +694,7 @@ function checkModify(replyModifyForm){
                         <i class="fas fa-thumbs-down"></i>
                         &nbsp;<span class="unLikesCount">${article.extra_dislikeOnlyPoint}</span>
                     </button>
-                    </form>
+                  </form>
                   </c:if>
 
             </div>
@@ -740,13 +740,13 @@ function checkModify(replyModifyForm){
 				<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${reply.extra_likeOnlyPoint}</span>
                     	</button>
                     </form>
                     <form>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${reply.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>
@@ -855,11 +855,11 @@ function checkModify(replyModifyForm){
 				<c:if test="${isLogined == false}">
                 	<form>
                 		<button class="addLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-up"></i>
+                        	<i class="far fa-thumbs-up"></i>
                         	&nbsp;<span class="likesCount">${reReply.extra_likeOnlyPoint}</span>
                     	</button>
                     	<button class="addUnLike" type="button" onclick="alert('로그인 후 이용해 주세요.')">
-                        	<i class="fas fa-thumbs-down"></i>
+                        	<i class="far fa-thumbs-down"></i>
                         	&nbsp;<span class="unLikesCount">${reReply.extra_dislikeOnlyPoint}</span>
                     	</button>
                     </form>

@@ -90,8 +90,7 @@
 <!-- 토스트 UI 에디터, 신택스 하이라이트 플러그인 추가 -->
 <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.js" defer></script>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/static/common.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/common.css" />
 <script src="${pageContext.request.contextPath}/static/common.js" defer></script>
 
 <%="<script>"%>
