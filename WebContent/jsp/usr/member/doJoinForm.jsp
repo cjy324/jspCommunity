@@ -217,21 +217,6 @@
       </div>
       <!-- 회원가입 페이지 끝 -->
     </section>
-    
-    <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 10 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6029045473"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-    
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
 
@@ -290,21 +275,7 @@
           <div class="mobile-join_cell__body">
             <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="'-' 생략하고 입력">
           </div>
-          
-          <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 10 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6029045473"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-          
+
           <div class="mobile-joinInput-cell flex flex-column ">
             <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
             <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 뒤로가기</button>

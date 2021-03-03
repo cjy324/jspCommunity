@@ -282,21 +282,6 @@ function checkModify(replyModifyForm){
               </div>
             </div>
           </div>
-          
-          <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형5 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="9218857194"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-      	  </div>
-
           <script type="text/x-template">
             ${articleBody}
 			</script>

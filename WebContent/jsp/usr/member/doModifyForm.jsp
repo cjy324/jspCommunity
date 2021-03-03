@@ -207,21 +207,6 @@
       </div>
       <!-- 회원정보 수정 페이지 끝 -->
     </section>
-    
-    <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 9 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6252406755"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-    
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
 
@@ -272,21 +257,6 @@
                 <input type="text" name="name" value="${loginedMember.name}">
               </div>
             </div>
-            
-            <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 9 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6252406755"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-            
 
             <div class="mobile-MyPage_cell__title">
               <span>닉네임</span>
@@ -322,22 +292,7 @@
                 <span>${loginedMember.regDate}</span>
               </div>
             </div>
-            
-            <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 10 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6029045473"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-            
-            
+
             <div class="mobile-section-MyPage-body__option flex flex-column">
               <button class="submitModifyBtn btn btn-go" type="submit" onclick="if(confirm('정말 변경하시겠습니까?') == false) {return false;}"><i class="fas fa-user-check"></i> 변경</button>
               <button class="cleModifyBtn btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 취소</button>

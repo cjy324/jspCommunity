@@ -84,21 +84,6 @@
       </div>
       <!-- 회원정보 페이지 끝 -->
     </section>
-    
-    <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 9 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6252406755"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-    
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
 
@@ -135,21 +120,6 @@
                 <span>${loginedMember.name}</span>
               </div>
             </div>
-            
-            <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 9 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6252406755"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-
             <div class="mobile-MyPage_cell__title">
               <span>닉네임</span>
               <div class="mobile-MyPage_cell__body">
@@ -183,22 +153,7 @@
                 <span>${loginedMember.regDate}</span>
               </div>
             </div>
-            
-            <div class="ad">
-      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- 수평 반응형 10 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7996879977557531"
-     data-ad-slot="6029045473"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-     </div>
-            
-            
+
             <div class="mobile-section-MyPage-body__option flex flex-column">
               <button class ="doModifyBtn btn btn-go" type="button"><a href="../member/doModifyForm"><i class="fas fa-user-cog"></i> 수정</a></button>
             </div>
