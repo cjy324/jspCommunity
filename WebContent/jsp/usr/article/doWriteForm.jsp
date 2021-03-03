@@ -71,6 +71,21 @@ function check(form){
                 <script type="text/x-template"></script>
                 <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
                 </div>
+                
+                <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 8 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="3815135040"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
+                
                 <div class="article-writeAndModify-cell__option flex flex-jc-fe visible-md-up">
                   <button class="btn btn-go" type="submit"><i class="fas fa-pen"></i> 등록</button>
                   <button class="btn btn-back" type="button" onclick="history.back();">

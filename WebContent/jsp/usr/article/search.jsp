@@ -97,6 +97,19 @@ function DoSearchForm_submit(form){
               <div>워치</div>
             </div>
           </div>
+          <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형3 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="6544608302"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
           <div class="search-totalCount">
             <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           </div>
@@ -132,6 +145,19 @@ function DoSearchForm_submit(form){
         </div>
       </div>
       <!-- 메인-리스트페이지 끝 -->
+      <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형4 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="8097347213"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
       <!-- 메인-리스트 하단 메뉴 시작 -->
       <div class="article-page-menu-section">
         <div class="article-page-menu">
@@ -203,6 +229,19 @@ function DoSearchForm_submit(form){
               <div>워치</div>
             </div>
           </div>
+          <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형3 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="6544608302"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
           <div class="mobile-search-totalCount">
             <span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           </div>
@@ -234,6 +273,19 @@ function DoSearchForm_submit(form){
         </div>
       </div>
       <!-- 모바일 메인-검색 리스트페이지 끝 -->
+      <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형4 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="8097347213"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
       <!-- 모바일 메인-검색 리스트 하단 메뉴 시작 -->
       <div class="mobile-article-page-menu-section">
         <div class="mobile-article-page-menu">

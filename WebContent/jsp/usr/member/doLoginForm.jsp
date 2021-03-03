@@ -86,9 +86,24 @@
       </div>
       <!-- 메인-로그인 페이지 끝 -->
     </section>
+    
+    <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 8 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="3815135040"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+     </div>
+      	  
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
-  
+
   
   <!-- 모바일-메인 컨텐츠 박스 시작 -->
   <main class="main-box flex-grow-1 visible-sm-down">
@@ -128,6 +143,19 @@
         </form>
       </div>
       <!-- 모바일-로그인 페이지 끝 -->
+      <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 8 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="3815135040"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
     </section>
   </main>
   <!-- 모바일-메인 컨텐츠 박스 끝 -->

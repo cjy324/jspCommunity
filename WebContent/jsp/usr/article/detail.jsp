@@ -282,6 +282,20 @@ function checkModify(replyModifyForm){
               </div>
             </div>
           </div>
+          
+          <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형5 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="9218857194"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
 
           <script type="text/x-template">
             ${articleBody}
@@ -300,9 +314,20 @@ function checkModify(replyModifyForm){
           </div>
         </div>
       </div>
-    </section>
-    <!-- 메인-상세페이지 끝 -->
-
+		
+	<div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 6 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="5852951509"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>	
     <!-- 댓글창 시작 -->
     <c:if test="${isLogined}">
       <div class="reply-write-box">
@@ -559,8 +584,23 @@ function checkModify(replyModifyForm){
 	
         </ul>
       </div>
-
       <!-- 댓글창 끝 -->
+      </section>
+    <!-- 메인-상세페이지 끝 -->
+
+	<div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 7 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="1751529743"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
 
       <!-- 메인-상세 하단 메뉴 시작 -->
       <section class="section-3 con-min-width">
@@ -700,6 +740,21 @@ function checkModify(replyModifyForm){
             </div>
           </div>
         </div>
+        
+        <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형5 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="9218857194"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
+        
         <div class="mobile-article-detail-cell__option flex">
           <c:if test="${loginedMemberId == article.extra_memberId}">
             <button class="btn btn-modify" type="button"><a style="text-decoration:none;" href="doModifyForm?id=${article.id}"><i class="far fa-edit"></i> 수정</a></button>
@@ -973,6 +1028,20 @@ function checkModify(replyModifyForm){
         <!-- 모바일 댓글창 끝 -->
     </section>
     <!-- 모바일 메인-상세페이지 끝 -->
+    
+    <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 7 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="1751529743"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
 
     <!-- 모바일 메인-상세 하단 메뉴 시작 -->
     <section class="mobile-section-3 con-min-width">

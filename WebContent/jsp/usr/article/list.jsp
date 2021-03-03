@@ -82,6 +82,12 @@ function DoSearchForm_submit(form){
             	<span><i class="far fa-copy"></i> Total : ${totalCount}</span>
           	</div>
           </nav>
+          <div class="ad">
+          	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 수평 반응형1 -->
+				<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7996879977557531" data-ad-slot="6812185708" data-ad-format="auto" data-full-width-responsive="true"></ins>
+		  	<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
           <header>
             <div class="article-list__cell-head">
               <div class="article-list__cell-id">No.</div>
@@ -139,6 +145,17 @@ function DoSearchForm_submit(form){
         </div>
       </div>
       <!-- 메인-리스트페이지 끝 -->
+      <div class="ad">
+      	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- 수평 반응형2 -->
+		<ins class="adsbygoogle"
+    		 style="display:block"
+    		 data-ad-client="ca-pub-7996879977557531"
+     		data-ad-slot="2278060237"
+    		 data-ad-format="auto"
+    		 data-full-width-responsive="true"></ins>
+		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
       <!-- 메인-리스트 하단 메뉴 시작 -->
       <div class="article-page-menu-section">
         <div class="article-page-menu">
@@ -217,6 +234,12 @@ function DoSearchForm_submit(form){
           <c:if test="${sessionScope.loginedMemberId > 0}">
           	<button class="m-btn btn-go" type="button"><a href="doWriteForm?boardId=${param.boardId}"><i class="fas fa-pen"></i> 글쓰기</a></button>
           </c:if>
+          <div class="ad">
+          	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 수평 반응형1 -->
+				<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7996879977557531" data-ad-slot="6812185708" data-ad-format="auto" data-full-width-responsive="true"></ins>
+		  	<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          </div>
           <header>
             <div class="mobile-article-list__cell-head">
               <div class="mobile-article-list__cell-id">No.</div>
@@ -245,6 +268,17 @@ function DoSearchForm_submit(form){
         </div>
       </div>
       <!-- 모바일 메인-리스트페이지 끝 -->
+      <div class="ad">
+      	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- 수평 반응형2 -->
+		<ins class="adsbygoogle"
+    		 style="display:block"
+    		 data-ad-client="ca-pub-7996879977557531"
+     		data-ad-slot="2278060237"
+    		 data-ad-format="auto"
+    		 data-full-width-responsive="true"></ins>
+		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
       <!-- 모바일 메인-리스트 하단 메뉴 시작 -->
       <div class="mobile-article-page-menu-section">
         <div class="mobile-article-page-menu">

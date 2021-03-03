@@ -72,6 +72,21 @@ function check(form){
                 <script type="text/x-template">${articleBody}</script>
                 <div class="article-writeAndModify-cell__body toast-ui-editor height-70p">
                 </div>
+                
+                <div class="ad">
+      		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 수평 반응형 8 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-7996879977557531"
+     data-ad-slot="3815135040"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      	  </div>
+                
                 <div class="article-writeAndModify-cell__option flex flex-jc-fe visible-md-up">
                   <button class="btn btn-go" type="submit" onclick="if(confirm('해당 내용으로 수정하시겠습니까?') == false) {return false;}"><i class="far fa-edit"></i> 수정</button>
                   <button class="btn btn-back" type="button" onclick="history.back();">
@@ -89,7 +104,7 @@ function check(form){
           </div>
         </div>
       </section>
-      <!-- 메인-글쓰기,수정페이지 시작 -->
+      <!-- 메인-글쓰기,수정페이지 끝 -->
     </section>
   </main>
   <!-- 메인 컨텐츠 박스 끝 -->
