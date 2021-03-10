@@ -16,28 +16,17 @@ CREATE TABLE `member` (
     authLevel TINYINT(1) UNSIGNED NOT NULL DEFAULT 2 COMMENT '0=탈퇴/1=로그인정지/2=일반/3=인증된/4=관리자'
 );
 
-# 회원1 생성
+# 관리자 계정 생성
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-`name` = "관리자",
+`name` = "ADMIN",
 `nickname` = "관리자",
 `email` = "juy32400@gmail.com",
-cellphoneNo = "01012341234",
+cellphoneNo = "01041308397",
 loginId = "admin",
-loginPw = "admin",
+loginPw = "Admin8397",
 authLevel = 4;
-
-# 회원2 생성
-INSERT INTO `member`
-SET regDate = NOW(),
-updateDate = NOW(),
-`name` = "임꺽정",
-`nickname` = "산적",
-`email` = "juy32400@gmail.com",
-cellphoneNo = "01043244444",
-loginId = "user1",
-loginPw = "user1";
 
 # 회원 비밀번호 암호화 수행
 UPDATE `member`
@@ -67,7 +56,7 @@ updateDate = NOW(),
 `code` = 'news',
 `name` = 'NEWS';
 
-# 자유게시판 생성
+# Tip게시판 생성
 INSERT INTO board
 SET regDate = NOW(),
 updateDate = NOW(),
@@ -94,57 +83,24 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 boardId = 1,
-title = '제목1',
-`body` = '내용1';
+title = 'GetIT 공지사항 게시판입니다.',
+`body` = '안녕하세요. 이곳은 GetIT 공지사항 게시판입니다. 이곳에선 GetIT사이트 관련 알림사항들을 전달드립니다.';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 2,
+memberId = 1,
 boardId = 2,
-title = '제목2',
-`body` = '내용2';
+title = 'GetIT NEWS 게시판입니다.',
+`body` = '안녕하세요. 이곳은 GetIT NEWS 게시판입니다. 이곳에선 아이폰, 갤럭시, 아이패드, 갤럭시탭 등 관련 최신 소식들을 공유하는 공간입니다.';
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
-memberId = 2,
+memberId = 1,
 boardId = 3,
-title = '제목3',
-`body` = '내용3';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-boardId = 1,
-title = '제목4',
-`body` = '내용4';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-boardId = 3,
-title = '제목5',
-`body` = '내용5';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-boardId = 1,
-title = '제목5',
-`body` = '내용5';
-
-INSERT INTO article
-SET regDate = NOW(),
-updateDate = NOW(),
-memberId = 2,
-boardId = 3,
-title = '제목5',
-`body` = '내용5';
-
+title = 'GetIT TIP`s 게시판입니다.',
+`body` = '안녕하세요. 이곳은 GetIT TIP`s 게시판입니다. 이곳에선 아이폰, 갤럭시, 아이패드, 갤럭시탭 등과 관련된 유용한 팁들을 자유롭게 공유하는 공간입니다.';
 
 SELECT * FROM article;
 SELECT * FROM `member`;
