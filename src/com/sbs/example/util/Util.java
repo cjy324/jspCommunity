@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -165,7 +167,7 @@ public class Util {
 		return false;
 	}
 
-	//URL 인코딩 유틸
+	// URL 인코딩 유틸
 	public static String getUrlEncoded(String url) {
 		try {
 			return URLEncoder.encode(url, "UTF-8");
@@ -173,9 +175,8 @@ public class Util {
 			return url;
 		}
 	}
-	
-	
-	public static String getNewUriRemoved(String url, String paramName) {
+
+	public static String getNewUrlRemoved(String url, String paramName) {
 		String deleteStrStarts = paramName + "=";
 		int delStartPos = url.indexOf(deleteStrStarts);
 
@@ -202,7 +203,7 @@ public class Util {
 	}
 
 	public static String getNewUrl(String url, String paramName, String paramValue) {
-		url = getNewUriRemoved(url, paramName);
+		url = getNewUrlRemoved(url, paramName);
 
 		if (url.contains("?")) {
 			url += "&" + paramName + "=" + paramValue;
@@ -232,5 +233,38 @@ public class Util {
 		}
 
 		return param;
+	}
+
+	// 오늘부터 90일 계산 유틸
+	public static String getPwChangeEndDate() {
+		// 날짜 포멧 셋팅
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		// Calendar생성
+		Calendar cal = Calendar.getInstance();
+		// 오늘 날짜
+		Date date = new Date();
+		// 오늘 날짜로 셋팅
+		cal.setTime(date);
+		// 오늘 날짜에 기간을 더한다(90일)
+		cal.add(cal.DATE, 90);
+		// cal에 셋팅한 값을 지정한 형식으로 가져온다
+		String endDate = sdf.format(cal.getTime());
+
+		return endDate;
+	}
+
+	// 오늘 날짜 계산 유틸
+	public static String getTodayDate() {
+		// 날짜 포멧 셋팅
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		// Calendar생성
+		Calendar cal = Calendar.getInstance();
+		// 오늘 날짜 가져오기
+		Date date = new Date();
+		// 오늘 날짜 셋팅
+		cal.setTime(date);
+		String todayDate = sdf.format(cal.getTime());
+
+		return todayDate;
 	}
 }

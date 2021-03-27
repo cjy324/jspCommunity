@@ -206,7 +206,7 @@
               <span>연락처</span>
             </div>
             <div class="join_cell__body">
-              <input type="tel" name="cellPhoneNo" maxlength="50" placeholder="'-' 생략하고 입력">
+              <input type="tel" name="cellPhoneNo" maxlength="11" placeholder="'-' 생략하고 입력">
             </div>
             <div class="joinInput-cell">
               <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>

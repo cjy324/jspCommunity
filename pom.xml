@@ -66,7 +66,7 @@
                 <configuration>
                     <server>getit__manager_text</server>
                     <url>http://getit.devj.me:8080/manager/text</url>
-                    <path>/</path>
+                    <path>/ROOT</path>
                 </configuration>
             </plugin>
 			

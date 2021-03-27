@@ -220,11 +220,6 @@ function localStorageClear(){
                 <span>SAMSUNG</span>
               </a>
             </li>
-            <li title="LG">
-              <a href="https://to2.kr/b7E" target="_blank" class="block">
-                <span>LG</span>
-              </a>
-            </li>
           </ul>
         </li>
           </ul>
@@ -302,11 +297,6 @@ function localStorageClear(){
             <li title="SAMSUNG">
               <a href="https://www.samsung.com/sec/" target="_blank" class="block">
                 <span>SAMSUNG</span>
-              </a>
-            </li>
-            <li title="LG">
-              <a href="https://to2.kr/b7E" target="_blank" class="block">
-                <span>LG</span>
               </a>
             </li>
           </ul>

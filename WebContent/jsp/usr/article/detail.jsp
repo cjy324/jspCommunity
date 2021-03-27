@@ -132,6 +132,7 @@ function cancelUnLike_submit(form) {
 
 
 <script>
+// 입력값 공백 검사
 let replyForm_submited = false;
 function checkWrite(form){
 	if(replyForm_submited){

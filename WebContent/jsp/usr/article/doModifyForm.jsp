@@ -6,6 +6,7 @@
 <%@ include file="../../part/head.jspf" %>
 
 <script>
+//입력값 공백 검사
 let DoModifyForm_submited = false;
 
 function check(form){
