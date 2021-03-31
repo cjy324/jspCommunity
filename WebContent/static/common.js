@@ -241,16 +241,13 @@ Pages__init();
 
 
 
-/* TOAST-UI 시작 */
-
-
+/* TOAST-UI EDITOR 게시물 BODY에 적용 시작 */
 function ArticleDetail__Body__init() {
 	if (toastui === undefined) {
 		return;
 	}
 
-/* 유튜브 함수 시작 */
-
+	/* 유튜브 함수 시작 */
 	//유튜브 영상임을 감지하고 공간을 형성하는 함수
 	function youtubePlugin() {
 		toastui.Editor.codeBlockManager.setReplacer('youtube', youtubeId => {
@@ -276,74 +273,68 @@ function ArticleDetail__Body__init() {
 	
 	
 	/* codepen 함수 시작 */
-function codepenPlugin() {
-  toastui.Editor.codeBlockManager.setReplacer('codepen', url => {
-    const wrapperId = `yt${Math.random().toString(36).substr(2, 10)}`;
+	function codepenPlugin() {
+  		toastui.Editor.codeBlockManager.setReplacer('codepen', url => {
+    	const wrapperId = `yt${Math.random().toString(36).substr(2, 10)}`;
 
-    // Avoid sanitizing iframe tag
-    setTimeout(renderCodepen.bind(null, wrapperId, url), 0);
+    	// Avoid sanitizing iframe tag
+    	setTimeout(renderCodepen.bind(null, wrapperId, url), 0);
 
-    return `<div id="${wrapperId}"></div>`;
-  });
-}
+    	return `<div id="${wrapperId}"></div>`;
+  		});
+	}
 
-function renderCodepen(wrapperId, url) {
-  const el = document.querySelector(`#${wrapperId}`);
+	function renderCodepen(wrapperId, url) {
+  		const el = document.querySelector(`#${wrapperId}`);
   
-  var urlParams = new URLSearchParams(url.split('?')[1]);
-  var height = urlParams.get('height');
+  		var urlParams = new URLSearchParams(url.split('?')[1]);
+  		var height = urlParams.get('height');
 
-  el.innerHTML = `<div class="toast-ui-codepen-plugin-wrap"><iframe height="${height}" scrolling="no" src="${url}" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe></div>`;
-}
-/* codepen 함수 끝 */
+  		el.innerHTML = `<div class="toast-ui-codepen-plugin-wrap"><iframe height="${height}" scrolling="no" src="${url}" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true"></iframe></div>`;
+	}
+	/* codepen 함수 끝 */
 	
 	
-/* toastui-editor 함수 시작 */
-function Editor__init() {
-  $('.toast-ui-editor').each(function(index, node) {
-    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
+	/* toastui-editor 함수 시작 */
+	function Editor__init() {
+  		$('.toast-ui-editor').each(function(index, node) {
+    	var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
 
-    var editor = new toastui.Editor({
-      el: node,
-      previewStyle: 'tab',
-      initialValue: initialValue,
-      height:600,
-      plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
-    });
+    	var editor = new toastui.Editor({
+      		el: node,
+      		previewStyle: 'tab',
+      		initialValue: initialValue,
+      		height:600,
+      		plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+    	});
 
-	$(node).data('data-toast-editor', editor);
-  });
-}
+			$(node).data('data-toast-editor', editor);
+  		});
+	}
 
-/* toastui-editor 함수 끝 */
+	/* toastui-editor 함수 끝 */
 
 
-/* toastui-viewer 함수 시작 */
-function EditorViewer__init() {
+	/* toastui-viewer 함수 시작 */
+	function EditorViewer__init() {
 	  $('.toast-ui-viewer').each(function(index, node) {
 	    var initialValue = $(node).prev().html().trim().replace(/t-script/gi, 'script');
-
-//	var body = document.querySelector('.article-detail-cell__body > div > span');
-//	var initValue = body.innerHTML.trim();
-
 	
-	var viewer = new toastui.Editor.factory({
-		el: node,
-		initialValue: initialValue,
-		viewer: true,
-		plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
-	});
-});
-}
+		var viewer = new toastui.Editor.factory({
+			el: node,
+			initialValue: initialValue,
+			viewer: true,
+			plugins: [toastui.Editor.plugin.codeSyntaxHighlight, youtubePlugin, codepenPlugin]
+			});
+		});
+	}
 	EditorViewer__init();
 	Editor__init();
 }
-
+/* toastui-viewer 함수 끝 */
 ArticleDetail__Body__init();
 
-/* toastui-viewer 함수 끝 */
-
-/* TOAST-UI 끝 */
+/* TOAST-UI EDITOR 게시물 BODY에 적용 끝 */
 
 
 /* 댓글 수정 버튼 시작 */

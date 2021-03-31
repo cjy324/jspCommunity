@@ -1,8 +1,5 @@
 package com.cjy.jspCommunity.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -380,7 +377,6 @@ public class UsrMemberController extends Controller {
 		if (Util.isEmpty(loginId)) {
 			return msgAndBack(request, "아이디를 입력하세요.");
 		}
-
 		String email = request.getParameter("email");
 		if (Util.isEmpty(email)) {
 			return msgAndBack(request, "email을 입력하세요.");
@@ -392,7 +388,6 @@ public class UsrMemberController extends Controller {
 		if (member == null) {
 			return msgAndBack(request, "일치하는 회원이 존재하지 않습니다.");
 		}
-
 		// 해당 email이 일치하는지 확인
 		if (member.getEmail().equals(email) == false) {
 			return msgAndBack(request, "이메일주소가 일치하지 않습니다.");

@@ -25,7 +25,6 @@ public class UsrArticleController extends Controller {
 
 	// 리스트 가져오기
 	public String showList(HttpServletRequest request, HttpServletResponse response) {
-
 		// 게시판 번호 확인
 		int boardId = Util.getAsInt(request.getParameter("boardId"), 0);
 		if (boardId == 0) {
@@ -37,7 +36,6 @@ public class UsrArticleController extends Controller {
 
 		// 총 게시물 수 카운트
 		int totalCount = articleService.getArticlesCountByBoardId(boardId, searchKeywordType, searchKeyword);
-
 		// 페이징
 		int articlesInAPage = 20; // 한 페이지에 들어갈 article 수 설정
 		int page = Util.getAsInt(request.getParameter("page"), 1); // pageNum이 null이면 1로 변환, 정수형(int)이 아니면 정수형으로 변환
@@ -53,7 +51,6 @@ public class UsrArticleController extends Controller {
 		/* 총 필요 페이지 수까지 버튼 만들기 시작 */
 		// 하단 페이지 이동 버튼 메뉴 만들기
 		// 1. pageMenuBox내 시작 번호, 끝 번호 설정
-
 		int previousPageNumCount = (page - 1) / pageMenuBoxSize; // 현재 페이지가 2이면 previousPageNumCount = 1/5
 		int boxStartNum = pageMenuBoxSize * previousPageNumCount + 1; // 총 페이지 수 30이면 1~5 6~10 11~15
 		int boxEndNum = pageMenuBoxSize + boxStartNum - 1;
@@ -61,7 +58,6 @@ public class UsrArticleController extends Controller {
 		if (boxEndNum > totalPages) {
 			boxEndNum = totalPages;
 		}
-
 		// 2. '이전','다음' 버튼 페이지 계산
 		int boxStartNumBeforePage = boxStartNum - 1;
 		if (boxStartNumBeforePage < 1) {
@@ -71,7 +67,6 @@ public class UsrArticleController extends Controller {
 		if (boxEndNumAfterPage > totalPages) {
 			boxEndNumAfterPage = totalPages;
 		}
-
 		// 3. '이전','다음' 버튼 필요 유무 판별
 		boolean boxStartNumBeforePageBtnNeedToShow = boxStartNumBeforePage != boxStartNum;
 		boolean boxEndNumAfterPageBtnNeedToShow = boxEndNumAfterPage != boxEndNum;
@@ -130,7 +125,6 @@ public class UsrArticleController extends Controller {
 				break;
 			}
 		}
-		;
 
 		int x = currentArticleIndex;
 
@@ -230,32 +224,31 @@ public class UsrArticleController extends Controller {
 	public String doWrite(HttpServletRequest request, HttpServletResponse response) {
 
 		int memberId = (int) request.getAttribute("loginedMemberId");
-
+		
 		// 게시판 번호가 입력됐는지 확인
 		int boardId = Util.getAsInt(request.getParameter("boardId"), 0);
 		if (boardId == 0) {
 			return msgAndBack(request, "게시판 번호를 입력하세요.");
 		}
-
 		// 해당 게시판이 존재하는지 확인
 		List<Article> articles = articleService.getArticlesForPrintByBoardId(boardId);
 
 		if (articles.size() <= 0) {
 			return msgAndBack(request, boardId + "번 게시판은 존재하지 않습니다. 게시판 번호를 확인하세요.");
 		}
-
+		
 		// 게시물 제목이 입력됐는지 확인
 		String title = request.getParameter("title");
 		if (Util.isEmpty(title)) {
 			return msgAndBack(request, "제목을 입력하세요.");
 		}
-
+		
 		// 게시물 내용이 입력됐는지 확인
 		String body = request.getParameter("body");
 		if (Util.isEmpty(body)) {
 			return msgAndBack(request, "내용을 입력하세요.");
 		}
-
+		
 		// 게시물 생성
 		int id = articleService.add(boardId, title, body, memberId);
 
@@ -375,26 +368,23 @@ public class UsrArticleController extends Controller {
 			relTypeCode = "article";
 			relId = articleId;
 		}
-
 		// 댓글 번호가 입력됐는지 확인
 		int originReplyId = Util.getAsInt(request.getParameter("replyId"), 0);
 		if (originReplyId != 0) {
 			relTypeCode = "reply";
 			relId = originReplyId;
 		}
-
 		// 회원 아이디 확인
 		int memberId = Util.getAsInt(request.getParameter("memberId"), 0);
 		if (memberId == 0) {
 			return msgAndBack(request, "회원 아이디를 입력하세요.");
 		}
-
 		// 댓글이 입력됐는지 확인
 		String replyBody = request.getParameter("replyBody");
 		if (Util.isEmpty(replyBody)) {
 			return msgAndBack(request, "내용을 입력하세요.");
 		}
-
+		
 		// 댓글 등록
 		int replyId = articleService.addReply(relId, memberId, relTypeCode, replyBody);
 
@@ -412,7 +402,6 @@ public class UsrArticleController extends Controller {
 		String redirectUrl = request.getParameter("redirectUrl");
 		redirectUrl = redirectUrl.replace("[NEW_REPLY_ID]", replyId + "");
 		return msgAndReplaceUrl(request, replyId + "번 댓글이 등록되었습니다.", redirectUrl);
-
 	}
 
 	// 댓글 수정
