@@ -12,6 +12,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -267,4 +268,24 @@ public class Util {
 
 		return todayDate;
 	}
+
+	// 암호 랜덤 생성
+	public static String getUUIDStr() {
+		return UUID.randomUUID().toString();
+	}
+
+	// 초단위인 토큰 유효기간을 날짜단위로 환산하는 유틸
+	public static String getTokenExpiresInToDateTime(long originToken_expires_in) {
+		// 현재 시간 초단위로 가져오기
+		long currentTimeMillis = System.currentTimeMillis();
+		// 현재 시간에 만료기간 더하기
+		originToken_expires_in = currentTimeMillis + (originToken_expires_in * 1000);
+
+		// 다시 날짜 단위로 환산
+		SimpleDateFormat simpl = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String token_expires_in = simpl.format(originToken_expires_in);
+
+		return token_expires_in;
+	}
+
 }

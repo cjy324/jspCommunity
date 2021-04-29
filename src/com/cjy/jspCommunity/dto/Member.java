@@ -18,6 +18,9 @@ public class Member {
 		this.email = (String) memberMap.get("email");
 		this.cellphoneNo = (String) memberMap.get("cellphoneNo");
 		this.authLevel = (int) memberMap.get("authLevel");
+		
+		this.loginProviderTypeCode = (String) memberMap.get("loginProviderTypeCode");
+		this.onLoginProviderMemberId = (String) memberMap.get("onLoginProviderMemberId");
 
 	}
 
@@ -31,5 +34,7 @@ public class Member {
 	private String email;
 	private String cellphoneNo;
 	private int authLevel;
+	private String loginProviderTypeCode;  //일반 로그인 common, 카카오 로그인 kakaoRest
+	private String onLoginProviderMemberId;
 
 }

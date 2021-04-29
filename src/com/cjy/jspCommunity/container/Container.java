@@ -12,6 +12,7 @@ import com.cjy.jspCommunity.dao.MemberDao;
 import com.cjy.jspCommunity.service.ArticleService;
 import com.cjy.jspCommunity.service.AttrService;
 import com.cjy.jspCommunity.service.EmailService;
+import com.cjy.jspCommunity.service.KakaoService;
 import com.cjy.jspCommunity.service.LikeService;
 import com.cjy.jspCommunity.service.MemberService;
 
@@ -23,6 +24,7 @@ public class Container {
 	public static AdmMemberController admMembercontroller;
 	public static UsrArticleController articleController;
 	public static MemberService memberService;
+	public static KakaoService kakaoService;
 	public static MemberDao memberDao;
 	public static UsrHomeController homeController;
 	public static EmailService emailService;
@@ -45,6 +47,7 @@ public class Container {
 		likeService = new LikeService();
 		emailService = new EmailService();
 		memberService = new MemberService();
+		kakaoService = new KakaoService();
 		articleService = new ArticleService();
 		
 		usrLikeController = new UsrLikeController();

@@ -12,15 +12,18 @@ import com.cjy.jspCommunity.App;
 import com.cjy.jspCommunity.container.Container;
 import com.cjy.jspCommunity.dto.Member;
 import com.cjy.jspCommunity.dto.ResultData;
+import com.cjy.jspCommunity.service.KakaoService;
 import com.cjy.jspCommunity.service.MemberService;
 import com.sbs.example.util.Util;
 
 public class UsrMemberController extends Controller {
 
 	private MemberService memberService;
+	private KakaoService kakaoService;
 
 	public UsrMemberController() {
 		memberService = Container.memberService;
+		kakaoService = Container.kakaoService;
 	}
 
 	// 회원가입 폼
@@ -319,19 +322,23 @@ public class UsrMemberController extends Controller {
 		String modifiedLoginPw = member.getLoginPw();
 
 		// 임시패스워드 사용중인 회원이 비밀번호를 수정했으면 attr정보 삭제
-		if (loginPw != null && isUsingTempPassword && loginPw != modifiedLoginPw) {
-			Container.attrService.remove("member__" + member.getId() + "__extra__isUsingTempPassword");
+		if (!member.getLoginId().contains("kakaoRest")) {
+			if (loginPw != null && isUsingTempPassword && loginPw != modifiedLoginPw) {
+				Container.attrService.remove("member__" + member.getId() + "__extra__isUsingTempPassword");
+			}
 		}
 
 		/* 비밀번호 변경 시 변경기간 재설정 시작 */
-		if (loginPw != null && loginPw != modifiedLoginPw) {
+		if (!member.getLoginId().contains("kakaoRest")) {
+			if (loginPw != null && loginPw != modifiedLoginPw) {
 
-			String newEndDate = Util.getPwChangeEndDate();
+				String newEndDate = Util.getPwChangeEndDate();
 
-			// attr에서 기존 기록 삭제 신규 기간 저장
-			Container.attrService.remove("member__" + member.getId() + "__extra__isPwChangeDateLimit");
-			Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", newEndDate,
-					null);
+				// attr에서 기존 기록 삭제 신규 기간 저장
+				Container.attrService.remove("member__" + member.getId() + "__extra__isPwChangeDateLimit");
+				Container.attrService.setValue("member__" + member.getId() + "__extra__isPwChangeDateLimit", newEndDate,
+						null);
+			}
 		}
 		/* 비밀번호 변경 시 변경기간 재설정 끝 */
 
@@ -403,6 +410,66 @@ public class UsrMemberController extends Controller {
 
 		// 임시패스워드 발급 알림창 보여주고 메인화면으로 이동
 		return msgAndReplaceUrl(request, sendTempLoginPwToEmailRs.getMsg(), "../home/main");
+	}
+
+	// 카카오 로그인
+	public String doKakaoLogin(HttpServletRequest request, HttpServletResponse response) {
+		// 1.인증코드 받기
+		String code = request.getParameter("code");
+		// 2.인증된 코드로 사용자토큰 받기
+		Map<String, Object> tokensInfo = kakaoService.getAccessToken(code);
+		String access_Token = (String) tokensInfo.get("access_Token");
+		// 3.사용자토큰으로 로그인한 유저의 정보 받아오기
+		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+
+		String loginProviderTypeCode = "kakaoRest";
+		String onLoginProviderMemberId = (String) userInfo.get("kakaoId");
+
+		// DB에서 카카오 로그인한 회원의 정보 가져오기(조회하기)
+		Member member = memberService.getMemberByOnLoginProviderMemberId(loginProviderTypeCode,
+				onLoginProviderMemberId);
+
+		Map<String, Object> kakaoUser = new HashMap<>();
+		kakaoUser.put("nickname", userInfo.get("nickname"));
+		if (!userInfo.get("email").equals("이메일 동의 항목에 사용자 동의 필요")) {
+			kakaoUser.put("email", userInfo.get("email"));
+		}
+		kakaoUser.put("loginProviderTypeCode", loginProviderTypeCode);
+		kakaoUser.put("onLoginProviderMemberId", onLoginProviderMemberId);
+
+		int memberId = 0;
+		// 만약, 기존 회원정보 있으면
+		if (member != null) {
+			// 카카오 유저정보로 기존 회원정보 업데이트
+			memberId = member.getId();
+			kakaoUser.put("id", memberId);
+			kakaoUser.put("nickname", member.getNickname());
+			memberService.modify(kakaoUser);
+		} else {
+			// 만약, 기존 회원정보 없으면 카카오계정으로 회원가입 실시
+			memberId = memberService.joinByKakao(kakaoUser);
+		}
+
+		HttpSession session = request.getSession();
+		session.setAttribute("loginedMemberId", memberId);
+
+		// 로그인 알림창 보여주고 화면으로 이동
+		String replaceUrl = "../home/main";
+
+		if (Util.isEmpty(request.getParameter("nextUrlAfterLogin")) == false) {
+			replaceUrl = request.getParameter("nextUrlAfterLogin");
+		}
+
+		if (Util.isEmpty(request.getParameter("beforeUrl")) == false) {
+			replaceUrl = request.getParameter("beforeUrl");
+		}
+		
+		String nickname = (String) userInfo.get("nickname");
+		if(member != null) {
+			nickname = member.getNickname();
+		}
+
+		return msgAndReplaceUrl(request, nickname + ", 님 반갑습니다.", replaceUrl);
 	}
 
 }

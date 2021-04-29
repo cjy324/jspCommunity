@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="GetIT | Login" />
+<c:set var="REST_ID" value="1b006c31c8a811b93a7505373a5e6b1b" />
+<c:set var="Redirect_URI" value="http://localhost:8083/jspCommunity/usr/member/doKakaoLogin" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
@@ -58,7 +60,7 @@
           <input type="hidden" name="loginPwReal">
           <input type="hidden" name="beforeUrl" value="${param.beforeUrl}">
           <div class="login-title">
-           LOGIN
+          	<img style="height: 38px" src="${pageContext.request.contextPath}/images/GetIT_logo/logo.png">
           </div>
           <div class="login_cell__title">
             <span>아이디</span>
@@ -73,16 +75,24 @@
             <input type="password" name="loginPw" maxlength="50" placeholder="Password">
           </div>
           <div class="loginInput_cell">
-            <div>
-            <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
-            <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> Back</button>
+            <div>   
+             <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+             <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> Back</button>
             </div>
             <div>
-            <a href="../member/doFindLoginIdForm">ID 찾기</a>
+             <a href="../member/doFindLoginIdForm">ID 찾기</a>
            / <a href="../member/doFindLoginPwForm">PW 찾기</a>
-              </div>
+           	 <!-- 카카오 로그인 -->
+			 <a class="block" style="margin-top: 12px" href="https://kauth.kakao.com/oauth/authorize
+				?client_id=${REST_ID}
+				&redirect_uri=${Redirect_URI}
+				&response_type=code">
+				<img style="" src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" alt="" />
+			 </a>
             </div>
-        </form>
+            
+          </div>
+        </form>   
       </div>
       <!-- 메인-로그인 페이지 끝 -->
     </section> 
@@ -101,7 +111,7 @@
           <input type="hidden" name="loginPwReal">
           <input type="hidden" name="beforeUrl" value="${param.beforeUrl}">
           <div class="mobile-login-title">
-           LOGIN
+           <img style="height: 32px" src="${pageContext.request.contextPath}/images/GetIT_logo/logo.png">
           </div>
           <div class="mobile-login_cell__title">
             <span>아이디</span>
@@ -123,6 +133,13 @@
             <div>
             <a href="../member/doFindLoginIdForm">ID 찾기</a>
            / <a href="../member/doFindLoginPwForm">PW 찾기</a>
+           <!-- 카카오 로그인 -->
+			  <a class="block" style="margin-top: 12px; width:100%; text-align:center;" href="https://kauth.kakao.com/oauth/authorize
+				?client_id=${REST_ID}
+				&redirect_uri=${Redirect_URI}
+				&response_type=code">
+				<img style="" src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="" />
+			  </a>
               </div>
             </div>
         </form>

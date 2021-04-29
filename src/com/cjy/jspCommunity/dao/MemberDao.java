@@ -45,6 +45,13 @@ public class MemberDao {
 		sql.append("nickname = ?,", joinArg.get("nickname"));
 		sql.append("email = ?,", joinArg.get("email"));
 		sql.append("cellPhoneNo = ?", joinArg.get("cellPhoneNo"));
+		if(joinArg.get("loginProviderTypeCode") != null) {
+			sql.append(", loginProviderTypeCode = ?", joinArg.get("loginProviderTypeCode"));
+		}
+		if(joinArg.get("onLoginProviderMemberId") != null) {
+			sql.append(", onLoginProviderMemberId = ?", joinArg.get("onLoginProviderMemberId"));
+		}
+		
 
 		return MysqlUtil.insert(sql);
 	}
@@ -168,6 +175,23 @@ public class MemberDao {
 
 		MysqlUtil.update(sql);
 
+	}
+
+	// 카카오 로그인 회원 정보 가져오기
+	public Member getMemberByOnLoginProviderMemberId(String loginProviderTypeCode, String onLoginProviderMemberId) {
+		SecSql sql = new SecSql();
+
+		sql.append("SELECT * FROM member");
+		sql.append("WHERE loginProviderTypeCode = ?", loginProviderTypeCode);
+		sql.append("AND onLoginProviderMemberId = ?", onLoginProviderMemberId);
+
+		Map<String, Object> memberMap = MysqlUtil.selectRow(sql);
+
+		if (memberMap.isEmpty()) {
+			return null;
+		}
+
+		return new Member(memberMap);
 	}
 
 }
