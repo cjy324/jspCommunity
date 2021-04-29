@@ -46,6 +46,9 @@ public class UsrDispatcherServlet extends DispatcherServlet {
 			if (actionMethodName.equals("doLoginForm")) {
 				jspPath = membercontroller.doLoginForm(request, response);
 			}
+			if (actionMethodName.equals("doKakaoLogin")) {
+				jspPath = membercontroller.doKakaoLogin(request, response);
+			}
 			if (actionMethodName.equals("doLogin")) {
 				jspPath = membercontroller.doLogin(request, response);
 			}

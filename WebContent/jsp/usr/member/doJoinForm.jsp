@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="GetIT | Sign-Up" />
+<c:set var="REST_ID" value="1b006c31c8a811b93a7505373a5e6b1b" />
+<c:set var="Redirect_URI" value="http://localhost:8083/jspCommunity/usr/member/doKakaoLogin" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
@@ -183,7 +185,14 @@
             <div class="joinInput-cell">
               <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
               <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 뒤로가기</button>
-            </div>
+              <!-- 카카오 로그인 -->
+			  <a class="block" style="margin-top: 12px; margin-right: 18px;" href="https://kauth.kakao.com/oauth/authorize
+				?client_id=${REST_ID}
+				&redirect_uri=${Redirect_URI}
+				&response_type=code">
+				<img style="" src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png" alt="" />
+			  </a>
+            </div> 
           </div>
         </form>
       </div>
@@ -251,6 +260,13 @@
           <div class="mobile-joinInput-cell flex flex-column ">
             <button class="btn btn-go" type="submit"><i class="fas fa-sign-in-alt"></i> 회원가입</button>
             <button class="btn btn-back" type="button" onclick="history.back();"><i class="fas fa-undo"></i> 뒤로가기</button>
+          	<!-- 카카오 로그인 -->
+			  <a class="block" style="margin-top: 12px; width:100%; text-align:center;" href="https://kauth.kakao.com/oauth/authorize
+				?client_id=${REST_ID}
+				&redirect_uri=${Redirect_URI}
+				&response_type=code">
+				<img style="" src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" alt="" />
+			  </a>
           </div>
         </form>
       </div>

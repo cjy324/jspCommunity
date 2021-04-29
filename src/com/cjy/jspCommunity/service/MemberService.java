@@ -100,4 +100,31 @@ public class MemberService {
 
 	}
 
+	public Member getMemberByOnLoginProviderMemberId(String loginProviderTypeCode, String onLoginProviderMemberId) {
+		return memberDao.getMemberByOnLoginProviderMemberId(loginProviderTypeCode, onLoginProviderMemberId);
+	}
+
+	public int joinByKakao(Map<String, Object> kakaoUser) {
+
+		String loginProviderTypeCode = (String) kakaoUser.get("loginProviderTypeCode");
+		String onLoginProviderMemberId = (String) kakaoUser.get("onLoginProviderMemberId");
+
+		String loginId = loginProviderTypeCode + "___" + onLoginProviderMemberId;
+
+		kakaoUser.put("loginId", loginId);  //ex) kakaoRest___카카오로그인 시 발급된 고유 ID
+		kakaoUser.put("loginPw", Util.getUUIDStr()); //암호 랜덤 생성
+		//알 수 있는 기타정보는 카카오 유저정보로 입력
+		kakaoUser.put("name", kakaoUser.get("nickname"));
+		kakaoUser.put("cellPhoneNo", "연락처 미등록");
+		if(kakaoUser.get("email") == null) {
+			kakaoUser.put("email", "이메일 미등록");
+		}
+		
+		return memberDao.join(kakaoUser);
+	}
+
+	public void updateToken(int memberId, String token_name, String token, String token_expires_in) {
+		attrService.setValue("member", memberId, "extra", token_name, token, token_expires_in);
+	}
+
 }
