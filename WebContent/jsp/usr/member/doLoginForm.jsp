@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="GetIT | Login" />
-<c:set var="REST_ID" value="1b006c31c8a811b93a7505373a5e6b1b" />
-<c:set var="Redirect_URI" value="http://localhost:8083/jspCommunity/usr/member/doKakaoLogin" />
+<c:set var="REST_ID" value="c5cafbd7423d14e396657832f41dd5e7" />
+<c:set var="Redirect_URI" value="https://getit.devj.me/usr/member/doKakaoLogin" />
 <%@ include file="../../part/head.jspf"%>
 
 <!-- sha256 -->
